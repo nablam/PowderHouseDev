@@ -42,6 +42,21 @@ public class ElevatorSceneNavigator : MonoBehaviour
 
     private bool _doorsAreOpen = false;
 
+
+
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.O))
+    //    {
+    //        OpenDoors();
+    //    }
+
+    //    if (Input.GetKeyDown(KeyCode.C))
+    //    {
+    //        CloseDoors();
+    //    }
+    //}
+
     public void OpenDoors()
     {
         if (!_doorsAreOpen)
@@ -78,6 +93,8 @@ public class ElevatorSceneNavigator : MonoBehaviour
     /// <param name="arg"></param>
     public void OnElevatorDoorAnimationComplete(string arg)
     {
+        DoorAnimator.ResetTrigger("TriggerActivate");
+
         if (String.Compare(arg, "Opened") == 0)
         {
             _doorsAreOpen = true;
@@ -90,4 +107,6 @@ public class ElevatorSceneNavigator : MonoBehaviour
         else
             Debug.LogError("Wrong string, check typos");
     }
+
+
 }
