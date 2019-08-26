@@ -1,0 +1,33 @@
+﻿public class GameEnums
+{
+    public enum GameScenes
+    {
+        Lobby,
+        Alligator,
+        Bear,
+        Cat,
+        Dog,
+        Elephant,
+        Flamingo,
+        Gorilla,
+        Hippo,
+        Iguana,
+        Jellyfish,
+        Koala,
+        Lion,
+        Monkey,
+        Newt,
+        Octopus,
+        Panda,
+        Quail,
+        Raccoon,
+        Snail,
+        Turtle,
+        Uakari,
+        Vulture,
+        Walrus,
+        Xenarthra,
+        Yak,
+        Zebra
+    }
+}
