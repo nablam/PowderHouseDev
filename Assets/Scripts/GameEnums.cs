@@ -1,8 +1,8 @@
 ﻿public class GameEnums
 {
-    public enum GameScenes
+    public enum AnimalCharcter
     {
-        Lobby,
+
         Alligator,
         Bear,
         Cat,
@@ -29,5 +29,52 @@
         Xenarthra,
         Yak,
         Zebra
+    }
+
+    public enum StoryObjects
+    {
+        Book,
+        Laptop,
+        Mirror,
+        Mouse,
+        Fan,
+        Bottle,
+        Bag,
+        Glasses,
+        Calculator,
+        Charger,
+        Spoon,
+        ToyCar,
+        Slippers,
+        Pajamas,
+        Shorts,
+        Flipflops,
+        Pen,
+        Phone,
+        Umbrella,
+        Wrench,
+        Hat,
+        ScrewDriver,
+        Chapstick,
+        SunGlasses,
+        Flowers,
+        Chocolate,
+        NightLight,
+        Jacket,
+        Binoculars,
+        LunchBox,
+        RemoteControle,
+        Medicine,
+        Map,
+        Telescope,
+        Markers,
+        Tape,
+        Cake,
+        RainCoat,
+        Watch,
+        HeadPhones,
+
+
+
     }
 }

@@ -82,7 +82,7 @@ public class ElevatorSceneNavigator : MonoBehaviour
         }
     }
 
-    public void GoToScene(GameEnums.GameScenes argSceneEnum)
+    public void GoToScene(GameEnums.AnimalCharcter argSceneEnum)
     {
 
     }
