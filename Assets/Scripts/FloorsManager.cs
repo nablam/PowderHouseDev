@@ -9,13 +9,22 @@ public class FloorsManager : MonoBehaviour
     public GameObject[] Floors;
     private GameObject CurFLoor;
     private int CurFloorNumber = 0;
-    void Start()
+    int NumberofFloorsObjectsAlreadyInScene;
+    void Awake()
     {
-        int NumberofFloors = transform.childCount;
-        Floors = new GameObject[NumberofFloors];
-        for (int f = 0; f < NumberofFloors; f++)
+        NumberofFloorsObjectsAlreadyInScene = transform.childCount;
+        Floors = new GameObject[NumberofFloorsObjectsAlreadyInScene];
+        for (int f = 0; f < NumberofFloorsObjectsAlreadyInScene; f++)
         {
             Floors[f] = transform.GetChild(f).gameObject;
+        }
+    }
+
+    public void InitializeFloor_0_Active()
+    {
+        for (int f = 0; f < NumberofFloorsObjectsAlreadyInScene; f++)
+        {
+
             if (f > 0)
             {
                 Floors[f].SetActive(false);
@@ -28,6 +37,12 @@ public class FloorsManager : MonoBehaviour
         Floors[CurFloorNumber].SetActive(false);
         Floors[argFloorNumber].SetActive(true);
         CurFloorNumber = argFloorNumber;
+    }
+
+    public void SetFloorAimalObj(int argFloorNumber, GameObject argAnimal)
+    {
+        argAnimal.transform.parent = Floors[argFloorNumber].transform;
+
     }
 
 

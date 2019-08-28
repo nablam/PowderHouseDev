@@ -2444,7 +2444,7 @@ GameObject:
   - component: {fileID: 719309331}
   - component: {fileID: 719309333}
   m_Layer: 0
-  m_Name: _GameManager
+  m_Name: _GameStoryManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2489,8 +2489,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc60e166d590af14ca8fa2f0f092ddb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m0: {fileID: 2100000, guid: 520a57b241d3f77489ffd9b39693a646, type: 2}
+  m1: {fileID: 2100000, guid: 4c5e2dcbcb2bc6b4f8e014e035c2942d, type: 2}
+  m2: {fileID: 2100000, guid: f9e08dcc3cf4d6345bb9986fba0647c0, type: 2}
+  m3: {fileID: 2100000, guid: 93385c3733bd1cc4b8e050394ccd508a, type: 2}
+  m4: {fileID: 2100000, guid: 584b867e46449b34991c95752fc5f19d, type: 2}
+  m5: {fileID: 2100000, guid: 02cb33c48fd7ef14a998083ceb0ff964, type: 2}
+  m6: {fileID: 2100000, guid: 73bb290e7d8f562439d5a9054a3f7311, type: 2}
+  m7: {fileID: 2100000, guid: 751bdf5a367201845b3191ad08e145dd, type: 2}
+  m8: {fileID: 2100000, guid: 4aa0042463ba8094bb5bae71afa1b593, type: 2}
   AllAnimals: []
   AllObjects: []
+  LoadedAnimalObjs: []
+  MyFloorManager: {fileID: 472543437}
 --- !u!1 &743679658
 GameObject:
   m_ObjectHideFlags: 0
