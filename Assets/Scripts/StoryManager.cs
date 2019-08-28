@@ -10,7 +10,7 @@ public class StoryManager : MonoBehaviour
     List<StoryPacket> AllPackets = new List<StoryPacket>();
 
     Dictionary<GameEnums.AnimalCharcter, GameEnums.StoryObjects> FloorDwellersAndObjectNeeded;
-
+    const int NumberofFloors = 9;
     void Start()
     {
         AllAnimals = Enum.GetNames(typeof(GameEnums.AnimalCharcter)).ToList();
@@ -18,6 +18,9 @@ public class StoryManager : MonoBehaviour
         RandomizeAnimalsList();
         RandomizeObjectsList();
         FloorDwellersAndObjectNeeded = new Dictionary<GameEnums.AnimalCharcter, GameEnums.StoryObjects>();
+        CreateFloorDwellers();
+
+        CheckWhoIsOnWhatFloor();
     }
 
     void RandomizeAnimalsList()
@@ -46,17 +49,23 @@ public class StoryManager : MonoBehaviour
     }
 
 
-    void CreateFloorDwellers(int argFloors)
+    void CreateFloorDwellers()
     {
-        for (int f = 0; f < argFloors; f++)
+        for (int f = 0; f < NumberofFloors; f++)
         {
-
-
+            GameEnums.AnimalCharcter TheAnimal = (GameEnums.AnimalCharcter)Enum.Parse(typeof(GameEnums.AnimalCharcter), AllAnimals[f], true);
+            GameEnums.StoryObjects TheObject = (GameEnums.StoryObjects)Enum.Parse(typeof(GameEnums.StoryObjects), AllObjects[f], true);
+            FloorDwellersAndObjectNeeded.Add(TheAnimal, TheObject);
         }
     }
-    // Update is called once per frame
-    void Update()
+
+    void CheckWhoIsOnWhatFloor()
     {
+
+        for (int f = 0; f < NumberofFloors; f++)
+        {
+            Debug.Log("floor + " + f + " -> " + FloorDwellersAndObjectNeeded.ElementAt(f).Key.ToString() + " who needs " + FloorDwellersAndObjectNeeded.ElementAt(f).Value.ToString());
+        }
 
     }
 }
