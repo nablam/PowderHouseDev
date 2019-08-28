@@ -25,7 +25,6 @@ public class ElevatorDoorsMasterControl : MonoBehaviour
         }
     }
 
-    public GameObject BellHopObject;
 
     /// <summary>
     /// Lets use an animator for quick turnaround. 

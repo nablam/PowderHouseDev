@@ -33,6 +33,7 @@
 
     public enum StoryObjects
     {
+        None,
         Book,
         Laptop,
         Mirror,

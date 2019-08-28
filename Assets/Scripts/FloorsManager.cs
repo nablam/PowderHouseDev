@@ -45,5 +45,7 @@ public class FloorsManager : MonoBehaviour
 
     }
 
+    public int GEtCurrFloorNumber() { return this.CurFloorNumber; }
+
 
 }

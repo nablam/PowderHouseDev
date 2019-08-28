@@ -1,19 +1,12 @@
-﻿using System;
+﻿//#define MakeAnimalModels
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class StoryManager : MonoBehaviour
 {
-    public Material m0;
-    public Material m1;
-    public Material m2;
-    public Material m3;
-    public Material m4;
-    public Material m5;
-    public Material m6;
-    public Material m7;
-    public Material m8;
+
 
 
     public List<string> AllAnimals;
@@ -23,8 +16,64 @@ public class StoryManager : MonoBehaviour
 
     Dictionary<GameEnums.AnimalCharcter, GameEnums.StoryObjects> FloorDwellersAndObjectNeeded;
     const int NumberofFloors = 9;
+
+
     //temp gameobject ref to make quick prefabs
-    // public GameObject RefAnimal;
+    public GameObject RefAnimal;
+
+#if MakeAnimalModels
+    void TempMakeAnimals()
+    {
+
+        for (int a = 0; a < AllAnimals.Count; a++)
+        {
+
+            GameObject animal = Instantiate(RefAnimal);
+            animal.name = AllAnimals[a] + "_Obj";
+            animal.transform.GetChild(0).GetComponent<TextMesh>().text = AllAnimals[a];
+            animal.transform.GetChild(1).GetComponent<TextMesh>().text = "";
+
+            //Color RandColor = new Color(
+            //UnityEngine.Random.Range(0f, 1f),
+            //UnityEngine.Random.Range(0f, 1f),
+            //UnityEngine.Random.Range(0f, 1f)
+            //);
+
+            if (a % 8 == 0)
+                animal.GetComponent<MeshRenderer>().material = m0;
+            else
+                            if (a % 9 == 0)
+                animal.GetComponent<MeshRenderer>().material = m0;
+            else
+                            if (a % 9 == 1)
+                animal.GetComponent<MeshRenderer>().material = m1;
+            else
+                            if (a % 9 == 2)
+                animal.GetComponent<MeshRenderer>().material = m2;
+            else
+                            if (a % 9 == 3)
+                animal.GetComponent<MeshRenderer>().material = m3;
+            else
+                            if (a % 9 == 4)
+                animal.GetComponent<MeshRenderer>().material = m4;
+            else
+                            if (a % 9 == 5)
+                animal.GetComponent<MeshRenderer>().material = m5;
+            else
+                            if (a % 9 == 6)
+                animal.GetComponent<MeshRenderer>().material = m6;
+            else
+                            if (a % 9 == 7)
+                animal.GetComponent<MeshRenderer>().material = m7;
+            else
+                            if (a % 9 == 8)
+                animal.GetComponent<MeshRenderer>().material = m8;
+
+
+        }
+    }
+
+#endif
 
     public FloorsManager MyFloorManager;
 
@@ -33,7 +82,9 @@ public class StoryManager : MonoBehaviour
         LoadedAnimalObjs = Resources.LoadAll<GameObject>("Animals/PlaceHolders").ToList();
         AllAnimals = Enum.GetNames(typeof(GameEnums.AnimalCharcter)).ToList();
         AllObjects = Enum.GetNames(typeof(GameEnums.StoryObjects)).ToList();
-        //TempMakeAnimals();
+#if MakeAnimalModels
+        TempMakeAnimals();
+#endif
         RandomizeAnimalsList();
         RandomizeObjectsList();
         FloorDwellersAndObjectNeeded = new Dictionary<GameEnums.AnimalCharcter, GameEnums.StoryObjects>();
@@ -57,56 +108,9 @@ public class StoryManager : MonoBehaviour
 
     }
 
-    //void TempMakeAnimals()
-    //{
-
-    //    for (int a = 0; a < AllAnimals.Count; a++)
-    //    {
-
-    //        GameObject animal = Instantiate(RefAnimal);
-    //        animal.name = AllAnimals[a] + "_Obj";
-    //        animal.transform.GetChild(0).GetComponent<TextMesh>().text = AllAnimals[a];
-    //        animal.transform.GetChild(1).GetComponent<TextMesh>().text = "";
-
-    //        //Color RandColor = new Color(
-    //        //UnityEngine.Random.Range(0f, 1f),
-    //        //UnityEngine.Random.Range(0f, 1f),
-    //        //UnityEngine.Random.Range(0f, 1f)
-    //        //);
-
-    //        if (a % 8 == 0)
-    //            animal.GetComponent<MeshRenderer>().material = m0;
-    //        else
-    //                        if (a % 9 == 0)
-    //            animal.GetComponent<MeshRenderer>().material = m0;
-    //        else
-    //                        if (a % 9 == 1)
-    //            animal.GetComponent<MeshRenderer>().material = m1;
-    //        else
-    //                        if (a % 9 == 2)
-    //            animal.GetComponent<MeshRenderer>().material = m2;
-    //        else
-    //                        if (a % 9 == 3)
-    //            animal.GetComponent<MeshRenderer>().material = m3;
-    //        else
-    //                        if (a % 9 == 4)
-    //            animal.GetComponent<MeshRenderer>().material = m4;
-    //        else
-    //                        if (a % 9 == 5)
-    //            animal.GetComponent<MeshRenderer>().material = m5;
-    //        else
-    //                        if (a % 9 == 6)
-    //            animal.GetComponent<MeshRenderer>().material = m6;
-    //        else
-    //                        if (a % 9 == 7)
-    //            animal.GetComponent<MeshRenderer>().material = m7;
-    //        else
-    //                        if (a % 9 == 8)
-    //            animal.GetComponent<MeshRenderer>().material = m8;
 
 
-    //    }
-    //}
+
 
     void RandomizeAnimalsList()
     {
@@ -157,5 +161,10 @@ public class StoryManager : MonoBehaviour
 
         MyFloorManager.InitializeFloor_0_Active();
 
+    }
+
+    public string GetFloorDwellerAsInfo(int argFloor)
+    {
+        return "fl_" + argFloor + "        The " + FloorDwellersAndObjectNeeded.ElementAt(argFloor).Key.ToString() + " needs -> " + FloorDwellersAndObjectNeeded.ElementAt(argFloor).Value.ToString();
     }
 }
