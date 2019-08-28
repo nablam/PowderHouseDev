@@ -149,7 +149,9 @@ public class StoryManager : MonoBehaviour
 
         for (int f = 0; f < NumberofFloors; f++)
         {
-            MyFloorManager.SetFloorAimalObj(f, FindLoadedAnimalByname(FloorDwellersAndObjectNeeded.ElementAt(f).Key.ToString()));
+            GameObject FloorDwellerPrefab = FindLoadedAnimalByname(FloorDwellersAndObjectNeeded.ElementAt(f).Key.ToString());
+            FloorDwellerPrefab.transform.GetChild(1).GetComponent<TextMesh>().text = FloorDwellersAndObjectNeeded.ElementAt(f).Value.ToString();
+            MyFloorManager.SetFloorAimalObj(f, FloorDwellerPrefab);
             Debug.Log("floor + " + f + " -> " + FloorDwellersAndObjectNeeded.ElementAt(f).Key.ToString() + " who needs " + FloorDwellersAndObjectNeeded.ElementAt(f).Value.ToString());
         }
 

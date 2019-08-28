@@ -7,7 +7,7 @@ public class ElevatorDoorsAnimationCTRL : MonoBehaviour, IDoorsAnimCTRL
 {
     public void OnAnimationCompleted(string argOpenedClosed)
     {
-        ElevatorSceneNavigator.Instance.OnElevatorDoorAnimationComplete(argOpenedClosed);
+        ElevatorDoorsMasterControl.Instance.OnElevatorDoorAnimationComplete(argOpenedClosed);
     }
 
 }

@@ -7,10 +7,10 @@ using UnityEngine;
 /// each scene will have a character in the background 
 /// the main character will be a child of this object.
 /// </summary>
-public class ElevatorSceneNavigator : MonoBehaviour
+public class ElevatorDoorsMasterControl : MonoBehaviour
 {
 
-    public static ElevatorSceneNavigator Instance = null;
+    public static ElevatorDoorsMasterControl Instance = null;
 
     private void Awake()
     {
@@ -98,11 +98,13 @@ public class ElevatorSceneNavigator : MonoBehaviour
         if (String.Compare(arg, "Opened") == 0)
         {
             _doorsAreOpen = true;
+            GameManager.Instance.ReachedFloor();
         }
         else
            if (String.Compare(arg, "Closed") == 0)
         {
             _doorsAreOpen = false;
+            GameManager.Instance.SwitchActiveFloorWhileDoorsAreClosed();
         }
         else
             Debug.LogError("Wrong string, check typos");
