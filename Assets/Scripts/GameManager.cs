@@ -31,6 +31,10 @@ public class GameManager : MonoBehaviour
 
     public int Master_Number_of_Floors;
 
+    public int _master_CurentFloorNumber;
+    public int Master_CurentFloorNumber { get => _master_CurentFloorNumber; set => _master_CurentFloorNumber = value; }
+
+
     /// <summary>
     /// Curentlevel story
     /// CharacterAnimation
@@ -44,7 +48,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(WaitOpenDoors(1));
-        TheBellHop.UpdateHeldObject("---");
 
     }
 
@@ -58,10 +61,10 @@ public class GameManager : MonoBehaviour
 
     int DestinationFloor = 0;
 
+
     public void StartGoingToFloorOnButtonClicked(int argFloorNum)
     {
         DestinationFloor = argFloorNum;
-        NumpadObj.SetActive(false);
         ElevatorDoorsMasterControl.Instance.CloseDoors();
         m_Text.text = "";
     }
@@ -75,7 +78,8 @@ public class GameManager : MonoBehaviour
     //called from elevatordoorsMAsterCTRL when doorOpen animation complets
     public void ReachedFloor()
     {
-        StartCoroutine(WaitTurnKeypadOnDoors(4));
+        // StartCoroutine(WaitTurnKeypadOnDoors(4));
+        Debug.Log("floorReached");
     }
     IEnumerator WaitOpenDoors(int argTimeWait)
     {
@@ -84,11 +88,11 @@ public class GameManager : MonoBehaviour
         UpdateStoryTextAccordingToCurrFloor();
     }
 
-    IEnumerator WaitTurnKeypadOnDoors(int argTimeWait)
-    {
-        yield return new WaitForSeconds(argTimeWait);
-        NumpadObj.SetActive(true);
-    }
+    //IEnumerator WaitTurnKeypadOnDoors(int argTimeWait)
+    //{
+    //    yield return new WaitForSeconds(argTimeWait);
+    //    NumpadObj.SetActive(true);
+    //}
 
     //TODO: test this then later use StoryController to generate the correct text, worongfloor ! we need to find blah...
     //this is just a test !!!!

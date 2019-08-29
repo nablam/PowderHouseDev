@@ -12,6 +12,7 @@ public class BellHopCharacter : MonoBehaviour
     void Start()
     {
         m_HeldObjectText = this.transform.GetChild(1).GetComponent<TextMesh>();
+        UpdateHeldObject("None");
     }
 
     public void UpdateHeldObject(string argObjName)

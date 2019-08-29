@@ -17,20 +17,21 @@ public class StoryManager : MonoBehaviour
     List<StoryPacket> AllPackets = new List<StoryPacket>();
 
     Dictionary<GameEnums.AnimalCharcter, GameEnums.StoryObjects> FloorDwellersAndObjectNeeded;
-    const int NumberofFloors = 9;
 
 
+    GameManager gm;
     public FloorsManager MyFloorManager;
     bool[] SwapItemUniqueValidation;
     void Start()
     {
+        gm = GameManager.Instance;
         LoadedAnimalObjs = Resources.LoadAll<GameObject>("Animals/PlaceHolders").ToList();
         LoadedItemObjs = Resources.LoadAll<GameObject>("Items/PlaceHolders").ToList();
         SelectedShuffeledItemObjs = new List<GameObject>();
         AllAnimals = Enum.GetNames(typeof(GameEnums.AnimalCharcter)).ToList();
         AllObjects = Enum.GetNames(typeof(GameEnums.StoryObjects)).ToList();
         AllObjects.RemoveAt(0);
-        SwapItemUniqueValidation = new bool[NumberofFloors];
+        SwapItemUniqueValidation = new bool[gm.Master_Number_of_Floors];
 
         RandomizeAnimalsList();
         RandomizeObjectsList();
@@ -104,7 +105,7 @@ public class StoryManager : MonoBehaviour
 
     void CreateFloorDwellersDictionary()
     {
-        for (int f = 0; f < NumberofFloors; f++)
+        for (int f = 0; f < gm.Master_Number_of_Floors; f++)
         {
             GameEnums.AnimalCharcter TheAnimal = (GameEnums.AnimalCharcter)Enum.Parse(typeof(GameEnums.AnimalCharcter), AllAnimals[f], true);
             GameEnums.StoryObjects TheObject = (GameEnums.StoryObjects)Enum.Parse(typeof(GameEnums.StoryObjects), AllObjects[f], true);
@@ -117,7 +118,7 @@ public class StoryManager : MonoBehaviour
     void CreateShuffledListOfItems()
     {
         // List<string> TempListOfFloorItemNames = new List<string>();
-        for (int x = 0; x < NumberofFloors; x++)
+        for (int x = 0; x < gm.Master_Number_of_Floors; x++)
         {
             TempListOfFloorItemNames.Add(FloorDwellersAndObjectNeeded.ElementAt(x).Value.ToString());
         }
@@ -156,7 +157,7 @@ public class StoryManager : MonoBehaviour
     void SetWhoIsOnWhatFloor()
     {
 
-        for (int f = 0; f < NumberofFloors; f++)
+        for (int f = 0; f < gm.Master_Number_of_Floors; f++)
         {
             GameObject FloorDwellerPrefab = FindLoadedAnimalByname_InstantiateGO(FloorDwellersAndObjectNeeded.ElementAt(f).Key.ToString());
             AnimalDweller AD = FloorDwellerPrefab.GetComponent<AnimalDweller>();
@@ -205,7 +206,7 @@ public class StoryManager : MonoBehaviour
     int GetFloorOFNeededGameObject(GameEnums.StoryObjects argobj)
     {
         int floorOfGO = 0;
-        for (int x = 0; x < NumberofFloors; x++)
+        for (int x = 0; x < gm.Master_Number_of_Floors; x++)
         {
 
             StoryItem si = SelectedShuffeledItemObjs[x].GetComponent<StoryItem>();
