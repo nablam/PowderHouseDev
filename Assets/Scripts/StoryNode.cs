@@ -9,6 +9,8 @@
     {
         Next_giveto = null;
         Prex_OwedToMe = null;
+        TheAnimal = GameEnums.AnimalCharcter.Alligator;
+        ObjectInHand = GameEnums.StoryObjects.Ball;
     }
 
 

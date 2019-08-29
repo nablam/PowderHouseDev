@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
     public void UpdateStoryTextAccordingToCurrFloor()
     {
         int curfloor = MyFloorManager.GEtCurrFloorNumber();
-        string Sentence = m_StoryMngr.GetFloorDwellerAsInfo(curfloor);
+        string Sentence = "Fix please";// m_StoryMngr.Get_FloorInfo(curfloor);
         //if bellhop held object is what floordweller needs -> get next obj, else "wrong floor buddy, the blah animal needs another blah"
         m_Text.text = Sentence;
     }

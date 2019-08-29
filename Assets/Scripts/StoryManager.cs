@@ -1,5 +1,4 @@
 ﻿//#define MakeAnimalModels
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,6 +7,86 @@ public class StoryManager : MonoBehaviour
 {
 
 
+    List<GameObject> LoadedAnimalObjs;
+    List<GameObject> LoadedItemObjs;
+    List<GameObject> FloorDweller_REFS;
+    List<GameObject> FloorItem_REFS;
+    public List<GameObject> FloorDweller_GO;
+    public List<GameObject> FloorItem_GO;
+
+    public List<AnimalDweller> AnimalDwellers;
+    public List<StoryItem> StoryItems;
+    GameManager gm;
+    StoryNode[] StoryNodes;
+    StoryNode HeadHop;
+    Queue<StoryNode> RandomizeTheNeedRelations;
+
+    private void Start()
+    {
+        gm = GameManager.Instance;
+        RandomizeTheNeedRelations = new Queue<StoryNode>();
+        LoadedAnimalObjs = Resources.LoadAll<GameObject>("Animals/PlaceHolders").ToList();
+        LoadedItemObjs = Resources.LoadAll<GameObject>("Items/PlaceHolders").ToList();
+        LoadedAnimalObjs.Shuffle();
+        LoadedItemObjs.Shuffle();
+
+        FloorDweller_REFS = LoadedAnimalObjs.Take<GameObject>(gm.Master_Number_of_Floors).ToList();
+        FloorItem_REFS = LoadedItemObjs.Take<GameObject>(gm.Master_Number_of_Floors).ToList();
+
+        FloorDweller_GO = new List<GameObject>();
+        AnimalDwellers = new List<AnimalDweller>();
+        FloorItem_GO = new List<GameObject>();
+        StoryItems = new List<StoryItem>();
+
+        for (int a = 0; a < gm.Master_Number_of_Floors; a++)
+        {
+            GameObject TheAnimalGO = Instantiate(FloorDweller_REFS[a]);
+            FloorDweller_GO.Add(TheAnimalGO);
+            AnimalDweller ad = TheAnimalGO.GetComponent<AnimalDweller>();
+            AnimalDwellers.Add(ad);
+        }
+        for (int i = 0; i < gm.Master_Number_of_Floors; i++)
+        {
+            GameObject TheItemGO = Instantiate(FloorItem_REFS[i]);
+            FloorItem_GO.Add(TheItemGO);
+            StoryItem si = TheItemGO.GetComponent<StoryItem>();
+            StoryItems.Add(si);
+        }
+        Debug.Log("hey");
+        CreateStoryNodes();
+
+
+
+    }
+
+    void CreateStoryNodes()
+    {
+        StoryNodes = new StoryNode[gm.Master_Number_of_Floors];
+
+        for (int s = 0; s < gm.Master_Number_of_Floors; s++)
+        {
+            AnimalDwellers[s]._HeldItem = StoryItems[s].MyType;
+            StoryNodes[s] = new StoryNode(AnimalDwellers[s].My_type, StoryItems[s].MyType);
+            //RandomizeTheNeedRelations.Enqueue(StoryNodes[s]);
+        }
+        Debug.Log("hi");
+        //for (int i = 0; i < gm.Master_CurentFloorNumber; i++)
+        //{
+        //    int j = Random.Range(i, gm.Master_CurentFloorNumber);
+        //    Debug.Log(j);
+        //    Debug.Log("YO");
+
+        //}
+
+        for (int i = 0; i < gm.Master_Number_of_Floors - 2; i++)
+        {
+            //Debug.Log(i);
+            int j = Random.Range(i + 1, gm.Master_CurentFloorNumber);
+            Debug.Log(j);
+        }
+    }
+
+    /*
 
     public List<string> AllAnimals;
     public List<string> AllObjects;
@@ -182,7 +261,7 @@ public class StoryManager : MonoBehaviour
 
     }
 
-    public string GetFloorDwellerAsInfo(int argFloor)
+    public string Get_FloorInfo(int argFloor)
     {
         return "fl_" + argFloor + "        The " + FloorDwellersAndObjectNeeded.ElementAt(argFloor).Key.ToString() + " needs -> " + FloorDwellersAndObjectNeeded.ElementAt(argFloor).Value.ToString();
     }
@@ -233,4 +312,5 @@ public class StoryManager : MonoBehaviour
         }
         return i;
     }
+    */
 }
