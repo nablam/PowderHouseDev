@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
         }
         else
             Destroy(this.gameObject);
+
+        Master_Number_of_Floors = NumKeypad_AvailableButtons.childCount;
     }
 
     public BellHopCharacter TheBellHop;
@@ -24,6 +26,10 @@ public class GameManager : MonoBehaviour
     public GameObject NumpadObj;
 
     public TMPro.TextMeshProUGUI m_Text;
+
+    public Transform NumKeypad_AvailableButtons;
+
+    public int Master_Number_of_Floors;
 
     /// <summary>
     /// Curentlevel story
