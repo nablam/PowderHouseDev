@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &218396717600076848
+--- !u!1 &838138196613558614
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,29 +8,29 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2997911705876756978}
+  - component: {fileID: 1252271480070082332}
   m_Layer: 0
-  m_Name: HandPos
+  m_Name: Hand2Pos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2997911705876756978
+--- !u!4 &1252271480070082332
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 218396717600076848}
+  m_GameObject: {fileID: 838138196613558614}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.247, y: 0, z: 0.63}
+  m_LocalPosition: {x: -0.115, y: 0, z: 0.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 6292521707942648366}
-  m_RootOrder: 2
+  m_Father: {fileID: 3593944303150060332}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &428082972458332144
+--- !u!1 &4113985046860020175
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -38,37 +38,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2741640458371747424}
-  - component: {fileID: 1458109630250531235}
-  - component: {fileID: 9149970899128749820}
+  - component: {fileID: 2126871122978998753}
+  - component: {fileID: 1107723202045259271}
+  - component: {fileID: 2573090177481771636}
   m_Layer: 0
-  m_Name: AnimalName
+  m_Name: Needs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2741640458371747424
+--- !u!4 &2126871122978998753
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 428082972458332144}
+  m_GameObject: {fileID: 4113985046860020175}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.43, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
-  m_Father: {fileID: 6292521707942648366}
-  m_RootOrder: 0
+  m_Father: {fileID: 3593944303150060332}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!23 &1458109630250531235
+--- !u!23 &1107723202045259271
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 428082972458332144}
+  m_GameObject: {fileID: 4113985046860020175}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -99,15 +99,15 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!102 &9149970899128749820
+--- !u!102 &2573090177481771636
 TextMesh:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 428082972458332144}
-  m_Text: Walrus
+  m_GameObject: {fileID: 4113985046860020175}
+  m_Text: 
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -121,7 +121,7 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4278979635
---- !u!1 &2808363520908707252
+--- !u!1 &5156986687255936882
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,11 +129,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6292521707942648366}
-  - component: {fileID: 1995991580228618595}
-  - component: {fileID: 1230423595653969371}
-  - component: {fileID: 4357620590770556843}
-  - component: {fileID: 8785257268317289083}
+  - component: {fileID: 4462117642557032249}
+  m_Layer: 0
+  m_Name: HandPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4462117642557032249
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5156986687255936882}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.247, y: 0, z: 0.63}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3593944303150060332}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6727151214926923087
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3593944303150060332}
+  - component: {fileID: 6608078671853932110}
+  - component: {fileID: 5253873776005086558}
+  - component: {fileID: 1020768079473377949}
+  - component: {fileID: 8317591341447997823}
   m_Layer: 0
   m_Name: Walrus_Obj
   m_TagString: Untagged
@@ -141,38 +171,39 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6292521707942648366
+--- !u!4 &3593944303150060332
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2808363520908707252}
+  m_GameObject: {fileID: 6727151214926923087}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -1.37, y: -0.2, z: 1.08}
   m_LocalScale: {x: 2, y: 3, z: 1}
   m_Children:
-  - {fileID: 2741640458371747424}
-  - {fileID: 8544342485329819384}
-  - {fileID: 2997911705876756978}
+  - {fileID: 605937593332968932}
+  - {fileID: 2126871122978998753}
+  - {fileID: 4462117642557032249}
+  - {fileID: 1252271480070082332}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!33 &1995991580228618595
+--- !u!33 &6608078671853932110
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2808363520908707252}
+  m_GameObject: {fileID: 6727151214926923087}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &1230423595653969371
+--- !u!23 &5253873776005086558
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2808363520908707252}
+  m_GameObject: {fileID: 6727151214926923087}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -183,7 +214,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 584b867e46449b34991c95752fc5f19d, type: 2}
+  - {fileID: 2100000, guid: 02cb33c48fd7ef14a998083ceb0ff964, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -203,33 +234,33 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &4357620590770556843
+--- !u!65 &1020768079473377949
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2808363520908707252}
+  m_GameObject: {fileID: 6727151214926923087}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8785257268317289083
+--- !u!114 &8317591341447997823
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2808363520908707252}
+  m_GameObject: {fileID: 6727151214926923087}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a210bc78bc5ad34fbd371348ef6918f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _HeldItem: 0
---- !u!1 &3316118918893922644
+--- !u!1 &8093409243609162030
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -237,37 +268,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8544342485329819384}
-  - component: {fileID: 8222149384282927891}
-  - component: {fileID: 3947793188759202730}
+  - component: {fileID: 605937593332968932}
+  - component: {fileID: 2450356127466244629}
+  - component: {fileID: 1999282988532152919}
   m_Layer: 0
-  m_Name: Needs
+  m_Name: AnimalName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8544342485329819384
+--- !u!4 &605937593332968932
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3316118918893922644}
+  m_GameObject: {fileID: 8093409243609162030}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.43, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
-  m_Father: {fileID: 6292521707942648366}
-  m_RootOrder: 1
+  m_Father: {fileID: 3593944303150060332}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!23 &8222149384282927891
+--- !u!23 &2450356127466244629
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3316118918893922644}
+  m_GameObject: {fileID: 8093409243609162030}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -298,15 +329,15 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!102 &3947793188759202730
+--- !u!102 &1999282988532152919
 TextMesh:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3316118918893922644}
-  m_Text: 
+  m_GameObject: {fileID: 8093409243609162030}
+  m_Text: Walrus
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
