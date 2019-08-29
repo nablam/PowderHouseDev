@@ -29,6 +29,7 @@ public class StoryManager : MonoBehaviour
         SelectedShuffeledItemObjs = new List<GameObject>();
         AllAnimals = Enum.GetNames(typeof(GameEnums.AnimalCharcter)).ToList();
         AllObjects = Enum.GetNames(typeof(GameEnums.StoryObjects)).ToList();
+        AllObjects.RemoveAt(0);
         SwapItemUniqueValidation = new bool[NumberofFloors];
 
         RandomizeAnimalsList();
@@ -38,6 +39,9 @@ public class StoryManager : MonoBehaviour
         CreateFloorDwellersDictionary();
 
         CreateShuffledListOfItems();
+
+        BuildPacketList();
+
         SetWhoIsOnWhatFloor();
     }
     GameObject FindLoadedAnimalByname_InstantiateGO(string argAnimalName)
@@ -107,15 +111,17 @@ public class StoryManager : MonoBehaviour
             FloorDwellersAndObjectNeeded.Add(TheAnimal, TheObject);
         }
     }
+    public List<string> TempListOfFloorItemNames = new List<string>();
 
     //also gameobject reflist
     void CreateShuffledListOfItems()
     {
-        List<string> TempListOfFloorItemNames = new List<string>();
+        // List<string> TempListOfFloorItemNames = new List<string>();
         for (int x = 0; x < NumberofFloors; x++)
         {
             TempListOfFloorItemNames.Add(FloorDwellersAndObjectNeeded.ElementAt(x).Value.ToString());
         }
+
         TempListOfFloorItemNames.Shuffle();
 
         foreach (string str in TempListOfFloorItemNames)
@@ -125,20 +131,50 @@ public class StoryManager : MonoBehaviour
         }
     }
 
+    void BuildPacketList()
+    {
 
+        for (int i = 0; i < FloorDwellersAndObjectNeeded.Count; i++)
+        {
+
+            int AnimalCharcterFloorNumber = i;
+            GameEnums.AnimalCharcter FloorAnimalCharacter = FloorDwellersAndObjectNeeded.ElementAt(i).Key;
+            GameEnums.StoryObjects ObjectNeededByFloorAnimal = FloorDwellersAndObjectNeeded.ElementAt(i).Value;
+            GameEnums.StoryObjects ObjectToSendToRecipient = SelectedShuffeledItemObjs[i].GetComponent<StoryItem>().MyType;
+            int RecipentAnimalCharcterFloorNumber = CalcRecipientFloor(ObjectToSendToRecipient);
+            GameEnums.AnimalCharcter RecipientFloorAnimalCharacter = FloorDwellersAndObjectNeeded.ElementAt(RecipentAnimalCharcterFloorNumber).Key;
+            int FloofOfAnimalWhoHasWhatINeed = GetFloorOFNeededGameObject(ObjectNeededByFloorAnimal);
+            GameEnums.AnimalCharcter WhoHasMyStuff = FloorDwellersAndObjectNeeded.ElementAt(FloofOfAnimalWhoHasWhatINeed).Key;
+
+            StoryPacket AStoryPacket = new StoryPacket(AnimalCharcterFloorNumber, FloorAnimalCharacter, ObjectNeededByFloorAnimal, RecipentAnimalCharcterFloorNumber, RecipientFloorAnimalCharacter, ObjectToSendToRecipient, FloofOfAnimalWhoHasWhatINeed, WhoHasMyStuff);
+
+            AllPackets.Add(AStoryPacket);
+
+        }
+
+    }
     void SetWhoIsOnWhatFloor()
     {
 
         for (int f = 0; f < NumberofFloors; f++)
         {
             GameObject FloorDwellerPrefab = FindLoadedAnimalByname_InstantiateGO(FloorDwellersAndObjectNeeded.ElementAt(f).Key.ToString());
+            AnimalDweller AD = FloorDwellerPrefab.GetComponent<AnimalDweller>();
+            if (AD == null)
+            {
+                AD = FloorDwellerPrefab.AddComponent<AnimalDweller>();
+            }
+            AD.InitMyPacket(AllPackets.ElementAt(f));
             FloorDwellerPrefab.transform.GetChild(1).GetComponent<TextMesh>().text = FloorDwellersAndObjectNeeded.ElementAt(f).Value.ToString();
             GameObject ShuffledItemAnimalIsHolding = SelectedShuffeledItemObjs[f];
+            StoryItem si = ShuffledItemAnimalIsHolding.GetComponent<StoryItem>();
+            AD.UpdateHeldObject(ShuffledItemAnimalIsHolding, si.MyType);
+
             ShuffledItemAnimalIsHolding.transform.position = FloorDwellerPrefab.transform.GetChild(2).position;//theHand transform
             ShuffledItemAnimalIsHolding.transform.parent = FloorDwellerPrefab.transform.GetChild(2);
 
             MyFloorManager.SetFloorAimalObj(f, FloorDwellerPrefab);
-            Debug.Log("floor + " + f + " -> " + FloorDwellersAndObjectNeeded.ElementAt(f).Key.ToString() + " who needs " + FloorDwellersAndObjectNeeded.ElementAt(f).Value.ToString());
+            //  Debug.Log("floor + " + f + " -> " + FloorDwellersAndObjectNeeded.ElementAt(f).Key.ToString() + " who needs " + FloorDwellersAndObjectNeeded.ElementAt(f).Value.ToString());
         }
 
         MyFloorManager.InitializeFloor_0_Active();
@@ -148,5 +184,52 @@ public class StoryManager : MonoBehaviour
     public string GetFloorDwellerAsInfo(int argFloor)
     {
         return "fl_" + argFloor + "        The " + FloorDwellersAndObjectNeeded.ElementAt(argFloor).Key.ToString() + " needs -> " + FloorDwellersAndObjectNeeded.ElementAt(argFloor).Value.ToString();
+    }
+
+    int GetDwellerFloor(GameEnums.AnimalCharcter argDweller)
+    {
+        int i = 0;
+        for (int x = 0; x < FloorDwellersAndObjectNeeded.Count; x++)
+        {
+            if (FloorDwellersAndObjectNeeded.ElementAt(x).Key == argDweller)
+            {
+                i = x;
+                break;
+            }
+
+        }
+
+        return i;
+    }
+
+    int GetFloorOFNeededGameObject(GameEnums.StoryObjects argobj)
+    {
+        int floorOfGO = 0;
+        for (int x = 0; x < NumberofFloors; x++)
+        {
+
+            StoryItem si = SelectedShuffeledItemObjs[x].GetComponent<StoryItem>();
+            if (si.MyType == argobj)
+            {
+                floorOfGO = x;
+                break;
+            }
+        }
+        return floorOfGO;
+    }
+
+    int CalcRecipientFloor(GameEnums.StoryObjects argMyObj)
+    {
+        int i = 0;
+        for (int x = 0; x < FloorDwellersAndObjectNeeded.Count; x++)
+        {
+            if (FloorDwellersAndObjectNeeded.ElementAt(x).Value == argMyObj)
+            {
+                i = x;
+                break;
+            }
+
+        }
+        return i;
     }
 }

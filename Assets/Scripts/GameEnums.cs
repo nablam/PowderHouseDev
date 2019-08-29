@@ -31,6 +31,7 @@
         Zebra
     }
 
+    //make sure to run the prefab 
     public enum StoryObjects
     {
         None,
@@ -38,7 +39,6 @@
         Laptop,
         Mirror,
         Mouse,
-        DeskFan,
         Bottle,
         Bag,
         Glasses,
@@ -47,17 +47,16 @@
         Spoon,
         ToyCar,
         Slippers,
+        DeskFan,
         Pajamas,
         Shorts,
         Flipflops,
-        Pen,
-        TelePhone,
+        Phone,
+        TopHat,
         Umbrella,
         Wrench,
-        TopHat,
         ScrewDriver,
         Chapstick,
-        SunHat,
         Flowers,
         Chocolate,
         NightLight,
@@ -73,7 +72,12 @@
         Cake,
         RainCoat,
         Watch,
-        HeadPhones,
+        //        HeadPhones,
+        Shoes,
+        Sweater,
+        HairBrush,
+        Ball,
+
 
 
 

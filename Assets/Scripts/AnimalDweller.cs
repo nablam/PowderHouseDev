@@ -7,7 +7,7 @@ public class AnimalDweller : MonoBehaviour
     Transform MyHandPos;
     StoryPacket _StoryPacket;
 
-    void Start()
+    void Awake()
     {
         MyHandPos = transform.GetChild(2);
     }

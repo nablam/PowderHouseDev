@@ -1,5 +1,6 @@
 ﻿public class StoryPacket
 {
+
     public int AnimalCharcterFloorNumber;
     public GameEnums.AnimalCharcter FloorAnimalCharacter;
     public GameEnums.StoryObjects ObjectNeededByFloorAnimal;
@@ -7,7 +8,9 @@
     public GameEnums.AnimalCharcter RecipientFloorAnimalCharacter;
     public GameEnums.StoryObjects ObjectToSendToRecipient;
 
-    public StoryPacket(int argMyFloor, GameEnums.AnimalCharcter argMyFloorAnimalCharacter, GameEnums.StoryObjects argMyObjNeeded, int argTheirFloor, GameEnums.AnimalCharcter argRecipientFloorAnimalCharacter, GameEnums.StoryObjects argRecipientObj)
+    public int FloofOfAnimalWhoHasWhatINeed;
+    public GameEnums.AnimalCharcter WhoHasMyStuff;
+    public StoryPacket(int argMyFloor, GameEnums.AnimalCharcter argMyFloorAnimalCharacter, GameEnums.StoryObjects argMyObjNeeded, int argTheirFloor, GameEnums.AnimalCharcter argRecipientFloorAnimalCharacter, GameEnums.StoryObjects argRecipientObj, int argFloorWhereMystuffis, GameEnums.AnimalCharcter argAnimalWhoHasMyStuffs)
     {
         AnimalCharcterFloorNumber = argMyFloor;
         FloorAnimalCharacter = argMyFloorAnimalCharacter;
@@ -15,6 +18,8 @@
         RecipentAnimalCharcterFloorNumber = argTheirFloor;
         RecipientFloorAnimalCharacter = argRecipientFloorAnimalCharacter;
         ObjectToSendToRecipient = argRecipientObj;
+        FloofOfAnimalWhoHasWhatINeed = argFloorWhereMystuffis;
+        WhoHasMyStuff = argAnimalWhoHasMyStuffs;
     }
 
 

@@ -140,8 +140,8 @@ public class AnimalPlaceHolderPrefabMaker : MonoBehaviour
     {
         AllAnimals = Enum.GetNames(typeof(GameEnums.AnimalCharcter)).ToList();
         AllItems = Enum.GetNames(typeof(GameEnums.StoryObjects)).ToList();
-        //MakeItems();
-        TempMakeAnimals();
+        MakeItems();
+        //TempMakeAnimals();
     }
 
     // Update is called once per frame
