@@ -9,7 +9,7 @@ public class AnimalDweller : MonoBehaviour
     Transform MyHandPos;
     GameObject TextBoxName;
     GameObject TextBoxObjNeeded;
-    StoryPacket _StoryPacket;
+    //StoryPacket _StoryPacket;
 
     void Awake()
     {
@@ -23,10 +23,10 @@ public class AnimalDweller : MonoBehaviour
     //{
 
     //}
-    public void InitMyPacket(StoryPacket argPacket)
-    {
-        _StoryPacket = argPacket;
-    }
+    //public void InitMyPacket(StoryPacket argPacket)
+    //{
+    //    _StoryPacket = argPacket;
+    //}
 
     /// <summary>
     /// TODO:
@@ -50,4 +50,15 @@ public class AnimalDweller : MonoBehaviour
         return this.MyStoryNode;
     }
 
+    public void TossObjectToBellhop(Transform ArgBellhopHand)
+    {
+
+        if (_CurHeldObject != null)
+        {
+
+            _CurHeldObject.GetComponent<StoryItem>().MoveTO(MyHandPos, ArgBellhopHand, true);
+        }
+    }
+
+    // public string I_Need_() { return " I need the " + MyStoryNode.; }
 }

@@ -11,10 +11,10 @@ public class StoryManager : MonoBehaviour
     List<GameObject> LoadedItemObjs;
     List<GameObject> FloorDweller_REFS;
     List<GameObject> FloorItem_REFS;
-    public List<GameObject> FloorDweller_GO;
+    List<GameObject> FloorDweller_GO;
     List<GameObject> FloorItem_GO;
 
-    List<AnimalDweller> AnimalDwellers;
+    public List<AnimalDweller> AnimalDwellers;
     List<StoryItem> StoryItems;
     GameManager gm;
     List<StoryNode> StoryNodes;
@@ -142,17 +142,17 @@ public class StoryManager : MonoBehaviour
         //StoryNodes[gm.Master_Number_of_Floors - 1].Next_giveto1 = null;
         // HeadHop = StoryNodes[0];
 
-        HeadHop = EndCheck = AnimalDwellers[0].GetStoryNode();
-        //  EndCheck = HeadHop.Prev_OwedToMe1;
-        bool firstrstcheck = false;
-        while (HeadHop.Next_giveto1 != EndCheck)
-        {
-            if (HeadHop.Next_giveto1 == null) return;
-            Debug.Log(HeadHop.TheAnimal1.ToString() + " give " + HeadHop.ObjectInHand1.ToString() + " to " + HeadHop.Next_giveto1.TheAnimal1.ToString());
-            HeadHop = HeadHop.Next_giveto1;
-        }
-        HeadHop = EndCheck;
-        Debug.Log(HeadHop.TheAnimal1.ToString() + " give " + HeadHop.ObjectInHand1.ToString() + " to " + HeadHop.Next_giveto1.TheAnimal1.ToString());
+        //HeadHop = EndCheck = AnimalDwellers[0].GetStoryNode();
+        ////  EndCheck = HeadHop.Prev_OwedToMe1;
+        //bool firstrstcheck = false;
+        //while (HeadHop.Next_giveto1 != EndCheck)
+        //{
+        //    if (HeadHop.Next_giveto1 == null) return;
+        //    Debug.Log(HeadHop.TheAnimal1.ToString() + " give " + HeadHop.ObjectInHand1.ToString() + " to " + HeadHop.Next_giveto1.TheAnimal1.ToString());
+        //    HeadHop = HeadHop.Next_giveto1;
+        //}
+        //HeadHop = EndCheck;
+        //Debug.Log(HeadHop.TheAnimal1.ToString() + " give " + HeadHop.ObjectInHand1.ToString() + " to " + HeadHop.Next_giveto1.TheAnimal1.ToString());
         //Debug.Log("endq " + RandomizeTheNeedRelations.Count);
 
         gm.PlaceDwellersOnFloors(FloorDweller_GO);

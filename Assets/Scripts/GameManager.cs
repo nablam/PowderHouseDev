@@ -84,11 +84,48 @@ public class GameManager : MonoBehaviour
         MyFloorManager.SetCurFloor(DestinationFloor);
         StartCoroutine(WaitOpenDoors(3));
     }
+
+    public void CurDwellerTossToBEllHop()
+    {
+        m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].TossObjectToBellhop(TheBellHop.transform.GetChild(0));
+        string theNeighbor = m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().Next_giveto1.TheAnimal1.ToString();
+        m_Text.text = "take this " + m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().ObjectInHand1 + "to " + theNeighbor + " plz";
+    }
     //called from elevatordoorsMAsterCTRL when doorOpen animation complets
+    bool firstTime = true;
     public void ReachedFloor()
     {
         // StartCoroutine(WaitTurnKeypadOnDoors(4));
         Debug.Log("floorReached");
+        if (firstTime)
+        {
+            string theNeighbor = m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().Next_giveto1.TheAnimal1.ToString();
+            m_Text.text = "hello bellhop: the" + theNeighbor + "needs this " + m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().ObjectInHand1;
+
+            m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].TossObjectToBellhop(TheBellHop.transform.GetChild(0));
+            firstTime = false;
+        }
+        else
+        {
+
+            if (TheBellHop._HeldObject == m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().Prev_OwedToMe1.ObjectInHand1)
+            {
+                m_Text.text = "thank you bellhop ";
+
+                TheBellHop.TossToDwellerHand(m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].transform.GetChild(1));
+            }
+            else
+            {
+                m_Text.text = "I dont need that , but ";
+                string theNeighbor = m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().Next_giveto1.TheAnimal1.ToString();
+                m_Text.text += theNeighbor + " needs this " + m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().ObjectInHand1;
+            }
+
+
+        }
+
+
+
     }
     IEnumerator WaitOpenDoors(int argTimeWait)
     {
@@ -109,8 +146,10 @@ public class GameManager : MonoBehaviour
     {
         int curfloor = MyFloorManager.GEtCurrFloorNumber();
         string Sentence = "Fix please";// m_StoryMngr.Get_FloorInfo(curfloor);
-        //if bellhop held object is what floordweller needs -> get next obj, else "wrong floor buddy, the blah animal needs another blah"
+                                       //if bellhop held object is what floordweller needs -> get next obj, else "wrong floor buddy, the blah animal needs another blah"
         m_Text.text = Sentence;
     }
+
+
 
 }
