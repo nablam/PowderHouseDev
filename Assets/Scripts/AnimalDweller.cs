@@ -4,6 +4,7 @@ public class AnimalDweller : MonoBehaviour
 {
     public GameEnums.StoryObjects _HeldItem = GameEnums.StoryObjects.Ball;
     public GameEnums.AnimalCharcter My_type = GameEnums.AnimalCharcter.Alligator;
+    StoryNode MyStoryNode = null;
     GameObject _CurHeldObject = null;
     Transform MyHandPos;
     GameObject TextBoxName;
@@ -27,9 +28,15 @@ public class AnimalDweller : MonoBehaviour
         _StoryPacket = argPacket;
     }
 
-    public void UpdateHeldObject(GameObject argObj, GameEnums.StoryObjects argObjEnum)
+    /// <summary>
+    /// TODO:
+    /// fix this later . dont assume argObj type , or handle errors
+    /// </summary>
+    /// <param name="argObj"></param>
+    public void AssignHeldObject(GameObject argObj, StoryNode argStoryNode)
     {
-        _HeldItem = argObjEnum;
+        _HeldItem = argObj.GetComponent<StoryItem>().MyType;
+        MyStoryNode = argStoryNode;
         if (_CurHeldObject == null)
         {
             _CurHeldObject = argObj;
@@ -37,6 +44,10 @@ public class AnimalDweller : MonoBehaviour
             _CurHeldObject.transform.parent = MyHandPos;
         }
 
+    }
+    public StoryNode GetStoryNode()
+    {
+        return this.MyStoryNode;
     }
 
 }

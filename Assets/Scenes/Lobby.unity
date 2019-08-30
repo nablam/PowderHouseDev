@@ -3702,11 +3702,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc60e166d590af14ca8fa2f0f092ddb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AllAnimals: []
-  AllObjects: []
-  SelectedShuffeledItemObjs: []
-  MyFloorManager: {fileID: 472543437}
-  TempListOfFloorItemNames: []
 --- !u!1 &743679658
 GameObject:
   m_ObjectHideFlags: 0
@@ -4305,6 +4300,7 @@ MonoBehaviour:
   m8: {fileID: 2100000, guid: 520a57b241d3f77489ffd9b39693a646, type: 2}
   AllAnimals: []
   AllItems: []
+  LoadedAnimalObjs: []
 --- !u!4 &924241333
 Transform:
   m_ObjectHideFlags: 0
@@ -13837,3 +13833,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _HeldItem: 0
+  My_type: 0

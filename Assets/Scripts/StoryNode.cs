@@ -23,7 +23,7 @@
     }
 
     public StoryNode Next_giveto1 { get => Next_giveto; set => Next_giveto = value; }
-    public StoryNode Prex_OwedToMe1 { get => Prex_OwedToMe; set => Prex_OwedToMe = value; }
+    public StoryNode Prev_OwedToMe1 { get => Prex_OwedToMe; set => Prex_OwedToMe = value; }
     public GameEnums.AnimalCharcter TheAnimal1 { get => TheAnimal; set => TheAnimal = value; }
     public GameEnums.StoryObjects ObjectInHand1 { get => ObjectInHand; set => ObjectInHand = value; }
 }

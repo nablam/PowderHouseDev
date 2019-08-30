@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -14,7 +15,7 @@ public class GameManager : MonoBehaviour
         else
             Destroy(this.gameObject);
 
-        Master_Number_of_Floors = NumKeypad_AvailableButtons.childCount;
+        Master_Number_of_Floors = 4;// NumKeypad_AvailableButtons.childCount;
     }
 
     public BellHopCharacter TheBellHop;
@@ -34,7 +35,15 @@ public class GameManager : MonoBehaviour
     public int _master_CurentFloorNumber;
     public int Master_CurentFloorNumber { get => _master_CurentFloorNumber; set => _master_CurentFloorNumber = value; }
 
-
+    public void PlaceDwellersOnFloors(List<GameObject> argDwellers)
+    {
+        for (int x = 0; x < Master_Number_of_Floors; x++)
+        {
+            // argDwellers[x].transform.parent = MyFloorManager.Floors[x].transform;
+            MyFloorManager.SetFloorAimalObj(x, argDwellers[x]);
+        }
+        MyFloorManager.InitializeFloor_0_Active();
+    }
     /// <summary>
     /// Curentlevel story
     /// CharacterAnimation

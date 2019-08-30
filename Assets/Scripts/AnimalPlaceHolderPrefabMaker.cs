@@ -20,6 +20,7 @@ public class AnimalPlaceHolderPrefabMaker : MonoBehaviour
     public Material m8;
     public List<string> AllAnimals;
     public List<string> AllItems;
+    public List<GameObject> LoadedAnimalObjs;
     void TempMakeAnimals()
     {
 
@@ -31,6 +32,8 @@ public class AnimalPlaceHolderPrefabMaker : MonoBehaviour
             animal.transform.GetChild(0).GetComponent<TextMesh>().text = AllAnimals[a];
             animal.transform.GetChild(1).GetComponent<TextMesh>().text = "";
 
+
+            animal.GetComponent<AnimalDweller>().My_type = (GameEnums.AnimalCharcter)a;
 
 
             if (a % 8 == 0)
@@ -70,6 +73,7 @@ public class AnimalPlaceHolderPrefabMaker : MonoBehaviour
 
     void MakeItems()
     {
+
 
         for (int i = 0; i < AllItems.Count; i++)
         {
@@ -138,10 +142,11 @@ public class AnimalPlaceHolderPrefabMaker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         AllAnimals = Enum.GetNames(typeof(GameEnums.AnimalCharcter)).ToList();
         AllItems = Enum.GetNames(typeof(GameEnums.StoryObjects)).ToList();
-        MakeItems();
-        //TempMakeAnimals();
+        // MakeItems();
+        TempMakeAnimals();
     }
 
     // Update is called once per frame
