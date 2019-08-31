@@ -12,9 +12,11 @@ public class BellHopCharacter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        m_HeldObjectText = this.transform.GetChild(0).GetComponent<TextMesh>();
+        m_HeldObjectText.text = "";
         m_HeldObjectText = this.transform.GetChild(1).GetComponent<TextMesh>();
-        _HeldObject = GameEnums.StoryObjects.None;
         // UpdateHeldObject("None");
+        _HeldObject = GameEnums.StoryObjects.None;
     }
 
     //public void UpdateHeldObject(string argObjName)

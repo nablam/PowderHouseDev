@@ -85,4 +85,10 @@
 
 
     }
+
+    public enum State
+    {
+        Playing,
+        Finished
+    }
 }

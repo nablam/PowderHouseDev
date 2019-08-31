@@ -9,6 +9,14 @@ public class AnimalDweller : MonoBehaviour
     Transform MyHandPos;
     GameObject TextBoxName;
     GameObject TextBoxObjNeeded;
+    bool HasTossedObjectToBellHop = false;
+
+    int TimesAsked = 0;
+
+    int _floor = 0;
+
+    public int Floor_Number { get => _floor; set => _floor = value; }
+
     //StoryPacket _StoryPacket;
 
     void Awake()
@@ -50,15 +58,29 @@ public class AnimalDweller : MonoBehaviour
         return this.MyStoryNode;
     }
 
+
     public void TossObjectToBellhop(Transform ArgBellhopHand)
     {
+        if (HasTossedObjectToBellHop)
+        {
 
+            return;
+        }
         if (_CurHeldObject != null)
         {
 
             _CurHeldObject.GetComponent<StoryItem>().MoveTO(MyHandPos, ArgBellhopHand, true);
+            HasTossedObjectToBellHop = true;
         }
     }
+
+    public void IncrementAskTimes()
+    {
+        TimesAsked++;
+    }
+
+
+    public int GEt_AskedTimes() { return this.TimesAsked; }
 
     // public string I_Need_() { return " I need the " + MyStoryNode.; }
 }

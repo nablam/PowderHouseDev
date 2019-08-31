@@ -25,6 +25,7 @@ public class StoryItem : MonoBehaviour
         {
             transform.parent = null;
         }
+
         journeyLength = 10000000;
         startTime = Time.time;
         journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
@@ -53,7 +54,7 @@ public class StoryItem : MonoBehaviour
             fracJourney = distCovered / journeyLength;
 
             transform.position = Vector3.Lerp(startMarker.position, endMarker.position, fracJourney);
-            Debug.Log(fracJourney);
+            //  Debug.Log(fracJourney);
 
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
@@ -77,11 +78,12 @@ public class StoryItem : MonoBehaviour
             fracJourney = distCovered / journeyLength;
 
             transform.position = Vector3.Lerp(startMarker.position, endMarker.position, fracJourney);
-            Debug.Log(fracJourney);
+            //Debug.Log(fracJourney);
 
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+        this.transform.GetChild(0).gameObject.SetActive(false);
         Debug.Log("ReachedDestination");
         GameManager.Instance.CurDwellerTossToBEllHop();
         //   GameManager.Instance.TheBellHop.Set_ItemReached(this.gameObject);

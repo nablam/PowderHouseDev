@@ -60,6 +60,7 @@ public class StoryManager : MonoBehaviour
             GameObject TheAnimalGO = Instantiate(FloorDweller_REFS[a]);
             FloorDweller_GO.Add(TheAnimalGO);
             AnimalDweller ad = TheAnimalGO.GetComponent<AnimalDweller>();
+            ad.Floor_Number = a;
             AnimalDwellers.Add(ad);
         }
         for (int i = 0; i < gm.Master_Number_of_Floors; i++)
@@ -162,4 +163,21 @@ public class StoryManager : MonoBehaviour
     {
 
     }
+
+    public int GetFloorNumberofForItem(GameEnums.StoryObjects toDeliver)
+    {
+        for (int a = 0; a < gm.Master_Number_of_Floors; a++)
+        {
+            AnimalDweller ad = AnimalDwellers[a];
+            if (ad.GetStoryNode().Prev_OwedToMe1.ObjectInHand1 == toDeliver)
+            {
+                Debug.Log("found floor " + a.ToString());
+                return ad.Floor_Number;
+            }
+
+        }
+        return 0;
+    }
+
+
 }

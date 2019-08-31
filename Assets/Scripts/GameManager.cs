@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
         else
             Destroy(this.gameObject);
 
-        Master_Number_of_Floors = 4;// NumKeypad_AvailableButtons.childCount;
+        Master_Number_of_Floors = 3;// NumKeypad_AvailableButtons.childCount;
     }
 
     public BellHopCharacter TheBellHop;
@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public FloorsManager MyFloorManager;
 
     public GameObject NumpadObj;
+    NumPadCTRL _numPad;
 
     public TMPro.TextMeshProUGUI m_Text;
 
@@ -34,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     public int _master_CurentFloorNumber;
     public int Master_CurentFloorNumber { get => _master_CurentFloorNumber; set => _master_CurentFloorNumber = value; }
+    public bool GameEnded = false;
+    int maxTimesAskedBeforeHint = 2;
 
     public void PlaceDwellersOnFloors(List<GameObject> argDwellers)
     {
@@ -56,6 +59,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _numPad = NumpadObj.GetComponent<NumPadCTRL>();
         StartCoroutine(WaitOpenDoors(1));
 
     }
@@ -97,6 +101,7 @@ public class GameManager : MonoBehaviour
     {
         // StartCoroutine(WaitTurnKeypadOnDoors(4));
         Debug.Log("floorReached");
+        _numPad.ClearArrows();
         if (firstTime)
         {
             string theNeighbor = m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().Next_giveto1.TheAnimal1.ToString();
@@ -116,9 +121,25 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                m_Text.text = "I dont need that , but ";
-                string theNeighbor = m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().Next_giveto1.TheAnimal1.ToString();
-                m_Text.text += theNeighbor + " needs this " + m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().ObjectInHand1;
+                if (m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GEt_AskedTimes() < maxTimesAskedBeforeHint)
+                {
+
+                    m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].IncrementAskTimes();
+
+                    m_Text.text = "I dont need that , but ";
+                    string theNeighbor = m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().Next_giveto1.TheAnimal1.ToString();
+                    m_Text.text += theNeighbor + " needs this " + m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().ObjectInHand1;
+                }
+                else
+                {
+                    m_Text.text = "Hint Goto Floor ";
+                    // GameEnums.AnimalCharcter Animal = m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().Next_giveto1.TheAnimal1;
+
+                    int Floortogoto = m_StoryMngr.GetFloorNumberofForItem(TheBellHop._HeldObject);
+                    m_Text.text += Floortogoto;// + " needs this " + m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().ObjectInHand1;
+
+                }
+
             }
 
 
@@ -151,5 +172,9 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public void EndGame()
+    {
+        GameEnded = true;
+    }
 
 }
