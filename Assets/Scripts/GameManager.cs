@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
         else
             Destroy(this.gameObject);
 
-        Master_Number_of_Floors = 3;// NumKeypad_AvailableButtons.childCount;
+        Master_Number_of_Floors = NumKeypad_AvailableButtons.childCount;
     }
 
     public BellHopCharacter TheBellHop;

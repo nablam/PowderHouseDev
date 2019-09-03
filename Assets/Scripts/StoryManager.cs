@@ -1,4 +1,5 @@
 ﻿//#define MakeAnimalModels
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -20,6 +21,8 @@ public class StoryManager : MonoBehaviour
     List<StoryNode> StoryNodes;
     StoryNode HeadHop;
     StoryNode EndCheck;
+    System.Random _random = new System.Random();
+
     /// <summary>
     /// 
     /// List of Linked Storynodes. Justpoint the HeaNode to element0 , start game , and only move the headnode when correct object has been given to correct animal
@@ -27,7 +30,8 @@ public class StoryManager : MonoBehaviour
     /// </summary>
 
     public List<StoryNode> GameAnimalDwellers;
-
+    int[] ArraIndexes;
+    int[] LowerHalfIndexes;
     private void Start()
     {
         gm = GameManager.Instance;
@@ -73,10 +77,127 @@ public class StoryManager : MonoBehaviour
         Debug.Log("hey");
         CreateStoryNodes();
 
+        ArraIndexes = new int[gm.Master_Number_of_Floors];
+        for (int i = 0; i < ArraIndexes.Length; i++)
+        {
+            ArraIndexes[i] = i;
+        }
+        LowerHalfIndexes = new int[gm.Master_Number_of_Floors / 2];
+        for (int lhi = 0; lhi < LowerHalfIndexes.Length; lhi++)
+        {
+            LowerHalfIndexes[lhi] = lhi;
+        }
+
+
+
+
+
+
+        Fisher_Yates(LowerHalfIndexes);
+        SwapLowerAndTopFHalves();
+
+
+        int temp = ArraIndexes[ArraIndexes.Length - 1];
+        ArraIndexes[ArraIndexes.Length - 1] = ArraIndexes[0];
+        ArraIndexes[0] = temp;
+        //for (int i = 0; i < ArraIndexes.Length; i++)
+        //{
+        //    if (ArraIndexes[i] == 0) { ArraIndexes[i] = ArraIndexes.Length - 1; }
+        //    else
+        //    if (ArraIndexes[i] == ArraIndexes.Length - 1) { ArraIndexes[i] = 0; }
+        //}
+
+        DebugArray(LowerHalfIndexes);
+        DebugArray(ArraIndexes);
+
+        //MySwap(ArraIndexes);
 
 
     }
 
+    void DebugArray(int[] argarra)
+    {
+        Debug.Log("contents of array ");
+        for (int ai = 0; ai < argarra.Length; ai++)
+        {
+            Debug.Log("[" + ai + "]=" + argarra[ai]);
+        }
+        Debug.Log("---endPrint");
+    }
+    void Fisher_Yates(int[] array)
+    {
+        int n = array.Length;
+        for (int i = 0; i < n; i++)
+        {
+            // Use Next on random instance with an argument.
+            // ... The argument is an exclusive bound.
+            //     So we will not go past the end of the array.
+            int r = i + _random.Next(n - i);
+            int t = array[r];
+            array[r] = array[i];
+            array[i] = t;
+        }
+    }
+
+    void SwapLowerAndTopFHalves()
+    {
+        int half_upperbound = LowerHalfIndexes.Length;
+
+        for (int lhi = 0; lhi < LowerHalfIndexes.Length; lhi++)
+        {
+            int arraIndexes_Lowerhalf = LowerHalfIndexes[lhi];
+            int temp = ArraIndexes[half_upperbound + lhi];
+            ArraIndexes[half_upperbound + lhi] = ArraIndexes[arraIndexes_Lowerhalf];
+            ArraIndexes[arraIndexes_Lowerhalf] = temp;
+        }
+
+
+    }
+    void MySwap(int[] argarra)
+    {
+        //  0  1  2  3
+        //        /\
+        //ln= 4   ||
+        int half_upperbound = argarra.Length / 2;
+        //half=2
+        Debug.Log(half_upperbound);
+        //shuffle lowerhalf does nt matter if we still have same elements 
+        half_upperbound = 1 / 2;
+        Debug.Log(half_upperbound);
+        half_upperbound = 3 / 2;
+
+        Debug.Log(half_upperbound);
+
+    }
+
+
+    List<Tuple<int, int>> GetPairs(int min, int max, System.Random r)
+    {
+        var items = new List<Tuple<int, int>>();
+        var pickedItems = new HashSet<int>();
+        int count = (max - min + 1);
+
+        Func<int> randAndCheck = () =>
+        {
+            int? candidate = null;
+
+            while (candidate == null || pickedItems.Contains(candidate.Value))
+                candidate = r.Next(min, max + 1);
+
+            pickedItems.Add(candidate.Value);
+            return candidate.Value;
+        };
+
+        while (pickedItems.Count != count)
+        {
+            int firstItem = randAndCheck();
+            int secondItem = randAndCheck();
+
+            items.Add(Tuple.Create(firstItem, secondItem));
+        }
+
+        return items;
+    }
     void CreateStoryNodes()
     {
         StoryNodes = new List<StoryNode>();
@@ -101,7 +222,7 @@ public class StoryManager : MonoBehaviour
         for (int i = 0; i < gm.Master_Number_of_Floors; i++)
         {
 
-            Debug.Log(i);
+            //   Debug.Log(i);
             if (i < gm.Master_Number_of_Floors - 1)
             {
                 if (i == 0)
@@ -129,32 +250,10 @@ public class StoryManager : MonoBehaviour
         //{
         //    // Debug.Log(sn.TheAnimal1);
         //}
-        Debug.Log("----------");
+        //  Debug.Log("----------");
 
         GameAnimalDwellers.Shuffle();
 
-
-        foreach (AnimalDweller sn in AnimalDwellers)
-        {
-            Debug.Log(sn.My_type);
-
-        }
-
-        //StoryNodes[gm.Master_Number_of_Floors - 1].Next_giveto1 = null;
-        // HeadHop = StoryNodes[0];
-
-        //HeadHop = EndCheck = AnimalDwellers[0].GetStoryNode();
-        ////  EndCheck = HeadHop.Prev_OwedToMe1;
-        //bool firstrstcheck = false;
-        //while (HeadHop.Next_giveto1 != EndCheck)
-        //{
-        //    if (HeadHop.Next_giveto1 == null) return;
-        //    Debug.Log(HeadHop.TheAnimal1.ToString() + " give " + HeadHop.ObjectInHand1.ToString() + " to " + HeadHop.Next_giveto1.TheAnimal1.ToString());
-        //    HeadHop = HeadHop.Next_giveto1;
-        //}
-        //HeadHop = EndCheck;
-        //Debug.Log(HeadHop.TheAnimal1.ToString() + " give " + HeadHop.ObjectInHand1.ToString() + " to " + HeadHop.Next_giveto1.TheAnimal1.ToString());
-        //Debug.Log("endq " + RandomizeTheNeedRelations.Count);
 
         gm.PlaceDwellersOnFloors(FloorDweller_GO);
     }
