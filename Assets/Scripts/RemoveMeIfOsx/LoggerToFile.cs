@@ -2,11 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using UnityEngine;
-using SysDiag = System.Diagnostics;
 using System.Linq;
+using UnityEngine;
 
-public class LoggerToFile : MonoBehaviour {
+public class LoggerToFile : MonoBehaviour
+{
 
 
 
@@ -77,6 +77,9 @@ public class LoggerToFile : MonoBehaviour {
             if (x % 4 == 0) { File.AppendAllText(fullpath, Environment.NewLine); }
             File.AppendAllText(fullpath, " " + arglist.ElementAt(x).ToString("X2") + " ");
         }
+
+
+
     }
 
     IEnumerator DoasCoroutine(List<byte> arglist)

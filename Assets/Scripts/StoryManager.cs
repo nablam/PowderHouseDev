@@ -88,11 +88,6 @@ public class StoryManager : MonoBehaviour
             LowerHalfIndexes[lhi] = lhi;
         }
 
-
-
-
-
-
         Fisher_Yates(LowerHalfIndexes);
         SwapLowerAndTopFHalves();
 
