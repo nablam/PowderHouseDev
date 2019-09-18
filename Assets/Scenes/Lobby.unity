@@ -201,20 +201,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mouse
       objectReference: {fileID: 0}
+    - target: {fileID: 1259897246504169509, guid: 64270df2899e60a48b904c1215bcb0ec,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1259897246503676933, guid: 64270df2899e60a48b904c1215bcb0ec,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.14
+      value: -0.7
       objectReference: {fileID: 0}
     - target: {fileID: 1259897246503676933, guid: 64270df2899e60a48b904c1215bcb0ec,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.6
+      value: -1.686
       objectReference: {fileID: 0}
     - target: {fileID: 1259897246503676933, guid: 64270df2899e60a48b904c1215bcb0ec,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.35
+      value: 0.74
       objectReference: {fileID: 0}
     - target: {fileID: 1259897246503676933, guid: 64270df2899e60a48b904c1215bcb0ec,
         type: 3}
@@ -1851,8 +1856,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 53.4
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -7456,7 +7461,7 @@ PrefabInstance:
     - target: {fileID: 8649803335141562451, guid: 792373db94e1e1344a25cb1560a1cf49,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.62
+      value: -1.706
       objectReference: {fileID: 0}
     - target: {fileID: 8649803335141562451, guid: 792373db94e1e1344a25cb1560a1cf49,
         type: 3}
