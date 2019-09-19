@@ -84,7 +84,7 @@ public class NavGameFloorBuilder : MonoBehaviour
                 BuildRow(posY);
 
                 BuildRow(-posY);
-
+                _matIndex++;
 
             }
 
