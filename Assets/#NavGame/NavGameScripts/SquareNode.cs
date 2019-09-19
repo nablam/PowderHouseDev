@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class NavMazeBlock : MonoBehaviour
+public class SquareNode : MonoBehaviour
 {
-
-    public TMPro.TextMeshPro m_Text;
-
-    public void UpdateBlockText(string argTxt) { m_Text.text = argTxt; }
+    public SquareNode() { }
 
     public Vector3 cellPosition;
 
@@ -26,16 +23,15 @@ public class NavMazeBlock : MonoBehaviour
         set { _mystupidz = value; }
     }
 
-    //public bool OnOff =true;
-    public bool IsLegitPath = true;
-    public bool isUP = false;
-    public bool isDown = true;
-    public bool isfound = false;
-    public bool hasTower = false;
-    public bool isStart = false;
-    public bool isEnd = false;
 
 
+    public bool OnOff = true;
+
+    //private bool _onoff=false;
+    //public bool OnOff{
+    //	get {return _onoff;}
+    //	set {_onoff= value;}
+    //}
 
 
     private Color _mycolor = Color.blue;
@@ -45,10 +41,7 @@ public class NavMazeBlock : MonoBehaviour
         set { _mycolor = value; }
     }
 
-
-
-
-
+    public bool isfound = false;
 
     private int _squareID = 0;
     public int SquareID
@@ -57,12 +50,15 @@ public class NavMazeBlock : MonoBehaviour
         set { _squareID = value; }
     }
 
+
     private int _randomeValue = 0;
     public int RandomValue
     {
         get { return _randomeValue; }
         set { _randomeValue = value; }
     }
+
+
 
     private int _value = 0;
     public int Value
@@ -78,14 +74,26 @@ public class NavMazeBlock : MonoBehaviour
         set { _d = value; }
     }
 
+    /*
+        public SquareNode ptr_right=null;
+        public SquareNode ptr_left=null;
+        public SquareNode ptr_top=null;
+        public SquareNode ptr_bot=null;
+        */
+    public Transform ptrT_right = null;
+    public Transform ptrT_left = null;
+    public Transform ptrT_top = null;
+    public Transform ptrT_bot = null;
+
+
+
     public Transform ptrT_Parent = null;
 
-    public Transform ptrT_ActualParent = null;
-    public Transform ptrT_Parent_PATH = null;
 
     public float _H;
     public float _G;
-    public float _g;
     public float _F;
-    public float _Fnew;
+
+
+
 }

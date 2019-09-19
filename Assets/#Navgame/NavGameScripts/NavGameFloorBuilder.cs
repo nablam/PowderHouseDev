@@ -4,6 +4,7 @@ public class NavGameFloorBuilder : MonoBehaviour
 {
 
     public GameObject FloorTileObj;
+    public GameObject BlockWallObj;
     public Material DarkGreen;
     public Material MidGreen;
     public Material LightGreen;

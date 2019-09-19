@@ -49,12 +49,10 @@ public class PlayerNavController : MonoBehaviour
         }
         if (agent.remainingDistance > agent.stoppingDistance)
         {
-            print("wt");
             character.Move(agent.desiredVelocity, false, false);
         }
         else //reached destination
         {
-            print("ff");
             character.Move(Vector3.zero, false, false);
         }
     }
