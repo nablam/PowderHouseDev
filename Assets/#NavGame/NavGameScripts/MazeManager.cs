@@ -23,7 +23,7 @@ public class MazeManager : MonoBehaviour
 
 
     public GameObject theHome;
-
+    public Transform WallBlocksGroup;
     public Transform Cell_Prefab_Square;
     public Vector3 Matrix_Size;
     public Transform[,] GridArra;
@@ -43,25 +43,25 @@ public class MazeManager : MonoBehaviour
     public List<Transform> ClosedSet;//= new List<Transform>();
     public bool showblank = false;
 
-    void placeHome()
-    {
-        Vector3 realHomeV3 = new Vector3(StartNodeV3.x - 1, StartNodeV3.y + 1, StartNodeV3.z);
+    //void placeHome()
+    //{
+    //    Vector3 realHomeV3 = new Vector3(StartNodeV3.x - 1, StartNodeV3.y + 1, StartNodeV3.z);
 
-        GameObject Myhome = Instantiate(theHome,
-                                        realHomeV3,
-                                        Quaternion.identity
-                                        ) as GameObject;
-        //
+    //    GameObject Myhome = Instantiate(theHome,
+    //                                    realHomeV3,
+    //                                    Quaternion.identity
+    //                                    ) as GameObject;
+    //    //
 
-        Myhome.transform.parent = this.transform;
-    }
+    //    Myhome.transform.parent = this.WallBlocksGroup.transform;
+    //}
     public void DO_INTI_SETUP_GRID()
     {
         RESETALL_inGrid();
-        setStartandEnd_Rand();
+        Set_start_End();
         CreateGrid();
 
-        placeHome();
+        // placeHome();
         //makeAdjList_and_Actualparent_AFTER_WALLSELECTION();
     }
 
@@ -85,10 +85,10 @@ public class MazeManager : MonoBehaviour
         EndNodeV3 = new Vector3();
         //KILLtheNODES
         //	GameObject.Destroy(StartNode.gameObject);
-        int childs = transform.childCount;
+        int childs = WallBlocksGroup.childCount;
         for (int i = childs - 1; i > 0 - 1; i--)
         {
-            GameObject.Destroy(transform.GetChild(i).gameObject);
+            GameObject.Destroy(WallBlocksGroup.GetChild(i).gameObject);
         }
         //Destroy(this);
 
@@ -109,7 +109,7 @@ public class MazeManager : MonoBehaviour
                 newcell = Instantiate(Cell_Prefab_Square, new Vector3(x * 2, 0, z * 2), Quaternion.identity) as Transform;
                 //newcell.name= string.Format("({0},0,{1})",x,z);
                 //	newcell.name= "("+x+",0,"+z+")" ;
-                newcell.parent = this.transform; //making the newcell parent to the emtygameogject reffered as "transform" or this.transform
+                newcell.parent = this.WallBlocksGroup.transform; //making the newcell parent to the emtygameogject reffered as "transform" or this.transform
 
                 newcell.GetComponent<NavMazeBlock>().cellPosition = new Vector3(x, 0, z);
                 int rando = Random.Range(1, 50);
@@ -154,16 +154,18 @@ public class MazeManager : MonoBehaviour
         float howhigh = Mathf.Sqrt(AsqrBsqr);
         Vector3 campos = new Vector3(midarraypos.x - (midarraypos.x / 2), midarraypos.y + howhigh, midarraypos.z);
 
+        WallBlocksGroup.position = new Vector3(-Matrix_Size.x, 0, -Matrix_Size.z);
+
         //Camera.mainCamera.transform.position= GridArra[(int)(Matrix_Size.x/2),(int) (Matrix_Size.z*2)].position    + Vector3.up*10;
         //	Camera.mainCamera.orthographicSize= Mathf.Max(Matrix_Size.x, Matrix_Size.z);
     }//XGridCreate
 
-    void setStartandEnd_Rand()
+    void Set_start_End()
     {
 
-        int maxX = (int)Matrix_Size.x;
-        int maxZ = (int)Matrix_Size.z;
-        int selecteRandomStartZ1 = Random.Range(0, maxZ);
+        int maxX = (int)Matrix_Size.x - 1;
+        int maxZ = (int)Matrix_Size.z - 1;
+        int selecteRandomStartZ1 = Random.Range(0, maxX);
         int selecteRandomStartZ2 = Random.Range(0, maxZ);
         //StartNode.x=0;
         //
