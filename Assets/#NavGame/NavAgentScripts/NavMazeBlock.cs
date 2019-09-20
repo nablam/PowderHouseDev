@@ -6,7 +6,14 @@ public class NavMazeBlock : MonoBehaviour
 
     public TMPro.TextMeshPro m_Text;
 
+    public GameObject MyTile;
+    Renderer MyTileRenderer;
+
     public void UpdateBlockText(string argTxt) { m_Text.text = argTxt; }
+
+    public void UpdateTileMAterial(Material argMat) { MyTile.GetComponent<Renderer>().material = argMat; }
+
+    public void UnparentMytile() { MyTile.transform.parent = null; }
 
     public Vector3 cellPosition;
 

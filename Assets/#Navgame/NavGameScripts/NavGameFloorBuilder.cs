@@ -11,9 +11,14 @@ public class NavGameFloorBuilder : MonoBehaviour
     const int MaxTileMaterials = 3;
 
     int _matIndex = 0;
+    int _lightmatIndex = 0;
+    int _darkmatIndex = 0;
     float tileEdgeSize;
     public int Width;
     public int Height;
+    public Material[] LightTiles = new Material[6];
+    public Material[] DarkTiles = new Material[6];
+
     Material[] TileMats;
     Vector3 TileOrientation = new Vector3(90f, 0, 0);
     private void Awake()
@@ -39,17 +44,20 @@ public class NavGameFloorBuilder : MonoBehaviour
             if (x == 0)
             {
                 TempTile = Instantiate(FloorTileObj, new Vector3(0, 0, rowPosZ), Quaternion.Euler(TileOrientation));
-                CycleTempTileColor(TempTile);
+                //  CycleTempTileColor(TempTile);
+                CycleTempTileMat(TempTile);
 
             }
             else
             {
                 float posX = tileEdgeSize * (float)x;
                 TempTile = Instantiate(FloorTileObj, new Vector3(posX, 0, rowPosZ), Quaternion.Euler(TileOrientation));
-                CycleTempTileColor(TempTile);
+                //  CycleTempTileColor(TempTile);
+                CycleTempTileMat(TempTile);
 
                 TempTile = Instantiate(FloorTileObj, new Vector3(-posX, 0, rowPosZ), Quaternion.Euler(TileOrientation));
-                CycleTempTileColor(TempTile);
+                //  CycleTempTileColor(TempTile);
+                CycleTempTileMat(TempTile);
 
             }
         }
@@ -65,6 +73,36 @@ public class NavGameFloorBuilder : MonoBehaviour
         if (argTempTile != null)
         {
             argTempTile.GetComponent<Renderer>().material = TileMats[_matIndex];
+            //
+        }
+
+
+    }
+
+
+    //real bad ! must check later . this is asumnig light and dark tiles are the same. 
+    //separate te two
+    bool flip = false;
+    void CycleTempTileMat(GameObject argTempTile)
+    {
+        _lightmatIndex++;
+        if (_lightmatIndex >= LightTiles.Length)
+        {
+
+            _lightmatIndex = 0;
+        }
+        if (argTempTile != null)
+        {
+            int rnd = Random.Range(0, 128);
+            if (rnd < 100)
+                // hereit is ... thus curious 
+                flip = !flip;
+
+            if (flip)
+                argTempTile.GetComponent<Renderer>().material = LightTiles[_lightmatIndex];
+            else
+                argTempTile.GetComponent<Renderer>().material = DarkTiles[_lightmatIndex];
+
             //
         }
 

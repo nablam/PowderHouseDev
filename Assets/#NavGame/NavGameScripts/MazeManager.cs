@@ -32,6 +32,12 @@ public class MazeManager : MonoBehaviour
     //private int _endNodeX;
     //private int _endNodeZ;
 
+    public Material RedMAt;
+    public Material GreenMatLight;
+    public Material GreenMatDark;
+    public Material[] LightTiles = new Material[6];
+    public Material[] DarkTiles = new Material[6];
+
     public Vector3 StartNodeV3;
     public Vector3 EndNodeV3;
 
@@ -62,7 +68,7 @@ public class MazeManager : MonoBehaviour
         CreateGrid();
 
         // placeHome();
-        //makeAdjList_and_Actualparent_AFTER_WALLSELECTION();
+        Aalgo();
     }
 
     #region INIT
@@ -106,8 +112,9 @@ public class MazeManager : MonoBehaviour
             {
                 Transform newcell;
 
-                newcell = Instantiate(Cell_Prefab_Square, new Vector3(x * 2, 0, z * 2), Quaternion.identity) as Transform;
-                //newcell.name= string.Format("({0},0,{1})",x,z);
+
+                newcell = Instantiate(Cell_Prefab_Square, new Vector3(x * 2, -2.1f, z * 2), Quaternion.identity) as Transform;
+                newcell.name = string.Format("({0},0,{1})", x, z);
                 //	newcell.name= "("+x+",0,"+z+")" ;
                 newcell.parent = this.WallBlocksGroup.transform; //making the newcell parent to the emtygameogject reffered as "transform" or this.transform
 
@@ -116,7 +123,7 @@ public class MazeManager : MonoBehaviour
                 newcell.GetComponent<NavMazeBlock>().RandomValue = rando;
                 //********************************************************************************
                 //*******VALUE SET rando or just all 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-                newcell.GetComponent<NavMazeBlock>().Value = 2;
+                newcell.GetComponent<NavMazeBlock>().Value = Random.Range(100, 300); // 2;
                 //************************************************************************************
 
                 newcell.GetComponent<NavMazeBlock>().SquareID = Script_ID;
@@ -125,7 +132,10 @@ public class MazeManager : MonoBehaviour
                 if (showblank)
                     newcell.GetComponent<NavMazeBlock>().UpdateBlockText("");
                 else
-                    newcell.GetComponent<NavMazeBlock>().UpdateBlockText(Script_ID.ToString());
+                {
+                    string debugstr = "id " + Script_ID.ToString() + " \n val=" + newcell.GetComponent<NavMazeBlock>().Value;
+                    newcell.GetComponent<NavMazeBlock>().UpdateBlockText(debugstr);
+                }
 
                 newcell.GetComponent<NavMazeBlock>().MyStupid__X = x;
                 newcell.GetComponent<NavMazeBlock>().MyStupid__Z = z;
@@ -134,6 +144,8 @@ public class MazeManager : MonoBehaviour
 
                 GridArra[x, z] = newcell;
 
+
+                //newcell.GetComponent<NavMazeBlock>().UnparentMytile();
                 //keepfr color
                 //newcell.GetComponent<Renderer>().material.color= Color.cyan;
             }
@@ -143,10 +155,10 @@ public class MazeManager : MonoBehaviour
         //*********************************make ptr to start and end in grid
         Grid_start_ptr = GridArra[(int)StartNodeV3.x, (int)StartNodeV3.z];
         Grid_start_ptr.GetComponent<NavMazeBlock>().isStart = true;
-        GridArra[(int)StartNodeV3.x, (int)StartNodeV3.z].GetComponent<Renderer>().material.color = Color.yellow;
+        // GridArra[(int)StartNodeV3.x, (int)StartNodeV3.z].GetComponent<Renderer>().material.color = Color.yellow;
 
         Grid_end_ptr = GridArra[(int)EndNodeV3.x, (int)EndNodeV3.z];
-        GridArra[(int)EndNodeV3.x, (int)EndNodeV3.z].GetComponent<Renderer>().material.color = Color.black;
+        //GridArra[(int)EndNodeV3.x, (int)EndNodeV3.z].GetComponent<Renderer>().material.color = Color.black;
         Grid_end_ptr.GetComponent<NavMazeBlock>().isEnd = true;
 
         Vector3 midarraypos = GridArra[(int)(Matrix_Size.x / 2), (int)(Matrix_Size.z / 2)].position;
@@ -156,24 +168,30 @@ public class MazeManager : MonoBehaviour
 
         WallBlocksGroup.position = new Vector3(-Matrix_Size.x, 0, -Matrix_Size.z);
 
-        //Camera.mainCamera.transform.position= GridArra[(int)(Matrix_Size.x/2),(int) (Matrix_Size.z*2)].position    + Vector3.up*10;
+        foreach (Transform trans in GridArra)
+        {
+            trans.GetComponent<NavMazeBlock>().UnparentMytile();
+        }
+        //  Camera.main.transform.position = GridArra[(int)(0f), (int)(Matrix_Size.z * 2)].position + Vector3.up * 10;
+        //Camera.main.transform.position = GridArra[(int)(Matrix_Size.x / 2), (int)(Matrix_Size.z * 2)].position + Vector3.up * 10;
         //	Camera.mainCamera.orthographicSize= Mathf.Max(Matrix_Size.x, Matrix_Size.z);
     }//XGridCreate
 
     void Set_start_End()
     {
-
-        int maxX = (int)Matrix_Size.x - 1;
+        //left door
+        int maxLow = (int)Matrix_Size.z / 2;
+        //right exit
         int maxZ = (int)Matrix_Size.z - 1;
-        int selecteRandomStartZ1 = Random.Range(0, maxX);
-        int selecteRandomStartZ2 = Random.Range(0, maxZ);
+        int selecteRandomStartZ1 = Random.Range(1, maxLow);
+        int selecteRandomStartZ2 = Random.Range(maxLow, maxZ);
         //StartNode.x=0;
         //
         //		StartNode.z=0;
         StartNodeV3.x = 0;
         StartNodeV3.z = selecteRandomStartZ1;
 
-        EndNodeV3.x = maxZ - 1;
+        EndNodeV3.x = (int)Matrix_Size.x - 1;
         EndNodeV3.z = selecteRandomStartZ2;
     }
 
@@ -192,10 +210,27 @@ public class MazeManager : MonoBehaviour
                 T_Cell_in_grid = GridArra[x, z];
                 NavMazeBlock cScript = T_Cell_in_grid.GetComponent<NavMazeBlock>();
                 //keepfor color
-                //if(cScript.IsLegitPath)GridArra[x,z].GetComponent<Renderer>().material.color=Color.cyan;
-                if (cScript.isStart) GridArra[x, z].GetComponent<Renderer>().material.color = Color.white;
-                if (cScript.isEnd) GridArra[x, z].GetComponent<Renderer>().material.color = Color.black;
-                if (!cScript.IsLegitPath) GridArra[x, z].GetComponent<Renderer>().material.color = Color.yellow;
+                //if (cScript.IsLegitPath) GridArra[x, z].GetComponent<Renderer>().material.color = Color.cyan;
+                //if (cScript.isStart) GridArra[x, z].GetComponent<Renderer>().material.color = Color.white;
+                //if (cScript.isEnd) GridArra[x, z].GetComponent<Renderer>().material.color = Color.black;
+                //if (!cScript.IsLegitPath) GridArra[x, z].GetComponent<Renderer>().material.color = Color.yellow;
+
+                if (cScript.IsLegitPath) { GridArra[x, z].GetComponent<NavMazeBlock>().UpdateTileMAterial(LightTiles[1]); }
+                if (cScript.isStart) { GridArra[x, z].GetComponent<NavMazeBlock>().UpdateTileMAterial(GreenMatDark); }
+                if (cScript.isEnd) { GridArra[x, z].GetComponent<NavMazeBlock>().UpdateTileMAterial(RedMAt); }
+                // if (!cScript.isfound) { GridArra[x, z].GetComponent<NavMazeBlock>().UpdateBlockText("X"); }
+
+
+                //if (Grid_end_ptr.GetComponent<NavMazeBlock>().isfound)
+                //{
+                //    Grid_end_ptr.GetComponent<NavMazeBlock>().UpdateTileMAterial(LightTiles[1]);
+
+                //}
+                //else
+                //{
+                //    Grid_end_ptr.GetComponent<NavMazeBlock>().UpdateTileMAterial(DarkTiles[1]);
+
+                //}
 
                 //if(cScript.isStart)GridArra[x,z].GetComponent<Renderer>().material.color=Color.white;
                 //if(cScript.isStart)GridArra[x,z].GetComponent<Renderer>().material.color=Color.white;
@@ -333,7 +368,7 @@ public class MazeManager : MonoBehaviour
         } while (Grid_curr_ptr.GetComponent<NavMazeBlock>().ptrT_Parent_PATH != null);
 
         Vector3 x1real = new Vector3(StartNodeV3.x, StartNodeV3.y + 1, StartNodeV3.z);
-        // MWay_ptr.wp_V3_List.Add(x1real);
+
 
     }
 
@@ -455,7 +490,7 @@ public class MazeManager : MonoBehaviour
 
         } while (Grid_curr_ptr.GetComponent<NavMazeBlock>().SquareID != Grid_end_ptr.GetComponent<NavMazeBlock>().SquareID);
 
-        //   MakePath();
+        MakePath();
 
 
 
