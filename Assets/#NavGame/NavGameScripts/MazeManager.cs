@@ -215,7 +215,8 @@ public class MazeManager : MonoBehaviour
                 //if (cScript.isEnd) GridArra[x, z].GetComponent<Renderer>().material.color = Color.black;
                 //if (!cScript.IsLegitPath) GridArra[x, z].GetComponent<Renderer>().material.color = Color.yellow;
 
-                if (cScript.IsLegitPath) { GridArra[x, z].GetComponent<NavMazeBlock>().UpdateTileMAterial(LightTiles[1]); }
+                if (cScript.isfound) { GridArra[x, z].GetComponent<NavMazeBlock>().UpdateTileMAterial(LightTiles[1]); }
+                else { GridArra[x, z].GetComponent<NavMazeBlock>().UpdateTileMAterial(DarkTiles[1]); }
                 if (cScript.isStart) { GridArra[x, z].GetComponent<NavMazeBlock>().UpdateTileMAterial(GreenMatDark); }
                 if (cScript.isEnd) { GridArra[x, z].GetComponent<NavMazeBlock>().UpdateTileMAterial(RedMAt); }
                 // if (!cScript.isfound) { GridArra[x, z].GetComponent<NavMazeBlock>().UpdateBlockText("X"); }
@@ -434,6 +435,7 @@ public class MazeManager : MonoBehaviour
         clearListOfAdjascent();
         //  MWay_ptr.Reset_Waypointtile_list();
         //   MWay_ptr.Reset_Waypointtile_OBJ_list();
+        // randCell_deselect();
         makeAdjList_and_Actualparent_AFTER_WALLSELECTION();
         resetALL_G_H_F();
 
@@ -553,7 +555,7 @@ public class MazeManager : MonoBehaviour
 
                     {
 
-                        GridArra[x, z].GetComponent<Renderer>().material.color = Color.gray;
+                        //GridArra[x, z].GetComponent<Renderer>().material.color = Color.gray;
                         // GridArra[x, z].GetComponent<NavMazeBlock_Clicking>().MoveUpOne();
                         GridArra[x, z].GetComponent<NavMazeBlock>().IsLegitPath = false;
                     }
@@ -600,11 +602,26 @@ public class MazeManager : MonoBehaviour
         // MWay_ptr = GameObject.Find("Empty_Waypoints").GetComponent<MNGR_Waypoints>();
         DO_INTI_SETUP_GRID();
 
-    }
+        node = Grid_end_ptr.GetComponent<NavMazeBlock>();
 
+
+    }
+    NavMazeBlock node;
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+
+            if (node.ptrT_ActualParent != null)
+            {
+
+                node = node.ptrT_ActualParent.GetComponent<NavMazeBlock>();
+                node.UpdateTileMAterial(DarkTiles[0]);
+            }
+
+        }
 
     }
 }
