@@ -570,9 +570,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CellPrefab: {fileID: 1234042796393194189, guid: cb0ba3fdb7557c94ba09b5cf5e9a8298,
     type: 3}
-  Size: {x: 20, y: 1, z: 11}
+  Size: {x: 21, y: 1, z: 11}
   Portal: {fileID: 1762529684940675268, guid: ee6485d0e47fde84eb517e4848eb723f, type: 3}
   wall: {fileID: 4599298731175404302, guid: 91163153bf19ea2479562ecf5cdc5ecd, type: 3}
+  RaiseT: []
+  LoweredT: []
   Set: []
 --- !u!4 &437200059
 Transform:
@@ -2928,7 +2930,7 @@ PrefabInstance:
     - target: {fileID: 1234042796393194191, guid: cb0ba3fdb7557c94ba09b5cf5e9a8298,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1234042796393194189, guid: cb0ba3fdb7557c94ba09b5cf5e9a8298,
         type: 3}
@@ -2989,21 +2991,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6142718744739821205, guid: cb0ba3fdb7557c94ba09b5cf5e9a8298,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6142718744739821205, guid: cb0ba3fdb7557c94ba09b5cf5e9a8298,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6142718744739821205, guid: cb0ba3fdb7557c94ba09b5cf5e9a8298,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb0ba3fdb7557c94ba09b5cf5e9a8298, type: 3}
