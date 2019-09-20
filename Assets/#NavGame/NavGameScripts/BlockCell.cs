@@ -9,8 +9,10 @@ public class BlockCell : MonoBehaviour
     public void UpdateBlockText(string argTxt) { m_Text.text = argTxt; }
     public void UpdateBlockTileMaterial(Material argMat) { MyTile.GetComponent<Renderer>().material = argMat; }
     public SubBlockVisualCtrl MySubBlock;
-    float _blockEdgeLength;
-    public float BlockEdgeLength { get => _blockEdgeLength; set => _blockEdgeLength = value; }
+    float _blockEdgeSize;
+    public float BlockEdgeSize { get => _blockEdgeSize; set => _blockEdgeSize = value; }
+    float _blockHeight;
+    public float BlockHeight { get => _blockHeight; set => _blockHeight = value; }
     NavMeshObstacle _MyObstacle;
 
 
@@ -24,16 +26,17 @@ public class BlockCell : MonoBehaviour
     private void OnEnable()
     {
         _MyObstacle = this.transform.GetComponentInChildren<NavMeshObstacle>();
-        _blockEdgeLength = _MyObstacle.gameObject.transform.localScale.x;
+        _blockEdgeSize = _MyObstacle.gameObject.transform.localScale.x;
+        _blockHeight = _MyObstacle.gameObject.transform.localScale.y;
     }
     public void Set_ObstacleUpDown(bool argUP)
     {
         if (argUP)
         {
-            _MyObstacle.gameObject.transform.Translate(Vector3.up * _blockEdgeLength);
+            _MyObstacle.gameObject.transform.Translate(Vector3.up * _blockHeight);
         }
         else
-            _MyObstacle.gameObject.transform.Translate(Vector3.down * _blockEdgeLength);
+            _MyObstacle.gameObject.transform.Translate(Vector3.down * _blockHeight);
 
 
     }

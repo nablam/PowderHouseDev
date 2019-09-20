@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -493,7 +493,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CellPrefab: {fileID: 1234042796393194189, guid: cb0ba3fdb7557c94ba09b5cf5e9a8298,
     type: 3}
-  Size: {x: 21, y: 1, z: 11}
+  Size: {x: 2, y: 1, z: 4}
   Portal: {fileID: 1762529684940675268, guid: ee6485d0e47fde84eb517e4848eb723f, type: 3}
   wall: {fileID: 4599298731175404302, guid: 91163153bf19ea2479562ecf5cdc5ecd, type: 3}
   Set: []
@@ -2577,16 +2577,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1234042796393194191, guid: cb0ba3fdb7557c94ba09b5cf5e9a8298,
-        type: 3}
-      propertyPath: m_Name
-      value: BlockCellRoot
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234042796393194191, guid: cb0ba3fdb7557c94ba09b5cf5e9a8298,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1234042796393194189, guid: cb0ba3fdb7557c94ba09b5cf5e9a8298,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2642,55 +2632,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1234042796393194191, guid: cb0ba3fdb7557c94ba09b5cf5e9a8298,
+        type: 3}
+      propertyPath: m_Name
+      value: BlockCellRoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234042796393194191, guid: cb0ba3fdb7557c94ba09b5cf5e9a8298,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3225603239416869234, guid: cb0ba3fdb7557c94ba09b5cf5e9a8298,
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 141832661883257902, guid: cb0ba3fdb7557c94ba09b5cf5e9a8298,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 141832660080701075, guid: cb0ba3fdb7557c94ba09b5cf5e9a8298,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 141832660477518410, guid: cb0ba3fdb7557c94ba09b5cf5e9a8298,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 141832661615236913, guid: cb0ba3fdb7557c94ba09b5cf5e9a8298,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 141832659981625203, guid: cb0ba3fdb7557c94ba09b5cf5e9a8298,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 141832661639762921, guid: cb0ba3fdb7557c94ba09b5cf5e9a8298,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 141832660736257714, guid: cb0ba3fdb7557c94ba09b5cf5e9a8298,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 141832661573810705, guid: cb0ba3fdb7557c94ba09b5cf5e9a8298,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 141832661665687113, guid: cb0ba3fdb7557c94ba09b5cf5e9a8298,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb0ba3fdb7557c94ba09b5cf5e9a8298, type: 3}

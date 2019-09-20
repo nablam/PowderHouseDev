@@ -88,7 +88,7 @@ public class BlocksManager : MonoBehaviour
                 // worry about.
                 newCell = (Transform)Instantiate(CellPrefab, new Vector3(0, 0, 0), Quaternion.identity);
                 BlockCell temp = newCell.GetComponent<BlockCell>();
-                newCell.position = new Vector3(x * temp.BlockEdgeLength, 0, z * temp.BlockEdgeLength);
+                newCell.position = new Vector3(x * temp.BlockEdgeSize, 0, z * temp.BlockEdgeSize);
 
                 //The newCell is now renamed "(x,0,z)" using String.Format
                 // "(+x+",0,"+z+")" would also work, but is less efficient.
@@ -98,7 +98,7 @@ public class BlocksManager : MonoBehaviour
                 //We already set the position of the newCell, but the cell's attached
                 // script needs to know where it is also.
                 // We assign it here.
-                newCell.GetComponent<BlockCell>().Position = new Vector3(x * temp.BlockEdgeLength, 0, z * temp.BlockEdgeLength);
+                newCell.GetComponent<BlockCell>().Position = new Vector3(x * temp.BlockEdgeSize, 0, z * temp.BlockEdgeSize);
                 //Grid[,] keeps track of all of the cells.
                 // We add the newCell to the appropriate location in the Grid array.
                 Grid[x, z] = newCell;
@@ -227,12 +227,12 @@ public class BlocksManager : MonoBehaviour
         //The Start of our Maze/Set will be color
         // coded Green, so we apply that to the renderer's
         // material's color here.
-        Grid[0, 0].GetComponent<BlockCell>().UpdateBlockTileMaterial(_repo.BlackMat);
+        Grid[0, 0].GetComponent<BlockCell>().UpdateBlockTileMaterial(_repo.GreenMatLight);
         //Now, we add the first cell to the Set.
         AddToSet(Grid[0, 0]);
 
 
-        buildwall();
+        // buildwall();
     }
 
     void AddToSet(Transform toAdd)
@@ -387,76 +387,7 @@ public class BlocksManager : MonoBehaviour
         this.transform.position = new Vector3(-Size.x, 0, -Size.z);
     }
 
-    void buildwall()
-    {
-        /*	
-            Instantiate(wall, new Vector3(Grid[0,0].transform.position.x -  80,
-                                          Grid[0,0].transform.position.y +80,
-                                          Grid[0,0].transform.position.z 
-                                          ), Quaternion.identity);
-            Debug.Log(Size.x);
-            */
-        //buildleftwall
 
-        for (int gridLengthindex = 0; gridLengthindex < Size.z; gridLengthindex++)
-        {
-
-            Instantiate(wall, new Vector3(Grid[0, 0].transform.position.x - 80,
-                                      Grid[0, 0].transform.position.y + 80,
-                                      Grid[0, 0].transform.position.z + (80 * gridLengthindex + 1)
-                                      ), Quaternion.identity);
-        }
-
-        //bildRightwall
-        for (int gridLengthindex = 0; gridLengthindex < Size.z; gridLengthindex++)
-        {
-
-            Instantiate(wall, new Vector3(Grid[0, 0].transform.position.x + 80 * Size.x,
-                                      Grid[0, 0].transform.position.y + 80,
-                                      Grid[0, 0].transform.position.z + (80 * gridLengthindex + 1)
-                                      ), Quaternion.identity);
-        }
-
-        //build bottom wall
-        for (int gridLengthindex = 0; gridLengthindex < Size.x; gridLengthindex++)
-        {
-
-            Instantiate(wall, new Vector3(Grid[0, 0].transform.position.x + (80 * gridLengthindex + 1),
-                                      Grid[0, 0].transform.position.y + 80,
-                                      Grid[0, 0].transform.position.z - 80
-                                      ), Quaternion.identity);
-        }
-
-        //build front wall
-        for (int gridLengthindex = 0; gridLengthindex < Size.x; gridLengthindex++)
-        {
-
-            Instantiate(wall, new Vector3(Grid[0, 0].transform.position.x + (80 * gridLengthindex + 1),
-                                      Grid[0, 0].transform.position.y + 80,
-                                      Grid[0, 0].transform.position.z + 80 * Size.z
-                                      ), Quaternion.identity);
-        }
-
-
-
-        //build roof
-        for (int gridWidthindex = 0; gridWidthindex < Size.z; gridWidthindex++)
-        {
-
-            for (int gridLengthindex = 0; gridLengthindex < Size.x; gridLengthindex++)
-            {
-
-                Instantiate(wall, new Vector3(Grid[0, 0].transform.position.x + (80 * gridLengthindex + 2),
-                                      Grid[0, 0].transform.position.y + 160, //up
-                                      Grid[0, 0].transform.position.z + 80 * Size.z - (80 * (gridWidthindex + 1)) //Size is size of grid longuere
-                                      ), Quaternion.identity);
-            }
-
-        }
-
-
-
-    }
 
 
     void Update()
@@ -468,3 +399,92 @@ public class BlocksManager : MonoBehaviour
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//void buildwall()
+//{
+//    /*	
+//        Instantiate(wall, new Vector3(Grid[0,0].transform.position.x -  80,
+//                                      Grid[0,0].transform.position.y +80,
+//                                      Grid[0,0].transform.position.z 
+//                                      ), Quaternion.identity);
+//        Debug.Log(Size.x);
+//        */
+//    //buildleftwall
+
+//    for (int gridLengthindex = 0; gridLengthindex < Size.z; gridLengthindex++)
+//    {
+
+//        Instantiate(wall, new Vector3(Grid[0, 0].transform.position.x - Size.x,
+//                                  Grid[0, 0].transform.position.y + 2,
+//                                  Grid[0, 0].transform.position.z + (gridLengthindex + 1)
+//                                  ), Quaternion.identity);
+//    }
+
+//    //bildRightwall
+//    for (int gridLengthindex = 0; gridLengthindex < Size.z; gridLengthindex++)
+//    {
+
+//        Instantiate(wall, new Vector3(Grid[0, 0].transform.position.x + 80 * Size.x,
+//                                  Grid[0, 0].transform.position.y + 80,
+//                                  Grid[0, 0].transform.position.z + (80 * gridLengthindex + 1)
+//                                  ), Quaternion.identity);
+//    }
+
+//    //build bottom wall
+//    for (int gridLengthindex = 0; gridLengthindex < Size.x; gridLengthindex++)
+//    {
+
+//        Instantiate(wall, new Vector3(Grid[0, 0].transform.position.x + (80 * gridLengthindex + 1),
+//                                  Grid[0, 0].transform.position.y + 80,
+//                                  Grid[0, 0].transform.position.z - 80
+//                                  ), Quaternion.identity);
+//    }
+
+//    //build front wall
+//    for (int gridLengthindex = 0; gridLengthindex < Size.x; gridLengthindex++)
+//    {
+
+//        Instantiate(wall, new Vector3(Grid[0, 0].transform.position.x + (80 * gridLengthindex + 1),
+//                                  Grid[0, 0].transform.position.y + 80,
+//                                  Grid[0, 0].transform.position.z + 80 * Size.z
+//                                  ), Quaternion.identity);
+//    }
+
+
+
+//    //build roof
+//    for (int gridWidthindex = 0; gridWidthindex < Size.z; gridWidthindex++)
+//    {
+
+//        for (int gridLengthindex = 0; gridLengthindex < Size.x; gridLengthindex++)
+//        {
+
+//            Instantiate(wall, new Vector3(Grid[0, 0].transform.position.x + (80 * gridLengthindex + 2),
+//                                  Grid[0, 0].transform.position.y + 160, //up
+//                                  Grid[0, 0].transform.position.z + 80 * Size.z - (80 * (gridWidthindex + 1)) //Size is size of grid longuere
+//                                  ), Quaternion.identity);
+//        }
+
+//    }
+
+
+
+//}
