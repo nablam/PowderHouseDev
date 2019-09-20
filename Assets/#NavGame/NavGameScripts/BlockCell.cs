@@ -22,6 +22,7 @@ public class BlockCell : MonoBehaviour
     public int Weight;
     public Transform here;
     public int AdjacentsOpened = 0;
+    public bool IsWall = false;
 
     private void OnEnable()
     {

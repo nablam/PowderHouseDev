@@ -4,6 +4,7 @@ using UnityEngine;
 public class BlocksManager : MonoBehaviour
 {
     // int walheight = 2;
+    const int RandNums = 12;
 
     //The CellPrefab is a Transform Prefab
     // we use as a template to create each
@@ -26,9 +27,19 @@ public class BlocksManager : MonoBehaviour
 
     RepoMaster _repo;
 
+    List<BlockCell> _loweredBlocks;
+    List<BlockCell> _raisedBlocks;
+
+    public List<BlockCell> RaisedWalls1 { get => _raisedBlocks; set => _raisedBlocks = value; }
+    public List<BlockCell> FloorPath1 { get => _loweredBlocks; set => _loweredBlocks = value; }
+    //public List<Transform> RaiseT = new List<Transform>();
+    //public List<Transform> LoweredT = new List<Transform>();
+
     // Use this for initialization
     void Start()
     {
+        _loweredBlocks = new List<BlockCell>();
+        RaisedWalls1 = new List<BlockCell>();
         _repo = RepoMaster.Instance;
 
         //CreateGrid will create a new grid of 
@@ -62,6 +73,8 @@ public class BlocksManager : MonoBehaviour
         // finishes, allowing it to loop indefinitely until
         // the invoke is canceled when we detect our maze is done.
         FindNext();
+
+
     }
 
     void CreateGrid()
@@ -118,7 +131,7 @@ public class BlocksManager : MonoBehaviour
         foreach (Transform child in transform)
         {
             //Get a new random number between 0 and 10.
-            int weight = Random.Range(0, 10);
+            int weight = Random.Range(0, RandNums);
             //Assign that number to both the cell's text..
             BlockCell temp = child.GetComponent<BlockCell>();
             temp.UpdateBlockText("w= " + weight.ToString());
@@ -213,6 +226,8 @@ public class BlocksManager : MonoBehaviour
     //  They are only recorded in the AdjSet once.
     public List<List<Transform>> AdjSet;
 
+
+
     void SetStart()
     {
         //Create a new List<Transform> for Set.
@@ -220,7 +235,7 @@ public class BlocksManager : MonoBehaviour
         //Also, we create a new List<List<Transform>>
         // and in the For loop, List<Transform>'s.
         AdjSet = new List<List<Transform>>();
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < RandNums; i++)
         {
             AdjSet.Add(new List<Transform>());
         }
@@ -279,7 +294,7 @@ public class BlocksManager : MonoBehaviour
             //We'll also take a note of which list is the Lowest,
             // and store it in this variable.
             int lowestList = 0;
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < RandNums; i++)
             {
                 //We loop through each sub-list in the AdjSet list of
                 // lists, until we find one with a count of more than 0.
@@ -301,6 +316,7 @@ public class BlocksManager : MonoBehaviour
             // are done with the maze production.
             if (empty)
             {
+                print("finied loop " + RaiseT.Count);
                 //If we finish, as stated and determined above,
                 // display a message to the DebugConsole
                 // that includes how many seconds it took to finish.
@@ -339,32 +355,29 @@ public class BlocksManager : MonoBehaviour
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 foreach (Transform cell in Grid)
                 {
                     if (!Set.Contains(cell))
                     {
-                        cell.GetComponent<BlockCell>().Set_ObstacleUpDown(true);
+                        BlockCell Raized = cell.GetComponent<BlockCell>();
+                        Raized.IsWall = true;
+                        // cell.GetComponent<BlockCell>().Set_ObstacleUpDown(true);
                         // cell.Translate(Vector3.up * 1);
                         //cell.renderer.material.color = Color.black;
+                        RaisedWalls1.Add(Raized);
+                        // RaiseT.Add(cell);
+                    }
+                    else
+                    {
+                        BlockCell FloorNotRaized = cell.GetComponent<BlockCell>();
+                        _loweredBlocks.Add(FloorNotRaized);
+                        // LoweredT.Add(cell);
                     }
                 }
+                SignalMazeFinished();
                 return;
             }
+
             //If we did not finish, then:
             // 1. Use the smallest sub-list in AdjSet
             //     as found earlier with the lowestList
@@ -377,17 +390,46 @@ public class BlocksManager : MonoBehaviour
             AdjSet[lowestList].Remove(next);
         } while (next.GetComponent<BlockCell>().AdjacentsOpened >= 2);
         //The 'next' transform's material color becomes white.
-        next.GetComponent<BlockCell>().UpdateBlockTileMaterial(_repo.WhiteMat);
+        next.GetComponent<BlockCell>().UpdateBlockTileMaterial(_repo.RedMat);
         //We add this 'next' transform to the Set our function.
         AddToSet(next);
+
+
+        //  print("Nothere");
+
         //Recursively call this function as soon as this function
         // finishes.
         Invoke("FindNext", 0);
 
-        this.transform.position = new Vector3(-Size.x * 2, 0, -Size.z * 2);
+
+        //this.transform.position = new Vector3(-Size.x * 2, 0, -Size.z * 2);
+
+        //foreach (BlockCell bc in _raisedBlocks)
+        //{
+        //    print("up");
+        //    bc.Set_ObstacleUpDown(true);
+        //}
     }
 
+    void SignalMazeFinished()
+    {
+        this.transform.position = new Vector3(-Size.x * 2, 0, -Size.z * 2);
+        foreach (BlockCell bc in _raisedBlocks)
+        {
+            bc.Set_ObstacleUpDown(true);
+            if (bc.AdjacentsOpened == 4) { }
+            else
+                 if (bc.AdjacentsOpened == 3) { }
+            else
+                 if (bc.AdjacentsOpened == 2) { }
+            else
+                 if (bc.AdjacentsOpened == 1) { }
+            else
+                 if (bc.AdjacentsOpened == 0) { }
 
+
+        }
+    }
 
 
     void Update()
