@@ -135,6 +135,7 @@ public class BlocksManager : MonoBehaviour
             //Assign that number to both the cell's text..
             BlockCell temp = child.GetComponent<BlockCell>();
             temp.UpdateBlockText("w= " + weight.ToString());
+            temp.UpdateBlockText("");
             //..and Weight variable in the BlockCell.
             temp.Weight = weight;
         }
@@ -316,7 +317,7 @@ public class BlocksManager : MonoBehaviour
             // are done with the maze production.
             if (empty)
             {
-                print("finied loop " + RaiseT.Count);
+                // print("finied loop " + RaiseT.Count);
                 //If we finish, as stated and determined above,
                 // display a message to the DebugConsole
                 // that includes how many seconds it took to finish.
@@ -331,9 +332,9 @@ public class BlocksManager : MonoBehaviour
                 // we mark it red.
                 Set[Set.Count - 1].GetComponent<BlockCell>().UpdateBlockTileMaterial(_repo.RedMat);
                 //  Instantiate(prefab, new Vecto( 3(i * 2.0F, 0, 0), Quaternion.identity) as Transform;
-                Instantiate(Portal, new Vector3(Set[Set.Count - 1].transform.position.x,
+                Instantiate(Portal, new Vector3(Set[Set.Count - 1].transform.position.x * 2,
                                                  Set[Set.Count - 1].transform.position.y + 1,
-                                                 Set[Set.Count - 1].transform.position.z), Quaternion.identity);
+                                                 Set[Set.Count - 1].transform.position.z * 2), Quaternion.identity);
 
                 //Here's an extra something I put in myself.
                 //Every cell in the grid that is not in the set
@@ -390,7 +391,7 @@ public class BlocksManager : MonoBehaviour
             AdjSet[lowestList].Remove(next);
         } while (next.GetComponent<BlockCell>().AdjacentsOpened >= 2);
         //The 'next' transform's material color becomes white.
-        next.GetComponent<BlockCell>().UpdateBlockTileMaterial(_repo.RedMat);
+        //No need for live coloring as path is foound next.GetComponent<BlockCell>().UpdateBlockTileMaterial(_repo.GetAlternatingTiles());
         //We add this 'next' transform to the Set our function.
         AddToSet(next);
 
@@ -411,22 +412,104 @@ public class BlocksManager : MonoBehaviour
         //}
     }
 
+
+
+    void SetShapeOfSubWall()
+    {
+        //Double For loop acts as a ForEach
+        for (int x = 0; x < Size.x; x++)
+        {
+            for (int z = 0; z < Size.z; z++)
+            {
+                bool HasAtLeast1Neighbor = false;
+                Transform thisRaisedCellOnly;
+                thisRaisedCellOnly = Grid[x, z];
+
+                BlockCell cScript = thisRaisedCellOnly.GetComponent<BlockCell>();
+
+                if (!cScript.IsWall) continue;
+
+                BlockCell NeighborPTR;
+                if (x - 1 >= 0)
+                {
+                    //checkleft
+                    NeighborPTR = Grid[x - 1, z].GetComponent<BlockCell>();
+                    if (NeighborPTR.IsWall)
+                    {
+                        cScript.MySubBlock.TurnonLeft();
+                        HasAtLeast1Neighbor = true;
+                    }
+                }
+                if (x + 1 < Size.x)
+                {
+
+                    //checkright
+                    NeighborPTR = Grid[x + 1, z].GetComponent<BlockCell>();
+                    if (NeighborPTR.IsWall)
+                    {
+                        cScript.MySubBlock.TurnonRight();
+                        HasAtLeast1Neighbor = true;
+                    }
+                }
+                if (z - 1 >= 0)
+                {
+
+                    //checkbot
+                    NeighborPTR = Grid[x, z - 1].GetComponent<BlockCell>();
+                    if (NeighborPTR.IsWall)
+                    {
+                        cScript.MySubBlock.TurnonBot();
+                        HasAtLeast1Neighbor = true;
+                    }
+                }
+                if (z + 1 < Size.z)
+                {
+
+                    //checkfront
+                    NeighborPTR = Grid[x, z + 1].GetComponent<BlockCell>();
+                    if (NeighborPTR.IsWall)
+                    {
+                        cScript.MySubBlock.TurnonTop();
+                        HasAtLeast1Neighbor = true;
+                    }
+                }
+
+                if (HasAtLeast1Neighbor)
+                {
+
+                    cScript.TurnBoxRenderer(false);
+                }
+                //After each cell has been validated and entered,
+                // sort all the adjacents in the list
+                // by the lowest weight.
+                //cScript.Adjacents.Sort(SortByLowestWeight);
+            }
+        }
+    }
+
+
     void SignalMazeFinished()
     {
         this.transform.position = new Vector3(-Size.x * 2, 0, -Size.z * 2);
+
+        SetShapeOfSubWall();
         foreach (BlockCell bc in _raisedBlocks)
         {
             bc.Set_ObstacleUpDown(true);
-            if (bc.AdjacentsOpened == 4) { }
-            else
-                 if (bc.AdjacentsOpened == 3) { }
-            else
-                 if (bc.AdjacentsOpened == 2) { }
-            else
-                 if (bc.AdjacentsOpened == 1) { }
-            else
-                 if (bc.AdjacentsOpened == 0) { }
 
+        }
+
+
+        for (int x = 0; x < _raisedBlocks.Count; x++)
+        {
+            BlockCell bc = _raisedBlocks[x];
+            bc.UpdateBlockTileMaterial(_repo.GetRandQuadMat());
+
+        }
+        for (int x = 0; x < _loweredBlocks.Count; x++)
+        {
+            BlockCell bc = _loweredBlocks[x];
+            bc.UpdateBlockTileMaterial(_repo.GetAlternatingTiles());
 
         }
     }

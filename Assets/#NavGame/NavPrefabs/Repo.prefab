@@ -64,3 +64,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 9397fc1c38018604f8a0c238b619a1e0, type: 2}
   - {fileID: 2100000, guid: b4f44b831d307274b8944a1c7fc9754d, type: 2}
   - {fileID: 2100000, guid: 7a1f9c7ed756b2a42921ce6bb82ed2fd, type: 2}
+  QuadTiles:
+  - {fileID: 2100000, guid: 32f1862602a34524d9adad7e73f86eac, type: 2}
+  - {fileID: 2100000, guid: 2f2a44eb7a370a5478b40c9823f9e841, type: 2}
+  - {fileID: 2100000, guid: 0db3973d45b5cec448480cebccfbada2, type: 2}
+  - {fileID: 2100000, guid: 8a4a804147029ef408d07b9356fa88e1, type: 2}

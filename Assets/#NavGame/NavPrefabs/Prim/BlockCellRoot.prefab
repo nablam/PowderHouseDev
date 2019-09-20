@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 141832659981625215}
   - component: {fileID: 141832659981625212}
   - component: {fileID: 4238151967388934124}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SubBlockM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 141832660080701084}
   - component: {fileID: 141832660080701085}
   - component: {fileID: 1984854841256902014}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SubBlockF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 141832660477518454}
   - component: {fileID: 141832660477518455}
   - component: {fileID: 2337089494331680089}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SubBlockFR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 141832660736257726}
   - component: {fileID: 141832660736257727}
   - component: {fileID: 7265311997153724877}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SubBlockBL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -426,7 +426,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 141832661047241600}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.5, y: 0.5, z: 0.5}
@@ -484,7 +484,7 @@ GameObject:
   - component: {fileID: 141832661573810717}
   - component: {fileID: 141832661573810706}
   - component: {fileID: 7998930691601405187}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SubBlockB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -578,7 +578,7 @@ GameObject:
   - component: {fileID: 141832661615236925}
   - component: {fileID: 141832661615236914}
   - component: {fileID: 8814864144075562245}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SubBlockML
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -672,7 +672,7 @@ GameObject:
   - component: {fileID: 141832661639762837}
   - component: {fileID: 141832661639762922}
   - component: {fileID: 2872616560914612161}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SubBlockMR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -766,7 +766,7 @@ GameObject:
   - component: {fileID: 141832661665687157}
   - component: {fileID: 141832661665687114}
   - component: {fileID: 1108708556974664078}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SubBlockBR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -860,7 +860,7 @@ GameObject:
   - component: {fileID: 141832661883257898}
   - component: {fileID: 141832661883257899}
   - component: {fileID: 3136339718433158825}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SubBlockFL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -990,11 +990,16 @@ MonoBehaviour:
   m_Text: {fileID: 2397820468940379779}
   MyTile: {fileID: 8965999488592522293}
   MySubBlock: {fileID: 6145695686241135182}
+  LeftNeighbor: {fileID: 0}
+  FrontNeighbor: {fileID: 0}
+  RightNeighbor: {fileID: 0}
+  BackNeighbor: {fileID: 0}
   Adjacents: []
   Position: {x: 0, y: 0, z: 0}
   Weight: 0
   here: {fileID: 0}
   AdjacentsOpened: 0
+  IsWall: 0
 --- !u!1 &3028352604291882014
 GameObject:
   m_ObjectHideFlags: 0

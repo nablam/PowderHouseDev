@@ -15,12 +15,20 @@ public class SubBlockVisualCtrl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        TopL.SetActive(false);
+        TopM.SetActive(false);
+        TopR.SetActive(false);
+        MidL.SetActive(false);
+        MidM.SetActive(false);
+        MidR.SetActive(false);
+        BotL.SetActive(false);
+        BotM.SetActive(false);
+        TopL.SetActive(false);
+        BotR.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    public void TurnonTop() { TopM.SetActive(true); if (!MidM.activeSelf) MidM.SetActive(true); }
+    public void TurnonBot() { BotM.SetActive(true); if (!MidM.activeSelf) MidM.SetActive(true); }
+    public void TurnonRight() { MidR.SetActive(true); if (!MidM.activeSelf) MidM.SetActive(true); }
+    public void TurnonLeft() { MidL.SetActive(true); if (!MidM.activeSelf) MidM.SetActive(true); }
 }
