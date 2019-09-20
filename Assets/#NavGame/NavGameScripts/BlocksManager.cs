@@ -384,7 +384,7 @@ public class BlocksManager : MonoBehaviour
         // finishes.
         Invoke("FindNext", 0);
 
-        this.transform.position = new Vector3(-Size.x, 0, -Size.z);
+        this.transform.position = new Vector3(-Size.x * 2, 0, -Size.z * 2);
     }
 
 
