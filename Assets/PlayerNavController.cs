@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.AI;
 using UnityStandardAssets.Characters.ThirdPerson;
 
@@ -11,20 +12,33 @@ public class PlayerNavController : MonoBehaviour
     public bool IsMecanim;
     public Joystick Jstk;
     public bool IsJoyStick;
+    public bool IsAI;
+    Transform PlayerTrans;
+    bool IsAwake = false;
+
+    IEnumerator SleepAbit()
+    {
+        yield return new WaitForSeconds(6);
+        IsAwake = true;
+    }
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         cam = Camera.main;
         character = GetComponent<ThirdPersonCharacter>();
+        if (IsAI) { IsJoyStick = false; PlayerTrans = GameObject.FindGameObjectWithTag("Player").transform; }
     }
 
     private void Start()
     {
+
         //rotation is done by animated character
         if (IsMecanim)
         {
             agent.updateRotation = false;
         }
+        StartCoroutine(SleepAbit());
+        InvokeRepeating("FindPlayerAndSetDest", 5, 3);
 
     }
     void Update()
@@ -35,8 +49,35 @@ public class PlayerNavController : MonoBehaviour
         }
         else
         {
-            UseNavMeshAndClick();
+            if (!IsAI)
+                UseNavMeshAndClick();
+            else
+            {
+
+                USeAI();
+            }
         }
+    }
+    void USeAI()
+    {
+        if (!IsAwake) return;
+
+
+        if (agent.remainingDistance > agent.stoppingDistance)
+        {
+            character.Move(agent.desiredVelocity, false, false);
+        }
+        else //reached destination
+        {
+            character.Move(Vector3.zero, false, false);
+        }
+
+    }
+
+    void FindPlayerAndSetDest()
+    {
+        if (!IsAwake) return;
+        agent.SetDestination(PlayerTrans.position);
     }
 
     void UseNavMeshAndClick()
