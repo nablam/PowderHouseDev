@@ -38,7 +38,8 @@ public class PlayerNavController : MonoBehaviour
             agent.updateRotation = false;
         }
         StartCoroutine(SleepAbit());
-        InvokeRepeating("FindPlayerAndSetDest", 5, 3);
+        if (IsAI)
+            InvokeRepeating("FindPlayerAndSetDest", 5, 3);
 
     }
     void Update()
