@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &7007899371910022218
+--- !u!114 &1865948142077545270
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -32,7 +32,7 @@ PrefabInstance:
     - target: {fileID: 1010093476082257734, guid: c927dcad001f26a44a27ed08d56a09aa,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.2
+      value: -1.12
       objectReference: {fileID: 0}
     - target: {fileID: 1010093476082257734, guid: c927dcad001f26a44a27ed08d56a09aa,
         type: 3}

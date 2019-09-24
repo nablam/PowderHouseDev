@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BellHopCharacter : MonoBehaviour, IAnimLisener
+public class BellHopCharacter : MonoBehaviour, ICharacterAnim
 {
     public TextMesh m_NameObjectText;
     public TextMesh m_HeldObjectText;
@@ -66,10 +66,21 @@ public class BellHopCharacter : MonoBehaviour, IAnimLisener
     }
     void ActialTossPeakRegisterStartMoveObject()
     {
+        GameManager.Instance.AirBornObj = ItemToToss.transform;
         ItemToToss.MoveTO(GetMyRightHandHold(), GameManager.Instance.GetCurDweller().LeftHandHoldPos, false);
     }
     void AnimateToss() { _MyAnimator.SetTrigger("TrigToss"); }
     public void AnimateCatch() { _MyAnimator.SetTrigger("TrigCatch"); }
+
+    bool turnright = false;
+    public void Animateturn()
+    {
+        turnright = !turnright;
+        if (turnright)
+            _MyAnimator.SetTrigger("TrigTurn");
+        else
+            _MyAnimator.SetTrigger("TrigUnTurn");
+    }
 
     //public void AnimTossPeack()
     //{
@@ -81,13 +92,29 @@ public class BellHopCharacter : MonoBehaviour, IAnimLisener
 
     //}
 
-    public void ToossPeack()
+    //public void ToossPeack()
+    //{
+    //    ActialTossPeakRegisterStartMoveObject();
+    //}
+
+    public void CatchPeack()
+    {
+        Set_ItemReached(GameManager.Instance.AirBornObj.gameObject);
+    }
+
+    void ICharacterAnim.AnimateToss()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void AnimTossPeack()
     {
         ActialTossPeakRegisterStartMoveObject();
     }
 
-    public void CatchPeack()
+    public void AnimCatchPeack()
     {
-        throw new System.NotImplementedException();
+        print("wtf");
+        CatchPeack();
     }
 }

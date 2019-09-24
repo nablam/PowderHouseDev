@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     }
 
     public BellHopCharacter TheBellHop;
+    public Transform AirBornObj;
 
     public StoryManager m_StoryMngr;
 

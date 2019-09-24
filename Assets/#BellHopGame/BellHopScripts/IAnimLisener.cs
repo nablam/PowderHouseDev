@@ -1,6 +1,6 @@
 ﻿public interface IAnimLisener
 {
-    void ToossPeack();
+    void TossPeack();
     void CatchPeack();
 
 }

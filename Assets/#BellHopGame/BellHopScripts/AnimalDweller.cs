@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AnimalDweller : MonoBehaviour, IAnimLisener
+public class AnimalDweller : MonoBehaviour, ICharacterAnim
 {
     public GameEnums.StoryObjects _HeldItem = GameEnums.StoryObjects.Ball;
     public GameEnums.AnimalCharcter My_type = GameEnums.AnimalCharcter.Alligator;
@@ -77,6 +77,7 @@ public class AnimalDweller : MonoBehaviour, IAnimLisener
     }
     void ActialTossPeakRegisterStartMoveObject()
     {
+        GameManager.Instance.AirBornObj = _CurHeldObject.transform;
         _CurHeldObject.GetComponent<StoryItem>().MoveTO(RightHandHoldPos, GameManager.Instance.TheBellHop.RightHandHoldPos, true);
         HasTossedObjectToBellHop = true;
     }
@@ -99,8 +100,8 @@ public class AnimalDweller : MonoBehaviour, IAnimLisener
 
     public int GEt_AskedTimes() { return this.TimesAsked; }
 
-    void AnimateToss() { _MyAnimator.SetTrigger("TrigToss"); }
-    void AnimateCatch() { _MyAnimator.SetTrigger("TrigCatch"); }
+    public void AnimateToss() { _MyAnimator.SetTrigger("TrigToss"); }
+    public void AnimateCatch() { _MyAnimator.SetTrigger("TrigCatch"); }
 
     //public void AnimTossPeack()
     //{
@@ -112,15 +113,28 @@ public class AnimalDweller : MonoBehaviour, IAnimLisener
 
     //}
 
-    public void ToossPeack()
+
+
+    public void CatchPeack()
+    {
+        Set_ItemReachedDwellr(GameManager.Instance.AirBornObj.gameObject);
+    }
+
+
+    void turnToDweller() { }
+    void turnToCam() { }
+
+    public void AnimTossPeack()
     {
         ActialTossPeakRegisterStartMoveObject();
     }
 
-    public void CatchPeack()
+    public void AnimCatchPeack()
     {
-        throw new System.NotImplementedException();
+        CatchPeack();
     }
+
+
 
     // public string I_Need_() { return " I need the " + MyStoryNode.; }
 }

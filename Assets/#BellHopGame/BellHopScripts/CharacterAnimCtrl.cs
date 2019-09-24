@@ -1,26 +1,26 @@
 ﻿using UnityEngine;
 
-public class CharacterAnimCtrl : MonoBehaviour, ICharacterAnim
+public class CharacterAnimCtrl : MonoBehaviour, IAnimLisener
 {
-    public void AnimateCatch()
+
+    public ICharacterAnim _myGuy;
+
+    void Awake()
     {
-        throw new System.NotImplementedException();
+        _myGuy = GetComponent<ICharacterAnim>();
+        if (_myGuy == null)
+        {
+            _myGuy = GetComponentInParent<ICharacterAnim>();
+        }
     }
 
-    public void AnimateToss()
+    public void CatchPeack()
     {
-        throw new System.NotImplementedException();
+        _myGuy.AnimCatchPeack();
     }
 
-    public void AnimCatchPeack()
+    public void TossPeack()
     {
-        throw new System.NotImplementedException();
+        _myGuy.AnimTossPeack();
     }
-
-    public void AnimTossPeack()
-    {
-        throw new System.NotImplementedException();
-    }
-
-
 }

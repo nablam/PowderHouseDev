@@ -301,7 +301,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770266673702424850}
-  m_LocalRotation: {x: 0.0013536194, y: -0.012696369, z: 0.07320004, w: 0.99723554}
+  m_LocalRotation: {x: 0.0013536195, y: -0.012696369, z: 0.07320005, w: 0.99723554}
   m_LocalPosition: {x: -0.00781031, y: 0.043043762, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -332,7 +332,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770266673702424852}
-  m_LocalRotation: {x: 0.000010981827, y: -0.0009821584, z: -0.02492076, w: 0.9996889}
+  m_LocalRotation: {x: 0.0000109818275, y: -0.0009821584, z: -0.024920762, w: 0.9996889}
   m_LocalPosition: {x: 0.0005536014, y: 0.041416563, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1009,7 +1009,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770266673702424932}
-  m_LocalRotation: {x: -0.09917511, y: -0.0049540764, z: -0.008910652, w: 0.99501777}
+  m_LocalRotation: {x: -0.09917512, y: -0.0049540764, z: -0.008910653, w: 0.99501777}
   m_LocalPosition: {x: -0, y: 0.17991273, z: 4.5474737e-16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1122,6 +1122,7 @@ GameObject:
   - component: {fileID: 770266673702587724}
   - component: {fileID: 770266673709818540}
   - component: {fileID: 1128734510690464778}
+  - component: {fileID: 8649803336640807441}
   m_Layer: 0
   m_Name: BellHop_Obj
   m_TagString: Untagged
@@ -1157,7 +1158,7 @@ Animator:
   m_GameObject: {fileID: 770266673702424940}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 7cb623fc6fbfd744d842710339301ac2, type: 3}
-  m_Controller: {fileID: 9100000, guid: 0994a2a5eb783f64bbba13d5563e7282, type: 2}
+  m_Controller: {fileID: 22100000, guid: 548d1518023a4ff409972a431ec29ed4, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1183,6 +1184,18 @@ MonoBehaviour:
   _HeldObject: 0
   RightHandHoldPos: {fileID: 6671229185197416404}
   LeftHandHoldPos: {fileID: 569500196432919611}
+--- !u!114 &8649803336640807441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770266673702424940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3287c34f0d8cb1b498748f91c9b958c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &770266673702424942
 GameObject:
   m_ObjectHideFlags: 0
@@ -1360,7 +1373,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770266673702424952}
-  m_LocalRotation: {x: 0.00000067953266, y: 0.00016609994, z: 0.015493565, w: 0.99987996}
+  m_LocalRotation: {x: 0.0000006795327, y: 0.00016609994, z: 0.015493566, w: 0.99987996}
   m_LocalPosition: {x: -0.00041783054, y: 0.0417399, z: -2.2737369e-16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

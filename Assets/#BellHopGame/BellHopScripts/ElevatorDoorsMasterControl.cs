@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -97,17 +98,25 @@ public class ElevatorDoorsMasterControl : MonoBehaviour
         if (String.Compare(arg, "Opened") == 0)
         {
             _doorsAreOpen = true;
-            GameManager.Instance.ReachedFloor();
+            StartCoroutine(WaitWhileBunnyturnsTpDweller());
         }
         else
            if (String.Compare(arg, "Closed") == 0)
         {
             _doorsAreOpen = false;
             GameManager.Instance.SwitchActiveFloorWhileDoorsAreClosed();
+            GameManager.Instance.TheBellHop.Animateturn();
         }
         else
             Debug.LogError("Wrong string, check typos");
     }
 
+    IEnumerator WaitWhileBunnyturnsTpDweller()
+    {
+        GameManager.Instance.TheBellHop.Animateturn();
+        yield return new WaitForSeconds(2);
+        GameManager.Instance.ReachedFloor();
+
+    }
 
 }
