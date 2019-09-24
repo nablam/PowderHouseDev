@@ -62,8 +62,10 @@ public class StoryManager : MonoBehaviour
         for (int a = 0; a < gm.Master_Number_of_Floors; a++)
         {
             GameObject TheAnimalGO = Instantiate(FloorDweller_REFS[a]);
+
             FloorDweller_GO.Add(TheAnimalGO);
             AnimalDweller ad = TheAnimalGO.GetComponent<AnimalDweller>();
+            ad.UpdateNameText(ad.My_type.ToString());
             ad.Floor_Number = a;
             AnimalDwellers.Add(ad);
         }

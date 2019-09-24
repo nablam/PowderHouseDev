@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
 
         Master_Number_of_Floors = NumKeypad_AvailableButtons.childCount;
+        Master_Number_of_Floors = 3;
     }
 
     public BellHopCharacter TheBellHop;
@@ -88,13 +89,18 @@ public class GameManager : MonoBehaviour
         MyFloorManager.SetCurFloor(DestinationFloor);
         StartCoroutine(WaitOpenDoors(3));
     }
-
+    public void SetCurDwellerReceivedObject(GameObject argtossedObj)
+    {
+        m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].Set_ItemReachedDwellr(argtossedObj);
+    }
     public void CurDwellerTossToBEllHop()
     {
-        m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].TossObjectToBellhop(TheBellHop.transform.GetChild(0));
+        m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].TossObjectToBellhop(TheBellHop.GetMyRightHandHold());
         string theNeighbor = m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().Next_giveto1.TheAnimal1.ToString();
         m_Text.text = "take this " + m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().ObjectInHand1 + "to " + theNeighbor + " plz";
     }
+
+
     //called from elevatordoorsMAsterCTRL when doorOpen animation complets
     bool firstTime = true;
     public void ReachedFloor()
@@ -107,7 +113,7 @@ public class GameManager : MonoBehaviour
             string theNeighbor = m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().Next_giveto1.TheAnimal1.ToString();
             m_Text.text = "hello bellhop: the" + theNeighbor + "needs this " + m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().ObjectInHand1;
 
-            m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].TossObjectToBellhop(TheBellHop.transform.GetChild(0));
+            m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].TossObjectToBellhop(TheBellHop.GetMyRightHandHold());
             firstTime = false;
         }
         else
@@ -117,7 +123,8 @@ public class GameManager : MonoBehaviour
             {
                 m_Text.text = "thank you bellhop ";
 
-                TheBellHop.TossToDwellerHand(m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].transform.GetChild(1));
+                //RightHandHoldPos TheBellHop.TossToDwellerHand(m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].transform.GetChild(1));
+                TheBellHop.TossToDwellerHand(m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].LeftHandHoldPos);
             }
             else
             {

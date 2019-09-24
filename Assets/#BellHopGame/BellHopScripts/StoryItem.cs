@@ -19,6 +19,7 @@ public class StoryItem : MonoBehaviour
 
 
 
+
     public void MoveTO(Transform startMarker, Transform endMarker, bool ToBEllhop)
     {
         if (transform.parent != null)
@@ -83,7 +84,8 @@ public class StoryItem : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        this.transform.GetChild(0).gameObject.SetActive(false);
+        //this.transform.GetChild(0).gameObject.SetActive(false);
+        GameManager.Instance.SetCurDwellerReceivedObject(this.gameObject);
         Debug.Log("ReachedDestination");
         GameManager.Instance.CurDwellerTossToBEllHop();
         //   GameManager.Instance.TheBellHop.Set_ItemReached(this.gameObject);

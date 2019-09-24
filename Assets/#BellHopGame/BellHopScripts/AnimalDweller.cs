@@ -6,7 +6,9 @@ public class AnimalDweller : MonoBehaviour
     public GameEnums.AnimalCharcter My_type = GameEnums.AnimalCharcter.Alligator;
     StoryNode MyStoryNode = null;
     GameObject _CurHeldObject = null;
-    Transform MyHandPos;
+    GameObject _CurReceivedObject = null;
+    public Transform RightHandHoldPos;
+    public Transform LeftHandHoldPos;
     GameObject TextBoxName;
     GameObject TextBoxObjNeeded;
     bool HasTossedObjectToBellHop = false;
@@ -18,12 +20,12 @@ public class AnimalDweller : MonoBehaviour
     public int Floor_Number { get => _floor; set => _floor = value; }
 
     //StoryPacket _StoryPacket;
-
+    public void UpdateNameText(string argName) { transform.GetChild(0).GetComponent<TextMesh>().text = argName; }
     void Awake()
     {
         TextBoxName = transform.GetChild(0).gameObject;
         TextBoxObjNeeded = transform.GetChild(1).gameObject;
-        MyHandPos = transform.GetChild(2);
+
 
     }
     ////forBuilding the resorce prefab only. keep while grayboxing
@@ -48,8 +50,8 @@ public class AnimalDweller : MonoBehaviour
         if (_CurHeldObject == null)
         {
             _CurHeldObject = argObj;
-            _CurHeldObject.transform.position = MyHandPos.position;
-            _CurHeldObject.transform.parent = MyHandPos;
+            _CurHeldObject.transform.position = RightHandHoldPos.position;
+            _CurHeldObject.transform.parent = RightHandHoldPos;
         }
 
     }
@@ -69,11 +71,20 @@ public class AnimalDweller : MonoBehaviour
         if (_CurHeldObject != null)
         {
 
-            _CurHeldObject.GetComponent<StoryItem>().MoveTO(MyHandPos, ArgBellhopHand, true);
+            _CurHeldObject.GetComponent<StoryItem>().MoveTO(RightHandHoldPos, ArgBellhopHand, true);
             HasTossedObjectToBellHop = true;
         }
     }
 
+
+    public void Set_ItemReachedDwellr(GameObject ItemObj)
+    {
+
+        _CurReceivedObject = ItemObj;
+        _CurReceivedObject.transform.parent = LeftHandHoldPos.transform;
+
+
+    }
     public void IncrementAskTimes()
     {
         TimesAsked++;

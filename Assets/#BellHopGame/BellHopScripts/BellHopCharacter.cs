@@ -2,17 +2,23 @@
 
 public class BellHopCharacter : MonoBehaviour
 {
+    public TextMesh m_NameObjectText;
+    public TextMesh m_HeldObjectText;
 
-    TextMesh m_HeldObjectText;
 
     public GameEnums.StoryObjects _HeldObject;
     StoryItem ItemToToss;
+    public Transform RightHandHoldPos;
+    public Transform LeftHandHoldPos;
+    public void UpdateNameText(string argName) { transform.GetChild(0).GetComponent<TextMesh>().text = argName; }
+    public void UpdateHeldObjNameText(string argName) { transform.GetChild(1).GetComponent<TextMesh>().text = argName; }
 
-
+    public Transform GetMyRightHandHold() { return this.RightHandHoldPos; }
+    public Transform GetMyLeftHandHold() { return this.LeftHandHoldPos; }
     // Start is called before the first frame update
     void Start()
     {
-        m_HeldObjectText = this.transform.GetChild(0).GetComponent<TextMesh>();
+        m_NameObjectText = this.transform.GetChild(0).GetComponent<TextMesh>();
         m_HeldObjectText.text = "";
         m_HeldObjectText = this.transform.GetChild(1).GetComponent<TextMesh>();
         // UpdateHeldObject("None");
@@ -47,10 +53,12 @@ public class BellHopCharacter : MonoBehaviour
     {
         ItemToToss = ItemObj.GetComponent<StoryItem>();
         _HeldObject = ItemToToss.MyType;
+        ItemObj.transform.parent = GetMyRightHandHold();
     }
 
     public void TossToDwellerHand(Transform argHand)
     {
-        ItemToToss.MoveTO(transform.GetChild(0), argHand, false);
+        //  ItemToToss.MoveTO(transform.GetChild(0), argHand, false);
+        ItemToToss.MoveTO(GetMyRightHandHold(), argHand, false);
     }
 }
