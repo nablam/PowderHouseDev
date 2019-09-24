@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BellHopCharacter : MonoBehaviour
+public class BellHopCharacter : MonoBehaviour, IAnimLisener
 {
     public TextMesh m_NameObjectText;
     public TextMesh m_HeldObjectText;
@@ -15,9 +15,11 @@ public class BellHopCharacter : MonoBehaviour
 
     public Transform GetMyRightHandHold() { return this.RightHandHoldPos; }
     public Transform GetMyLeftHandHold() { return this.LeftHandHoldPos; }
+    Animator _MyAnimator;
     // Start is called before the first frame update
     void Start()
     {
+        _MyAnimator = GetComponent<Animator>();
         m_NameObjectText = this.transform.GetChild(0).GetComponent<TextMesh>();
         m_HeldObjectText.text = "";
         m_HeldObjectText = this.transform.GetChild(1).GetComponent<TextMesh>();
@@ -56,9 +58,36 @@ public class BellHopCharacter : MonoBehaviour
         ItemObj.transform.parent = GetMyRightHandHold();
     }
 
-    public void TossToDwellerHand(Transform argHand)
+    public void TossToDwellerHand()
     {
+        AnimateToss();
         //  ItemToToss.MoveTO(transform.GetChild(0), argHand, false);
-        ItemToToss.MoveTO(GetMyRightHandHold(), argHand, false);
+        // ItemToToss.MoveTO(GetMyRightHandHold(), argHand, false);
+    }
+    void ActialTossPeakRegisterStartMoveObject()
+    {
+        ItemToToss.MoveTO(GetMyRightHandHold(), GameManager.Instance.GetCurDweller().LeftHandHoldPos, false);
+    }
+    void AnimateToss() { _MyAnimator.SetTrigger("TrigToss"); }
+    public void AnimateCatch() { _MyAnimator.SetTrigger("TrigCatch"); }
+
+    //public void AnimTossPeack()
+    //{
+    //    ActialTossPeakRegisterStartMoveObject();
+    //}
+
+    //public void AnimCatchPeack()
+    //{
+
+    //}
+
+    public void ToossPeack()
+    {
+        ActialTossPeakRegisterStartMoveObject();
+    }
+
+    public void CatchPeack()
+    {
+        throw new System.NotImplementedException();
     }
 }

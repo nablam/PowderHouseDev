@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AnimalDweller : MonoBehaviour
+public class AnimalDweller : MonoBehaviour, IAnimLisener
 {
     public GameEnums.StoryObjects _HeldItem = GameEnums.StoryObjects.Ball;
     public GameEnums.AnimalCharcter My_type = GameEnums.AnimalCharcter.Alligator;
@@ -16,13 +16,14 @@ public class AnimalDweller : MonoBehaviour
     int TimesAsked = 0;
 
     int _floor = 0;
-
+    Animator _MyAnimator;
     public int Floor_Number { get => _floor; set => _floor = value; }
 
     //StoryPacket _StoryPacket;
     public void UpdateNameText(string argName) { transform.GetChild(0).GetComponent<TextMesh>().text = argName; }
     void Awake()
     {
+        _MyAnimator = GetComponentInChildren<Animator>();
         TextBoxName = transform.GetChild(0).gameObject;
         TextBoxObjNeeded = transform.GetChild(1).gameObject;
 
@@ -61,7 +62,7 @@ public class AnimalDweller : MonoBehaviour
     }
 
 
-    public void TossObjectToBellhop(Transform ArgBellhopHand)
+    public void TossObjectToBellhop()
     {
         if (HasTossedObjectToBellHop)
         {
@@ -70,12 +71,15 @@ public class AnimalDweller : MonoBehaviour
         }
         if (_CurHeldObject != null)
         {
+            AnimateToss();
 
-            _CurHeldObject.GetComponent<StoryItem>().MoveTO(RightHandHoldPos, ArgBellhopHand, true);
-            HasTossedObjectToBellHop = true;
         }
     }
-
+    void ActialTossPeakRegisterStartMoveObject()
+    {
+        _CurHeldObject.GetComponent<StoryItem>().MoveTO(RightHandHoldPos, GameManager.Instance.TheBellHop.RightHandHoldPos, true);
+        HasTossedObjectToBellHop = true;
+    }
 
     public void Set_ItemReachedDwellr(GameObject ItemObj)
     {
@@ -91,7 +95,32 @@ public class AnimalDweller : MonoBehaviour
     }
 
 
+
+
     public int GEt_AskedTimes() { return this.TimesAsked; }
+
+    void AnimateToss() { _MyAnimator.SetTrigger("TrigToss"); }
+    void AnimateCatch() { _MyAnimator.SetTrigger("TrigCatch"); }
+
+    //public void AnimTossPeack()
+    //{
+    //    ActialTossPeakRegisterStartMoveObject();
+    //}
+
+    //public void AnimCatchPeack()
+    //{
+
+    //}
+
+    public void ToossPeack()
+    {
+        ActialTossPeakRegisterStartMoveObject();
+    }
+
+    public void CatchPeack()
+    {
+        throw new System.NotImplementedException();
+    }
 
     // public string I_Need_() { return " I need the " + MyStoryNode.; }
 }

@@ -93,9 +93,16 @@ public class GameManager : MonoBehaviour
     {
         m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].Set_ItemReachedDwellr(argtossedObj);
     }
+
+    public AnimalDweller GetCurDweller()
+    {
+
+        return m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()];
+
+    }
     public void CurDwellerTossToBEllHop()
     {
-        m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].TossObjectToBellhop(TheBellHop.GetMyRightHandHold());
+        m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].TossObjectToBellhop();
         string theNeighbor = m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().Next_giveto1.TheAnimal1.ToString();
         m_Text.text = "take this " + m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().ObjectInHand1 + "to " + theNeighbor + " plz";
     }
@@ -113,7 +120,7 @@ public class GameManager : MonoBehaviour
             string theNeighbor = m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().Next_giveto1.TheAnimal1.ToString();
             m_Text.text = "hello bellhop: the" + theNeighbor + "needs this " + m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().ObjectInHand1;
 
-            m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].TossObjectToBellhop(TheBellHop.GetMyRightHandHold());
+            m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].TossObjectToBellhop();
             firstTime = false;
         }
         else
@@ -124,7 +131,7 @@ public class GameManager : MonoBehaviour
                 m_Text.text = "thank you bellhop ";
 
                 //RightHandHoldPos TheBellHop.TossToDwellerHand(m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].transform.GetChild(1));
-                TheBellHop.TossToDwellerHand(m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].LeftHandHoldPos);
+                TheBellHop.TossToDwellerHand();
             }
             else
             {
