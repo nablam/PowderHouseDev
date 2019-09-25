@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
         else
             Destroy(this.gameObject);
 
-        Master_Number_of_Floors = 2;
+        Master_Number_of_Floors = 3;
         if (Master_Number_of_Floors > NumKeypad_AvailableButtons.childCount)
             Master_Number_of_Floors = NumKeypad_AvailableButtons.childCount;
     }
