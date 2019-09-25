@@ -24,7 +24,7 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
         m_HeldObjectText.text = "";
         m_HeldObjectText = this.transform.GetChild(1).GetComponent<TextMesh>();
         // UpdateHeldObject("None");
-        _HeldObject = GameEnums.StoryObjects.None;
+        _HeldObject = GameEnums.StoryObjects.aaNone;
     }
 
     //public void UpdateHeldObject(string argObjName)
@@ -114,7 +114,7 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
 
     public void AnimCatchPeack()
     {
-        print("wtf");
+        GameManager.Instance.IsAllowKeypad = true;
         CatchPeack();
     }
 }

@@ -49,7 +49,7 @@
     //make sure to run the prefab 
     public enum StoryObjects
     {
-        None,
+        aaNone,
         Book,
         Laptop,
         Mirror,

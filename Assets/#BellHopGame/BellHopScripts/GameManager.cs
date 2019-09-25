@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,8 +16,9 @@ public class GameManager : MonoBehaviour
         else
             Destroy(this.gameObject);
 
-        Master_Number_of_Floors = NumKeypad_AvailableButtons.childCount;
-        Master_Number_of_Floors = 3;
+        Master_Number_of_Floors = 2;
+        if (Master_Number_of_Floors > NumKeypad_AvailableButtons.childCount)
+            Master_Number_of_Floors = NumKeypad_AvailableButtons.childCount;
     }
 
     public BellHopCharacter TheBellHop;
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour
     public int _master_CurentFloorNumber;
     public int Master_CurentFloorNumber { get => _master_CurentFloorNumber; set => _master_CurentFloorNumber = value; }
     public bool GameEnded = false;
+    public bool IsAllowKeypad = false;
     int maxTimesAskedBeforeHint = 2;
 
     public void PlaceDwellersOnFloors(List<GameObject> argDwellers)
@@ -93,6 +96,8 @@ public class GameManager : MonoBehaviour
     public void SetCurDwellerReceivedObject(GameObject argtossedObj)
     {
         m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].Set_ItemReachedDwellr(argtossedObj);
+        if (MyFloorManager.GEtCurrFloorNumber() == 0) EndGame();
+
     }
 
     public AnimalDweller GetCurDweller()
@@ -113,6 +118,7 @@ public class GameManager : MonoBehaviour
     bool firstTime = true;
     public void ReachedFloor()
     {
+        IsAllowKeypad = false;
         // StartCoroutine(WaitTurnKeypadOnDoors(4));
         Debug.Log("floorReached");
         _numPad.ClearArrows();
@@ -123,6 +129,7 @@ public class GameManager : MonoBehaviour
 
             m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].TossObjectToBellhop();
             firstTime = false;
+
         }
         else
         {
@@ -154,6 +161,7 @@ public class GameManager : MonoBehaviour
                     m_Text.text += Floortogoto;// + " needs this " + m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().ObjectInHand1;
 
                 }
+                GameManager.Instance.IsAllowKeypad = true;
 
             }
 
@@ -181,8 +189,8 @@ public class GameManager : MonoBehaviour
     public void UpdateStoryTextAccordingToCurrFloor()
     {
         int curfloor = MyFloorManager.GEtCurrFloorNumber();
-        string Sentence = "Fix please";// m_StoryMngr.Get_FloorInfo(curfloor);
-                                       //if bellhop held object is what floordweller needs -> get next obj, else "wrong floor buddy, the blah animal needs another blah"
+        string Sentence = "";// m_StoryMngr.Get_FloorInfo(curfloor);
+                             //if bellhop held object is what floordweller needs -> get next obj, else "wrong floor buddy, the blah animal needs another blah"
         m_Text.text = Sentence;
     }
 
@@ -190,6 +198,18 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         GameEnded = true;
+        WaitToChangeScenes();
     }
 
+    void WaitToChangeScenes()
+    {
+        StartCoroutine(Wait5sec());
+
+    }
+
+    IEnumerator Wait5sec()
+    {
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene("PrimGame");
+    }
 }

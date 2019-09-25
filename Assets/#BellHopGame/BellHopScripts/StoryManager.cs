@@ -97,17 +97,10 @@ public class StoryManager : MonoBehaviour
         int temp = ArraIndexes[ArraIndexes.Length - 1];
         ArraIndexes[ArraIndexes.Length - 1] = ArraIndexes[0];
         ArraIndexes[0] = temp;
-        //for (int i = 0; i < ArraIndexes.Length; i++)
-        //{
-        //    if (ArraIndexes[i] == 0) { ArraIndexes[i] = ArraIndexes.Length - 1; }
-        //    else
-        //    if (ArraIndexes[i] == ArraIndexes.Length - 1) { ArraIndexes[i] = 0; }
-        //}
 
-        DebugArray(LowerHalfIndexes);
-        DebugArray(ArraIndexes);
+        //DebugArray(LowerHalfIndexes);
+        //DebugArray(ArraIndexes);
 
-        //MySwap(ArraIndexes);
 
 
     }
