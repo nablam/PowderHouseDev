@@ -16,9 +16,11 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
     public Transform GetMyRightHandHold() { return this.RightHandHoldPos; }
     public Transform GetMyLeftHandHold() { return this.LeftHandHoldPos; }
     Animator _MyAnimator;
+    GameManager _gm;
     // Start is called before the first frame update
     void Start()
     {
+        _gm = GameManager.Instance;
         _MyAnimator = GetComponent<Animator>();
         m_NameObjectText = this.transform.GetChild(0).GetComponent<TextMesh>();
         m_HeldObjectText.text = "";
@@ -27,29 +29,7 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
         _HeldObject = GameEnums.StoryObjects.aaNone;
     }
 
-    //public void UpdateHeldObject(string argObjName)
-    //{
 
-    //    GameEnums.StoryObjects tempHeldObj;
-    //    if (Enum.TryParse(argObjName, true, out tempHeldObj))
-    //    {
-    //        if (Enum.IsDefined(typeof(GameEnums.StoryObjects), tempHeldObj) | tempHeldObj.ToString().Contains(","))
-    //        {
-    //            Debug.LogFormat("Converted '{0}' to {1}.", argObjName, tempHeldObj.ToString());
-
-    //        }
-    //        else
-    //        {
-    //            Debug.LogFormat("{0} is not an underlying value of the StoryObjects enumeration.", argObjName);
-    //        }
-    //    }
-    //    else
-    //    {
-    //        Debug.LogFormat("{0} is not a member of the StoryObjects enumeration.", argObjName);
-    //    }
-    //    // _HeldObject = (GameEnums.StoryObjects)Enum.TryParse(typeof(GameEnums.StoryObjects), argObjName, true); //true ->  case insensitive
-    //    m_HeldObjectText.text = argObjName;
-    //}
 
     public void Set_ItemReached(GameObject ItemObj)
     {
@@ -61,13 +41,20 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
     public void TossToDwellerHand()
     {
         AnimateToss();
-        //  ItemToToss.MoveTO(transform.GetChild(0), argHand, false);
-        // ItemToToss.MoveTO(GetMyRightHandHold(), argHand, false);
+
     }
     void ActialTossPeakRegisterStartMoveObject()
     {
-        GameManager.Instance.AirBornObj = ItemToToss.transform;
-        ItemToToss.MoveTO(GetMyRightHandHold(), GameManager.Instance.GetCurDweller().LeftHandHoldPos, false);
+        if (_gm != null)
+        {
+            _gm.AirBornObj = ItemToToss.transform;
+            ItemToToss.MoveTO(GetMyRightHandHold(), _gm.GetCurDweller().LeftHandHoldPos, false);
+        }
+        else
+        {
+            Debug.LogWarning("No GameManager!!");
+        }
+
     }
     void AnimateToss() { _MyAnimator.SetTrigger("TrigToss"); }
     public void AnimateCatch() { _MyAnimator.SetTrigger("TrigCatch"); }
@@ -82,24 +69,18 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
             _MyAnimator.SetTrigger("TrigUnTurn");
     }
 
-    //public void AnimTossPeack()
-    //{
-    //    ActialTossPeakRegisterStartMoveObject();
-    //}
-
-    //public void AnimCatchPeack()
-    //{
-
-    //}
-
-    //public void ToossPeack()
-    //{
-    //    ActialTossPeakRegisterStartMoveObject();
-    //}
 
     public void CatchPeack()
     {
-        Set_ItemReached(GameManager.Instance.AirBornObj.gameObject);
+        if (_gm != null)
+        {
+            Set_ItemReached(_gm.AirBornObj.gameObject);
+        }
+        else
+        {
+            Debug.LogWarning("No GameManager!!");
+        }
+
     }
 
     void ICharacterAnim.AnimateToss()
@@ -114,7 +95,15 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
 
     public void AnimCatchPeack()
     {
-        GameManager.Instance.IsAllowKeypad = true;
-        CatchPeack();
+        if (_gm != null)
+        {
+            _gm.IsAllowKeypad = true;
+            CatchPeack();
+        }
+        else
+        {
+            Debug.LogWarning("No GameManager!!");
+        }
+
     }
 }
