@@ -195,10 +195,10 @@ public class StoryManager : MonoBehaviour
         for (int s = 0; s < gm.Master_Number_of_Floors; s++)
         {
             // Link instantiated Animal script to instantited item script 
-            AnimalDwellers[s]._HeldItem = StoryItems[s].MyType;
+            // AnimalDwellers[s]._HeldItem = StoryItems[s].MyType;
             StoryNode sn = new StoryNode(AnimalDwellers[s].My_type, StoryItems[s].MyType);
             StoryNodes.Add(sn);
-            AnimalDwellers[s].AssignHeldObject(FloorItem_GO[s], sn);
+            //  AnimalDwellers[s].AssignHeldObject(FloorItem_GO[s], sn);
         }
         ///
         //
@@ -258,11 +258,11 @@ public class StoryManager : MonoBehaviour
         for (int a = 0; a < gm.Master_Number_of_Floors; a++)
         {
             AnimalDweller ad = AnimalDwellers[a];
-            if (ad.GetStoryNode().Prev_OwedToMe1.ObjectInHand1 == toDeliver)
-            {
-                Debug.Log("found floor " + a.ToString());
-                return ad.Floor_Number;
-            }
+            //if (ad.GetStoryNode().Prev_OwedToMe1.ObjectInHand1 == toDeliver)
+            //{
+            //    Debug.Log("found floor " + a.ToString());
+            //    return ad.Floor_Number;
+            //}
 
         }
         return 0;

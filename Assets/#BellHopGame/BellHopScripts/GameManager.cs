@@ -109,8 +109,8 @@ public class GameManager : MonoBehaviour
     public void CurDwellerTossToBEllHop()
     {
         m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].TossObjectToBellhop();
-        string theNeighbor = m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().Next_giveto1.TheAnimal1.ToString();
-        m_Text.text = "take this " + m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().ObjectInHand1 + "to " + theNeighbor + " plz";
+        //  string theNeighbor = m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().Next_giveto1.TheAnimal1.ToString();
+        //  m_Text.text = "take this " + m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().ObjectInHand1 + "to " + theNeighbor + " plz";
     }
 
 
@@ -118,14 +118,14 @@ public class GameManager : MonoBehaviour
     bool firstTime = true;
     public void ReachedFloor()
     {
+        /*
         IsAllowKeypad = false;
-        // StartCoroutine(WaitTurnKeypadOnDoors(4));
         Debug.Log("floorReached");
         _numPad.ClearArrows();
         if (firstTime)
         {
-            string theNeighbor = m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().Next_giveto1.TheAnimal1.ToString();
-            m_Text.text = "hello bellhop: the" + theNeighbor + "needs this " + m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().ObjectInHand1;
+           // string theNeighbor = m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().Next_giveto1.TheAnimal1.ToString();
+          //  m_Text.text = "hello bellhop: the" + theNeighbor + "needs this " + m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].GetStoryNode().ObjectInHand1;
 
             m_StoryMngr.AnimalDwellers[MyFloorManager.GEtCurrFloorNumber()].TossObjectToBellhop();
             firstTime = false;
@@ -167,7 +167,7 @@ public class GameManager : MonoBehaviour
 
 
         }
-
+        */
 
 
     }

@@ -2,9 +2,7 @@
 
 public class AnimalDweller : MonoBehaviour, ICharacterAnim
 {
-    public GameEnums.StoryObjects _HeldItem = GameEnums.StoryObjects.Ball;
     public GameEnums.AnimalCharcter My_type = GameEnums.AnimalCharcter.Alligator;
-    StoryNode MyStoryNode = null;
     GameObject _CurHeldObject = null;
     GameObject _CurReceivedObject = null;
     public Transform RightHandHoldPos;
@@ -16,8 +14,12 @@ public class AnimalDweller : MonoBehaviour, ICharacterAnim
     int TimesAsked = 0;
 
     int _floor = 0;
-    Animator _MyAnimator;
     public int Floor_Number { get => _floor; set => _floor = value; }
+
+    int _name = 0;
+    public int Name { get => _name; set => _name = value; }
+
+    Animator _MyAnimator;
 
     //StoryPacket _StoryPacket;
     public void UpdateNameText(string argName) { transform.GetChild(0).GetComponent<TextMesh>().text = argName; }
@@ -26,8 +28,6 @@ public class AnimalDweller : MonoBehaviour, ICharacterAnim
         _MyAnimator = GetComponentInChildren<Animator>();
         TextBoxName = transform.GetChild(0).gameObject;
         TextBoxObjNeeded = transform.GetChild(1).gameObject;
-
-
     }
     ////forBuilding the resorce prefab only. keep while grayboxing
     //public void InitializeMe(GameEnums.AnimalCharcter argAnimal)
@@ -44,10 +44,8 @@ public class AnimalDweller : MonoBehaviour, ICharacterAnim
     /// fix this later . dont assume argObj type , or handle errors
     /// </summary>
     /// <param name="argObj"></param>
-    public void AssignHeldObject(GameObject argObj, StoryNode argStoryNode)
+    public void AssignHeldObject(GameObject argObj)
     {
-        _HeldItem = argObj.GetComponent<StoryItem>().MyType;
-        MyStoryNode = argStoryNode;
         if (_CurHeldObject == null)
         {
             _CurHeldObject = argObj;
@@ -56,11 +54,10 @@ public class AnimalDweller : MonoBehaviour, ICharacterAnim
         }
 
     }
-    public StoryNode GetStoryNode()
+    public GameObject GetHeldObject()
     {
-        return this.MyStoryNode;
+        return this._CurHeldObject;
     }
-
 
     public void TossObjectToBellhop()
     {
@@ -103,15 +100,6 @@ public class AnimalDweller : MonoBehaviour, ICharacterAnim
     public void AnimateToss() { _MyAnimator.SetTrigger("TrigToss"); }
     public void AnimateCatch() { _MyAnimator.SetTrigger("TrigCatch"); }
 
-    //public void AnimTossPeack()
-    //{
-    //    ActialTossPeakRegisterStartMoveObject();
-    //}
-
-    //public void AnimCatchPeack()
-    //{
-
-    //}
 
 
 
@@ -121,8 +109,6 @@ public class AnimalDweller : MonoBehaviour, ICharacterAnim
     }
 
 
-    void turnToDweller() { }
-    void turnToCam() { }
 
     public void AnimTossPeack()
     {
@@ -135,6 +121,4 @@ public class AnimalDweller : MonoBehaviour, ICharacterAnim
     }
 
 
-
-    // public string I_Need_() { return " I need the " + MyStoryNode.; }
 }
