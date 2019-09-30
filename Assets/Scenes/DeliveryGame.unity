@@ -287,11 +287,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 380ec57fb3af6da478e83ccee29d35cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BoyNamescsv: {fileID: 0}
+  GirlNamescsv: {fileID: 0}
   DeliveryItem_Instances: []
   Dwellers_Instances: []
   FloorObjRef: {fileID: 3604308529588604398, guid: 19a177500809f8443a548d5fc09a7121,
     type: 3}
   max: 5
+  TempItemNames: []
+  tl: []
 --- !u!4 &44857822
 Transform:
   m_ObjectHideFlags: 0
@@ -5542,7 +5546,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1107079556
 Transform:
   m_ObjectHideFlags: 0
@@ -13705,7 +13709,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a210bc78bc5ad34fbd371348ef6918f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _HeldItem: 0
   My_type: 0
   RightHandHoldPos: {fileID: 0}
   LeftHandHoldPos: {fileID: 0}
