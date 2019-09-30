@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class AnimalPlaceHolderPrefabMaker : MonoBehaviour
@@ -21,6 +20,7 @@ public class AnimalPlaceHolderPrefabMaker : MonoBehaviour
     public List<string> AllAnimals;
     public List<string> AllItems;
     public List<GameObject> LoadedAnimalObjs;
+
     void TempMakeAnimals()
     {
 
@@ -71,7 +71,7 @@ public class AnimalPlaceHolderPrefabMaker : MonoBehaviour
     }
 
 
-    void MakeItems()
+    void MakeItemsold()
     {
 
 
@@ -139,14 +139,55 @@ public class AnimalPlaceHolderPrefabMaker : MonoBehaviour
 
         }
     }
+
+
+
+    void MakeItems()
+    {
+
+
+        for (int i = 0; i < AllItems.Count; i++)
+        {
+
+            GameObject ItemObj = Instantiate(RefItem);
+            ItemObj.name = AllItems[i] + "_Obj";
+            ItemObj.transform.GetChild(0).GetComponent<TextMesh>().text = AllItems[i];
+            StoryItem _storiItem = ItemObj.GetComponent<StoryItem>();
+
+            // _HeldObject = (GameEnums.StoryObjects)Enum.TryParse(typeof(GameEnums.StoryObjects), argObjName, true); //true ->  case insensitive
+
+
+
+
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
 
-        AllAnimals = Enum.GetNames(typeof(GameEnums.AnimalCharcter)).ToList();
-        AllItems = Enum.GetNames(typeof(GameEnums.StoryObjects)).ToList();
-        // MakeItems();
-        TempMakeAnimals();
+
+
+
+        ///
+
+        /// THIS WILL BUILD PREFABS ! JUST QUICK HACK < 
+
+        ///
+        // LoadedDeliveryItemObjs = Resources.LoadAll<GameObject>("Items/NiceConstructedObjects").ToList();
+        //foreach (GameObject go in LoadedDeliveryItemObjs)
+        //{
+        //    GameObject NewGO = new GameObject();
+        //    NewGO.transform.position = new Vector3(0, 0, 0);
+        //    NewGO.name = go.name + "_root";
+
+        //    GameObject NewGOChild = Instantiate(go);
+        //    NewGOChild.name = go.name;
+        //    NewGO.AddComponent<DeliveryItem>();
+        //    DeliveryItem di = NewGO.GetComponent<DeliveryItem>();
+        //    di.SetItemName(go.name);
+        //    NewGOChild.transform.parent = NewGO.transform;
+        //    print(go.name);
+        //}
     }
 
     // Update is called once per frame

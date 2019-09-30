@@ -4,6 +4,7 @@ using UnityEngine;
 public class BlocksManager : MonoBehaviour
 {
     // int walheight = 2;
+    const int RandNums = 12;
 
     //The CellPrefab is a Transform Prefab
     // we use as a template to create each
@@ -26,9 +27,19 @@ public class BlocksManager : MonoBehaviour
 
     RepoMaster _repo;
 
+    List<BlockCell> _loweredBlocks;
+    List<BlockCell> _raisedBlocks;
+
+    public List<BlockCell> RaisedWalls1 { get => _raisedBlocks; set => _raisedBlocks = value; }
+    public List<BlockCell> FloorPath1 { get => _loweredBlocks; set => _loweredBlocks = value; }
+    //public List<Transform> RaiseT = new List<Transform>();
+    //public List<Transform> LoweredT = new List<Transform>();
+
     // Use this for initialization
     void Start()
     {
+        _loweredBlocks = new List<BlockCell>();
+        RaisedWalls1 = new List<BlockCell>();
         _repo = RepoMaster.Instance;
 
         //CreateGrid will create a new grid of 
@@ -62,6 +73,8 @@ public class BlocksManager : MonoBehaviour
         // finishes, allowing it to loop indefinitely until
         // the invoke is canceled when we detect our maze is done.
         FindNext();
+
+
     }
 
     void CreateGrid()
@@ -88,7 +101,7 @@ public class BlocksManager : MonoBehaviour
                 // worry about.
                 newCell = (Transform)Instantiate(CellPrefab, new Vector3(0, 0, 0), Quaternion.identity);
                 BlockCell temp = newCell.GetComponent<BlockCell>();
-                newCell.position = new Vector3(x * temp.BlockEdgeLength, 0, z * temp.BlockEdgeLength);
+                newCell.position = new Vector3(x * temp.BlockEdgeSize, 0, z * temp.BlockEdgeSize);
 
                 //The newCell is now renamed "(x,0,z)" using String.Format
                 // "(+x+",0,"+z+")" would also work, but is less efficient.
@@ -98,7 +111,7 @@ public class BlocksManager : MonoBehaviour
                 //We already set the position of the newCell, but the cell's attached
                 // script needs to know where it is also.
                 // We assign it here.
-                newCell.GetComponent<BlockCell>().Position = new Vector3(x * temp.BlockEdgeLength, 0, z * temp.BlockEdgeLength);
+                newCell.GetComponent<BlockCell>().Position = new Vector3(x * temp.BlockEdgeSize, 0, z * temp.BlockEdgeSize);
                 //Grid[,] keeps track of all of the cells.
                 // We add the newCell to the appropriate location in the Grid array.
                 Grid[x, z] = newCell;
@@ -118,10 +131,11 @@ public class BlocksManager : MonoBehaviour
         foreach (Transform child in transform)
         {
             //Get a new random number between 0 and 10.
-            int weight = Random.Range(0, 10);
+            int weight = Random.Range(0, RandNums);
             //Assign that number to both the cell's text..
             BlockCell temp = child.GetComponent<BlockCell>();
             temp.UpdateBlockText("w= " + weight.ToString());
+            temp.UpdateBlockText("");
             //..and Weight variable in the BlockCell.
             temp.Weight = weight;
         }
@@ -213,6 +227,8 @@ public class BlocksManager : MonoBehaviour
     //  They are only recorded in the AdjSet once.
     public List<List<Transform>> AdjSet;
 
+
+
     void SetStart()
     {
         //Create a new List<Transform> for Set.
@@ -220,19 +236,19 @@ public class BlocksManager : MonoBehaviour
         //Also, we create a new List<List<Transform>>
         // and in the For loop, List<Transform>'s.
         AdjSet = new List<List<Transform>>();
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < RandNums; i++)
         {
             AdjSet.Add(new List<Transform>());
         }
         //The Start of our Maze/Set will be color
         // coded Green, so we apply that to the renderer's
         // material's color here.
-        Grid[0, 0].GetComponent<BlockCell>().UpdateBlockTileMaterial(_repo.BlackMat);
+        Grid[0, 0].GetComponent<BlockCell>().UpdateBlockTileMaterial(_repo.GreenMatLight);
         //Now, we add the first cell to the Set.
         AddToSet(Grid[0, 0]);
 
 
-        buildwall();
+        // buildwall();
     }
 
     void AddToSet(Transform toAdd)
@@ -279,7 +295,7 @@ public class BlocksManager : MonoBehaviour
             //We'll also take a note of which list is the Lowest,
             // and store it in this variable.
             int lowestList = 0;
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < RandNums; i++)
             {
                 //We loop through each sub-list in the AdjSet list of
                 // lists, until we find one with a count of more than 0.
@@ -301,6 +317,7 @@ public class BlocksManager : MonoBehaviour
             // are done with the maze production.
             if (empty)
             {
+                // print("finied loop " + RaiseT.Count);
                 //If we finish, as stated and determined above,
                 // display a message to the DebugConsole
                 // that includes how many seconds it took to finish.
@@ -315,9 +332,9 @@ public class BlocksManager : MonoBehaviour
                 // we mark it red.
                 Set[Set.Count - 1].GetComponent<BlockCell>().UpdateBlockTileMaterial(_repo.RedMat);
                 //  Instantiate(prefab, new Vecto( 3(i * 2.0F, 0, 0), Quaternion.identity) as Transform;
-                Instantiate(Portal, new Vector3(Set[Set.Count - 1].transform.position.x,
+                Instantiate(Portal, new Vector3(Set[Set.Count - 1].transform.position.x * 2,
                                                  Set[Set.Count - 1].transform.position.y + 1,
-                                                 Set[Set.Count - 1].transform.position.z), Quaternion.identity);
+                                                 Set[Set.Count - 1].transform.position.z * 2), Quaternion.identity);
 
                 //Here's an extra something I put in myself.
                 //Every cell in the grid that is not in the set
@@ -339,32 +356,29 @@ public class BlocksManager : MonoBehaviour
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 foreach (Transform cell in Grid)
                 {
                     if (!Set.Contains(cell))
                     {
-                        cell.GetComponent<BlockCell>().Set_ObstacleUpDown(true);
+                        BlockCell Raized = cell.GetComponent<BlockCell>();
+                        Raized.IsWall = true;
+                        // cell.GetComponent<BlockCell>().Set_ObstacleUpDown(true);
                         // cell.Translate(Vector3.up * 1);
                         //cell.renderer.material.color = Color.black;
+                        RaisedWalls1.Add(Raized);
+                        // RaiseT.Add(cell);
+                    }
+                    else
+                    {
+                        BlockCell FloorNotRaized = cell.GetComponent<BlockCell>();
+                        _loweredBlocks.Add(FloorNotRaized);
+                        // LoweredT.Add(cell);
                     }
                 }
+                SignalMazeFinished();
                 return;
             }
+
             //If we did not finish, then:
             // 1. Use the smallest sub-list in AdjSet
             //     as found earlier with the lowestList
@@ -377,85 +391,127 @@ public class BlocksManager : MonoBehaviour
             AdjSet[lowestList].Remove(next);
         } while (next.GetComponent<BlockCell>().AdjacentsOpened >= 2);
         //The 'next' transform's material color becomes white.
-        next.GetComponent<BlockCell>().UpdateBlockTileMaterial(_repo.WhiteMat);
+        //No need for live coloring as path is foound next.GetComponent<BlockCell>().UpdateBlockTileMaterial(_repo.GetAlternatingTiles());
         //We add this 'next' transform to the Set our function.
         AddToSet(next);
+
+
+        //  print("Nothere");
+
         //Recursively call this function as soon as this function
         // finishes.
         Invoke("FindNext", 0);
 
-        this.transform.position = new Vector3(-Size.x, 0, -Size.z);
+
+        //this.transform.position = new Vector3(-Size.x * 2, 0, -Size.z * 2);
+
+        //foreach (BlockCell bc in _raisedBlocks)
+        //{
+        //    print("up");
+        //    bc.Set_ObstacleUpDown(true);
+        //}
     }
 
-    void buildwall()
+
+
+    void SetShapeOfSubWall()
     {
-        /*	
-            Instantiate(wall, new Vector3(Grid[0,0].transform.position.x -  80,
-                                          Grid[0,0].transform.position.y +80,
-                                          Grid[0,0].transform.position.z 
-                                          ), Quaternion.identity);
-            Debug.Log(Size.x);
-            */
-        //buildleftwall
-
-        for (int gridLengthindex = 0; gridLengthindex < Size.z; gridLengthindex++)
+        //Double For loop acts as a ForEach
+        for (int x = 0; x < Size.x; x++)
         {
-
-            Instantiate(wall, new Vector3(Grid[0, 0].transform.position.x - 80,
-                                      Grid[0, 0].transform.position.y + 80,
-                                      Grid[0, 0].transform.position.z + (80 * gridLengthindex + 1)
-                                      ), Quaternion.identity);
-        }
-
-        //bildRightwall
-        for (int gridLengthindex = 0; gridLengthindex < Size.z; gridLengthindex++)
-        {
-
-            Instantiate(wall, new Vector3(Grid[0, 0].transform.position.x + 80 * Size.x,
-                                      Grid[0, 0].transform.position.y + 80,
-                                      Grid[0, 0].transform.position.z + (80 * gridLengthindex + 1)
-                                      ), Quaternion.identity);
-        }
-
-        //build bottom wall
-        for (int gridLengthindex = 0; gridLengthindex < Size.x; gridLengthindex++)
-        {
-
-            Instantiate(wall, new Vector3(Grid[0, 0].transform.position.x + (80 * gridLengthindex + 1),
-                                      Grid[0, 0].transform.position.y + 80,
-                                      Grid[0, 0].transform.position.z - 80
-                                      ), Quaternion.identity);
-        }
-
-        //build front wall
-        for (int gridLengthindex = 0; gridLengthindex < Size.x; gridLengthindex++)
-        {
-
-            Instantiate(wall, new Vector3(Grid[0, 0].transform.position.x + (80 * gridLengthindex + 1),
-                                      Grid[0, 0].transform.position.y + 80,
-                                      Grid[0, 0].transform.position.z + 80 * Size.z
-                                      ), Quaternion.identity);
-        }
-
-
-
-        //build roof
-        for (int gridWidthindex = 0; gridWidthindex < Size.z; gridWidthindex++)
-        {
-
-            for (int gridLengthindex = 0; gridLengthindex < Size.x; gridLengthindex++)
+            for (int z = 0; z < Size.z; z++)
             {
+                bool HasAtLeast1Neighbor = false;
+                Transform thisRaisedCellOnly;
+                thisRaisedCellOnly = Grid[x, z];
 
-                Instantiate(wall, new Vector3(Grid[0, 0].transform.position.x + (80 * gridLengthindex + 2),
-                                      Grid[0, 0].transform.position.y + 160, //up
-                                      Grid[0, 0].transform.position.z + 80 * Size.z - (80 * (gridWidthindex + 1)) //Size is size of grid longuere
-                                      ), Quaternion.identity);
+                BlockCell cScript = thisRaisedCellOnly.GetComponent<BlockCell>();
+
+                if (!cScript.IsWall) continue;
+
+                BlockCell NeighborPTR;
+                if (x - 1 >= 0)
+                {
+                    //checkleft
+                    NeighborPTR = Grid[x - 1, z].GetComponent<BlockCell>();
+                    if (NeighborPTR.IsWall)
+                    {
+                        cScript.MySubBlock.TurnonLeft();
+                        HasAtLeast1Neighbor = true;
+                    }
+                }
+                if (x + 1 < Size.x)
+                {
+
+                    //checkright
+                    NeighborPTR = Grid[x + 1, z].GetComponent<BlockCell>();
+                    if (NeighborPTR.IsWall)
+                    {
+                        cScript.MySubBlock.TurnonRight();
+                        HasAtLeast1Neighbor = true;
+                    }
+                }
+                if (z - 1 >= 0)
+                {
+
+                    //checkbot
+                    NeighborPTR = Grid[x, z - 1].GetComponent<BlockCell>();
+                    if (NeighborPTR.IsWall)
+                    {
+                        cScript.MySubBlock.TurnonBot();
+                        HasAtLeast1Neighbor = true;
+                    }
+                }
+                if (z + 1 < Size.z)
+                {
+
+                    //checkfront
+                    NeighborPTR = Grid[x, z + 1].GetComponent<BlockCell>();
+                    if (NeighborPTR.IsWall)
+                    {
+                        cScript.MySubBlock.TurnonTop();
+                        HasAtLeast1Neighbor = true;
+                    }
+                }
+
+                if (HasAtLeast1Neighbor)
+                {
+
+                    cScript.TurnBoxRenderer(false);
+                }
+                //After each cell has been validated and entered,
+                // sort all the adjacents in the list
+                // by the lowest weight.
+                //cScript.Adjacents.Sort(SortByLowestWeight);
             }
+        }
+    }
+
+
+    void SignalMazeFinished()
+    {
+        this.transform.position = new Vector3(-Size.x * 2, 0, -Size.z * 2);
+
+        SetShapeOfSubWall();
+        foreach (BlockCell bc in _raisedBlocks)
+        {
+            bc.Set_ObstacleUpDown(true);
 
         }
 
 
+        for (int x = 0; x < _raisedBlocks.Count; x++)
+        {
+            BlockCell bc = _raisedBlocks[x];
+            bc.UpdateBlockTileMaterial(_repo.GetRandQuadMat());
 
+        }
+        for (int x = 0; x < _loweredBlocks.Count; x++)
+        {
+            BlockCell bc = _loweredBlocks[x];
+            bc.UpdateBlockTileMaterial(_repo.GetAlternatingTiles());
+
+        }
     }
 
 
@@ -468,3 +524,92 @@ public class BlocksManager : MonoBehaviour
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//void buildwall()
+//{
+//    /*	
+//        Instantiate(wall, new Vector3(Grid[0,0].transform.position.x -  80,
+//                                      Grid[0,0].transform.position.y +80,
+//                                      Grid[0,0].transform.position.z 
+//                                      ), Quaternion.identity);
+//        Debug.Log(Size.x);
+//        */
+//    //buildleftwall
+
+//    for (int gridLengthindex = 0; gridLengthindex < Size.z; gridLengthindex++)
+//    {
+
+//        Instantiate(wall, new Vector3(Grid[0, 0].transform.position.x - Size.x,
+//                                  Grid[0, 0].transform.position.y + 2,
+//                                  Grid[0, 0].transform.position.z + (gridLengthindex + 1)
+//                                  ), Quaternion.identity);
+//    }
+
+//    //bildRightwall
+//    for (int gridLengthindex = 0; gridLengthindex < Size.z; gridLengthindex++)
+//    {
+
+//        Instantiate(wall, new Vector3(Grid[0, 0].transform.position.x + 80 * Size.x,
+//                                  Grid[0, 0].transform.position.y + 80,
+//                                  Grid[0, 0].transform.position.z + (80 * gridLengthindex + 1)
+//                                  ), Quaternion.identity);
+//    }
+
+//    //build bottom wall
+//    for (int gridLengthindex = 0; gridLengthindex < Size.x; gridLengthindex++)
+//    {
+
+//        Instantiate(wall, new Vector3(Grid[0, 0].transform.position.x + (80 * gridLengthindex + 1),
+//                                  Grid[0, 0].transform.position.y + 80,
+//                                  Grid[0, 0].transform.position.z - 80
+//                                  ), Quaternion.identity);
+//    }
+
+//    //build front wall
+//    for (int gridLengthindex = 0; gridLengthindex < Size.x; gridLengthindex++)
+//    {
+
+//        Instantiate(wall, new Vector3(Grid[0, 0].transform.position.x + (80 * gridLengthindex + 1),
+//                                  Grid[0, 0].transform.position.y + 80,
+//                                  Grid[0, 0].transform.position.z + 80 * Size.z
+//                                  ), Quaternion.identity);
+//    }
+
+
+
+//    //build roof
+//    for (int gridWidthindex = 0; gridWidthindex < Size.z; gridWidthindex++)
+//    {
+
+//        for (int gridLengthindex = 0; gridLengthindex < Size.x; gridLengthindex++)
+//        {
+
+//            Instantiate(wall, new Vector3(Grid[0, 0].transform.position.x + (80 * gridLengthindex + 2),
+//                                  Grid[0, 0].transform.position.y + 160, //up
+//                                  Grid[0, 0].transform.position.z + 80 * Size.z - (80 * (gridWidthindex + 1)) //Size is size of grid longuere
+//                                  ), Quaternion.identity);
+//        }
+
+//    }
+
+
+
+//}

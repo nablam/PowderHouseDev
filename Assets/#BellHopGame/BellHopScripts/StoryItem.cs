@@ -19,6 +19,7 @@ public class StoryItem : MonoBehaviour
 
 
 
+
     public void MoveTO(Transform startMarker, Transform endMarker, bool ToBEllhop)
     {
         if (transform.parent != null)
@@ -30,7 +31,7 @@ public class StoryItem : MonoBehaviour
         startTime = Time.time;
         journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
         if (ToBEllhop)
-            StartCoroutine(ToBellHOp(startMarker, endMarker, 2));
+            StartCoroutine(ToBellHOp(startMarker, endMarker, 1.14f));
         else
         {
             StartCoroutine(ToDweller(startMarker, endMarker, 2));
@@ -46,7 +47,7 @@ public class StoryItem : MonoBehaviour
 
         float elapsedTime = 0;
 
-
+        GameManager.Instance.TheBellHop.AnimateCatch();
         while (elapsedTime < time)
         {
 
@@ -60,7 +61,8 @@ public class StoryItem : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         Debug.Log("ReachedDestination");
-        GameManager.Instance.TheBellHop.Set_ItemReached(this.gameObject);
+        //  GameManager.Instance.TheBellHop.Set_ItemReached(this.gameObject);
+
     }
 
     private IEnumerator ToDweller(Transform startMarker, Transform endMarker, float time)
@@ -69,7 +71,7 @@ public class StoryItem : MonoBehaviour
             yield return null;
 
         float elapsedTime = 0;
-
+        GameManager.Instance.GetCurDweller().AnimateCatch();
 
         while (elapsedTime < time)
         {
@@ -83,7 +85,8 @@ public class StoryItem : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        this.transform.GetChild(0).gameObject.SetActive(false);
+        //this.transform.GetChild(0).gameObject.SetActive(false);
+        GameManager.Instance.SetCurDwellerReceivedObject(this.gameObject);
         Debug.Log("ReachedDestination");
         GameManager.Instance.CurDwellerTossToBEllHop();
         //   GameManager.Instance.TheBellHop.Set_ItemReached(this.gameObject);

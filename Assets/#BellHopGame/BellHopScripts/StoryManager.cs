@@ -62,8 +62,10 @@ public class StoryManager : MonoBehaviour
         for (int a = 0; a < gm.Master_Number_of_Floors; a++)
         {
             GameObject TheAnimalGO = Instantiate(FloorDweller_REFS[a]);
+
             FloorDweller_GO.Add(TheAnimalGO);
             AnimalDweller ad = TheAnimalGO.GetComponent<AnimalDweller>();
+            ad.UpdateNameText(ad.My_type.ToString());
             ad.Floor_Number = a;
             AnimalDwellers.Add(ad);
         }
@@ -95,17 +97,10 @@ public class StoryManager : MonoBehaviour
         int temp = ArraIndexes[ArraIndexes.Length - 1];
         ArraIndexes[ArraIndexes.Length - 1] = ArraIndexes[0];
         ArraIndexes[0] = temp;
-        //for (int i = 0; i < ArraIndexes.Length; i++)
-        //{
-        //    if (ArraIndexes[i] == 0) { ArraIndexes[i] = ArraIndexes.Length - 1; }
-        //    else
-        //    if (ArraIndexes[i] == ArraIndexes.Length - 1) { ArraIndexes[i] = 0; }
-        //}
 
-        DebugArray(LowerHalfIndexes);
-        DebugArray(ArraIndexes);
+        //DebugArray(LowerHalfIndexes);
+        //DebugArray(ArraIndexes);
 
-        //MySwap(ArraIndexes);
 
 
     }
@@ -200,10 +195,10 @@ public class StoryManager : MonoBehaviour
         for (int s = 0; s < gm.Master_Number_of_Floors; s++)
         {
             // Link instantiated Animal script to instantited item script 
-            AnimalDwellers[s]._HeldItem = StoryItems[s].MyType;
+            // AnimalDwellers[s]._HeldItem = StoryItems[s].MyType;
             StoryNode sn = new StoryNode(AnimalDwellers[s].My_type, StoryItems[s].MyType);
             StoryNodes.Add(sn);
-            AnimalDwellers[s].AssignHeldObject(FloorItem_GO[s], sn);
+            //  AnimalDwellers[s].AssignHeldObject(FloorItem_GO[s], sn);
         }
         ///
         //
@@ -263,11 +258,11 @@ public class StoryManager : MonoBehaviour
         for (int a = 0; a < gm.Master_Number_of_Floors; a++)
         {
             AnimalDweller ad = AnimalDwellers[a];
-            if (ad.GetStoryNode().Prev_OwedToMe1.ObjectInHand1 == toDeliver)
-            {
-                Debug.Log("found floor " + a.ToString());
-                return ad.Floor_Number;
-            }
+            //if (ad.GetStoryNode().Prev_OwedToMe1.ObjectInHand1 == toDeliver)
+            //{
+            //    Debug.Log("found floor " + a.ToString());
+            //    return ad.Floor_Number;
+            //}
 
         }
         return 0;

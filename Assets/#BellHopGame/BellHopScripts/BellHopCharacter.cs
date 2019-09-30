@@ -1,56 +1,109 @@
 ﻿using UnityEngine;
 
-public class BellHopCharacter : MonoBehaviour
+public class BellHopCharacter : MonoBehaviour, ICharacterAnim
 {
+    public TextMesh m_NameObjectText;
+    public TextMesh m_HeldObjectText;
 
-    TextMesh m_HeldObjectText;
 
     public GameEnums.StoryObjects _HeldObject;
     StoryItem ItemToToss;
+    public Transform RightHandHoldPos;
+    public Transform LeftHandHoldPos;
+    public void UpdateNameText(string argName) { transform.GetChild(0).GetComponent<TextMesh>().text = argName; }
+    public void UpdateHeldObjNameText(string argName) { transform.GetChild(1).GetComponent<TextMesh>().text = argName; }
 
-
+    public Transform GetMyRightHandHold() { return this.RightHandHoldPos; }
+    public Transform GetMyLeftHandHold() { return this.LeftHandHoldPos; }
+    Animator _MyAnimator;
+    GameManager _gm;
     // Start is called before the first frame update
     void Start()
     {
-        m_HeldObjectText = this.transform.GetChild(0).GetComponent<TextMesh>();
+        _gm = GameManager.Instance;
+        _MyAnimator = GetComponent<Animator>();
+        m_NameObjectText = this.transform.GetChild(0).GetComponent<TextMesh>();
         m_HeldObjectText.text = "";
         m_HeldObjectText = this.transform.GetChild(1).GetComponent<TextMesh>();
         // UpdateHeldObject("None");
-        _HeldObject = GameEnums.StoryObjects.None;
+        _HeldObject = GameEnums.StoryObjects.aaNone;
     }
 
-    //public void UpdateHeldObject(string argObjName)
-    //{
 
-    //    GameEnums.StoryObjects tempHeldObj;
-    //    if (Enum.TryParse(argObjName, true, out tempHeldObj))
-    //    {
-    //        if (Enum.IsDefined(typeof(GameEnums.StoryObjects), tempHeldObj) | tempHeldObj.ToString().Contains(","))
-    //        {
-    //            Debug.LogFormat("Converted '{0}' to {1}.", argObjName, tempHeldObj.ToString());
-
-    //        }
-    //        else
-    //        {
-    //            Debug.LogFormat("{0} is not an underlying value of the StoryObjects enumeration.", argObjName);
-    //        }
-    //    }
-    //    else
-    //    {
-    //        Debug.LogFormat("{0} is not a member of the StoryObjects enumeration.", argObjName);
-    //    }
-    //    // _HeldObject = (GameEnums.StoryObjects)Enum.TryParse(typeof(GameEnums.StoryObjects), argObjName, true); //true ->  case insensitive
-    //    m_HeldObjectText.text = argObjName;
-    //}
 
     public void Set_ItemReached(GameObject ItemObj)
     {
         ItemToToss = ItemObj.GetComponent<StoryItem>();
         _HeldObject = ItemToToss.MyType;
+        ItemObj.transform.parent = GetMyRightHandHold();
     }
 
-    public void TossToDwellerHand(Transform argHand)
+    public void TossToDwellerHand()
     {
-        ItemToToss.MoveTO(transform.GetChild(0), argHand, false);
+        AnimateToss();
+
+    }
+    void ActialTossPeakRegisterStartMoveObject()
+    {
+        if (_gm != null)
+        {
+            _gm.AirBornObj = ItemToToss.transform;
+            ItemToToss.MoveTO(GetMyRightHandHold(), _gm.GetCurDweller().LeftHandHoldPos, false);
+        }
+        else
+        {
+            Debug.LogWarning("No GameManager!!");
+        }
+
+    }
+    void AnimateToss() { _MyAnimator.SetTrigger("TrigToss"); }
+    public void AnimateCatch() { _MyAnimator.SetTrigger("TrigCatch"); }
+
+    bool turnright = false;
+    public void Animateturn()
+    {
+        turnright = !turnright;
+        if (turnright)
+            _MyAnimator.SetTrigger("TrigTurn");
+        else
+            _MyAnimator.SetTrigger("TrigUnTurn");
+    }
+
+
+    public void CatchPeack()
+    {
+        if (_gm != null)
+        {
+            Set_ItemReached(_gm.AirBornObj.gameObject);
+        }
+        else
+        {
+            Debug.LogWarning("No GameManager!!");
+        }
+
+    }
+
+    void ICharacterAnim.AnimateToss()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void AnimTossPeack()
+    {
+        ActialTossPeakRegisterStartMoveObject();
+    }
+
+    public void AnimCatchPeack()
+    {
+        if (_gm != null)
+        {
+            _gm.IsAllowKeypad = true;
+            CatchPeack();
+        }
+        else
+        {
+            Debug.LogWarning("No GameManager!!");
+        }
+
     }
 }

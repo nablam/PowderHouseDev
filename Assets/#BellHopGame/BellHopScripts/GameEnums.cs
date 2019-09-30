@@ -1,5 +1,19 @@
 ﻿public class GameEnums
 {
+    public enum BlockType
+    {
+
+        FL_corner,
+        FrontRow,
+        FR_corner,
+        RighColumn,
+        BR_corner,
+        BackRow,
+        BL_corner,
+        Rightcolumn
+
+    }
+
     public enum AnimalCharcter
     {
 
@@ -35,7 +49,7 @@
     //make sure to run the prefab 
     public enum StoryObjects
     {
-        None,
+        aaNone,
         Book,
         Laptop,
         Mirror,
