@@ -1,7 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class DwellerMeshComposer : MonoBehaviour
 {
+
+    public string AnimalName;
+    public string AnimalType;
     public GameObject Body;
     SkinnedMeshRenderer BodyRenderer;
     public GameObject ShirtLong;
@@ -108,6 +113,7 @@ public class DwellerMeshComposer : MonoBehaviour
     public void ShowHead(string argHeadName)
     {
         HideHeads();
+        //Debug.Log("show head " + argHeadName);
         switch (argHeadName)
         {
             case "cat":
@@ -305,14 +311,20 @@ public class DwellerMeshComposer : MonoBehaviour
         FeetCartoon.GetComponent<SkinnedMeshRenderer>().material = BodyRenderer.material;
         FeetChiken.GetComponent<SkinnedMeshRenderer>().material = BodyRenderer.material;
     }
+
+
+    private void Awake()
+    {
+        BodyRenderer = Body.GetComponent<SkinnedMeshRenderer>();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        HideHeads();
-        HideFeet();
-        HidePants();
-        HideShirts();
-        BodyRenderer = Body.GetComponent<SkinnedMeshRenderer>();
+        //HideHeads();
+        //HideFeet();
+        //HidePants();
+        //HideShirts();
+
 
         //string animal = "monkey";
         //string feet = "feetcat";// "feetboots";
@@ -324,10 +336,28 @@ public class DwellerMeshComposer : MonoBehaviour
         //ShowShirts(shirt);
         //ShowPants(pants);
         //ShowFeet(feet);
-        ComposeMesh(GameEnums.DynAnimal.sheep, GameEnums.Shirts.shirtshort, GameEnums.MatColors.yellow, GameEnums.Pants.pantsshort, GameEnums.MatColors.pink, GameEnums.Shoes.feetchicken, GameEnums.MatColors.green);
+        // ComposeMesh(GameEnums.DynAnimal.sheep, GameEnums.Shirts.shirtshort, GameEnums.MatColors.yellow, GameEnums.Pants.pantsshort, GameEnums.MatColors.pink, GameEnums.Shoes.feetchicken, GameEnums.MatColors.green);
+
+        //Make(GameEnums.DynAnimal.mole, "milke");
     }
 
-    public void ComposeMesh(GameEnums.DynAnimal arganimal, GameEnums.Shirts argShirt, GameEnums.MatColors argshirtcolor, GameEnums.Pants argpants, GameEnums.MatColors argPantscolor, GameEnums.Shoes argshoes, GameEnums.MatColors argshoecolor)
+
+    public void Make(GameEnums.DynAnimal arganimal, string argMyName)
+    {
+
+        HideHeads();
+        HideFeet();
+        HidePants();
+        HideShirts();
+
+
+        ComposeMesh(arganimal, GetRandShirt(), GetRandColor(), GetRandPants(), GetRandColor(), GetRandShoes(), GetRandColor());
+
+        AnimalName = argMyName;
+        AnimalType = arganimal.ToString(); ;
+    }
+
+    void ComposeMesh(GameEnums.DynAnimal arganimal, GameEnums.Shirts argShirt, GameEnums.MatColors argshirtcolor, GameEnums.Pants argpants, GameEnums.MatColors argPantscolor, GameEnums.Shoes argshoes, GameEnums.MatColors argshoecolor)
     {
         SetBodyMat(arganimal.ToString());
         ShowHead(arganimal.ToString());
@@ -346,6 +376,13 @@ public class DwellerMeshComposer : MonoBehaviour
             PantsPtr.GetComponent<SkinnedMeshRenderer>().material = GetMatByEnum(argPantscolor);
         }
     }
+
+
+    GameEnums.Shirts GetRandShirt() { return (GameEnums.Shirts)Random.Range(0, Enum.GetNames(typeof(GameEnums.Shirts)).Length); }
+    GameEnums.Pants GetRandPants() { return (GameEnums.Pants)Random.Range(0, Enum.GetNames(typeof(GameEnums.Pants)).Length); }
+    GameEnums.MatColors GetRandColor() { return (GameEnums.MatColors)Random.Range(0, Enum.GetNames(typeof(GameEnums.MatColors)).Length); }
+    GameEnums.Shoes GetRandShoes() { return (GameEnums.Shoes)Random.Range(0, Enum.GetNames(typeof(GameEnums.Shoes)).Length); }
+
 
     // Update is called once per frame
     void Update()
