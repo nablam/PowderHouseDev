@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SceneBuilder : MonoBehaviour
 {
     public TextAsset BoyNamescsv;
     public TextAsset GirlNamescsv;
+
+    public GameObject BaseAnimalRef;
 
     Dictionary<char, List<string>> Dict_BoyNames;
     Dictionary<char, List<string>> Dict_GirlNames;
@@ -15,15 +19,19 @@ public class SceneBuilder : MonoBehaviour
 
 
     List<GameObject> LoadedDeliveryItemObjs;
-    List<GameObject> FloorItem_REFS;
+    public List<GameObject> FloorItem_REFS;
     public List<GameObject> DeliveryItem_Instances;
-    List<GameObject> LoadedAnimalObjs;
+    List<string> BOYS_AvailableDynamicAnimalNames = new List<string>();
+    List<string> GIRLS_AvailableDynamicAnimalNames = new List<string>();
+    public List<string> SelectedAnimalNames = new List<string>();
+    //  List<GameObject> LoadedAnimalObjs;
     List<GameObject> FloorDweller_REFS;
     public List<GameObject> Dwellers_Instances;
     public GameObject FloorObjRef;
     HotelFloor tempHotelFloor;
     GameObject Hotel;
     public int max = 4;
+    const int MAXavailableAnimals = 18;
     int[] path;
 
     /// <summary>
@@ -94,7 +102,10 @@ public class SceneBuilder : MonoBehaviour
 
     public List<string> tl = new List<string>();
 
-
+    private void Awake()
+    {
+        if (max > MAXavailableAnimals) max = MAXavailableAnimals;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -104,7 +115,21 @@ public class SceneBuilder : MonoBehaviour
         Dict_ItemNames = new Dictionary<char, List<string>>();
         DeliveryItem_Instances = new List<GameObject>();
         Dwellers_Instances = new List<GameObject>();
+        BOYS_AvailableDynamicAnimalNames = Enum.GetNames(typeof(GameEnums.DynAnimal)).ToList();
 
+        GIRLS_AvailableDynamicAnimalNames = Enum.GetNames(typeof(GameEnums.DynAnimal)).ToList();
+
+        for (int x = 0; x < Enum.GetNames(typeof(GameEnums.DynAnimal)).ToList().Count; x++)
+        {
+            BOYS_AvailableDynamicAnimalNames[x] = "Mr." + BOYS_AvailableDynamicAnimalNames[x];
+            GIRLS_AvailableDynamicAnimalNames[x] = "Mrs." + GIRLS_AvailableDynamicAnimalNames[x];
+        }
+
+        SelectedAnimalNames.AddRange(BOYS_AvailableDynamicAnimalNames);
+
+        SelectedAnimalNames.AddRange(GIRLS_AvailableDynamicAnimalNames);
+
+        SelectedAnimalNames.Shuffle();
 
         BoyNamescsv = Resources.Load("Data/BoyNames237") as TextAsset;
         GirlNamescsv = Resources.Load("Data/GirlNames323") as TextAsset;
@@ -119,18 +144,16 @@ public class SceneBuilder : MonoBehaviour
         LoadedDeliveryItemObjs = Resources.LoadAll<GameObject>("Items/NiceConstructedObjects").ToList();
 
 
-        LoadedAnimalObjs = Resources.LoadAll<GameObject>("Animals/PlaceHolders").ToList();
+        //  LoadedAnimalObjs = Resources.LoadAll<GameObject>("Animals/PlaceHolders").ToList();
         LoadedDeliveryItemObjs.Shuffle();
-        LoadedAnimalObjs.Shuffle();
 
-        foreach (GameObject gi in LoadedDeliveryItemObjs)
-        {
-            TempItemNames.Add(gi.name);
-        }
+        List<string> temp = SelectedAnimalNames.Take<string>(max).ToList();
+        SelectedAnimalNames = temp;
+
 
 
         FloorItem_REFS = LoadedDeliveryItemObjs.Take<GameObject>(max).ToList();
-        FloorDweller_REFS = LoadedAnimalObjs.Take<GameObject>(max).ToList();
+
 
 
 
@@ -148,7 +171,7 @@ public class SceneBuilder : MonoBehaviour
             hf.FloorNumber = i;
 
 
-            GameObject Dweller = Instantiate(FloorDweller_REFS[i]);
+            // GameObject Dweller = Instantiate(FloorDweller_REFS[i]);
             GameObject DeliveryObj = Instantiate(FloorItem_REFS[i]);
 
             F.transform.parent = Hotel.transform;
@@ -159,7 +182,12 @@ public class SceneBuilder : MonoBehaviour
     string[,] BoysSplitCsvGrid;
     string[,] GirlsSplitCsvGrid;
 
-
+    GameObject BuildDynamicAnimals()
+    {
+        GameObject Dweller = null;
+        FloorDweller_REFS = new List<GameObject>();
+        return Dweller;
+    }
 
     void MakeDictionaries(string[,] argSpitGrid, TextAsset argCsv, Dictionary<char, List<string>> argDict)
     {

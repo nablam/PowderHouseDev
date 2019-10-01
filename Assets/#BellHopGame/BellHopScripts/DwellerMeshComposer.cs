@@ -50,6 +50,11 @@ public class DwellerMeshComposer : MonoBehaviour
     public Material Grey;
     public Material Brown;
 
+    GameObject _CurHeldObject = null;
+    GameObject _CurReceivedObject = null;
+    public Transform RightHandHoldPos;
+    public Transform LeftHandHoldPos;
+
     Material GetMatByEnum(GameEnums.MatColors argMatcolor)
     {
 
