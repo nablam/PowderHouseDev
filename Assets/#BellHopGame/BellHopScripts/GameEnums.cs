@@ -105,4 +105,106 @@
         Playing,
         Finished
     }
+
+    public enum DynAnimal
+    {
+        cat,
+        duck,
+        mole,
+        mouse,
+        monkey,
+        penguin,
+        pig,
+        rabbit,
+        sheep
+    }
+
+    public enum MatColors
+    {
+        white,
+        black,
+        yellow,
+        orange,
+        red,
+        pink,
+        purple,
+        brown,
+        green,
+        blue,
+        grey
+    }
+
+    public enum Shirts
+    {
+        none,
+        shirtlong,
+        shirtshort
+    }
+    public enum Pants
+    {
+        none,
+        pantslong,
+        pantsshort
+    }
+    public enum Shoes
+    {
+        feetcat,
+        feetboots,
+        feetcartoon,
+        feetchicken
+    }
+
+    public enum MyItems
+    {
+        Avocado,
+        Banana,
+        Bread,
+        Burger,
+        Cheese_01,
+        Cheese_02,
+        Chicken,
+        Chili,
+        Chips,
+        Chips_Bag,
+        Coconut,
+        Croissant,
+        Donut,
+        Drink_01,
+        Drink_02,
+        Drink_03,
+        Eclair_Chocolate,
+        Egg,
+        Fries,
+        Gyoza,
+        HotDog,
+        IceCream,
+        IceCream_Cone,
+        Maki,
+        MeatBall,
+        Mochi,
+        Muffin,
+        Mushroom,
+        Omelette,
+        Onigiri,
+        Onion,
+        Pepper,
+        Pineapple,
+        Pizza,
+        Rice_Bowl,
+        Salad,
+        Saucisson,
+        Sausage,
+        Shrimp,
+        Steak_Cooked,
+        Steak_Uncooked,
+        Sushi,
+        SweetPepper,
+        Tacos,
+        Tempura,
+        Toast,
+        Tomato,
+        Watermelon,
+        Wine_Bottle
+    }
+
 }
