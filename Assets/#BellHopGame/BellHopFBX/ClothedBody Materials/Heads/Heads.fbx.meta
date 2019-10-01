@@ -1,0 +1,192 @@
+fileFormatVersion: 2
+guid: 8654af91ce2f62c4eb309514c79c341a
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Head_Cat_Low
+    100002: Head_Duck_Low
+    100004: Head_Mole_Low
+    100006: Head_Monkey_Low
+    100008: Head_Mouse_Low
+    100010: Head_Penguin_Low
+    100012: Head_Pig_Low
+    100014: Head_Rabbit_Low
+    100016: Head_Sheep_Low
+    100018: //RootNode
+    400000: Head_Cat_Low
+    400002: Head_Duck_Low
+    400004: Head_Mole_Low
+    400006: Head_Monkey_Low
+    400008: Head_Mouse_Low
+    400010: Head_Penguin_Low
+    400012: Head_Pig_Low
+    400014: Head_Rabbit_Low
+    400016: Head_Sheep_Low
+    400018: //RootNode
+    2100000: HedMouse_Mat
+    2100002: HeadDuck_Mat
+    2100004: HeadMonkey_Mat
+    2100006: HeadPenguin_Mat
+    2100008: HeadBunny_Mat
+    2100010: HeadPig_Mat
+    2100012: HeadCat_Mat
+    2100014: HeadMole_Mat
+    2100016: HeadSheep_Mat
+    2300000: Head_Cat_Low
+    2300002: Head_Duck_Low
+    2300004: Head_Mole_Low
+    2300006: Head_Monkey_Low
+    2300008: Head_Mouse_Low
+    2300010: Head_Penguin_Low
+    2300012: Head_Pig_Low
+    2300014: Head_Rabbit_Low
+    2300016: Head_Sheep_Low
+    3300000: Head_Cat_Low
+    3300002: Head_Duck_Low
+    3300004: Head_Mole_Low
+    3300006: Head_Monkey_Low
+    3300008: Head_Mouse_Low
+    3300010: Head_Penguin_Low
+    3300012: Head_Pig_Low
+    3300014: Head_Rabbit_Low
+    3300016: Head_Sheep_Low
+    4300000: Head_Mouse_Low
+    4300002: Head_Duck_Low
+    4300004: Head_Monkey_Low
+    4300006: Head_Penguin_Low
+    4300008: Head_Rabbit_Low
+    4300010: Head_Pig_Low
+    4300012: Head_Cat_Low
+    4300014: Head_Mole_Low
+    4300016: Head_Sheep_Low
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HeadBunny_Mat
+    second: {fileID: 2100000, guid: ff11b7cd034564247b373bc47d75751d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HeadCat_Mat
+    second: {fileID: 2100000, guid: 3faac4e768ed3644f8d4253b2e6f1f09, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HeadDuck_Mat
+    second: {fileID: 2100000, guid: 38839386a045c214badd93642142d688, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HeadMole_Mat
+    second: {fileID: 2100000, guid: d767efc36260b9a4497a78e657c61e78, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HeadMonkey_Mat
+    second: {fileID: 2100000, guid: 83768a7dca2c6d54c9db6dc57d992d0c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HeadPenguin_Mat
+    second: {fileID: 2100000, guid: 417339210a222254893da267bb2f70fc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HeadPig_Mat
+    second: {fileID: 2100000, guid: 2a3a7eecc1ca05e46916a14f24716738, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HeadSheep_Mat
+    second: {fileID: 2100000, guid: 9a895c574600c33468e9de29d3139e6b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HedMouse_Mat
+    second: {fileID: 2100000, guid: a74f52d2e81e2fe4884b7b0bad345948, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
