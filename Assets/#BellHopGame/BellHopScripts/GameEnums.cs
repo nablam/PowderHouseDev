@@ -207,4 +207,32 @@
         Wine_Bottle
     }
 
+
+    public enum GameSequenceType
+    {
+        GameStart,
+
+        ReachedFloor,
+        DoorsOppned,
+        DwellerReactionFinished,
+        BunnyReleasedObject,
+        BunnyCaughtObject,
+        DwellerReleasedObject,
+        DwellerCaughtObject,
+        BunnyReaction,
+        DoorsClosed,
+
+        GameEnd,
+
+    }
+
+
+    //new search , how many missed , can access the global discovered floors
+    public enum SolvingState
+    {
+        Memory,
+        Logic,
+        DirrectHint
+
+    }
 }

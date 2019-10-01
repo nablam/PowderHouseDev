@@ -333,6 +333,7 @@ public class SceneBuilder : MonoBehaviour
             HotelAsListOfFloors[floortosetup].SetDweller(Dwellers_Instances[p]);
         }
 
+        Camera.main.gameObject.GetComponent<CameraPov>().SetInitialPos(HotelAsListOfFloors[max - 1].BaseCamPos.transform);
     }
 
     GameObject GetItemRefBySimpleName(string argSimpleName)
