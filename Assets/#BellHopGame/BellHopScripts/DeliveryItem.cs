@@ -8,11 +8,11 @@ public class DeliveryItem : MonoBehaviour
 
     public void SetItemName(string argname) { _itemName = argname; RefName = argname; }
     public string GetItemName() { return _itemName; }
+    [SerializeField]
+    DwellerMeshComposer _destinationFloor;
 
-    int _destinationFloor;
-
-    public int GetDestFloorNumber() { return _destinationFloor; }
-    public void SetDestinationFloor(int argDestFloor)
+    public DwellerMeshComposer GetDestFloorNumber() { return _destinationFloor; }
+    public void SetDestinationFloor(DwellerMeshComposer argDestFloor)
     {
         _destinationFloor = argDestFloor;
     }

@@ -25,9 +25,10 @@ public class SceneBuilder : MonoBehaviour
 
 
 
-    List<GameObject> LoadedDeliveryItemObjs;
+    public List<GameObject> LoadedDeliveryItemObjs;
     public List<GameObject> FloorItem_REFS;
     public List<GameObject> DeliveryItem_Instances;
+    List<GameObject> TempListToBeShifted = new List<GameObject>(); //
     List<string> BOYS_AvailableDynamicAnimalNames = new List<string>();
     List<string> GIRLS_AvailableDynamicAnimalNames = new List<string>();
     public List<string> SelectedAnimalNames = new List<string>();
@@ -36,6 +37,7 @@ public class SceneBuilder : MonoBehaviour
     public List<GameObject> Dwellers_Instances;
     public GameObject FloorObjRef;
     HotelFloor tempHotelFloor;
+    public List<HotelFloor> HotelAsListOfFloors = new List<HotelFloor>();
     GameObject Hotel;
     public int max = 4;
     const int MAXavailableAnimals = 12;
@@ -141,7 +143,6 @@ public class SceneBuilder : MonoBehaviour
         MakeDictionaries(BoysSplitCsvGrid, BoyNamescsv, Dict_BoyNames);
         MakeDictionaries(GirlsSplitCsvGrid, GirlNamescsv, Dict_GirlNames);
 
-
         for (int x = 0; x < Enum.GetNames(typeof(GameEnums.MyItems)).ToList().Count; x++)
         {
 
@@ -159,12 +160,9 @@ public class SceneBuilder : MonoBehaviour
 
         }
 
-
-
         CreatePath();
 
         LoadedDeliveryItemObjs = Resources.LoadAll<GameObject>("Items/NiceConstructedObjects").ToList();
-
 
         //  LoadedAnimalObjs = Resources.LoadAll<GameObject>("Animals/PlaceHolders").ToList();
 
@@ -193,19 +191,7 @@ public class SceneBuilder : MonoBehaviour
             Dict_ItemNames[c].Shuffle();
         }
 
-
-
-
-
         //create MAster Dictionary based on selected animals 
-
-
-
-
-
-
-
-
 
 
 
@@ -278,55 +264,94 @@ public class SceneBuilder : MonoBehaviour
 
         for (int i = 0; i < max; i++)
         {
+
+
+
+
             GameObject F = Instantiate(FloorObjRef);
             F.name = "floor_" + i;
             F.transform.position = new Vector3(F.transform.position.x, i * 7f, F.transform.position.z);
+
+
+
             HotelFloor hf = F.GetComponent<HotelFloor>();
             hf.FloorNumber = i;
 
 
-            GameObject Dweller = Instantiate(BaseAnimalRef, new Vector3(-1.37f, -1.12f, 1.08f), Quaternion.Euler(0, 180, 0));
+
+            // GameObject Dweller = Instantiate(BaseAnimalRef, new Vector3(-1.37f, (i * 7f) - 1.12f, 1.08f), Quaternion.Euler(0, 180, 0));
+            GameObject Dweller = Instantiate(BaseAnimalRef, new Vector3(0, 0, 0), Quaternion.Euler(0, 180, 0));
             DwellerMeshComposer dmc = Dweller.GetComponent<DwellerMeshComposer>();
 
 
 
-
             string searchkey;
+            string ItemSearchKey;
             string name1 = SelectedAnimalNames[i];
             char c = name1.Split('.')[1][0];
             searchkey = (name1.Split('.')[0].Length == 3) ? "g." : "b.";  //  Mr.Rabbit  => b.r 
-
             searchkey = searchkey + c;
-
-
-
+            ItemSearchKey = "i." + c;
 
             string animalName = SelectedAnimalNames[i].Split('.')[1];
-
-
-
-
-            Debug.Log(SelectedAnimalNames[i] + " " + " " + animalName + " " + searchkey);
+            GameObject objRef = GetItemRefBySimpleName(DICT_MASTER[ItemSearchKey].NextItem());
+            DeliveryItem di = objRef.GetComponent<DeliveryItem>();
+            di.SetDestinationFloor(dmc);
+            TempListToBeShifted.Add(objRef);
+            Debug.Log(SelectedAnimalNames[i] + " " + " " + animalName + "  -> " + objRef.name);
             GameEnums.DynAnimal a = (GameEnums.DynAnimal)Enum.Parse(typeof(GameEnums.DynAnimal), animalName);
 
-
             dmc.Make(a, DICT_MASTER[searchkey].NextItem());
-            Dweller.transform.parent = F.transform;
-            //GameObject DeliveryObj = Instantiate(FloorItem_REFS[i]);
+
+            Dwellers_Instances.Add(Dweller);
+            //hf.SetDweller(Dweller);
 
             F.transform.parent = Hotel.transform;
+            HotelAsListOfFloors.Add(hf);
         }
+
+
+        GameObject firstislast = TempListToBeShifted[0];
+        for (int x = 1; x < TempListToBeShifted.Count; x++)
+        {
+
+            DeliveryItem_Instances.Add(Instantiate(TempListToBeShifted[x]));
+        }
+        DeliveryItem_Instances.Add(Instantiate(firstislast));
+
+
+
+        //now assign the objs and the animals and the floors 
+        for (int p = 0; p < path.Length; p++)
+        {
+
+            int floortosetup = path[p];
+            DwellerMeshComposer dmc = Dwellers_Instances[p].GetComponent<DwellerMeshComposer>();
+
+            dmc.InitializeHeldObject(DeliveryItem_Instances[p]);
+
+            HotelAsListOfFloors[floortosetup].SetDweller(Dwellers_Instances[p]);
+        }
+
     }
 
-    //string RoundRobinOnaList(List<string> argList)
-    //{
-    //    int i = 0;
-    //    int s = argList.Count;
-    //    string output = 
+    GameObject GetItemRefBySimpleName(string argSimpleName)
+    {
+        GameObject theRef = null;
+        for (int x = 0; x < LoadedDeliveryItemObjs.Count; x++)
+        {
+            if (LoadedDeliveryItemObjs[x].name.ToLower().Contains(argSimpleName))
+            {
+                theRef = LoadedDeliveryItemObjs[x];
+                break;
+            }
+        }
 
-    //    i++;
-    //    if (i > s) i = 0;
-    //}
+
+        return theRef;
+
+    }
+
 
 
     string[,] BoysSplitCsvGrid;
@@ -341,7 +366,7 @@ public class SceneBuilder : MonoBehaviour
 
     void MakeDictionaries(string[,] argSpitGrid, TextAsset argCsv, Dictionary<char, List<string>> argDict)
     {
-        // CSVReader.SplitCsvToGrid(CSVtoUse);
+
         argSpitGrid = CSVReader.SplitCsvGrid(argCsv.text);
         int GridLen = argSpitGrid.GetLength(1) - 2; //first and last i guess
 
@@ -359,19 +384,6 @@ public class SceneBuilder : MonoBehaviour
                 argDict.Add(c, new List<string>() { name });
             }
         }
-
-
-
-
-
-    }
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }
 
@@ -384,7 +396,6 @@ public class ListManager
     public ListManager()
     {
         i = 0;
-
     }
 
     public ListManager(List<string> arglist)
@@ -398,7 +409,6 @@ public class ListManager
         _list = arglist;
     }
 
-
     public void AddToME(string argstr)
     {
         _list.Add(argstr);
@@ -409,10 +419,8 @@ public class ListManager
         _list.Shuffle();
     }
 
-
     public string NextItem()
     {
-
         if (i >= _list.Count)
         {
             i = 0;

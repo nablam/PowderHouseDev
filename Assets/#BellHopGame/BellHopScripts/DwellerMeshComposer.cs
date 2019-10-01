@@ -2,13 +2,13 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class DwellerMeshComposer : MonoBehaviour
+public class DwellerMeshComposer : MonoBehaviour, IAnimLisener
 {
-
+    #region PublicVars
     public string AnimalName;
     public string AnimalType;
     public GameObject Body;
-    SkinnedMeshRenderer BodyRenderer;
+
     public GameObject ShirtLong;
     public GameObject ShirtShort;
     public GameObject PantsLong;
@@ -55,11 +55,21 @@ public class DwellerMeshComposer : MonoBehaviour
     public Material Grey;
     public Material Brown;
 
-    GameObject _CurHeldObject = null;
-    GameObject _CurReceivedObject = null;
+
+
     public Transform RightHandHoldPos;
     public Transform LeftHandHoldPos;
+    #endregion
 
+    SkinnedMeshRenderer BodyRenderer;
+
+    GameObject _CurHeldObject = null;
+    GameObject _CurReceivedObject = null;
+
+    GameObject ShirtPtr;
+    GameObject PantsPtr;
+
+    #region BodySetup
     Material GetMatByEnum(GameEnums.MatColors argMatcolor)
     {
 
@@ -95,8 +105,6 @@ public class DwellerMeshComposer : MonoBehaviour
 
     }
 
-    GameObject ShirtPtr;
-    GameObject PantsPtr;
     void HideHeads()
     {
         HeadCat.SetActive(false);
@@ -110,7 +118,7 @@ public class DwellerMeshComposer : MonoBehaviour
         HeadSheep.SetActive(false);
 
     }
-    public void ShowHead(string argHeadName)
+    void ShowHead(string argHeadName)
     {
         HideHeads();
         //Debug.Log("show head " + argHeadName);
@@ -179,7 +187,7 @@ public class DwellerMeshComposer : MonoBehaviour
         PantsLong.SetActive(false);
         PantsShort.SetActive(false);
     }
-    public void ShowFeet(string argFeetName)
+    void ShowFeet(string argFeetName)
     {
         HideFeet();
         switch (argFeetName)
@@ -202,7 +210,7 @@ public class DwellerMeshComposer : MonoBehaviour
                 break;
         }
     }
-    public void ShowShirts(string argShirtsName)
+    void ShowShirts(string argShirtsName)
     {
         HideShirts();
         switch (argShirtsName)
@@ -227,7 +235,7 @@ public class DwellerMeshComposer : MonoBehaviour
                 break;
         }
     }
-    public void ShowPants(string agPantsNAme)
+    void ShowPants(string agPantsNAme)
     {
         HidePants();
         switch (agPantsNAme)
@@ -312,6 +320,32 @@ public class DwellerMeshComposer : MonoBehaviour
         FeetChiken.GetComponent<SkinnedMeshRenderer>().material = BodyRenderer.material;
     }
 
+    void ComposeMesh(GameEnums.DynAnimal arganimal, GameEnums.Shirts argShirt, GameEnums.MatColors argshirtcolor, GameEnums.Pants argpants, GameEnums.MatColors argPantscolor, GameEnums.Shoes argshoes, GameEnums.MatColors argshoecolor)
+    {
+        SetBodyMat(arganimal.ToString());
+        ShowHead(arganimal.ToString());
+        SetFeetMat();
+        ShowShirts(argShirt.ToString());
+        ShowPants(argpants.ToString());
+        ShowFeet(argshoes.ToString());
+
+        if (ShirtPtr != null)
+        {
+            ShirtPtr.GetComponent<SkinnedMeshRenderer>().material = GetMatByEnum(argshirtcolor);
+        }
+
+        if (PantsPtr != null)
+        {
+            PantsPtr.GetComponent<SkinnedMeshRenderer>().material = GetMatByEnum(argPantscolor);
+        }
+    }
+
+
+    GameEnums.Shirts GetRandShirt() { return (GameEnums.Shirts)Random.Range(0, Enum.GetNames(typeof(GameEnums.Shirts)).Length); }
+    GameEnums.Pants GetRandPants() { return (GameEnums.Pants)Random.Range(0, Enum.GetNames(typeof(GameEnums.Pants)).Length); }
+    GameEnums.MatColors GetRandColor() { return (GameEnums.MatColors)Random.Range(0, Enum.GetNames(typeof(GameEnums.MatColors)).Length); }
+    GameEnums.Shoes GetRandShoes() { return (GameEnums.Shoes)Random.Range(0, Enum.GetNames(typeof(GameEnums.Shoes)).Length); }
+    #endregion
 
     private void Awake()
     {
@@ -357,31 +391,7 @@ public class DwellerMeshComposer : MonoBehaviour
         AnimalType = arganimal.ToString(); ;
     }
 
-    void ComposeMesh(GameEnums.DynAnimal arganimal, GameEnums.Shirts argShirt, GameEnums.MatColors argshirtcolor, GameEnums.Pants argpants, GameEnums.MatColors argPantscolor, GameEnums.Shoes argshoes, GameEnums.MatColors argshoecolor)
-    {
-        SetBodyMat(arganimal.ToString());
-        ShowHead(arganimal.ToString());
-        SetFeetMat();
-        ShowShirts(argShirt.ToString());
-        ShowPants(argpants.ToString());
-        ShowFeet(argshoes.ToString());
 
-        if (ShirtPtr != null)
-        {
-            ShirtPtr.GetComponent<SkinnedMeshRenderer>().material = GetMatByEnum(argshirtcolor);
-        }
-
-        if (PantsPtr != null)
-        {
-            PantsPtr.GetComponent<SkinnedMeshRenderer>().material = GetMatByEnum(argPantscolor);
-        }
-    }
-
-
-    GameEnums.Shirts GetRandShirt() { return (GameEnums.Shirts)Random.Range(0, Enum.GetNames(typeof(GameEnums.Shirts)).Length); }
-    GameEnums.Pants GetRandPants() { return (GameEnums.Pants)Random.Range(0, Enum.GetNames(typeof(GameEnums.Pants)).Length); }
-    GameEnums.MatColors GetRandColor() { return (GameEnums.MatColors)Random.Range(0, Enum.GetNames(typeof(GameEnums.MatColors)).Length); }
-    GameEnums.Shoes GetRandShoes() { return (GameEnums.Shoes)Random.Range(0, Enum.GetNames(typeof(GameEnums.Shoes)).Length); }
 
 
     // Update is called once per frame
@@ -389,4 +399,36 @@ public class DwellerMeshComposer : MonoBehaviour
     {
 
     }
+
+    public void InitializeHeldObject(GameObject argItemInHand)
+    {
+        _CurHeldObject = argItemInHand;
+        _CurHeldObject.transform.position = new Vector3(RightHandHoldPos.position.x, RightHandHoldPos.position.y, RightHandHoldPos.position.z);
+        _CurHeldObject.transform.parent = RightHandHoldPos.transform;
+    }
+
+    public DwellerMeshComposer GetMyHeldObjectDestination()
+    {
+        if (_CurHeldObject != null)
+        {
+
+
+            return _CurHeldObject.GetComponent<DeliveryItem>().GetDestFloorNumber();
+        }
+        else
+            return null;
+    }
+
+
+    #region InterfaceForAnimatorListen
+    public void TossPeack()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void CatchPeack()
+    {
+        throw new NotImplementedException();
+    }
+    #endregion
 }

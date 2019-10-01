@@ -2145,7 +2145,7 @@ Animator:
   m_GameObject: {fileID: 8557428548546911944}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 5b9b2b6d9a984d546bf94ab11be3f439, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0994a2a5eb783f64bbba13d5563e7282, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -2166,6 +2166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 398b2310a9477894287691fd8ce991c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AnimalName: 
+  AnimalType: 
   Body: {fileID: 8557428548546911950}
   ShirtLong: {fileID: 8557428548546911948}
   ShirtShort: {fileID: 8557428548546911946}
