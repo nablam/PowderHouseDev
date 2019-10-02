@@ -25,8 +25,15 @@ public class BellHopGameEventManager : MonoBehaviour
     public static EventCurSequence OnCurSequenceChanged;
     public void Call_CurSequenceChanged(GameEnums.GameSequenceType gs)
     {
-        if (OnCurSequenceChanged != null) OnCurSequenceChanged(gs);
+        OnCurSequenceChanged?.Invoke(gs);
     }
 
-    //GameSequenceType
+    public delegate void EventButtonPressed(int argNum);
+    public static EventButtonPressed OnButtonPressed;
+    public void Call_ButtonPressed(int argNum)
+    {
+        OnButtonPressed?.Invoke(argNum);
+    }
+
+
 }

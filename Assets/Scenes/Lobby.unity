@@ -12714,7 +12714,7 @@ GameObject:
   - component: {fileID: 5200026930020386989}
   - component: {fileID: 5312806656918470090}
   m_Layer: 5
-  m_Name: Canvas_Mobile
+  m_Name: Canvas_MobileV2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15729,7 +15729,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a210bc78bc5ad34fbd371348ef6918f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _HeldItem: 0
   My_type: 0
   RightHandHoldPos: {fileID: 0}
   LeftHandHoldPos: {fileID: 0}

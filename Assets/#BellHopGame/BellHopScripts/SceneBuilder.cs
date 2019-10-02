@@ -10,6 +10,7 @@ public class SceneBuilder : MonoBehaviour
     public TextAsset GirlNamescsv;
 
     public GameObject BaseAnimalRef;
+    public HotelFloorsManager HotelFloorsMNG;
 
     Dictionary<char, List<string>> Dict_BoyNames;
     Dictionary<char, List<string>> Dict_GirlNames;
@@ -19,10 +20,6 @@ public class SceneBuilder : MonoBehaviour
     //         b.r     list boy names start with r
     //         i.r      list of items that start with i 
     Dictionary<string, ListManager> DICT_MASTER;
-
-
-    //Dictionary<char, List<string>> Dict_AnimalNames;
-
 
 
     public List<GameObject> LoadedDeliveryItemObjs;
@@ -288,8 +285,12 @@ public class SceneBuilder : MonoBehaviour
             string searchkey;
             string ItemSearchKey;
             string name1 = SelectedAnimalNames[i];
+            Dweller.name = name1;
             char c = name1.Split('.')[1][0];
             searchkey = (name1.Split('.')[0].Length == 3) ? "g." : "b.";  //  Mr.Rabbit  => b.r 
+
+            if (searchkey == "b.") { dmc.Gender = GameEnums.Gender.Mr; } else { dmc.Gender = GameEnums.Gender.Mrs; }
+
             searchkey = searchkey + c;
             ItemSearchKey = "i." + c;
 
@@ -333,7 +334,9 @@ public class SceneBuilder : MonoBehaviour
             HotelAsListOfFloors[floortosetup].SetDweller(Dwellers_Instances[p]);
         }
 
-        Camera.main.gameObject.GetComponent<CameraPov>().SetInitialPos(HotelAsListOfFloors[max - 1].BaseCamPos.transform);
+
+        HotelFloorsMNG.InitializeFLoors(HotelAsListOfFloors);
+        // Camera.main.gameObject.GetComponent<CameraPov>().SetInitialPos(HotelAsListOfFloors[max - 1].BaseCamPos.transform);
     }
 
     GameObject GetItemRefBySimpleName(string argSimpleName)

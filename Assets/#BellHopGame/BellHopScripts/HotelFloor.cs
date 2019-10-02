@@ -6,6 +6,7 @@ public class HotelFloor : MonoBehaviour
     public Transform DwellerPos;
     public GameObject BackWall;
     public GameObject BaseCamPos;
+    public TMPro.TextMeshPro m_Text_Billboard;
 
     int _floorNumber;
 
@@ -20,6 +21,7 @@ public class HotelFloor : MonoBehaviour
         argDwellerObj.transform.position = new Vector3(DwellerPos.position.x, DwellerPos.position.y, DwellerPos.position.z);
         argDwellerObj.transform.parent = this.transform;
         FloorDweller = argDwellerObj.GetComponent<DwellerMeshComposer>();
+        m_Text_Billboard.text = FloorDweller.Gender + ". " + FloorDweller.AnimalName + " the " + FloorDweller.AnimalType;
     }
 
     void Start()

@@ -62,6 +62,10 @@ public class DwellerMeshComposer : MonoBehaviour, IAnimLisener
     #endregion
 
     int _id;
+    public int Id { get => _id; set => _id = value; }
+
+    GameEnums.Gender _gender;
+    public GameEnums.Gender Gender { get => _gender; set => _gender = value; }
 
     SkinnedMeshRenderer BodyRenderer;
 
@@ -71,7 +75,6 @@ public class DwellerMeshComposer : MonoBehaviour, IAnimLisener
     GameObject ShirtPtr;
     GameObject PantsPtr;
 
-    public int Id { get => _id; set => _id = value; }
 
     #region BodySetup
     Material GetMatByEnum(GameEnums.MatColors argMatcolor)

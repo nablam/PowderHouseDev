@@ -99,6 +99,12 @@
 
 
     }
+    public enum Gender
+    {
+        Mrs,
+        Mr
+    }
+
 
     public enum State
     {
