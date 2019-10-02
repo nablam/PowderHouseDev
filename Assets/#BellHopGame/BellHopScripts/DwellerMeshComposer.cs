@@ -61,6 +61,8 @@ public class DwellerMeshComposer : MonoBehaviour, IAnimLisener
     public Transform LeftHandHoldPos;
     #endregion
 
+    int _id;
+
     SkinnedMeshRenderer BodyRenderer;
 
     GameObject _CurHeldObject = null;
@@ -68,6 +70,8 @@ public class DwellerMeshComposer : MonoBehaviour, IAnimLisener
 
     GameObject ShirtPtr;
     GameObject PantsPtr;
+
+    public int Id { get => _id; set => _id = value; }
 
     #region BodySetup
     Material GetMatByEnum(GameEnums.MatColors argMatcolor)

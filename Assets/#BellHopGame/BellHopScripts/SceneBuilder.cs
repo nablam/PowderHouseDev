@@ -282,7 +282,7 @@ public class SceneBuilder : MonoBehaviour
             // GameObject Dweller = Instantiate(BaseAnimalRef, new Vector3(-1.37f, (i * 7f) - 1.12f, 1.08f), Quaternion.Euler(0, 180, 0));
             GameObject Dweller = Instantiate(BaseAnimalRef, new Vector3(0, 0, 0), Quaternion.Euler(0, 180, 0));
             DwellerMeshComposer dmc = Dweller.GetComponent<DwellerMeshComposer>();
-
+            dmc.Id = i;
 
 
             string searchkey;
@@ -296,7 +296,7 @@ public class SceneBuilder : MonoBehaviour
             string animalName = SelectedAnimalNames[i].Split('.')[1];
             GameObject objRef = GetItemRefBySimpleName(DICT_MASTER[ItemSearchKey].NextItem());
             DeliveryItem di = objRef.GetComponent<DeliveryItem>();
-            di.SetDestinationFloor(dmc);
+            di.SetOwner(dmc);
             TempListToBeShifted.Add(objRef);
             Debug.Log(SelectedAnimalNames[i] + " " + " " + animalName + "  -> " + objRef.name);
             GameEnums.DynAnimal a = (GameEnums.DynAnimal)Enum.Parse(typeof(GameEnums.DynAnimal), animalName);
