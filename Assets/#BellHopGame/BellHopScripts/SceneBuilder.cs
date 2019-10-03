@@ -331,6 +331,8 @@ public class SceneBuilder : MonoBehaviour
 
 
         HotelFloorsMNG.InitializeFLoors(HotelAsListOfFloors);
+
+        Camera.main.gameObject.GetComponent<CameraPov>().SetInitialPos(HotelAsListOfFloors[_gs.Master_Number_of_Floors - 1].BaseCamPos.transform);
     }
 
     GameObject GetItemRefBySimpleName(string argSimpleName)
