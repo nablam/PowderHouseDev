@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class NumPadCTRL : MonoBehaviour
 {
-    GameManager _gm;
+    GameSettings _gs;
+    GameFlowManager _flowMngr;
 
     public GameObject UpArrow;
 
@@ -19,14 +20,27 @@ public class NumPadCTRL : MonoBehaviour
     {
 
 
-        _gm = GameManager.Instance;
+        _gs = GameSettings.Instance;
+
+        if (_gs == null)
+        {
+            Debug.LogError("NumPadCTRL: no gm in scene!");
+        }
+        _flowMngr = GameFlowManager.Instance;
+
+        if (_flowMngr == null)
+        {
+            Debug.LogError("NumPadCTRL: no flowMngr in scene!");
+        }
+
+
         UpArrow.SetActive(false);
         DownArrowArrow.SetActive(false);
 
         for (int x = 0; x < transform.childCount; x++)
         {
             AllButtonsObjs.Add(transform.GetChild(x).gameObject);
-            if (x < _gm.Master_Number_of_Floors)
+            if (x < _gs.Master_Number_of_Floors)
             {
                 AvailableButtonsObjs.Add(transform.GetChild(x).gameObject);
             }
@@ -38,19 +52,20 @@ public class NumPadCTRL : MonoBehaviour
     }
     public void ReadButtonTouch(int argnum)
     {
-        if (!_gm.IsAllowKeypad) return;
-        if (_gm.GameEnded) return;
-        if (argnum >= _gm.Master_Number_of_Floors) return;
+        if (!_flowMngr.IsAllowKeypad) return;
+        if (_flowMngr.GameEnded) return;
+        if (argnum >= _gs.Master_Number_of_Floors) return;
 
-        if (_gm.Master_CurentFloorNumber < argnum) { UpArrow.SetActive(true); DownArrowArrow.SetActive(false); }
-        else
+        //if (_gs.Master_CurentFloorNumber < argnum) { UpArrow.SetActive(true); DownArrowArrow.SetActive(false); }
+        //else
 
-        if (_gm.Master_CurentFloorNumber > argnum) { UpArrow.SetActive(false); DownArrowArrow.SetActive(true); }
+        //if (_gs.Master_CurentFloorNumber > argnum) { UpArrow.SetActive(false); DownArrowArrow.SetActive(true); }
 
-        _gm.StartGoingToFloorOnButtonClicked(argnum);
+        // _gs.StartGoingToFloorOnButtonClicked(argnum);
         m_Text_FloorNumber.text = argnum.ToString();
         Debug.Log("pressed " + argnum);
-        _gm.IsAllowKeypad = false;
+        BellHopGameEventManager.Instance.Call_ButtonPressed(argnum);
+
     }
     public void UnTouch(int argnum)
     {

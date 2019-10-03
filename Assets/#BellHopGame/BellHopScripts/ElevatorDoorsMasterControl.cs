@@ -4,7 +4,7 @@ using UnityEngine;
 
 /// <summary>
 /// this script should be placed on the foreground object which is the actual sliding elevator doors. 
-/// this should controll opening and closing the doors as well as changing scenes. 
+/// this should controll opening and closing the doors 
 /// each scene will have a character in the background 
 /// the main character will be a child of this object.
 /// </summary>

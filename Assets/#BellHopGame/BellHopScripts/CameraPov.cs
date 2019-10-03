@@ -23,8 +23,20 @@ public class CameraPov : MonoBehaviour
     public GameObject ElevatorWall;
     public GameObject BunnyHop;
 
+    GameSettings _gs;
+    ElevatorDoorsMasterControl _ElevatorDoorsCTRL;
+    BellHopGameEventManager _eventManager;
+
     private void Start()
     {
+        _gs = GameSettings.Instance;
+        if (_gs == null) { Debug.LogError("NumPadCTRL: no gm in scene!"); }
+        _ElevatorDoorsCTRL = ElevatorDoorsMasterControl.Instance;
+        if (_ElevatorDoorsCTRL == null) Debug.LogError("no static elevator door ctrl in scene!");
+        _eventManager = BellHopGameEventManager.Instance;
+        if (_eventManager == null) Debug.LogError("no static game Event manger in scene!");
+
+
         ElevatorWall.SetActive(false);
         BunnyHop.SetActive(false);
     }
@@ -49,11 +61,12 @@ public class CameraPov : MonoBehaviour
     {
         if (_target != null && !Reached)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _target.position, 2f);
+            transform.position = Vector3.MoveTowards(transform.position, _target.position, _gs.ElevatorSpeed);
             if (transform.position == _target.position)
             {
 
-                Debug.Log("reacehd");
+                Debug.Log("Cam pov reacehd");
+                _eventManager.Call_CurSequenceChanged(GameEnums.GameSequenceType.ReachedFloor);
                 Reached = true;
             }
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿//#define DebugOn
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,6 +7,8 @@ using Random = UnityEngine.Random;
 
 public class SceneBuilder : MonoBehaviour
 {
+    GameSettings _gs;
+
     public TextAsset BoyNamescsv;
     public TextAsset GirlNamescsv;
 
@@ -36,8 +39,7 @@ public class SceneBuilder : MonoBehaviour
     HotelFloor tempHotelFloor;
     public List<HotelFloor> HotelAsListOfFloors = new List<HotelFloor>();
     GameObject Hotel;
-    public int max = 4;
-    const int MAXavailableAnimals = 12;
+
     int[] path;
 
     /// <summary>
@@ -46,21 +48,21 @@ public class SceneBuilder : MonoBehaviour
     /// <returns></returns>
     bool CreatePath()
     {
-        path = new int[max];
+        path = new int[_gs.Master_Number_of_Floors];
         bool success = true;
         int ptr = 0;
         int rptr = 0;
         //int[] path = new int[max];
-        bool[] used = new bool[max];
+        bool[] used = new bool[_gs.Master_Number_of_Floors];
 
-        for (int x = 0; x < max; x++)
+        for (int x = 0; x < _gs.Master_Number_of_Floors; x++)
         {
             path[x] = 0;
             used[x] = false;
         }
 
 
-        int MAX = max - (max % 2);
+        int MAX = _gs.Master_Number_of_Floors - (_gs.Master_Number_of_Floors % 2);
 
         for (int i = 0; i < MAX; i++)
         {
@@ -69,7 +71,7 @@ public class SceneBuilder : MonoBehaviour
             used[ptr] = true;
             do
             {
-                rptr = Random.Range(ptr, max) % MAX;
+                rptr = Random.Range(ptr, _gs.Master_Number_of_Floors) % MAX;
             }
             while ((used[rptr] != false) || rptr <= ptr);
             used[rptr] = true;
@@ -78,19 +80,22 @@ public class SceneBuilder : MonoBehaviour
         }
 
 
-        if (max % 2 == 1)
+        if (_gs.Master_Number_of_Floors % 2 == 1)
         {
             rptr = Random.Range(0, MAX);
             path[MAX] = path[rptr];
             path[rptr] = MAX;
         }
 
-
-        print("____PATH___");
-        for (int x = 0; x < max; x++)
+#if DebugOn
+        Debug.Log("____PATH___");
+#endif
+        for (int x = 0; x < _gs.Master_Number_of_Floors; x++)
         {
             if (path[x] == x) success = false;
-            print(path[x]);
+#if DebugOn
+            Debug.Log(path[x]);
+#endif
         }
 
         return success;
@@ -105,14 +110,14 @@ public class SceneBuilder : MonoBehaviour
 
     private void Awake()
     {
-        if (max > MAXavailableAnimals) max = MAXavailableAnimals;
+        _gs = GameSettings.Instance;
+        if (_gs == null) { Debug.LogError("SceneBuilder: No GameSettings in scene!"); }
     }
     // Start is called before the first frame update
     void Start()
     {
         Dict_BoyNames = new Dictionary<char, List<string>>();
         Dict_GirlNames = new Dictionary<char, List<string>>();
-        //Dict_AnimalNames = new Dictionary<char, List<string>>();
         Dict_ItemNames = new Dictionary<char, List<string>>();
         DICT_MASTER = new Dictionary<string, ListManager>();
 
@@ -161,12 +166,7 @@ public class SceneBuilder : MonoBehaviour
 
         LoadedDeliveryItemObjs = Resources.LoadAll<GameObject>("Items/NiceConstructedObjects").ToList();
 
-        //  LoadedAnimalObjs = Resources.LoadAll<GameObject>("Animals/PlaceHolders").ToList();
-
-        //TODO noneed to shuffle we need to get a list of alliteration objects 
-        // LoadedDeliveryItemObjs.Shuffle();
-
-        List<string> temp = SelectedAnimalNames.Take<string>(max).ToList();
+        List<string> temp = SelectedAnimalNames.Take<string>(_gs.Master_Number_of_Floors).ToList();
         SelectedAnimalNames = temp;
 
         HashSet<char> UniqueCharToUse = new HashSet<char>();
@@ -200,8 +200,9 @@ public class SceneBuilder : MonoBehaviour
             string MasterKEY = (name.Split('.')[0].Length == 3) ? "g." : "b.";  //  Mr.Rabbit  => b.r 
 
             MasterKEY = MasterKEY + c;
-
+#if DebugOn
             Debug.Log(SelectedAnimalNames[M] + " " + " " + name.Split('.')[1] + " " + MasterKEY);
+#endif
 
             if (!DICT_MASTER.ContainsKey(MasterKEY))
             {
@@ -246,20 +247,15 @@ public class SceneBuilder : MonoBehaviour
 
         }
 
-        //TODO
-        // FloorItem_REFS = LoadedDeliveryItemObjs.Take<GameObject>(max).ToList();
-
-
-
-
 
         Hotel = new GameObject();
         Hotel.transform.position = new Vector3(0, 0, 0);
         Hotel.name = "Hotel";
-
+#if DebugOn
         Debug.Log("-----------------------");
+#endif
 
-        for (int i = 0; i < max; i++)
+        for (int i = 0; i < _gs.Master_Number_of_Floors; i++)
         {
 
 
@@ -275,8 +271,6 @@ public class SceneBuilder : MonoBehaviour
             hf.FloorNumber = i;
 
 
-
-            // GameObject Dweller = Instantiate(BaseAnimalRef, new Vector3(-1.37f, (i * 7f) - 1.12f, 1.08f), Quaternion.Euler(0, 180, 0));
             GameObject Dweller = Instantiate(BaseAnimalRef, new Vector3(0, 0, 0), Quaternion.Euler(0, 180, 0));
             DwellerMeshComposer dmc = Dweller.GetComponent<DwellerMeshComposer>();
             dmc.Id = i;
@@ -299,13 +293,14 @@ public class SceneBuilder : MonoBehaviour
             DeliveryItem di = objRef.GetComponent<DeliveryItem>();
             di.SetOwner(dmc);
             TempListToBeShifted.Add(objRef);
+#if DebugOn
             Debug.Log(SelectedAnimalNames[i] + " " + " " + animalName + "  -> " + objRef.name);
+#endif
             GameEnums.DynAnimal a = (GameEnums.DynAnimal)Enum.Parse(typeof(GameEnums.DynAnimal), animalName);
 
             dmc.Make(a, DICT_MASTER[searchkey].NextItem());
 
             Dwellers_Instances.Add(Dweller);
-            //hf.SetDweller(Dweller);
 
             F.transform.parent = Hotel.transform;
             HotelAsListOfFloors.Add(hf);
@@ -336,7 +331,6 @@ public class SceneBuilder : MonoBehaviour
 
 
         HotelFloorsMNG.InitializeFLoors(HotelAsListOfFloors);
-        // Camera.main.gameObject.GetComponent<CameraPov>().SetInitialPos(HotelAsListOfFloors[max - 1].BaseCamPos.transform);
     }
 
     GameObject GetItemRefBySimpleName(string argSimpleName)
