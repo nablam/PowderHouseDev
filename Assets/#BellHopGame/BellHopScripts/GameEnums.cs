@@ -214,6 +214,20 @@
     }
 
 
+    //chain dooraction, player input, when finished start dooraction, 
+    public enum GameActionsType
+    {
+        CinematicAction,
+        PlayerInput,
+        DoorAction,
+        Character_Reaction,
+        Character_Action,
+        ElevatorAction,
+
+
+
+    }
+
     public enum GameSequenceType
     {
         GameStart,

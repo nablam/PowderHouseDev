@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class GameFlowManager : MonoBehaviour
 {
@@ -88,14 +89,21 @@ public class GameFlowManager : MonoBehaviour
 
 
     bool _gameEnded;
-    bool _isAllowKeypad;
-
     public bool GameEnded
     {
         get => _gameEnded;
         private set => _gameEnded = value;
     }
+
+    bool _isAllowKeypad;
     public bool IsAllowKeypad { get => _isAllowKeypad; private set => _isAllowKeypad = value; }
+
+
+    Action<BellHopCharacter, DwellerMeshComposer> _ActionBunnyandDweller;
+
+    void BunnyAndDwellerWave(BellHopCharacter bunny, DwellerMeshComposer bameobject) { }
+
+
 }
 
 
