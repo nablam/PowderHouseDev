@@ -325,7 +325,7 @@ public class SceneBuilder : MonoBehaviour
             DwellerMeshComposer dmc = Dwellers_Instances[p].GetComponent<DwellerMeshComposer>();
 
             dmc.InitializeHeldObject(DeliveryItem_Instances[p]);
-
+            dmc.MyFinalResidenceFloorNumber = floortosetup;
             HotelAsListOfFloors[floortosetup].SetDweller(Dwellers_Instances[p]);
         }
 

@@ -63,9 +63,13 @@ public class DwellerMeshComposer : MonoBehaviour, IAnimLisener
 
     int _id;
     public int Id { get => _id; set => _id = value; }
+    [SerializeField]
+    int _myFinalResidenceFloorNumber;
+    public int MyFinalResidenceFloorNumber { get => _myFinalResidenceFloorNumber; set => _myFinalResidenceFloorNumber = value; }
 
     GameEnums.Gender _gender;
     public GameEnums.Gender Gender { get => _gender; set => _gender = value; }
+
 
     SkinnedMeshRenderer BodyRenderer;
 
@@ -420,7 +424,7 @@ public class DwellerMeshComposer : MonoBehaviour, IAnimLisener
         {
 
 
-            return _CurHeldObject.GetComponent<DeliveryItem>().GetDestFloorNumber();
+            return _CurHeldObject.GetComponent<DeliveryItem>().GetDestFloorDweller();
         }
         else
             return null;
