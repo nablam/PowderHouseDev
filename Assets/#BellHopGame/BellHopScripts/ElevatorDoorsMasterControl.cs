@@ -98,14 +98,16 @@ public class ElevatorDoorsMasterControl : MonoBehaviour
         if (String.Compare(arg, "Opened") == 0)
         {
             _doorsAreOpen = true;
-            StartCoroutine(WaitWhileBunnyturnsTpDweller());
+            // StartCoroutine(WaitWhileBunnyturnsTpDweller());
+            BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.DoorsOppned);
         }
         else
            if (String.Compare(arg, "Closed") == 0)
         {
             _doorsAreOpen = false;
-            GameManager.Instance.SwitchActiveFloorWhileDoorsAreClosed();
-            GameManager.Instance.TheBellHop.Animateturn();
+            BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.DoorsClosed);
+            // GameManager.Instance.SwitchActiveFloorWhileDoorsAreClosed();
+            //GameManager.Instance.TheBellHop.Animateturn();
         }
         else
             Debug.LogError("Wrong string, check typos");

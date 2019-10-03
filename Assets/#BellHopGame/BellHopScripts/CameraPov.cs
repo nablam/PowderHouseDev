@@ -89,7 +89,7 @@ public class CameraPov : MonoBehaviour
     {
         if (!ReachedInitialPos)
         {
-            transform.position = Vector3.MoveTowards(transform.position, InitialPos.position, _gs.ElevatorSpeed / 2f);
+            transform.position = Vector3.MoveTowards(transform.position, InitialPos.position, _gs.ElevatorSpeed / 4f);
             if (transform.position == InitialPos.position)
             {
 
@@ -99,6 +99,7 @@ public class CameraPov : MonoBehaviour
                 BunnyHop.transform.parent = this.transform;
                 ButtonsCanvas.SetActive(true);
                 ReachedInitialPos = true;
+                _ElevatorDoorsCTRL.OpenDoors();
             }
         }
     }

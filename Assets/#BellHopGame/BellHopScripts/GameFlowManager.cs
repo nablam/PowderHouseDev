@@ -29,13 +29,15 @@ public class GameFlowManager : MonoBehaviour
         switch (argGST)
         {
             case GameEnums.GameSequenceType.GameStart:
+
                 break;
 
             case GameEnums.GameSequenceType.ReachedFloor:
-                IsAllowKeypad = true;
+
                 break;
 
             case GameEnums.GameSequenceType.DoorsOppned:
+                IsAllowKeypad = true;
                 break;
             case GameEnums.GameSequenceType.DwellerReactionFinished:
                 break;
