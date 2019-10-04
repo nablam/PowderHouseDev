@@ -21,7 +21,7 @@ public class CameraPov : MonoBehaviour
 
     Transform _target = null;
     public GameObject ElevatorWall;
-    public GameObject BunnyHop;
+    GameObject BunnyHop;
     public GameObject ButtonsCanvas;
     public Transform InitialPos;
 
@@ -43,6 +43,7 @@ public class CameraPov : MonoBehaviour
         // BunnyHop.SetActive(false);
         ButtonsCanvas.SetActive(false);
     }
+    public void assignBunny(GameObject argbunny) { BunnyHop = argbunny; }
 
     //  public Transform Target { get => _target; set => _target = value; }
 

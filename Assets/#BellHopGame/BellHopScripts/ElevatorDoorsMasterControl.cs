@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -44,18 +43,6 @@ public class ElevatorDoorsMasterControl : MonoBehaviour
 
 
 
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.O))
-    //    {
-    //        OpenDoors();
-    //    }
-
-    //    if (Input.GetKeyDown(KeyCode.C))
-    //    {
-    //        CloseDoors();
-    //    }
-    //}
 
     public void OpenDoors()
     {
@@ -82,10 +69,7 @@ public class ElevatorDoorsMasterControl : MonoBehaviour
         }
     }
 
-    public void GoToScene(GameEnums.AnimalCharcter argSceneEnum)
-    {
 
-    }
 
     /// <summary>
     /// Animation completion event listener
@@ -98,7 +82,7 @@ public class ElevatorDoorsMasterControl : MonoBehaviour
         if (String.Compare(arg, "Opened") == 0)
         {
             _doorsAreOpen = true;
-            // StartCoroutine(WaitWhileBunnyturnsTpDweller());
+
             BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.DoorsOppned);
         }
         else
@@ -106,19 +90,12 @@ public class ElevatorDoorsMasterControl : MonoBehaviour
         {
             _doorsAreOpen = false;
             BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.DoorsClosed);
-            // GameManager.Instance.SwitchActiveFloorWhileDoorsAreClosed();
-            //GameManager.Instance.TheBellHop.Animateturn();
+
         }
         else
             Debug.LogError("Wrong string, check typos");
     }
 
-    IEnumerator WaitWhileBunnyturnsTpDweller()
-    {
-        GameManager.Instance.TheBellHop.Animateturn();
-        yield return new WaitForSeconds(2);
-        GameManager.Instance.ReachedFloor();
 
-    }
 
 }
