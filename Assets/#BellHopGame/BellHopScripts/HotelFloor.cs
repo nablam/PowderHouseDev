@@ -9,10 +9,15 @@ public class HotelFloor : MonoBehaviour
     public TMPro.TextMeshPro m_Text_Billboard;
 
     int _floorNumber;
+    bool _deliveryItemStillOnFloor;
+    bool _receivedItem;
 
     public DwellerMeshComposer FloorDweller;
 
     public int FloorNumber { get => _floorNumber; set => _floorNumber = value; }
+    public bool DeliveryItemStillOnFloor { get => _deliveryItemStillOnFloor; set => _deliveryItemStillOnFloor = value; }
+    public bool ReceivedItem { get => _receivedItem; set => _receivedItem = value; }
+
 
 
     public void SetDweller(GameObject argDwellerObj)
@@ -22,8 +27,16 @@ public class HotelFloor : MonoBehaviour
         argDwellerObj.transform.parent = this.transform;
         FloorDweller = argDwellerObj.GetComponent<DwellerMeshComposer>();
         m_Text_Billboard.text = FloorDweller.Gender + ". " + FloorDweller.AnimalName + " the " + FloorDweller.AnimalType;
+        DeliveryItemStillOnFloor = true;
+        ReceivedItem = false;
     }
 
+
+    public void ShowHideBArrier(bool argShow)
+    {
+        Barrier.SetActive(argShow);
+
+    }
     void Start()
     {
 

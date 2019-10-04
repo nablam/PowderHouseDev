@@ -100,7 +100,8 @@ public class CameraPov : MonoBehaviour
                 BunnyHop.transform.parent = this.transform;
                 ButtonsCanvas.SetActive(true);
                 ReachedInitialPos = true;
-                _ElevatorDoorsCTRL.OpenDoors();
+                // _ElevatorDoorsCTRL.OpenDoors();
+                BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.GameStart);
             }
         }
     }

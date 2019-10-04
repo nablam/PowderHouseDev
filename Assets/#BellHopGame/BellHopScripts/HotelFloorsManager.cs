@@ -6,18 +6,18 @@ public class HotelFloorsManager : MonoBehaviour
     #region EventSubscription
     private void OnEnable()
     {
-        BellHopGameEventManager.OnCurSequenceChanged += HeardSequenceChanged;
-        BellHopGameEventManager.OnButtonPressed += FloorDestRequested;
+        //  BellHopGameEventManager.OnCurSequenceChanged += HeardSequenceChanged;
+        // BellHopGameEventManager.OnButtonPressed += FloorDestRequested;
     }
 
     private void OnDisable()
     {
-        BellHopGameEventManager.OnCurSequenceChanged -= HeardSequenceChanged;
-        BellHopGameEventManager.OnButtonPressed += FloorDestRequested;
+        //   BellHopGameEventManager.OnCurSequenceChanged -= HeardSequenceChanged;
+        // BellHopGameEventManager.OnButtonPressed += FloorDestRequested;
     }
 
-    void HeardSequenceChanged(GameEnums.GameSequenceType argGST) { }
-    void FloorDestRequested(int x)
+    //  void HeardSequenceChanged(GameEnums.GameSequenceType argGST) { }
+    public void FloorDestRequested(int x)
     {
         if (_floors == null) { Debug.LogError("HotelFloorsManager: No Floors list!"); return; }
         if (x >= _floors.Count) { Debug.LogError("HotelFloorsManager: floor index out of range"); return; }
@@ -35,7 +35,14 @@ public class HotelFloorsManager : MonoBehaviour
 
     }
 
-    public void InitializeFLoors(List<HotelFloor> argFloors) { _floors = argFloors; }
+    public void InitializeFLoors(List<HotelFloor> argFloors) { _floors = argFloors; _curfloor = _floors[0]; }
+
+    public void HideShowAllBarriers(bool argShow)
+    {
+        foreach (HotelFloor hf in _floors) { hf.ShowHideBArrier(argShow); }
+    }
+
+    public DwellerMeshComposer GetCurFloorDweller() { return _curfloor.FloorDweller; }
 
 
     public int GetFloorByAnimal(int argID)

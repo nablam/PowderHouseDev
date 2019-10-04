@@ -25,20 +25,28 @@ public class GameFlowManager : MonoBehaviour
         BellHopGameEventManager.OnButtonPressed += FloorDestRequested;
     }
 
+    int _requestedFloor;
+
     void HeardSequenceChanged(GameEnums.GameSequenceType argGST)
     {
         switch (argGST)
         {
             case GameEnums.GameSequenceType.GameStart:
-
+                _floorsmngr.HideShowAllBarriers(false);
+                _curDweller = _floorsmngr.GetCurFloorDweller();
+                // _curDeliveryItem = _curDweller.
+                _ElevatorDoors.OpenDoors();
+                IsAllowKeypad = true;
                 break;
 
             case GameEnums.GameSequenceType.ReachedFloor:
-
+                _curDweller = _floorsmngr.GetCurFloorDweller();
+                _ElevatorDoors.OpenDoors();
                 break;
 
             case GameEnums.GameSequenceType.DoorsOppned:
-
+                //moveme down 
+                IsAllowKeypad = true;
                 break;
             case GameEnums.GameSequenceType.DwellerReactionFinished:
                 break;
@@ -53,6 +61,7 @@ public class GameFlowManager : MonoBehaviour
             case GameEnums.GameSequenceType.BunnyReaction:
                 break;
             case GameEnums.GameSequenceType.DoorsClosed:
+                _floorsmngr.FloorDestRequested(_requestedFloor);
                 break;
 
             case GameEnums.GameSequenceType.GameEnd:
@@ -65,9 +74,30 @@ public class GameFlowManager : MonoBehaviour
     }
     void FloorDestRequested(int x)
     {
-        // IsAllowKeypad = false;
+        IsAllowKeypad = false;
+        _ElevatorDoors.CloseDoors();
+        _requestedFloor = x;
+
     }
     #endregion
+
+
+    public DwellerMeshComposer _curDweller;
+    DeliveryItem _curDeliveryItem;
+
+    BellHopCharacter _bellHop;
+    HotelFloorsManager _floorsmngr;
+    ElevatorDoorsMasterControl _ElevatorDoors;
+    CameraPov _cam;
+
+    public void InitializeMyThings(BellHopCharacter argbh, HotelFloorsManager argfloors, CameraPov argCam)
+    {
+
+        _bellHop = argbh;
+        _floorsmngr = argfloors;
+        _cam = argCam;
+        _ElevatorDoors = ElevatorDoorsMasterControl.Instance;
+    }
 
 
     public static GameFlowManager Instance = null;

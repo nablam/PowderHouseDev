@@ -344,6 +344,7 @@ public class SceneBuilder : MonoBehaviour
         camlobby.assignBunny(Hop);
         HotelFloorsMNG.InitializeFLoors(HotelAsListOfFloors);
         camlobby.SetInitialPos(HotelAsListOfFloors[_gs.Master_Number_of_Floors - 1].BaseCamPos.transform);
+        GameFlow.InitializeMyThings(Hop.GetComponent<BellHopCharacter>(), HotelFloorsMNG, camlobby);
     }
 
     GameObject GetItemRefBySimpleName(string argSimpleName)
