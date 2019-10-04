@@ -4,9 +4,9 @@ using System;
 public class BHGA_Base : IBellHopGameAction, IDisposable
 {
     GameEnums.GameActionsType _myActionType;
-    Action _Action;
+    Action<BellHopCharacter, DwellerMeshComposer, DeliveryItem> _Action;
 
-    public BHGA_Base(Action Action, GameEnums.GameActionsType argmyActionType)
+    public BHGA_Base(Action<BellHopCharacter, DwellerMeshComposer, DeliveryItem> Action, GameEnums.GameActionsType argmyActionType)
     {
         _Action = Action;
         _myActionType = argmyActionType;
