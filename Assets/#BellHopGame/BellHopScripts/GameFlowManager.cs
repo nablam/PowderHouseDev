@@ -61,7 +61,7 @@ public class GameFlowManager : MonoBehaviour
             case GameEnums.GameSequenceType.BunnyReaction:
                 break;
             case GameEnums.GameSequenceType.DoorsClosed:
-                _floorsmngr.FloorDestRequested(_requestedFloor);
+                _floorsmngr.UpdateCurFloorDest(_requestedFloor);
                 break;
 
             case GameEnums.GameSequenceType.GameEnd:
@@ -81,6 +81,15 @@ public class GameFlowManager : MonoBehaviour
     }
     #endregion
 
+
+    void CheckFloorStatus()
+    {
+
+        if (_floorsmngr.Get_curFloor().DeliveryItemStillOnFloor)
+        {
+
+        }
+    }
 
     public DwellerMeshComposer _curDweller;
     DeliveryItem _curDeliveryItem;

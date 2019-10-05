@@ -1,8 +1,10 @@
-﻿using System;
+﻿#define DebugOn
+
+using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class DwellerMeshComposer : MonoBehaviour, IAnimLisener
+public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
 {
     #region PublicVars
     public string AnimalName;
@@ -358,6 +360,9 @@ public class DwellerMeshComposer : MonoBehaviour, IAnimLisener
     GameEnums.Shoes GetRandShoes() { return (GameEnums.Shoes)Random.Range(0, Enum.GetNames(typeof(GameEnums.Shoes)).Length); }
     #endregion
 
+
+    Animator _MyAnimator;
+
     private void Awake()
     {
         BodyRenderer = Body.GetComponent<SkinnedMeshRenderer>();
@@ -384,6 +389,9 @@ public class DwellerMeshComposer : MonoBehaviour, IAnimLisener
         // ComposeMesh(GameEnums.DynAnimal.sheep, GameEnums.Shirts.shirtshort, GameEnums.MatColors.yellow, GameEnums.Pants.pantsshort, GameEnums.MatColors.pink, GameEnums.Shoes.feetchicken, GameEnums.MatColors.green);
 
         //Make(GameEnums.DynAnimal.mole, "milke");
+
+
+        _MyAnimator = GetComponent<Animator>();
     }
 
 
@@ -431,15 +439,48 @@ public class DwellerMeshComposer : MonoBehaviour, IAnimLisener
     }
 
 
+
     #region InterfaceForAnimatorListen
-    public void TossPeack()
+
+
+    //animate
+    public void AnimateToss()
     {
-        throw new NotImplementedException();
+        _MyAnimator.SetTrigger("TrigToss");
     }
 
-    public void CatchPeack()
+    public void AnimateCatch()
     {
-        throw new NotImplementedException();
+        _MyAnimator.SetTrigger("TrigCatch");
     }
+
+
+    //anim event handler
+    public void AnimTossPeack()
+    {
+#if DebugOn
+        Debug.Log("Dweller: Toss peakheard");
+#endif
+    }
+
+    public void AnimCatchPeack()
+    {
+#if DebugOn
+        Debug.Log("Dweller: Catch peakheard");
+#endif
+    }
+
+
+
+
+    //public void TossPeack()
+    //{
+    //    throw new NotImplementedException();
+    //}
+
+    //public void CatchPeack()
+    //{
+    //    throw new NotImplementedException();
+    //}
     #endregion
 }

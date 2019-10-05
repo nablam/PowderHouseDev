@@ -17,7 +17,7 @@ public class HotelFloorsManager : MonoBehaviour
     }
 
     //  void HeardSequenceChanged(GameEnums.GameSequenceType argGST) { }
-    public void FloorDestRequested(int x)
+    public void UpdateCurFloorDest(int x)
     {
         if (_floors == null) { Debug.LogError("HotelFloorsManager: No Floors list!"); return; }
         if (x >= _floors.Count) { Debug.LogError("HotelFloorsManager: floor index out of range"); return; }
