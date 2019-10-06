@@ -1,4 +1,6 @@
-﻿public interface ICharacterAnim
+﻿using UnityEngine;
+
+public interface ICharacterAnim
 {
 
 
@@ -11,7 +13,11 @@
     void AnimateToss();
     void AnimateCatch();
 
-    // void AnimWaveHello();
+    void AnimTrigger(GameEnums.DwellerAnimTrigger argtrig);
+
+    void ReleaseObj_CalledExternally();
+    Transform GetMyRightHandHold();
+    Transform GetMyLeftHandHold();
 
 
 }

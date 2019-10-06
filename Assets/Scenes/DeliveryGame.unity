@@ -409,6 +409,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RM_assets
       objectReference: {fileID: 0}
+    - target: {fileID: 100472, guid: 218f26a07c1882b46a2985e73f352430, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400472, guid: 218f26a07c1882b46a2985e73f352430, type: 3}
       propertyPath: m_LocalPosition.x
       value: 36.77
@@ -3339,6 +3343,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _curDweller: {fileID: 0}
+  _curDeliveryItem: {fileID: 0}
+  _bellHop: {fileID: 0}
 --- !u!4 &1882000202
 Transform:
   m_ObjectHideFlags: 0
@@ -4094,6 +4100,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BellHop_Obj
+      objectReference: {fileID: 0}
+    - target: {fileID: 770266673702424940, guid: 6ada14e2957087f49b301edd0fd17311,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 770266673702587724, guid: 6ada14e2957087f49b301edd0fd17311,
         type: 3}

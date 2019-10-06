@@ -13,18 +13,20 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
     public void UpdateNameText(string argName) { transform.GetChild(0).GetComponent<TextMesh>().text = argName; }
     public void UpdateHeldObjNameText(string argName) { transform.GetChild(1).GetComponent<TextMesh>().text = argName; }
 
-    public Transform GetMyRightHandHold() { return this.RightHandHoldPos; }
-    public Transform GetMyLeftHandHold() { return this.LeftHandHoldPos; }
     Animator _MyAnimator;
     GameManager _gm;
+    bool _isEmptyHanded;
+    public bool IsEmptyHAnded() { return this._isEmptyHanded; }
+    GameObject _CurHeldObject = null;
     // Start is called before the first frame update
     void Start()
     {
-        _gm = GameManager.Instance;
+        //_gm = GameManager.Instance;
         _MyAnimator = GetComponent<Animator>();
         m_NameObjectText = this.transform.GetChild(0).GetComponent<TextMesh>();
         m_HeldObjectText.text = "";
         m_HeldObjectText = this.transform.GetChild(1).GetComponent<TextMesh>();
+        _isEmptyHanded = true;
         // UpdateHeldObject("None");
         _HeldObject = GameEnums.StoryObjects.aaNone;
     }
@@ -104,4 +106,18 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
         //}
         Debug.Log("Dweller: Catch peakheard");
     }
+
+    public void AnimTrigger(GameEnums.DwellerAnimTrigger argtrig)
+    {
+        _MyAnimator.SetTrigger(argtrig.ToString());
+    }
+
+    public void ReleaseObj_CalledExternally()
+    {
+        _CurHeldObject.transform.parent = null;
+        _CurHeldObject = null;
+    }
+
+    public Transform GetMyRightHandHold() { return this.RightHandHoldPos; }
+    public Transform GetMyLeftHandHold() { return this.LeftHandHoldPos; }
 }

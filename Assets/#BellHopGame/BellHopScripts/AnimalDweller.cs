@@ -120,7 +120,23 @@ public class AnimalDweller : MonoBehaviour, ICharacterAnim
         CatchPeack();
     }
 
+    public void AnimTrigger(GameEnums.DwellerAnimTrigger argtrig)
+    {
+        throw new System.NotImplementedException();
+    }
 
+    public void ReleaseObj_CalledExternally()
+    {
+        throw new System.NotImplementedException();
+    }
 
+    public Transform GetMyRightHandHold()
+    {
+        throw new System.NotImplementedException();
+    }
 
+    public Transform GetMyLeftHandHold()
+    {
+        throw new System.NotImplementedException();
+    }
 }

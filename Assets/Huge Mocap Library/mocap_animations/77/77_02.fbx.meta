@@ -127,17 +127,17 @@ ModelImporter:
     - serializedVersion: 16
       name: 77_02|standing
       takeName: 77_02
-      firstFrame: 0
-      lastFrame: 187
+      firstFrame: 61
+      lastFrame: 182
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0

@@ -17,12 +17,12 @@ public class GameSettings : MonoBehaviour
         else
             Destroy(this.gameObject);
 
-        Master_Number_of_Floors = 4;
+        Master_Number_of_Floors = 3;
         if (Master_Number_of_Floors > _Master_max_Available_Dwellers_sofar)
             Master_Number_of_Floors = _Master_max_Available_Dwellers_sofar;
 
-        ElevatorSpeed = 0.15f;
-
+        // ElevatorSpeed = 0.1f;
+        ElevatorSpeed = 5f;
 
         Debug.Log(nameof(_Master_max_Available_Dwellers_sofar));
     }

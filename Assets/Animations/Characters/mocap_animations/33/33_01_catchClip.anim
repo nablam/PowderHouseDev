@@ -34450,9 +34450,9 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.6666667
-    functionName: CatchPeack
+    functionName: AnimCatchPeack
     data: 
-    objectReferenceParameter: {fileID: 11500000, guid: afa7259804a5cb34392b42729d2b34e6,
+    objectReferenceParameter: {fileID: 11500000, guid: 52025944dfc3e6347966bd5aef22d364,
       type: 3}
     floatParameter: 0
     intParameter: 0

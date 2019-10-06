@@ -21,6 +21,12 @@ public class DeliveryItem : MonoBehaviour
         _ownerid = _dwellerOwner.Id;
     }
 
+    public bool IsMyOwner(DwellerMeshComposer argThisGuy)
+    {
+        if (argThisGuy.Id == this.Id)
+            return true;
+        return false;
+    }
 
 
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class GameFlowManager : MonoBehaviour
@@ -26,7 +27,8 @@ public class GameFlowManager : MonoBehaviour
     }
 
     int _requestedFloor;
-
+    int _floorNumArrivedAt;
+    bool firstTime = true;
     void HeardSequenceChanged(GameEnums.GameSequenceType argGST)
     {
         switch (argGST)
@@ -34,19 +36,50 @@ public class GameFlowManager : MonoBehaviour
             case GameEnums.GameSequenceType.GameStart:
                 _floorsmngr.HideShowAllBarriers(false);
                 _curDweller = _floorsmngr.GetCurFloorDweller();
-                // _curDeliveryItem = _curDweller.
+                _curDeliveryItem = _curDweller.GetInitialDeliveryItem();
+                //then setup context later when bunny owns it
                 _ElevatorDoors.OpenDoors();
                 IsAllowKeypad = true;
                 break;
 
             case GameEnums.GameSequenceType.ReachedFloor:
-                _curDweller = _floorsmngr.GetCurFloorDweller();
+                CheckFloorStatusUponArrival();
                 _ElevatorDoors.OpenDoors();
                 break;
 
             case GameEnums.GameSequenceType.DoorsOppned:
                 //moveme down 
-                IsAllowKeypad = true;
+                // _curDweller.AnimTrigger(GameEnums.DwellerAnimTrigger.TrigHello);
+                //_bellHop.AnimTrigger(GameEnums.DwellerAnimTrigger.TrigWave1);
+                _bellHop.Animateturn();
+                if (firstTime)
+                {
+                    _ContextItem = _curDeliveryItem;
+                    firstTime = false;
+                    _curDweller.AnimateToss();
+
+                    //if (_bellHop.GetMyRightHandHold().GetChild(0) == null)
+                    //{
+
+
+                    //}
+                }
+                else
+                {
+                    if (_GOODFLOOR)
+                    {
+                        _bellHop.AnimateToss();
+                    }
+                    else
+                    {
+
+                    }
+
+
+                }
+
+
+
                 break;
             case GameEnums.GameSequenceType.DwellerReactionFinished:
                 break;
@@ -54,13 +87,19 @@ public class GameFlowManager : MonoBehaviour
                 break;
             case GameEnums.GameSequenceType.BunnyCaughtObject:
                 break;
-            case GameEnums.GameSequenceType.DwellerReleasedObject:
+            case GameEnums.GameSequenceType.DwellerReleaseObject:
+                _curDweller.ReleaseObj_CalledExternally();
+                MoveTO(_curDeliveryItem, _curDweller.GetMyRightHandHold(), _bellHop.GetMyRightHandHold());
+                //_curDeliveryItem
+                //_curDeliveryItem.transform.parent = null;
                 break;
             case GameEnums.GameSequenceType.DwellerCaughtObject:
                 break;
-            case GameEnums.GameSequenceType.BunnyReaction:
+            case GameEnums.GameSequenceType.BunnyReactionEnd:
+                //IsAllowKeypad = true;
                 break;
             case GameEnums.GameSequenceType.DoorsClosed:
+                _bellHop.Animateturn();
                 _floorsmngr.UpdateCurFloorDest(_requestedFloor);
                 break;
 
@@ -80,21 +119,56 @@ public class GameFlowManager : MonoBehaviour
 
     }
     #endregion
-
-
-    void CheckFloorStatus()
+    bool _GOODFLOOR = false;
+    //is called when 
+    void CheckFloorStatusUponArrival()
     {
-
-        if (_floorsmngr.Get_curFloor().DeliveryItemStillOnFloor)
+        if (_ContextItem.IsMyOwner(_curDweller))
         {
-
+            Debug.Log("YAYA");
+            _GOODFLOOR = true;
         }
+        else
+        {
+            Debug.Log("nay");
+            _GOODFLOOR = false;
+        }
+        //_curDeliveryItem = null;
+
+        //if (_curDeliveryItem.IsMyOwner(_curDweller))
+        //{
+        //    Debug.Log("WOOT");
+
+        //    if (_bellHop.IsEmptyHAnded())
+        //    {
+        //        Debug.Log("bunny empty handed");
+        //    }
+        //    else
+        //    {
+        //        Debug.Log("bunny full handed");
+        //    }
+
+        //}
+        //else
+        //{
+        //    Debug.Log("original floor item not here");
+        //}
+    }
+    void ThrowRoutine()
+    {
+        _bellHop.Animateturn();
+        //_curDweller.AnimateToss();
+
     }
 
-    public DwellerMeshComposer _curDweller;
+    [SerializeField]
+    DwellerMeshComposer _curDweller;
+    [SerializeField]
     DeliveryItem _curDeliveryItem;
-
+    DeliveryItem _ContextItem;
+    [SerializeField]
     BellHopCharacter _bellHop;
+
     HotelFloorsManager _floorsmngr;
     ElevatorDoorsMasterControl _ElevatorDoors;
     CameraPov _cam;
@@ -146,6 +220,91 @@ public class GameFlowManager : MonoBehaviour
     void ActionElevatorDoorsOpen() { }
     void ActionElevatorDoorsClose() { }
     void ActionAllowInput() { }
+
+
+    float speed = 2.0F;
+
+    // Time when the movement started.
+    private float startTime;
+    // Total distance between the markers.
+    float journeyLength;
+    float fracJourney;
+
+
+
+
+    public void MoveTO(DeliveryItem argItem, Transform startMarker, Transform endMarker)
+    {
+        if (argItem.transform.parent != null)
+        {
+            argItem.transform.parent = null;
+        }
+
+        journeyLength = 10000000;
+        startTime = Time.time;
+        journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
+
+        StartCoroutine(MoveCurItemRoutine(startMarker, endMarker, argItem));
+
+    }
+
+
+
+
+
+
+    private IEnumerator MoveCurItemRoutine(Transform startMarker, Transform endMarker, DeliveryItem argDeliveryItem)
+    {
+
+        float elapsedTime = 0;
+        float timeTrigcatcher;
+        bool catcherTriggered = false;
+        float time;
+        if (endMarker == null)
+            yield return null;
+
+        if (endMarker.gameObject.CompareTag("Player"))
+        {
+            time = 1.14f;
+        }
+        else
+        {
+            time = 2f;
+        }
+        //timeTrigcatcher = time * 0.8f;
+        timeTrigcatcher = time - 0.16f;
+
+        while (elapsedTime < time)
+        {
+
+            float distCovered = (Time.time - startTime) * speed;
+            fracJourney = distCovered / journeyLength;
+
+            if (elapsedTime <= timeTrigcatcher)
+            {
+                if (!catcherTriggered)
+                {
+                    Debug.Log("hey catch reflex NOW");
+                    endMarker.gameObject.GetComponentInParent<ICharacterAnim>().AnimateCatch();
+                    catcherTriggered = true;
+                }
+            }
+
+            argDeliveryItem.transform.position = Vector3.Lerp(startMarker.position, endMarker.position, fracJourney);
+            //Debug.Log(fracJourney);
+
+
+
+
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        Debug.Log("ReachedDestination");
+        argDeliveryItem.transform.parent = endMarker;
+    }
+
+
+
 
 }
 

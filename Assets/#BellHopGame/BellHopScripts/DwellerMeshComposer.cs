@@ -413,14 +413,35 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
 
 
 
+
+
     // Update is called once per frame
     void Update()
     {
 
     }
 
+    public DeliveryItem GetInitialDeliveryItem()
+    {
+        try
+        {
+
+
+        }
+        catch (Exception e)
+        {
+            print("error");
+
+        }
+
+        if (_initiallyAssignedAtSceneBuild == null) Debug.LogError("! Dweller: i haz no  initial obj, or it haz been changd ");
+        return _initiallyAssignedAtSceneBuild;
+    }
+
+    DeliveryItem _initiallyAssignedAtSceneBuild;
     public void InitializeHeldObject(GameObject argItemInHand)
     {
+        _initiallyAssignedAtSceneBuild = argItemInHand.GetComponent<DeliveryItem>();
         _CurHeldObject = argItemInHand;
         _CurHeldObject.transform.position = new Vector3(RightHandHoldPos.position.x, RightHandHoldPos.position.y, RightHandHoldPos.position.z);
         _CurHeldObject.transform.parent = RightHandHoldPos.transform;
@@ -461,6 +482,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
 #if DebugOn
         Debug.Log("Dweller: Toss peakheard");
 #endif
+        BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.DwellerReleaseObject);
     }
 
     public void AnimCatchPeack()
@@ -468,10 +490,26 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
 #if DebugOn
         Debug.Log("Dweller: Catch peakheard");
 #endif
+
+
+    }
+
+    public void AnimTrigger(GameEnums.DwellerAnimTrigger argtrig)
+    {
+        _MyAnimator.SetTrigger(argtrig.ToString());
     }
 
 
+    public void ReleaseObj_CalledExternally() //after anim event handled
+    {
+        _CurHeldObject.transform.parent = null;
+        _initiallyAssignedAtSceneBuild = null;
+        _CurHeldObject = null;
+    }
 
+
+    public Transform GetMyRightHandHold() { return this.RightHandHoldPos; }
+    public Transform GetMyLeftHandHold() { return this.LeftHandHoldPos; }
 
     //public void TossPeack()
     //{
@@ -484,3 +522,4 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     //}
     #endregion
 }
+

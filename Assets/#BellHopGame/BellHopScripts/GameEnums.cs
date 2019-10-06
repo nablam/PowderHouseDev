@@ -237,9 +237,9 @@
         DwellerReactionFinished,
         BunnyReleasedObject,
         BunnyCaughtObject,
-        DwellerReleasedObject,
+        DwellerReleaseObject,
         DwellerCaughtObject,
-        BunnyReaction,
+        BunnyReactionEnd,
         DoorsClosed,
 
         GameEnd,
@@ -253,6 +253,25 @@
         Memory,
         Logic,
         DirrectHint
+
+    }
+
+    public enum DwellerAnimTrigger
+    {
+        TrigToss,
+        TrigCatch,
+        TrigTurn,
+        TrigUnTurn,
+        TrigWave1,
+        TrigWave2,
+        TrigHello,
+        TrigDance1,
+        TrigDance2,
+        TrigBad,
+        TrigShrug,
+        TrigGood,
+        TrigHappy,
+        TrigCome
 
     }
 }

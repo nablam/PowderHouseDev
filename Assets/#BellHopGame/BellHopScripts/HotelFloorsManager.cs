@@ -32,7 +32,8 @@ public class HotelFloorsManager : MonoBehaviour
     HotelFloor _curfloor;
     void Start()
     {
-
+        //_curfloor = 0; 
+        //curfloor 0 is set upon initialization
     }
 
     public void InitializeFLoors(List<HotelFloor> argFloors) { _floors = argFloors; _curfloor = _floors[0]; }
