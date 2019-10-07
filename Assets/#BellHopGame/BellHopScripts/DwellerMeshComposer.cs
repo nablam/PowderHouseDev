@@ -459,6 +459,11 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
             return null;
     }
 
+    public DeliveryItem HELP_firstGuyOut()
+    {
+        return _CurHeldObject.GetComponent<DeliveryItem>();
+    }
+
 
 
     #region InterfaceForAnimatorListen
@@ -515,6 +520,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
 
     public void AnimTrigger(string argTrig)
     {
+        print("sanitycheck Dweller anim " + "Trig" + argTrig);
         _MyAnimator.SetTrigger("Trig" + argTrig);
     }
 
@@ -523,6 +529,10 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
         throw new NotImplementedException();
     }
 
+    public GameObject TemMyGO()
+    {
+        return this.gameObject;
+    }
 
     //public void TossPeack()
     //{

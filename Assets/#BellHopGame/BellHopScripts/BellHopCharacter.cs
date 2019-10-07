@@ -138,11 +138,17 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
 
     public void AnimTrigger(string argTrig)
     {
+        print("sanitycheck Bunny anim " + "Trig" + argTrig);
         _MyAnimator.SetTrigger("Trig" + argTrig);
     }
 
     public void AnimateNamedAction(string argactionNAme, Action OnEnded_slash_ArrivedAtPos_Callback = null)
     {
         throw new NotImplementedException();
+    }
+
+    public GameObject TemMyGO()
+    {
+        return this.gameObject;
     }
 }

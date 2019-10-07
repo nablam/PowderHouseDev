@@ -101,7 +101,7 @@ public class CameraPov : MonoBehaviour
                 ButtonsCanvas.SetActive(true);
                 ReachedInitialPos = true;
                 // _ElevatorDoorsCTRL.OpenDoors();
-                BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.GameStart);
+                // BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.GameStart);
             }
         }
     }

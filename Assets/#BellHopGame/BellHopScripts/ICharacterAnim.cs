@@ -23,5 +23,6 @@ public interface ICharacterAnim
     Transform GetMyRightHandHold();
     Transform GetMyLeftHandHold();
 
+    GameObject TemMyGO();
 
 }

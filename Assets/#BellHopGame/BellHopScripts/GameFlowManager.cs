@@ -35,11 +35,14 @@ public class GameFlowManager : MonoBehaviour
         {
             case GameEnums.GameSequenceType.GameStart:
                 _floorsmngr.HideShowAllBarriers(false);
+                print("here");
                 _curDweller = _floorsmngr.GetCurFloorDweller();
-                _curDeliveryItem = _curDweller.GetInitialDeliveryItem();
+                _curDeliveryItem = _curDweller.HELP_firstGuyOut();
+                _ContextItem = _curDeliveryItem;
                 //then setup context later when bunny owns it
                 _ElevatorDoors.OpenDoors();
                 IsAllowKeypad = true;
+                CheckFloorStatusUponArrival();
                 break;
 
             case GameEnums.GameSequenceType.ReachedFloor:
@@ -126,12 +129,17 @@ public class GameFlowManager : MonoBehaviour
         {
             Debug.Log("YAYA");
             _GOODFLOOR = true;
+
+            _NamedActionsController.ReInitContextObjectsOnArrivalTOFloor(_bellHop, _curDweller, _ContextItem);
         }
         else
         {
             Debug.Log("nay");
             _GOODFLOOR = false;
+            _NamedActionsController.ReInitContextObjectsOnArrivalTOFloor(_bellHop, _curDweller, _ContextItem);
         }
+
+
         //_curDeliveryItem = null;
 
         //if (_curDeliveryItem.IsMyOwner(_curDweller))
@@ -171,14 +179,16 @@ public class GameFlowManager : MonoBehaviour
     HotelFloorsManager _floorsmngr;
     ElevatorDoorsMasterControl _ElevatorDoors;
     CameraPov _cam;
+    NamedActionsController _NamedActionsController;
 
-    public void InitializeMyThings(BellHopCharacter argbh, HotelFloorsManager argfloors, CameraPov argCam)
+    public void InitializeMyThings(BellHopCharacter argbh, HotelFloorsManager argfloors, CameraPov argCam, NamedActionsController argNameActionCTRL)
     {
 
         _bellHop = argbh;
         _floorsmngr = argfloors;
         _cam = argCam;
         _ElevatorDoors = ElevatorDoorsMasterControl.Instance;
+        _NamedActionsController = argNameActionCTRL;
     }
 
 

@@ -18,6 +18,8 @@ public class SceneBuilder : MonoBehaviour
     public GameObject Hop;
     public CameraPov camlobby;
 
+    public NamedActionsController ActionsControllerObj;
+
     Dictionary<char, List<string>> Dict_BoyNames;
     Dictionary<char, List<string>> Dict_GirlNames;
     Dictionary<char, List<string>> Dict_ItemNames;
@@ -344,7 +346,7 @@ public class SceneBuilder : MonoBehaviour
         camlobby.assignBunny(Hop);
         HotelFloorsMNG.InitializeFLoors(HotelAsListOfFloors);
         camlobby.SetInitialPos(HotelAsListOfFloors[_gs.Master_Number_of_Floors - 1].BaseCamPos.transform);
-        GameFlow.InitializeMyThings(Hop.GetComponent<BellHopCharacter>(), HotelFloorsMNG, camlobby);
+        GameFlow.InitializeMyThings(Hop.GetComponent<BellHopCharacter>(), HotelFloorsMNG, camlobby, ActionsControllerObj);
     }
 
     GameObject GetItemRefBySimpleName(string argSimpleName)
