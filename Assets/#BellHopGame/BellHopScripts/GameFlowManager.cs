@@ -1,4 +1,6 @@
-﻿using System;
+﻿//#define DebugOn
+
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -35,7 +37,9 @@ public class GameFlowManager : MonoBehaviour
         {
             case GameEnums.GameSequenceType.GameStart:
                 _floorsmngr.HideShowAllBarriers(false);
+#if DebugOn
                 print("here");
+#endif
                 _curDweller = _floorsmngr.GetCurFloorDweller();
                 _curDeliveryItem = _curDweller.HELP_firstGuyOut();
                 _ContextItem = _curDeliveryItem;
@@ -127,14 +131,18 @@ public class GameFlowManager : MonoBehaviour
     {
         if (_ContextItem.IsMyOwner(_curDweller))
         {
+#if DebugOn
             Debug.Log("YAYA");
+#endif
             _GOODFLOOR = true;
 
             _NamedActionsController.ReInitContextObjectsOnArrivalTOFloor(_bellHop, _curDweller, _ContextItem);
         }
         else
         {
+#if DebugOn
             Debug.Log("nay");
+#endif
             _GOODFLOOR = false;
             _NamedActionsController.ReInitContextObjectsOnArrivalTOFloor(_bellHop, _curDweller, _ContextItem);
         }

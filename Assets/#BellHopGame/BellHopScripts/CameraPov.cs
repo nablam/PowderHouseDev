@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿//#define DebugOn
+
+using UnityEngine;
 
 public class CameraPov : MonoBehaviour
 {
@@ -78,8 +80,9 @@ public class CameraPov : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, _target.position, _gs.ElevatorSpeed);
             if (transform.position == _target.position)
             {
-
+#if DebugOn
                 Debug.Log("Cam pov reacehd");
+#endif
                 _eventManager.Call_CurSequenceChanged(GameEnums.GameSequenceType.ReachedFloor);
                 Reached = true;
             }
@@ -93,8 +96,9 @@ public class CameraPov : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, InitialPos.position, _gs.ElevatorSpeed / 4f);
             if (transform.position == InitialPos.position)
             {
-
+#if DebugOn
                 Debug.Log("Cam pov Startpos");
+#endif
                 _eventManager.Call_CurSequenceChanged(GameEnums.GameSequenceType.GameStart);
                 ElevatorWall.transform.parent = this.transform;
                 BunnyHop.transform.parent = this.transform;

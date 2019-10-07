@@ -22,7 +22,7 @@ public interface ICharacterAnim
     void ReleaseObj_CalledExternally();
     Transform GetMyRightHandHold();
     Transform GetMyLeftHandHold();
-
+    void NotifyMeWheanAnimationStateExit();
     GameObject TemMyGO();
 
 }

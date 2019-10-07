@@ -1,4 +1,4 @@
-﻿#define Debug_On
+﻿//#define Debug_On
 using UnityEngine;
 
 public class AnimatorStateHelper : StateMachineBehaviour
@@ -14,10 +14,16 @@ public class AnimatorStateHelper : StateMachineBehaviour
         {
             if (stateInfo.IsTag(actionstr + ".Tag"))
             {
+                ICharacterAnim ica = animator.gameObject.GetComponent<ICharacterAnim>();
+                ica.NotifyMeWheanAnimationStateExit();
+
+
+
                 if (animator.gameObject.CompareTag("Player"))
                 {
 #if Debug_On
                     Debug.Log("Player finished anim.tag " + actionstr);
+                    BellHopGameEventManager.Instance.Call_NamedActionFinished("Player." + actionstr);
 #endif
                 }
                 else
@@ -25,7 +31,9 @@ public class AnimatorStateHelper : StateMachineBehaviour
                 {
 #if Debug_On
                     Debug.Log("Dweller finished anim.tag " + actionstr);
+                    BellHopGameEventManager.Instance.Call_NamedActionFinished("Dweller." + actionstr);
 #endif
+
 
                 }
                 //TODO< Items are tagged but have no animator. could adde coo effetcts when needed in this way"

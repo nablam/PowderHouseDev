@@ -13,7 +13,7 @@
     }
 
     public string TheActionName { get => _theActionName; private set => _theActionName = value; }
-    public ICharacterAnim TheCharacter { get => _theCharacter; private set => _theCharacter = value; }
+    public ICharacterAnim TheCharacter { get => _theCharacter; set => _theCharacter = value; }
     public DeliveryItem TheContextItem { get => _theContextItem; private set => _theContextItem = value; }
 
     //public BHG_Task() { }

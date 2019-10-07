@@ -1,4 +1,5 @@
-﻿using System;
+﻿#define DebugOn
+using System;
 using UnityEngine;
 
 public class BellHopCharacter : MonoBehaviour, ICharacterAnim
@@ -97,7 +98,6 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
         //{
         Debug.LogWarning("No GameManager!!");
         //}
-
     }
 
 
@@ -142,9 +142,21 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
         _MyAnimator.SetTrigger("Trig" + argTrig);
     }
 
+    string PlayingAnimState = "";
+    Action WhatToDoWhenThisAnimStateEnds = null;
     public void AnimateNamedAction(string argactionNAme, Action OnEnded_slash_ArrivedAtPos_Callback = null)
     {
-        throw new NotImplementedException();
+        PlayingAnimState = argactionNAme;
+        WhatToDoWhenThisAnimStateEnds = OnEnded_slash_ArrivedAtPos_Callback;
+        AnimTrigger(argactionNAme); //ads trig to it 
+    }
+
+    public void NotifyMeWheanAnimationStateExit()
+    {
+#if DebugOn
+        Debug.Log("Hops: Notifiedby animator end of " + PlayingAnimState);
+#endif
+        WhatToDoWhenThisAnimStateEnds();
     }
 
     public GameObject TemMyGO()

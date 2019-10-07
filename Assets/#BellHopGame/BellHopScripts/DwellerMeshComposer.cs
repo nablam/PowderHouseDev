@@ -524,9 +524,22 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
         _MyAnimator.SetTrigger("Trig" + argTrig);
     }
 
+    string PlayingAnimState = "";
+    Action WhatToDoWhenThisAnimStateEnds = null;
     public void AnimateNamedAction(string argactionNAme, Action OnEnded_slash_ArrivedAtPos_Callback = null)
     {
-        throw new NotImplementedException();
+        PlayingAnimState = argactionNAme;
+        WhatToDoWhenThisAnimStateEnds = OnEnded_slash_ArrivedAtPos_Callback;
+        AnimTrigger(argactionNAme); //ads trig to it 
+    }
+
+
+    public void NotifyMeWheanAnimationStateExit()
+    {
+#if DebugOn
+        Debug.Log("Dweller: Notifiedby animator end of " + PlayingAnimState);
+#endif
+        WhatToDoWhenThisAnimStateEnds();
     }
 
     public GameObject TemMyGO()
