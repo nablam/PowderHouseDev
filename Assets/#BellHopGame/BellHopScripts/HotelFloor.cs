@@ -56,4 +56,12 @@ public class HotelFloor : MonoBehaviour
         // anime Apex -> bunnyhandls -> 
 
     }
+
+    void InitialFloorVisited()
+    {
+
+    }
+    void visitingCorrectFloor() { }
+
+    void visitingWrongFloor() { }
 }

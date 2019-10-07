@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class BellHopCharacter : MonoBehaviour, ICharacterAnim
 {
@@ -121,10 +122,10 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
         Debug.Log("BEllHop: Catch peakheard");
     }
 
-    public void AnimTrigger(GameEnums.DwellerAnimTrigger argtrig)
-    {
-        _MyAnimator.SetTrigger(argtrig.ToString());
-    }
+    //public void AnimTrigger(GameEnums.DwellerAnimTrigger argtrig)
+    //{
+    //    _MyAnimator.SetTrigger(argtrig.ToString());
+    //}
 
     public void ReleaseObj_CalledExternally()
     {
@@ -134,4 +135,14 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
 
     public Transform GetMyRightHandHold() { return this.RightHandHoldPos; }
     public Transform GetMyLeftHandHold() { return this.LeftHandHoldPos; }
+
+    public void AnimTrigger(string argTrig)
+    {
+        _MyAnimator.SetTrigger("Trig" + argTrig);
+    }
+
+    public void AnimateNamedAction(string argactionNAme, Action OnEnded_slash_ArrivedAtPos_Callback = null)
+    {
+        throw new NotImplementedException();
+    }
 }

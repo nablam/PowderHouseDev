@@ -14,7 +14,7 @@ public class GameSettings : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            ActionNames = new List<string>();
+            ActionNames = new List<string>(); //TODO: should be a dictionary if dataset gets longer 
 
             ActionNames.Add(_toss);
             ActionNames.Add(_catch);
@@ -68,9 +68,9 @@ public class GameSettings : MonoBehaviour
     string _good = "Good";
     string _happy = "Happy";
     string _come = "Come";
-    string _openDoors = "OpenDoors";
-    string _closeDoors = "CloseDoors";
-    string _moveElevator = "MoveElevator";
+    string _openDoors = "OpenDoors"; //TODO: currently implemented separately
+    string _closeDoors = "CloseDoors";//TODO: currently implemented separately
+    string _moveElevator = "MoveElevator";//TODO: currently implemented separately according to old FLowElements
     public string Toss { get => _toss; set => _toss = value; }
     public string Catch { get => _catch; set => _catch = value; }
     public string Catch1 { get => _catch1; set => _catch1 = value; }

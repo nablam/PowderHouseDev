@@ -51,53 +51,52 @@ public class GameFlowManager : MonoBehaviour
                 //moveme down 
                 // _curDweller.AnimTrigger(GameEnums.DwellerAnimTrigger.TrigHello);
                 //_bellHop.AnimTrigger(GameEnums.DwellerAnimTrigger.TrigWave1);
-                _bellHop.Animateturn();
-                if (firstTime)
-                {
-                    _ContextItem = _curDeliveryItem;
-                    firstTime = false;
-                    _curDweller.AnimateToss();
+                //_bellHop.Animateturn();
+                //if (firstTime)
+                //{
+                //    _ContextItem = _curDeliveryItem;
+                //    firstTime = false;
+                //    // _curDweller.AnimateToss();
 
-                    //if (_bellHop.GetMyRightHandHold().GetChild(0) == null)
-                    //{
-
-
-                    //}
-                }
-                else
-                {
-                    if (_GOODFLOOR)
-                    {
-                        _bellHop.AnimateToss();
-                    }
-                    else
-                    {
-
-                    }
+                //    //if (_bellHop.GetMyRightHandHold().GetChild(0) == null)
+                //    //{
 
 
-                }
+                //    //}
+                //}
+                //else
+                //{
+                //    if (_GOODFLOOR)
+                //    {
+                //        _bellHop.AnimateToss();
+                //    }
+                //    else
+                //    {
+
+                //    }
+
+
+                //}
 
 
 
                 break;
-            case GameEnums.GameSequenceType.DwellerReactionFinished:
+
+
+            case GameEnums.GameSequenceType.FloorActionsFinished:
                 break;
-            case GameEnums.GameSequenceType.BunnyReleasedObject:
+
+
+
+            case GameEnums.GameSequenceType.PlayerInputs:
                 break;
-            case GameEnums.GameSequenceType.BunnyCaughtObject:
-                break;
-            case GameEnums.GameSequenceType.DwellerReleaseObject:
-                _curDweller.ReleaseObj_CalledExternally();
-                MoveTO(_curDeliveryItem, _curDweller.GetMyRightHandHold(), _bellHop.GetMyRightHandHold());
-                //_curDeliveryItem
-                //_curDeliveryItem.transform.parent = null;
-                break;
-            case GameEnums.GameSequenceType.DwellerCaughtObject:
-                break;
-            case GameEnums.GameSequenceType.BunnyReactionEnd:
-                //IsAllowKeypad = true;
-                break;
+            //case GameEnums.GameSequenceType.DwellerReleaseObject:
+            //    _curDweller.ReleaseObj_CalledExternally();
+            //    MoveTO(_curDeliveryItem, _curDweller.GetMyRightHandHold(), _bellHop.GetMyRightHandHold());
+            //    //_curDeliveryItem
+            //    //_curDeliveryItem.transform.parent = null;
+            //    break;
+
             case GameEnums.GameSequenceType.DoorsClosed:
                 _bellHop.Animateturn();
                 _floorsmngr.UpdateCurFloorDest(_requestedFloor);

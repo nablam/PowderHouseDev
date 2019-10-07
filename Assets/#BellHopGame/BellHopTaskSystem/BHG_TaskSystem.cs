@@ -1,12 +1,8 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
 public class BHG_TaskSystem
 {
-    public class BHG_Task
-    {
-        public Vector3 targetPosition;
-    }
+
 
     private List<BHG_Task> taskList;
 
@@ -37,3 +33,12 @@ public class BHG_TaskSystem
     }
 
 }
+//MAkeaNewTAsk
+//CM_TaskSystem.Task task = new CM_TaskSystem.Task
+//{
+//    ActionName = "",
+//TheDweller =passdweller,
+//...
+
+//};
+//taskSystem.AddTask(task);

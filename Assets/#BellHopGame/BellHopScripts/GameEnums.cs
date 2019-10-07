@@ -234,12 +234,19 @@
 
         ReachedFloor,
         DoorsOppned,
-        DwellerReactionFinished,
-        BunnyReleasedObject,
-        BunnyCaughtObject,
-        DwellerReleaseObject,
-        DwellerCaughtObject,
-        BunnyReactionEnd,
+
+        FloorActionsFinished,
+
+        //DwellerReactionFinished,
+        //  BunnyReleasedObject,
+        //  BunnyCaughtObject,
+        // DwellerReleaseObject,
+        // DwellerCaughtObject,
+        //BunnyReactionEnd,
+
+
+        PlayerInputs,
+
         DoorsClosed,
 
         GameEnd,
@@ -256,24 +263,24 @@
 
     }
 
-    public enum DwellerAnimTrigger
-    {
-        TrigToss,
-        TrigCatch, // goes into a looped pose
-        TrigCatch1,
-        TrigCatch2,
-        TrigTurn,
-        TrigUnTurn,
-        TrigWave1,
-        TrigWave2,
-        TrigHello,
-        TrigDance1,
-        TrigDance2,
-        TrigBad,
-        TrigShrug,
-        TrigGood,
-        TrigHappy,
-        TrigCome
+    //public enum DwellerAnimTrigger
+    //{
+    //    TrigToss,
+    //    TrigCatch, // goes into a looped pose
+    //    TrigCatch1,
+    //    TrigCatch2,
+    //    TrigTurn,
+    //    TrigUnTurn,
+    //    TrigWave1,
+    //    TrigWave2,
+    //    TrigHello,
+    //    TrigDance1,
+    //    TrigDance2,
+    //    TrigBad,
+    //    TrigShrug,
+    //    TrigGood,
+    //    TrigHappy,
+    //    TrigCome
 
-    }
+    //}
 }

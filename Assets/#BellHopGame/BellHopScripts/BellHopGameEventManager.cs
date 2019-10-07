@@ -72,5 +72,12 @@ public class BellHopGameEventManager : MonoBehaviour
         OnButtonPressed?.Invoke(argNum);
     }
 
-
+    // NAMEDACTION <==strongly tied to => Animator Event Tag which needs to match the typed name of the action started ... using gamesettings reduces erorrs 
+    // namedactions can be started by providing gamesetings action name, then subscribers can wait for particular named actionto finishe
+    public delegate void EventNamedAction(string gs);
+    public static EventNamedAction OnEventNamedActionFinished;
+    public void Call_NamedActionFinished(string gs)
+    {
+        OnEventNamedActionFinished?.Invoke(gs);
+    }
 }

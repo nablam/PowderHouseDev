@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public interface ICharacterAnim
 {
@@ -13,7 +14,10 @@ public interface ICharacterAnim
     void AnimateToss();
     void AnimateCatch();
 
-    void AnimTrigger(GameEnums.DwellerAnimTrigger argtrig);
+    // void AnimTrigger(GameEnums.DwellerAnimTrigger argtrig);
+    void AnimTrigger(string argTrig);
+
+    void AnimateNamedAction(string argactionNAme, Action OnEnded_slash_ArrivedAtPos_Callback = null);
 
     void ReleaseObj_CalledExternally();
     Transform GetMyRightHandHold();

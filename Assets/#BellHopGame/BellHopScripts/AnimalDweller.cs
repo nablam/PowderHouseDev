@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AnimalDweller : MonoBehaviour, ICharacterAnim
+public class AnimalDweller : MonoBehaviour
 {
     public GameEnums.AnimalCharcter My_type = GameEnums.AnimalCharcter.Alligator;
     GameObject _CurHeldObject = null;
@@ -120,10 +120,10 @@ public class AnimalDweller : MonoBehaviour, ICharacterAnim
         CatchPeack();
     }
 
-    public void AnimTrigger(GameEnums.DwellerAnimTrigger argtrig)
-    {
-        throw new System.NotImplementedException();
-    }
+    //public void AnimTrigger(GameEnums.DwellerAnimTrigger argtrig)
+    //{
+    //    throw new System.NotImplementedException();
+    //}
 
     public void ReleaseObj_CalledExternally()
     {
