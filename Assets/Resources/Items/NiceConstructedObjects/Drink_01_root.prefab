@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 956787557423070574}
   m_Layer: 0
   m_Name: Drink_01_root
-  m_TagString: Untagged
+  m_TagString: DeliveryItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,3 +122,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RefName: Drink_01
+  _dwellerOwner: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7854804102609617385}
   m_Layer: 0
   m_Name: Avocado_root
-  m_TagString: Untagged
+  m_TagString: DeliveryItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RefName: Avocado
+  _dwellerOwner: {fileID: 0}
 --- !u!1 &8655034864657438608
 GameObject:
   m_ObjectHideFlags: 0

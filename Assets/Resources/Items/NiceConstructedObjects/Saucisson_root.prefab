@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6132003688365907968}
   m_Layer: 0
   m_Name: Saucisson_root
-  m_TagString: Untagged
+  m_TagString: DeliveryItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RefName: Saucisson
+  _dwellerOwner: {fileID: 0}
 --- !u!1 &1286805362669668499
 GameObject:
   m_ObjectHideFlags: 0

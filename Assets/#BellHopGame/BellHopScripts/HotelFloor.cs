@@ -47,4 +47,13 @@ public class HotelFloor : MonoBehaviour
     {
 
     }
+
+    public void CoordinateTossCatch()
+    {
+
+        //bunny toss 
+
+        // anime Apex -> bunnyhandls -> 
+
+    }
 }

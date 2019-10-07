@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7998188985028571311}
   m_Layer: 0
   m_Name: Gyoza_root
-  m_TagString: Untagged
+  m_TagString: DeliveryItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RefName: Gyoza
+  _dwellerOwner: {fileID: 0}
 --- !u!1 &3323529156029955736
 GameObject:
   m_ObjectHideFlags: 0

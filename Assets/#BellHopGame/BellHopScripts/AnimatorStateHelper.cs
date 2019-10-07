@@ -1,4 +1,4 @@
-﻿//#define Debug_On
+﻿#define Debug_On
 using UnityEngine;
 
 public class AnimatorStateHelper : StateMachineBehaviour
@@ -8,23 +8,51 @@ public class AnimatorStateHelper : StateMachineBehaviour
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // string str = animator.GetCurrentAnimatorStateInfo(0).  GetCurrentAnimatorClipInfo(0).
-        if (stateInfo.IsTag("Standard"))
+
+
+        foreach (string actionstr in GameSettings.Instance.ActionNames)
         {
-            if (animator.gameObject.CompareTag("Player"))
+            if (stateInfo.IsTag(actionstr + ".Tag"))
             {
+                if (animator.gameObject.CompareTag("Player"))
+                {
 #if Debug_On
-                Debug.Log("bunny finished come wave");
+                    Debug.Log("Player finished anim.tag " + actionstr);
 #endif
-                BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.BunnyReactionEnd);
-            }
-            else
-            {
+                }
+                else
+                     if (animator.gameObject.CompareTag("Dweller"))
+                {
 #if Debug_On
-                Debug.Log("dweller finished come wave");
+                    Debug.Log("Dweller finished anim.tag " + actionstr);
 #endif
+
+                }
+                //TODO< Items are tagged but have no animator. could adde coo effetcts when needed in this way"
+                //add animator, tag anims win the same format as above . can animate scale fluctuations, rotations ..etc
+                //else
+                //     if (animator.gameObject.CompareTag("DeliveryItem"))
+                //{
+
+
+                //}
+                else
+                {
+#if Debug_On
+                    Debug.Log(actionstr + "finished , but object is neither Player nor Dweller");
+#endif
+
+                }
+
             }
+
+
         }
+
+
+
+
+
 
     }
 }

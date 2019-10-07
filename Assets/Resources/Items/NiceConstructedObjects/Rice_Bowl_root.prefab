@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4437964202371756854}
   m_Layer: 0
   m_Name: Rice_Bowl_root
-  m_TagString: Untagged
+  m_TagString: DeliveryItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RefName: Rice_Bowl
+  _dwellerOwner: {fileID: 0}
 --- !u!1 &8161319495613629563
 GameObject:
   m_ObjectHideFlags: 0

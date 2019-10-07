@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6228974907243461562}
   m_Layer: 0
   m_Name: Maki_root
-  m_TagString: Untagged
+  m_TagString: DeliveryItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RefName: Maki
+  _dwellerOwner: {fileID: 0}
 --- !u!1 &3047243109865001389
 GameObject:
   m_ObjectHideFlags: 0

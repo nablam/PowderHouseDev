@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7935913690996237402}
   m_Layer: 0
   m_Name: Donut_root
-  m_TagString: Untagged
+  m_TagString: DeliveryItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RefName: Donut
+  _dwellerOwner: {fileID: 0}
 --- !u!1 &7559900709284323469
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,17 +4,17 @@ public class CameraPov : MonoBehaviour
 {
 
     #region EventSubscription
-    private void OnEnable()
-    {
-        BellHopGameEventManager.OnCurSequenceChanged += HeardSequenceChanged;
-    }
+    //private void OnEnable()
+    //{
+    //    BellHopGameEventManager.OnCurSequenceChanged += HeardSequenceChanged;
+    //}
 
-    private void OnDisable()
-    {
-        BellHopGameEventManager.OnCurSequenceChanged -= HeardSequenceChanged;
-    }
+    //private void OnDisable()
+    //{
+    //    BellHopGameEventManager.OnCurSequenceChanged -= HeardSequenceChanged;
+    //}
 
-    void HeardSequenceChanged(GameEnums.GameSequenceType argGST) { }
+    //void HeardSequenceChanged(GameEnums.GameSequenceType argGST) { }
     #endregion
 
 

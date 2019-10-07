@@ -259,7 +259,9 @@
     public enum DwellerAnimTrigger
     {
         TrigToss,
-        TrigCatch,
+        TrigCatch, // goes into a looped pose
+        TrigCatch1,
+        TrigCatch2,
         TrigTurn,
         TrigUnTurn,
         TrigWave1,

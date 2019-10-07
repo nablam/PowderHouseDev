@@ -2105,7 +2105,7 @@ GameObject:
   - component: {fileID: 7341026681230816611}
   m_Layer: 0
   m_Name: BaseAnimal
-  m_TagString: Untagged
+  m_TagString: Dweller
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2209,6 +2209,7 @@ MonoBehaviour:
   Brown: {fileID: 2100000, guid: e958c3b7438bbea428275ac5b378d4db, type: 2}
   RightHandHoldPos: {fileID: 3142949648316647956}
   LeftHandHoldPos: {fileID: 6768286349510291908}
+  _myFinalResidenceFloorNumber: 0
 --- !u!1 &8557428548546911946
 GameObject:
   m_ObjectHideFlags: 0

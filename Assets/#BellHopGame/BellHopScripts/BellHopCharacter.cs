@@ -31,7 +31,21 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
         _HeldObject = GameEnums.StoryObjects.aaNone;
     }
 
-
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            AnimateToss();
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            AnimateCatch();
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Animateturn();
+        }
+    }
 
     public void Set_ItemReached(GameObject ItemObj)
     {
@@ -90,7 +104,7 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
     public void AnimTossPeack()
     {
         ActialTossPeakRegisterStartMoveObject();
-        Debug.Log("Dweller: Toss peakheard");
+        Debug.Log("BEllHop: Toss peakheard");
     }
 
     public void AnimCatchPeack()
@@ -104,7 +118,7 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
         //{
         //    Debug.LogWarning("No GameManager!!");
         //}
-        Debug.Log("Dweller: Catch peakheard");
+        Debug.Log("BEllHop: Catch peakheard");
     }
 
     public void AnimTrigger(GameEnums.DwellerAnimTrigger argtrig)
