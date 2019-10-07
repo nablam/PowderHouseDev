@@ -11,8 +11,8 @@ public interface ICharacterAnim
 
 
     //to be called by other objects
-    void AnimateToss();
-    void AnimateCatch();
+    void AnimateToss(Action CallBackOnAnimEvent);
+    void AnimateCatch(Action CallBackOnAnimEvent);
 
     // void AnimTrigger(GameEnums.DwellerAnimTrigger argtrig);
     void AnimTrigger(string argTrig);

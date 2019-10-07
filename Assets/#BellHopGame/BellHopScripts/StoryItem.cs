@@ -47,7 +47,7 @@ public class StoryItem : MonoBehaviour
 
         float elapsedTime = 0;
 
-        GameManager.Instance.TheBellHop.AnimateCatch();
+        //  GameManager.Instance.TheBellHop.AnimateCatch();
         while (elapsedTime < time)
         {
 

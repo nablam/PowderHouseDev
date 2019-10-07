@@ -6,17 +6,24 @@ public class BHG_TaskSystem
 
     private List<BHG_Task> taskList;
 
+    private BHG_Task _curTask = null;
     public BHG_TaskSystem()
     {
         taskList = new List<BHG_Task>();
     }
 
+
+    public BHG_Task getCurTak()
+    {
+
+        return _curTask;
+    }
     public BHG_Task RequestNextTask()
     {
         if (taskList.Count > 0)
         {
-            // Give the first task
             BHG_Task task = taskList[0];
+            _curTask = task;
             taskList.RemoveAt(0);
             return task;
         }
@@ -33,12 +40,3 @@ public class BHG_TaskSystem
     }
 
 }
-//MAkeaNewTAsk
-//CM_TaskSystem.Task task = new CM_TaskSystem.Task
-//{
-//    ActionName = "",
-//TheDweller =passdweller,
-//...
-
-//};
-//taskSystem.AddTask(task);

@@ -1,4 +1,6 @@
 ﻿#define DebugOn
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class NamedActionsController : MonoBehaviour
@@ -19,9 +21,9 @@ public class NamedActionsController : MonoBehaviour
 
     //}
 
-    int _requestedFloor;
-    int _floorNumArrivedAt;
-    bool firstTime = true;
+
+
+
     //void HeardAnimstateExited(string argGST)
     //{
 
@@ -51,49 +53,18 @@ public class NamedActionsController : MonoBehaviour
     [SerializeField]
     GameObject _tempdwellertemp;
     [SerializeField]
-    DeliveryItem MyContextItem;
+    public DeliveryItem MyContextItem;
+
+    GameEnums.TaskSequenceType _CurSequenceType; //will drive the GameEventSqenceChange
+    #region GAmeTAskHandler MAker initer
+
+
     private void Start()
     {
-        #region GAmeTAskHandler MAker initer
+        DelayedCallBAckWhenTossPeacks = TheCallBAckFor_delayGetNestTask;
         taskSystem = new BHG_TaskSystem();
-        //CM_Worker worker = CM_Worker.Create(new Vector3(500, 500));
-        //  CM_WorkerTaskAI workerTaskAI = worker.gameObject.AddComponent<CM_WorkerTaskAI>();
-
-
-        #endregion
-
-
-
-
-
-        //GoodFloor_Sequence = new List<string>
-        //{
-        //    GameSettings.Instance.Catch1,
-        //    GameSettings.Instance.Hello,
-        //    GameSettings.Instance.Catch1,
-
-        //};
-
-        //GoodFloor_Sequence = new List<string>
-        //{
-        //    GameSettings.Instance.Toss,
-        //    GameSettings.Instance.Wave1,
-        //    GameSettings.Instance.Wave1,
-
-        //};
-
-
-
-        //tasks = new List<BHG_Task>
-        //{
-        //    BunnyCome,
-        //    DwellerSayHi,
-        //    BunnySayHi,
-        //    DwellerCome,
-        //    BunnyCome,
-        //};
-
     }
+    #endregion
 
     void MAkeTasks()
     {
@@ -112,36 +83,82 @@ public class NamedActionsController : MonoBehaviour
         taskSystem.AddTask(BunnyCome);
     }
 
-    public void ReInitContextObjectsOnArrivalTOFloor(ICharacterAnim argBunny, ICharacterAnim argDweller, DeliveryItem argContextItem)
+    void MAkeDweller_toss_Bunny()
     {
+
+        BHG_Task DwellerSayHi = new BHG_Task(GameSettings.Instance.Wave1, MyDweller, MyContextItem);
+        //  BHG_Task BunnyTurn = new BHG_Task(GameSettings.Instance.Wave2, MyBunny, MyContextItem);
+        BHG_Task DwellerToss = new BHG_Task(GameSettings.Instance.Toss, MyDweller, MyContextItem);
+        taskSystem.AddTask(DwellerSayHi);
+        taskSystem.AddTask(DwellerToss);
+    }
+    void MAkeBunnyTossDweller()
+    {
+
+        BHG_Task DwellerSayHi = new BHG_Task(GameSettings.Instance.Wave2, MyDweller, MyContextItem);
+        BHG_Task DwellerCome = new BHG_Task(GameSettings.Instance.Come, MyDweller, MyContextItem);
+        BHG_Task BunnyToss = new BHG_Task(GameSettings.Instance.Toss, MyBunny, MyContextItem);
+        BHG_Task DwellerSayHEllo = new BHG_Task(GameSettings.Instance.Hello, MyDweller, MyContextItem);
+        taskSystem.AddTask(DwellerSayHi);
+        taskSystem.AddTask(DwellerCome);
+        taskSystem.AddTask(BunnyToss);
+        taskSystem.AddTask(DwellerSayHEllo);
+    }
+    public void InitForCutScene(ICharacterAnim argBunny, ICharacterAnim argDweller, DeliveryItem argContextItem)
+    {
+        _CurSequenceType = GameEnums.TaskSequenceType.CutScene;
         MyBunny = argBunny;
         MyDweller = argDweller;
         MyContextItem = argContextItem;
         _tempdwellertemp = argDweller.TemMyGO();
         _tempBunnyObj = argBunny.TemMyGO();
-
         MAkeTasks();
+        TheCallBackAfterAnimStetends();
+    }
 
-        //  Setup(MyBunny, MyDweller, MyContextItem);
 
+    public void InitContextItems_FOR_dwellerTossToBunny(ICharacterAnim argBunny, ICharacterAnim argDweller, DeliveryItem argContextItem)
+    {
+        _CurSequenceType = GameEnums.TaskSequenceType.Dweller_toss_Bunny;
+        MyBunny = argBunny;
+        MyDweller = argDweller;
+        MyContextItem = argContextItem;
+        _tempdwellertemp = argDweller.TemMyGO();
+        _tempBunnyObj = argBunny.TemMyGO();
+        MAkeDweller_toss_Bunny();
+        // TheCallBackAfterAnimStetends();
+        BHG_Task task = taskSystem.RequestNextTask();
+        if (task != null)
+            ExecuteTask(task);
 
-        startExecutionShouldBeAfterDoorSopen();
-        //  RequestNextTask();
+    }
+
+    public void InitContextItems_FOR_BunnyMAkseAdelivery(ICharacterAnim argBunny, ICharacterAnim argDweller, DeliveryItem argContextItem)
+    {
+        _CurSequenceType = GameEnums.TaskSequenceType.Bunny_tossDweller;
+        MyBunny = argBunny;
+        MyDweller = argDweller;
+        MyContextItem = argContextItem;
+        _tempdwellertemp = argDweller.TemMyGO();
+        _tempBunnyObj = argBunny.TemMyGO();
+        MAkeBunnyTossDweller();
+        // TheCallBackAfterAnimStetends();
+        BHG_Task task = taskSystem.RequestNextTask();
+        if (task != null)
+            ExecuteTask(task);
     }
 
 
     int curActionIndex = 0;
     //TODO and also after analysis of context items , is the context item on the correct floor basically check item's dest floor against curfloor number 
-    void startExecutionShouldBeAfterDoorSopen()
+    void TheCallBackAfterAnimStetends()
     {
-        // if (curActionIndex >= GoodFloor_Sequence.Count) return;
 
-        // MyBunny.AnimTrigger(GoodFloor_Sequence[curActionIndex]);
-        //  curActionIndex++;
+
 
 
 #if DebugOn
-        print("WHEN IS THIS CALLED");
+        print("the call back when task ends");
 #endif
         BHG_Task task = taskSystem.RequestNextTask();
         if (task != null)
@@ -151,12 +168,49 @@ public class NamedActionsController : MonoBehaviour
 #if DebugOn
             print("Signal End of Animations on this floor");
 #endif
+            if (_CurSequenceType == GameEnums.TaskSequenceType.CutScene) { }
+            else
+                 if (_CurSequenceType == GameEnums.TaskSequenceType.Dweller_toss_Bunny) { }
+            else
+                 if (_CurSequenceType == GameEnums.TaskSequenceType.Bunny_tossDweller) { }
+            //else
+            //     if (_CurSequenceType == GameEnums.TaskSequenceType.InitialHAndoffToDweller) { }
 
         }
     }
 
+    public Transform tempSTART;
+    public Transform tempEND;
+    void TheCallBAckFor_delayGetNestTask()
+    {
+#if DebugOn
+        print("Yo I think TossMidMarker just kickedin");
+#endif
+
+        DeliveryItem tempItem = MyContextItem;
 
 
+
+
+        if (_CurSequenceType == GameEnums.TaskSequenceType.Bunny_tossDweller)
+        {
+            //MoveTO(taskSystem.getCurTak().TheContextItem, taskSystem.getCurTak().TheContextItem)
+            tempSTART = _myIbunny.GetMyRightHandHold();
+            tempEND = _myIDweller.GetMyRightHandHold();
+        }
+        else
+              if (_CurSequenceType == GameEnums.TaskSequenceType.Dweller_toss_Bunny)
+        {
+
+
+            tempSTART = _myIDweller.GetMyRightHandHold();
+            tempEND = _myIbunny.GetMyRightHandHold();
+            //  MoveTO(MyContextItem, tempstartMarker, tempendMarker);
+        }
+
+
+
+    }
 
 
 
@@ -164,89 +218,138 @@ public class NamedActionsController : MonoBehaviour
 
     #region TaskAIrequests
 
-    private enum State
-    {
-        WaitingForNextTask,
-        ExecutingTask,
-    }
+    //private enum State
+    //{
+    //    WaitingForNextTask,
+    //    ExecutingTask,
+    //}
 
     private ICharacterAnim _myIbunny;
     private ICharacterAnim _myIDweller;
     private DeliveryItem _myItem;
     private BHG_TaskSystem taskSystem;
-    private State state;
+    // private State state;
     private float waitingTimer;
 
-    //public void Setup(ICharacterAnim argworker_Bunny, ICharacterAnim argworker_Dweller, DeliveryItem argItem)
-    //{
-    //    this._myIbunny = argworker_Bunny;
-    //    this.MyDweller = argworker_Dweller;
-    //    this._myItem = argItem;
-    //    // this.taskSystem = taskSystem;
-    //    // state = State.WaitingForNextTask;
-    //}
-
-    //private void Update()
-    //{
-    //    switch (state)
-    //    {
-    //        case State.WaitingForNextTask:
-    //            // Waiting to request a new task
-    //            waitingTimer -= Time.deltaTime;
-    //            if (waitingTimer <= 0)
-    //            {
-    //                float waitingTimerMax = .2f; // 200ms
-    //                waitingTimer = waitingTimerMax;
-    //                RequestNextTask();
-    //            }
-    //            break;
-    //        case State.ExecutingTask:
-    //            break;
-    //    }
-    //}
-
-    //private void RequestNextTask()
-    //{
-    //    // CMDebug.TextPopup("RequestNextTask", worker.GetPosition());
-    //    BHG_Task task = taskSystem.RequestNextTask();
-    //    if (task == null)
-    //    {
-    //        state = State.WaitingForNextTask;
-    //    }
-    //    else
-    //    {
-    //        state = State.ExecutingTask;
-    //        ExecuteTask(task);
-    //    }
-    //}
-
-
-
-    //private void ExecuteTask(BHG_Task task)
-    //{
-    //    //   CMDebug.TextPopup("ExecuteTask", worker.GetPosition());
-    //    _myIbunny.AnimateNamedAction(task.TheActionName, () =>   //and when he gets there run the call backs  or void Onarrivetopos(){ state= Stae.WaitingForNexrTask;}
-    //    {
-    //        state = State.WaitingForNextTask;
-    //    });
-    //}
+    Action DelayedCallBAckWhenTossPeacks;
 
 
     private void ExecuteTask(BHG_Task task)
     {
-        //   CMDebug.TextPopup("ExecuteTask", worker.GetPosition());
         ICharacterAnim ica = task.TheCharacter;
-        ica.AnimateNamedAction(task.TheActionName, startExecutionShouldBeAfterDoorSopen);//and when he gets there run the call backs  or void Onarrivetopos(){ state= Stae.WaitingForNexrTask;}
 
+        if (task.TheActionName.CompareTo(GameSettings.Instance.Toss) == 0)
+        {
 
+            ica.AnimateToss(DelayedCallBAckWhenTossPeacks);
+        }
+        else
+        if (task.TheActionName.CompareTo(GameSettings.Instance.Catch) == 0)
+        {
+
+        }
+        else
+
+            ica.AnimateNamedAction(task.TheActionName, TheCallBackAfterAnimStetends);//and when he gets there run the call backs  or void Onarrivetopos(){ state= Stae.WaitingForNexrTask;}
 
     }
 
 
     #endregion
 
+    float speed = 2.0F;
+
+    // Time when the movement started.
+    private float startTime;
+    // Total distance between the markers.
+    float journeyLength;
+    float fracJourney;
 
 
+
+
+    public void MoveTO(DeliveryItem argItem, Transform startMarker, Transform endMarker)
+    {
+        if (argItem.transform.parent != null)
+        {
+            argItem.transform.parent = null;
+        }
+
+        journeyLength = 10000000;
+        startTime = Time.time;
+        journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
+
+        StartCoroutine(MoveCurItemRoutine(startMarker, endMarker, argItem));
+
+    }
+
+
+
+
+
+
+    private IEnumerator MoveCurItemRoutine(Transform startMarker, Transform endMarker, DeliveryItem argDeliveryItem)
+    {
+
+        float elapsedTime = 0;
+        float timeTrigcatcher;
+        bool catcherTriggered = false;
+        float time;
+        if (endMarker == null)
+            yield return null;
+
+        if (endMarker.gameObject.CompareTag("Player"))
+        {
+            time = 1.14f;
+        }
+        else
+        {
+            time = 2f;
+        }
+        //timeTrigcatcher = time * 0.8f;
+        timeTrigcatcher = time - 0.16f;
+
+        while (elapsedTime < time)
+        {
+
+            float distCovered = (Time.time - startTime) * speed;
+            fracJourney = distCovered / journeyLength;
+
+            if (elapsedTime <= timeTrigcatcher)
+            {
+                if (!catcherTriggered)
+                {
+                    Debug.Log("hey catch reflex NOW");
+                    endMarker.gameObject.GetComponentInParent<ICharacterAnim>().AnimateCatch(JustTellMeSomthinAfterHEardMid__CAtch);
+                    catcherTriggered = true;
+                }
+            }
+
+            argDeliveryItem.transform.position = Vector3.Lerp(startMarker.position, endMarker.position, fracJourney);
+            //Debug.Log(fracJourney);
+
+
+
+
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        Debug.Log("ReachedDestination");
+        argDeliveryItem.transform.parent = endMarker;
+    }
+
+    void JustTellMeSomthinAfterHEardMid__CAtch()
+    {
+#if DebugOn
+        print("SnapCatch");
+#endif
+    }
+    void JustTellMeSomthinAfterHEardMid__TOSS()
+    {
+#if DebugOn
+        print("SnapToss");
+#endif
+    }
 }
 
 

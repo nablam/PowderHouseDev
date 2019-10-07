@@ -468,15 +468,18 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
 
     #region InterfaceForAnimatorListen
 
-
+    Action MidTossCallBAck;
+    Action MidCatchCallBAck; //may not be needed
     //animate
-    public void AnimateToss()
+    public void AnimateToss(Action argTossAimeEvnet)
     {
+        MidTossCallBAck = argTossAimeEvnet;
         _MyAnimator.SetTrigger("TrigToss");
     }
 
-    public void AnimateCatch()
+    public void AnimateCatch(Action argCatchAimeEvnet)
     {
+        MidCatchCallBAck = argCatchAimeEvnet;
         _MyAnimator.SetTrigger("TrigCatch");
     }
 
@@ -485,18 +488,19 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     public void AnimTossPeack()
     {
 #if DebugOn
-        Debug.Log("Dweller: Toss peakheard");
+        Debug.Log("Dweller: TOSS APEXXX");
 #endif
         // BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.DwellerReleaseObject);
+        MidTossCallBAck();
     }
 
     public void AnimCatchPeack()
     {
 #if DebugOn
-        Debug.Log("Dweller: Catch peakheard");
+        Debug.Log("Dweller: CATCH APEXXX");
 #endif
 
-
+        MidCatchCallBAck();
     }
 
     //public void AnimTrigger(GameEnums.DwellerAnimTrigger argtrig)
@@ -520,7 +524,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
 
     public void AnimTrigger(string argTrig)
     {
-        print("sanitycheck Dweller anim " + "Trig" + argTrig);
+        //print("sanitycheck Dweller anim " + "Trig" + argTrig);
         _MyAnimator.SetTrigger("Trig" + argTrig);
     }
 
@@ -537,7 +541,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     public void NotifyMeWheanAnimationStateExit()
     {
 #if DebugOn
-        Debug.Log("Dweller: Notifiedby animator end of " + PlayingAnimState);
+        Debug.Log("Dweller: stateExit " + PlayingAnimState);
 #endif
         WhatToDoWhenThisAnimStateEnds();
     }

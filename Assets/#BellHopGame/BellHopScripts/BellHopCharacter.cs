@@ -35,18 +35,18 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            AnimateToss();
-        }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            AnimateCatch();
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Animateturn();
-        }
+        //if (Input.GetKeyDown(KeyCode.T))
+        //{
+        //    AnimateToss();
+        //}
+        //if (Input.GetKeyDown(KeyCode.C))
+        //{
+        //    AnimateCatch();
+        //}
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    Animateturn();
+        //}
     }
 
     public void Set_ItemReached(GameObject ItemObj)
@@ -56,26 +56,22 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
         ItemObj.transform.parent = GetMyRightHandHold();
     }
 
-    public void TossToDwellerHand()
-    {
-        AnimateToss();
 
-    }
-    void ActialTossPeakRegisterStartMoveObject()
-    {
-        if (_gm != null)
-        {
-            _gm.AirBornObj = ItemToToss.transform;
-            ItemToToss.MoveTO(GetMyRightHandHold(), _gm.GetCurDweller().LeftHandHoldPos, false);
-        }
-        else
-        {
-            Debug.LogWarning("No GameManager!!");
-        }
+    //void ActialTossPeakRegisterStartMoveObject()
+    //{
+    //    if (_gm != null)
+    //    {
+    //        _gm.AirBornObj = ItemToToss.transform;
+    //        ItemToToss.MoveTO(GetMyRightHandHold(), _gm.GetCurDweller().LeftHandHoldPos, false);
+    //    }
+    //    else
+    //    {
+    //        Debug.LogWarning("No GameManager!!");
+    //    }
 
-    }
-    public void AnimateToss() { _MyAnimator.SetTrigger("TrigToss"); }
-    public void AnimateCatch() { _MyAnimator.SetTrigger("TrigCatch"); }
+    //}
+    //public void AnimateToss() { _MyAnimator.SetTrigger("TrigToss"); }
+    //public void AnimateCatch() { _MyAnimator.SetTrigger("TrigCatch"); }
 
     bool turnright = false;
     public void Animateturn()
@@ -88,39 +84,40 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
     }
 
 
-    public void CatchPeack()
+    //anim event handler
+    Action MidTossCallBAck;
+    Action MidCatchCallBAck; //may not be needed
+    public void AnimateToss(Action argTossAimeEvnet)
     {
-        //if (_gm != null)
-        //{
-        //    Set_ItemReached(_gm.AirBornObj.gameObject);
-        //}
-        //else
-        //{
-        Debug.LogWarning("No GameManager!!");
-        //}
+        MidTossCallBAck = argTossAimeEvnet;
+        PlayingAnimState = GameSettings.Instance.Toss;
+        _MyAnimator.SetTrigger("TrigToss");
     }
 
-
-
+    public void AnimateCatch(Action argCatchAimeEvnet)
+    {
+        MidCatchCallBAck = argCatchAimeEvnet;
+        PlayingAnimState = GameSettings.Instance.Catch;
+        _MyAnimator.SetTrigger("TrigCatch");
+    }
     public void AnimTossPeack()
     {
-        ActialTossPeakRegisterStartMoveObject();
-        Debug.Log("BEllHop: Toss peakheard");
+#if DebugOn
+        Debug.Log("Dweller: TOSS APEXXX");
+#endif
+        // BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.DwellerReleaseObject);
+        MidTossCallBAck();
     }
 
     public void AnimCatchPeack()
     {
-        //if (_gm != null)
-        //{
-        //    //_gm.IsAllowKeypad = true;
-        //    CatchPeack();
-        //}
-        //else
-        //{
-        //    Debug.LogWarning("No GameManager!!");
-        //}
-        Debug.Log("BEllHop: Catch peakheard");
+#if DebugOn
+        Debug.Log("Dweller: CATCH APEXXX");
+#endif
+
+        MidCatchCallBAck();
     }
+
 
     //public void AnimTrigger(GameEnums.DwellerAnimTrigger argtrig)
     //{

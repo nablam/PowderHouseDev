@@ -1,7 +1,6 @@
-﻿//#define DebugOn
+﻿#define DebugOn
 
 using System;
-using System.Collections;
 using UnityEngine;
 
 public class GameFlowManager : MonoBehaviour
@@ -38,7 +37,7 @@ public class GameFlowManager : MonoBehaviour
             case GameEnums.GameSequenceType.GameStart:
                 _floorsmngr.HideShowAllBarriers(false);
 #if DebugOn
-                print("here");
+                print("startgame");
 #endif
                 _curDweller = _floorsmngr.GetCurFloorDweller();
                 _curDeliveryItem = _curDweller.HELP_firstGuyOut();
@@ -46,51 +45,31 @@ public class GameFlowManager : MonoBehaviour
                 //then setup context later when bunny owns it
                 _ElevatorDoors.OpenDoors();
                 IsAllowKeypad = true;
-                CheckFloorStatusUponArrival();
+
                 break;
 
             case GameEnums.GameSequenceType.ReachedFloor:
-                CheckFloorStatusUponArrival();
+#if DebugOn
+                print("reachedfloor");
+#endif
+
                 _ElevatorDoors.OpenDoors();
                 break;
 
             case GameEnums.GameSequenceType.DoorsOppned:
-                //moveme down 
-                // _curDweller.AnimTrigger(GameEnums.DwellerAnimTrigger.TrigHello);
-                //_bellHop.AnimTrigger(GameEnums.DwellerAnimTrigger.TrigWave1);
-                //_bellHop.Animateturn();
-                //if (firstTime)
-                //{
-                //    _ContextItem = _curDeliveryItem;
-                //    firstTime = false;
-                //    // _curDweller.AnimateToss();
+#if DebugOn
+                print("doorsOpened");
+#endif
 
-                //    //if (_bellHop.GetMyRightHandHold().GetChild(0) == null)
-                //    //{
-
-
-                //    //}
-                //}
-                //else
-                //{
-                //    if (_GOODFLOOR)
-                //    {
-                //        _bellHop.AnimateToss();
-                //    }
-                //    else
-                //    {
-
-                //    }
-
-
-                //}
-
-
+                CheckFloorStatusUponArrival();
 
                 break;
 
 
             case GameEnums.GameSequenceType.FloorActionsFinished:
+#if DebugOn
+                print("action floor finished");
+#endif
                 break;
 
 
@@ -105,6 +84,9 @@ public class GameFlowManager : MonoBehaviour
             //    break;
 
             case GameEnums.GameSequenceType.DoorsClosed:
+#if DebugOn
+                print("here");
+#endif
                 _bellHop.Animateturn();
                 _floorsmngr.UpdateCurFloorDest(_requestedFloor);
                 break;
@@ -124,11 +106,22 @@ public class GameFlowManager : MonoBehaviour
         _requestedFloor = x;
 
     }
+
     #endregion
+
+
     bool _GOODFLOOR = false;
+    bool FirstTime = true;
     //is called when 
     void CheckFloorStatusUponArrival()
     {
+        if (FirstTime)
+        {
+            DoInitialDeliveryRequest();
+            firstTime = false;
+            return;
+        }
+
         if (_ContextItem.IsMyOwner(_curDweller))
         {
 #if DebugOn
@@ -136,7 +129,7 @@ public class GameFlowManager : MonoBehaviour
 #endif
             _GOODFLOOR = true;
 
-            _NamedActionsController.ReInitContextObjectsOnArrivalTOFloor(_bellHop, _curDweller, _ContextItem);
+            _NamedActionsController.InitContextItems_FOR_BunnyMAkseAdelivery(_bellHop, _curDweller, _ContextItem);
         }
         else
         {
@@ -144,7 +137,7 @@ public class GameFlowManager : MonoBehaviour
             Debug.Log("nay");
 #endif
             _GOODFLOOR = false;
-            _NamedActionsController.ReInitContextObjectsOnArrivalTOFloor(_bellHop, _curDweller, _ContextItem);
+            _NamedActionsController.InitContextItems_FOR_dwellerTossToBunny(_bellHop, _curDweller, _ContextItem);
         }
 
 
@@ -175,6 +168,12 @@ public class GameFlowManager : MonoBehaviour
         //_curDweller.AnimateToss();
 
     }
+
+    void DoInitialDeliveryRequest()
+    {
+        _NamedActionsController.InitContextItems_FOR_dwellerTossToBunny(_bellHop, _curDweller, _ContextItem);
+    }
+
 
     [SerializeField]
     DwellerMeshComposer _curDweller;
@@ -239,7 +238,16 @@ public class GameFlowManager : MonoBehaviour
     void ActionAllowInput() { }
 
 
-    float speed = 2.0F;
+
+
+
+
+}
+
+
+
+/*
+  float speed = 2.0F;
 
     // Time when the movement started.
     private float startTime;
@@ -320,11 +328,7 @@ public class GameFlowManager : MonoBehaviour
         argDeliveryItem.transform.parent = endMarker;
     }
 
-
-
-
-}
-
+ */
 
 /*  
  

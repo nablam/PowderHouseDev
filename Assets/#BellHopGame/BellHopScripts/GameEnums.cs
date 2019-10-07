@@ -235,7 +235,14 @@
         ReachedFloor,
         DoorsOppned,
 
+        AnalyzeFloorFinished,
+
+        CorrectFloor,
+
+
+
         FloorActionsFinished,
+
 
         //DwellerReactionFinished,
         //  BunnyReleasedObject,
@@ -243,6 +250,7 @@
         // DwellerReleaseObject,
         // DwellerCaughtObject,
         //BunnyReactionEnd,
+
 
 
         PlayerInputs,
@@ -263,6 +271,15 @@
 
     }
 
+
+    public enum TaskSequenceType
+    {
+
+        //InitialHAndoffToDweller,
+        Dweller_toss_Bunny,
+        Bunny_tossDweller,
+        CutScene
+    }
     //public enum DwellerAnimTrigger
     //{
     //    TrigToss,
