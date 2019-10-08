@@ -127,7 +127,7 @@ ModelImporter:
     - serializedVersion: 16
       name: 111_11|get.up.from.chair
       takeName: 111_11
-      firstFrame: 0
+      firstFrame: 14
       lastFrame: 114
       wrapMode: 0
       orientationOffsetY: 0
@@ -137,13 +137,13 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
+      keepOriginalPositionY: 0
       keepOriginalPositionXZ: 0
-      heightFromFeet: 0
+      heightFromFeet: 1
       mirror: 0
       bodyMask: 0100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []

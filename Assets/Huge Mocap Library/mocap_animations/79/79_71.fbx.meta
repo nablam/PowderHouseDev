@@ -127,8 +127,8 @@ ModelImporter:
     - serializedVersion: 16
       name: 79_71|sad
       takeName: 79_71
-      firstFrame: 0
-      lastFrame: 215
+      firstFrame: 12
+      lastFrame: 207
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -322,11 +322,11 @@ ModelImporter:
     - boneName: rForeArm
       humanName: RightLowerArm
       limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
+        min: {x: -90, y: 0, z: 0}
+        max: {x: 90, y: 0, z: 62.545456}
         value: {x: 0, y: 0, z: 0}
         length: 0
-        modified: 0
+        modified: 1
     - boneName: lHand
       humanName: LeftHand
       limit:
