@@ -127,7 +127,7 @@ ModelImporter:
     - serializedVersion: 16
       name: 55_12|dancing.bear.(human.subject)
       takeName: 55_12
-      firstFrame: 0
+      firstFrame: 1
       lastFrame: 414
       wrapMode: 0
       orientationOffsetY: 0

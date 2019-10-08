@@ -127,7 +127,7 @@ ModelImporter:
     - serializedVersion: 16
       name: 55_20|hippo.ballerina.(human.subject)
       takeName: 55_20
-      firstFrame: 0
+      firstFrame: 76
       lastFrame: 919
       wrapMode: 0
       orientationOffsetY: 0
