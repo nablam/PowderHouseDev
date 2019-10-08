@@ -87,10 +87,16 @@ public class NamedActionsController : MonoBehaviour
     {
 
         BHG_Task DwellerSayHi = new BHG_Task(GameSettings.Instance.Wave1, MyDweller, MyContextItem);
-        //  BHG_Task BunnyTurn = new BHG_Task(GameSettings.Instance.Wave2, MyBunny, MyContextItem);
+        BHG_Task BunnyTurn = new BHG_Task(GameSettings.Instance.Turn, MyBunny, MyContextItem);
         BHG_Task DwellerToss = new BHG_Task(GameSettings.Instance.Toss, MyDweller, MyContextItem);
+        BHG_Task BunnyCatch1 = new BHG_Task(GameSettings.Instance.Catch1, MyBunny, MyContextItem);
+        BHG_Task BunnyUnTurn = new BHG_Task(GameSettings.Instance.UnTurn, MyBunny, MyContextItem);
+        taskSystem.AddTask(BunnyTurn);
         taskSystem.AddTask(DwellerSayHi);
         taskSystem.AddTask(DwellerToss);
+        //taskSystem.AddTask(BunnyCatch1);
+        taskSystem.AddTask(BunnyUnTurn);
+        taskSystem.AddTask(BunnyUnTurn);
     }
     void MAkeBunnyTossDweller()
     {
@@ -104,49 +110,37 @@ public class NamedActionsController : MonoBehaviour
         taskSystem.AddTask(BunnyToss);
         taskSystem.AddTask(DwellerSayHEllo);
     }
-    public void InitForCutScene(ICharacterAnim argBunny, ICharacterAnim argDweller, DeliveryItem argContextItem)
+    public void InitActionCTRL(GameEnums.TaskSequenceType argSequenceType, ICharacterAnim argBunny, ICharacterAnim argDweller, DeliveryItem argContextItem)
     {
-        _CurSequenceType = GameEnums.TaskSequenceType.CutScene;
+        _CurSequenceType = argSequenceType;
         MyBunny = argBunny;
         MyDweller = argDweller;
         MyContextItem = argContextItem;
-        _tempdwellertemp = argDweller.TemMyGO();
-        _tempBunnyObj = argBunny.TemMyGO();
-        MAkeTasks();
-        TheCallBackAfterAnimStetends();
+        if (_CurSequenceType == GameEnums.TaskSequenceType.CutScene)
+        {
+            MAkeTasks();
+            TheCallBackAfterAnimStetends();
+        }
+        else
+            if (_CurSequenceType == GameEnums.TaskSequenceType.Dweller_toss_Bunny)
+        {
+            MAkeDweller_toss_Bunny();
+            BHG_Task task = taskSystem.RequestNextTask();
+            if (task != null)
+                ExecuteTask(task);
+        }
+        else
+            if (_CurSequenceType == GameEnums.TaskSequenceType.Bunny_tossDweller)
+        {
+            MAkeBunnyTossDweller();
+            // TheCallBackAfterAnimStetends();
+            BHG_Task task = taskSystem.RequestNextTask();
+            if (task != null)
+                ExecuteTask(task);
+        }
     }
 
 
-    public void InitContextItems_FOR_dwellerTossToBunny(ICharacterAnim argBunny, ICharacterAnim argDweller, DeliveryItem argContextItem)
-    {
-        _CurSequenceType = GameEnums.TaskSequenceType.Dweller_toss_Bunny;
-        MyBunny = argBunny;
-        MyDweller = argDweller;
-        MyContextItem = argContextItem;
-        _tempdwellertemp = argDweller.TemMyGO();
-        _tempBunnyObj = argBunny.TemMyGO();
-        MAkeDweller_toss_Bunny();
-        // TheCallBackAfterAnimStetends();
-        BHG_Task task = taskSystem.RequestNextTask();
-        if (task != null)
-            ExecuteTask(task);
-
-    }
-
-    public void InitContextItems_FOR_BunnyMAkseAdelivery(ICharacterAnim argBunny, ICharacterAnim argDweller, DeliveryItem argContextItem)
-    {
-        _CurSequenceType = GameEnums.TaskSequenceType.Bunny_tossDweller;
-        MyBunny = argBunny;
-        MyDweller = argDweller;
-        MyContextItem = argContextItem;
-        _tempdwellertemp = argDweller.TemMyGO();
-        _tempBunnyObj = argBunny.TemMyGO();
-        MAkeBunnyTossDweller();
-        // TheCallBackAfterAnimStetends();
-        BHG_Task task = taskSystem.RequestNextTask();
-        if (task != null)
-            ExecuteTask(task);
-    }
 
 
     int curActionIndex = 0;
@@ -195,18 +189,21 @@ public class NamedActionsController : MonoBehaviour
         if (_CurSequenceType == GameEnums.TaskSequenceType.Bunny_tossDweller)
         {
             //MoveTO(taskSystem.getCurTak().TheContextItem, taskSystem.getCurTak().TheContextItem)
-            tempSTART = _myIbunny.GetMyRightHandHold();
-            tempEND = _myIDweller.GetMyRightHandHold();
+            tempSTART = MyBunny.GetMyRightHandHold();
+            tempEND = MyDweller.GetMyRightHandHold();
+            //  MoveTO(MyContextItem, tempSTART, tempEND);
         }
         else
               if (_CurSequenceType == GameEnums.TaskSequenceType.Dweller_toss_Bunny)
         {
 
 
-            tempSTART = _myIDweller.GetMyRightHandHold();
-            tempEND = _myIbunny.GetMyRightHandHold();
-            //  MoveTO(MyContextItem, tempstartMarker, tempendMarker);
+            tempSTART = MyDweller.GetMyRightHandHold();
+            tempEND = MyBunny.GetMyRightHandHold();
+            //  MoveTO(MyContextItem, tempSTART, tempEND);
         }
+
+        MoveTO(MyContextItem, tempSTART, tempEND);
 
 
 
@@ -270,10 +267,10 @@ public class NamedActionsController : MonoBehaviour
 
     public void MoveTO(DeliveryItem argItem, Transform startMarker, Transform endMarker)
     {
-        if (argItem.transform.parent != null)
-        {
-            argItem.transform.parent = null;
-        }
+        // if (argItem.transform.parent != null)
+        //  {
+        argItem.transform.parent = null;
+        // }
 
         journeyLength = 10000000;
         startTime = Time.time;
@@ -320,7 +317,8 @@ public class NamedActionsController : MonoBehaviour
                 if (!catcherTriggered)
                 {
                     Debug.Log("hey catch reflex NOW");
-                    endMarker.gameObject.GetComponentInParent<ICharacterAnim>().AnimateCatch(JustTellMeSomthinAfterHEardMid__CAtch);
+                    endMarker.gameObject.GetComponentInParent<ICharacterAnim>().AnimTrigger(GameSettings.Instance.Catch1);
+                    //endMarker.gameObject.GetComponentInParent<ICharacterAnim>().AnimateCatch(JustTellMeSomthinAfterHEardMid__CAtch);
                     catcherTriggered = true;
                 }
             }
@@ -331,11 +329,18 @@ public class NamedActionsController : MonoBehaviour
 
 
 
+
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
         Debug.Log("ReachedDestination");
         argDeliveryItem.transform.parent = endMarker;
+        endMarker.gameObject.GetComponentInParent<ICharacterAnim>().AnimTrigger(GameSettings.Instance.Catch2);
+
+        //BHG_Task task = taskSystem.RequestNextTask();
+        //if (task != null)
+        //    ExecuteTask(task);
+
     }
 
     void JustTellMeSomthinAfterHEardMid__CAtch()

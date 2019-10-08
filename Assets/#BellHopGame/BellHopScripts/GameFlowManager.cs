@@ -52,6 +52,7 @@ public class GameFlowManager : MonoBehaviour
 #if DebugOn
                 print("reachedfloor");
 #endif
+                _curDweller = _floorsmngr.GetCurFloorDweller();
 
                 _ElevatorDoors.OpenDoors();
                 break;
@@ -115,32 +116,36 @@ public class GameFlowManager : MonoBehaviour
     //is called when 
     void CheckFloorStatusUponArrival()
     {
+
         if (FirstTime)
         {
-            DoInitialDeliveryRequest();
+            _NamedActionsController.InitActionCTRL(GameEnums.TaskSequenceType.Dweller_toss_Bunny, _bellHop, _curDweller, _ContextItem);
             firstTime = false;
-            return;
-        }
 
-        if (_ContextItem.IsMyOwner(_curDweller))
-        {
-#if DebugOn
-            Debug.Log("YAYA");
-#endif
-            _GOODFLOOR = true;
-
-            _NamedActionsController.InitContextItems_FOR_BunnyMAkseAdelivery(_bellHop, _curDweller, _ContextItem);
         }
         else
         {
+
+
+            if (_ContextItem.IsMyOwner(_curDweller))
+            {
 #if DebugOn
-            Debug.Log("nay");
+                Debug.Log("YAYA");
 #endif
-            _GOODFLOOR = false;
-            _NamedActionsController.InitContextItems_FOR_dwellerTossToBunny(_bellHop, _curDweller, _ContextItem);
+                _GOODFLOOR = true;
+
+                _NamedActionsController.InitActionCTRL(GameEnums.TaskSequenceType.Bunny_tossDweller, _bellHop, _curDweller, _ContextItem);
+            }
+            else
+            {
+#if DebugOn
+                Debug.Log("nay");
+#endif
+                _GOODFLOOR = false;
+                _NamedActionsController.InitActionCTRL(GameEnums.TaskSequenceType.CutScene, _bellHop, _curDweller, _ContextItem);
+            }
+
         }
-
-
         //_curDeliveryItem = null;
 
         //if (_curDeliveryItem.IsMyOwner(_curDweller))
@@ -169,10 +174,7 @@ public class GameFlowManager : MonoBehaviour
 
     }
 
-    void DoInitialDeliveryRequest()
-    {
-        _NamedActionsController.InitContextItems_FOR_dwellerTossToBunny(_bellHop, _curDweller, _ContextItem);
-    }
+
 
 
     [SerializeField]
@@ -238,9 +240,10 @@ public class GameFlowManager : MonoBehaviour
     void ActionAllowInput() { }
 
 
+    public Vector3 GEt_DwellerPos() { return _floorsmngr.GetCurFloorDweller().transform.position; }
 
 
-
+    public Vector3 GEt_BEllhopPos() { return _bellHop.transform.position; }
 
 }
 

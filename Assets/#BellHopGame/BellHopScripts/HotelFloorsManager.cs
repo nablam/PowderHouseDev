@@ -23,6 +23,8 @@ public class HotelFloorsManager : MonoBehaviour
         if (x >= _floors.Count) { Debug.LogError("HotelFloorsManager: floor index out of range"); return; }
         _curfloor = _floors[x];
         camPov.SetNextPos(_curfloor.BaseCamPos.transform);
+
+
     }
     #endregion
 

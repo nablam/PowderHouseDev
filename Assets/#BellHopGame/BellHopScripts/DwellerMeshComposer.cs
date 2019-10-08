@@ -1,4 +1,4 @@
-﻿#define DebugOn
+﻿//define DebugOn
 
 using System;
 using UnityEngine;
@@ -415,11 +415,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
 
 
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
 
     public DeliveryItem GetInitialDeliveryItem()
     {
@@ -445,6 +441,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
         _CurHeldObject = argItemInHand;
         _CurHeldObject.transform.position = new Vector3(RightHandHoldPos.position.x, RightHandHoldPos.position.y, RightHandHoldPos.position.z);
         _CurHeldObject.transform.parent = RightHandHoldPos.transform;
+        OriginalRot = transform.rotation;
     }
 
     public DwellerMeshComposer GetMyHeldObjectDestination()
@@ -561,5 +558,23 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     //    throw new NotImplementedException();
     //}
     #endregion
+    Quaternion OriginalRot;
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            Quaternion currentRotation = transform.rotation;
+            Quaternion wantedRotation = Quaternion.Euler(0, 0, 90);
+            transform.rotation = Quaternion.RotateTowards(currentRotation, wantedRotation, Time.deltaTime * 20f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            Quaternion currentRotation = transform.rotation;
+            Quaternion wantedRotation = OriginalRot; // Quaternion.Euler(0, 0, 90);
+            transform.rotation = Quaternion.RotateTowards(currentRotation, wantedRotation, Time.deltaTime * 20f);
+        }
+    }
+
 }
 

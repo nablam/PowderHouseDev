@@ -1,4 +1,4 @@
-﻿#define DebugOn
+﻿//#define DebugOn
 using System;
 using UnityEngine;
 
@@ -20,6 +20,7 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
     bool _isEmptyHanded;
     public bool IsEmptyHAnded() { return this._isEmptyHanded; }
     GameObject _CurHeldObject = null;
+    Quaternion OriginalRot;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,10 +32,96 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
         _isEmptyHanded = true;
         // UpdateHeldObject("None");
         _HeldObject = GameEnums.StoryObjects.aaNone;
+        OriginalRot = this.transform.rotation;
     }
-
+    Quaternion RotationFaceScreen = Quaternion.Euler(0, 180, 0);
+    Quaternion Rotation_faceDweller = Quaternion.Euler(0, 330f, 0);
+    Quaternion Rotation_faceBunny = Quaternion.Euler(0, 160f, 0);
+    bool ClockWeis = true;
+    bool reachedWantedRot = false;
+    float timeT;
     void Update()
     {
+
+
+
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            ClockWeis = !ClockWeis;
+            //Quaternion currentRotation = transform.rotation;
+            reachedWantedRot = false;
+            timeT = Time.time;
+        }
+
+        if (ClockWeis)
+        {
+
+
+            if (!reachedWantedRot)
+            {
+
+
+                Vector3 relativePos = GameFlowManager.Instance.GEt_DwellerPos() - transform.position;
+                Quaternion toRotation = Quaternion.LookRotation(relativePos);
+                transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, 2 * Time.deltaTime);
+
+
+                //timeT += Time.deltaTime;
+                // transform.rotation = Quaternion.Lerp(RotationFaceScreen, Rotation_faceDweller, timeT * 0.5f);
+                float angle = Quaternion.Angle(transform.rotation, toRotation);
+
+
+
+                if (angle < 5f)
+                {
+                    Debug.Log("Reached Rot dwell");
+                    reachedWantedRot = true;
+                }
+
+
+            }
+
+
+        }
+        else
+        {
+
+
+            if (!reachedWantedRot)
+            {
+                // timeT += Time.deltaTime;
+                // transform.rotation = Quaternion.Lerp(Rotation_faceDweller, RotationFaceScreen, timeT * 0.5f);
+                Vector3 relativePos = new Vector3(Camera.main.transform.position.x, transform.position.y, Camera.main.transform.position.z) - transform.position;
+                Quaternion toRotation = Quaternion.LookRotation(relativePos);
+                transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, 2 * Time.deltaTime);
+                float angle = Quaternion.Angle(transform.rotation, toRotation);
+
+
+
+                if (angle < 3f)
+                {
+                    Debug.Log("Reached Rot screen");
+                    reachedWantedRot = true;
+                }
+
+
+            }
+
+
+            // Quaternion wantedRotation = Quaternion.Euler(0, 0, 0);
+            //transform.rotation = Quaternion.RotateTowards(currentRotation, wantedRotation, Time.deltaTime * 20f);
+            //  transform.rotation = Quaternion.Lerp(t, OriginalRot, Time.time * 0.2f);
+        }
+
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    Quaternion currentRotation = transform.rotation;
+        //    Quaternion wantedRotation = OriginalRot; // Quaternion.Euler(0, 0, 90);
+        //    transform.rotation = Quaternion.RotateTowards(currentRotation, wantedRotation, Time.deltaTime * 20f);
+        //}
+
+
         //if (Input.GetKeyDown(KeyCode.T))
         //{
         //    AnimateToss();
@@ -135,7 +222,7 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
 
     public void AnimTrigger(string argTrig)
     {
-        print("sanitycheck Bunny anim " + "Trig" + argTrig);
+        // print("sanitycheck Bunny anim " + "Trig" + argTrig);
         _MyAnimator.SetTrigger("Trig" + argTrig);
     }
 
