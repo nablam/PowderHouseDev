@@ -25,4 +25,5 @@ public interface ICharacterAnim
     void NotifyMeWheanAnimationStateExit();
     GameObject TemMyGO();
 
+    void SpecialSequenceFinished();
 }

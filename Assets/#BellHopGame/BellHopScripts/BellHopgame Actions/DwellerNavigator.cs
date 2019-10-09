@@ -4,23 +4,22 @@ using UnityStandardAssets.Characters.ThirdPerson;
 public class DwellerNavigator : MonoBehaviour
 {
     [SerializeField]
-    GameObject[] waypoints;
+    DwellerTarget[] waypoints;
     int ptr = 0;
     Transform target;
     ThirdPersonCharacter character;
     public Animator anim;
 
 
-    public bool test;
+
     void Start()
     {
         anim = GetComponent<Animator>();
         character = GetComponent<ThirdPersonCharacter>();
-        waypoints = GameObject.FindGameObjectsWithTag("Finish");
-        target = waypoints[0].transform;
 
 
-        act = Lookdir_Dividedby10;
+
+        //act = Lookdir_Dividedby10;
         animname = "Run";
     }
 
@@ -30,33 +29,52 @@ public class DwellerNavigator : MonoBehaviour
     Action<string, int> act1;
     string animname;
     // Update is called once per frame
-    void Update()
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Alpha1))
+    //    {
+    //        Debug.Log("1 ");
+    //        animname = "Run";
+
+
+
+    //    }
+    //    else
+    //          if (Input.GetKeyDown(KeyCode.Alpha2))
+    //    {
+    //        Debug.Log("2");
+    //        animname = "Idle";
+
+
+    //    }
+
+    //    anim.PlayInFixedTime(animname, 0);
+    //}
+
+
+
+
+
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (other.CompareTag("Finish"))
         {
-            Debug.Log("1 ");
-            animname = "Run";
-
-
+            ptr++;
+            if (ptr >= waypoints.Length)
+            {
+                ptr = 0;
+            }
+            target = waypoints[ptr].transform;
 
         }
-        else
-              if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            Debug.Log("2");
-            animname = "Idle";
-
-
-        }
-
-        anim.PlayInFixedTime(animname, 0);
     }
+}
 
-
-
-
-
-    void NotTest()
+/*
+ * 
+ * 
+     void NotTest()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -122,17 +140,4 @@ if (Input.GetKeyDown(KeyCode.Alpha5))
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Finish"))
-        {
-            ptr++;
-            if (ptr >= waypoints.Length)
-            {
-                ptr = 0;
-            }
-            target = waypoints[ptr].transform;
-
-        }
-    }
-}
+     */

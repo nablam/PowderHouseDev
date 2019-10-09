@@ -548,6 +548,12 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
         return this.gameObject;
     }
 
+
+    public void SpecialSequenceFinished()
+    {
+        Dweller3rdPerson d3rd = GetComponent<Dweller3rdPerson>();
+        d3rd.SpecialDoeWasDone();
+    }
     //public void TossPeack()
     //{
     //    throw new NotImplementedException();

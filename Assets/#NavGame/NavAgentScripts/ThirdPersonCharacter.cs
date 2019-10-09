@@ -31,8 +31,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         bool m_Crouching;
 
 
-        void Start()
+        public void Start()
         {
+            print("base.Start");
             m_Animator = GetComponent<Animator>();
             m_Rigidbody = GetComponent<Rigidbody>();
             m_Capsule = GetComponent<CapsuleCollider>();

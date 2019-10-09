@@ -247,4 +247,9 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
     {
         return this.gameObject;
     }
+
+    public void SpecialSequenceFinished()
+    {
+        throw new NotImplementedException();
+    }
 }
