@@ -10,6 +10,9 @@ public class Dweller3rdPerson : ThirdPersonCharacter
     int ptr = 0;
     Transform target;
     bool DoMove = true;
+
+    string[] AnimStr = new string[13];
+    public Material SpecMat;
     void Init()
     {
         //print("init");
@@ -19,15 +22,34 @@ public class Dweller3rdPerson : ThirdPersonCharacter
         {
             waypoints[x].TargId = x;
             waypoints[x].IsNavTarget = true;
+            waypoints[x].AnimToPlay = AnimStr[x];
             TRANSs[x] = waypoints[x].transform;
         }
 
         waypoints[2].IsNavTarget = false;
+        waypoints[2].gameObject.GetComponent<Renderer>().material = SpecMat;
+        waypoints[5].IsNavTarget = false;
+        waypoints[5].gameObject.GetComponent<Renderer>().material = SpecMat;
+        waypoints[7].IsNavTarget = false;
+        waypoints[7].gameObject.GetComponent<Renderer>().material = SpecMat;
         target = waypoints[0].transform;
     }
 
     private new void Start()
     {
+        AnimStr[0] = GameSettings.Instance.Palmpilot;
+        AnimStr[1] = GameSettings.Instance.Investigateground;
+        AnimStr[2] = GameSettings.Instance.Searchground;
+        AnimStr[3] = GameSettings.Instance.Answerphone;
+        AnimStr[4] = GameSettings.Instance.Slicebread;
+        AnimStr[5] = GameSettings.Instance.Typelaptop;
+        AnimStr[6] = GameSettings.Instance.Raking;
+        AnimStr[7] = GameSettings.Instance.Shaving;
+        AnimStr[8] = GameSettings.Instance.Cutonion;
+        AnimStr[9] = GameSettings.Instance.Eatsandwich;
+        AnimStr[10] = GameSettings.Instance.Playpiano;
+        AnimStr[11] = GameSettings.Instance.Dialphone;
+        AnimStr[12] = GameSettings.Instance.Brushteeth;
         Init();
         base.Start();
     }
@@ -37,7 +59,8 @@ public class Dweller3rdPerson : ThirdPersonCharacter
         if (!DoMove) return;
         Vector3 lookdir = target.position - transform.position;
 
-        Move(lookdir.normalized / 2.5f, false, false);
+        //Move(lookdir.normalized / 2.5f, false, false);
+        Move(lookdir.normalized, false, false);
     }
 
     public new void Move(Vector3 move, bool crouch, bool jump)
@@ -66,7 +89,7 @@ public class Dweller3rdPerson : ThirdPersonCharacter
 
                 {
 
-                    StartCoroutine(DoTheAnim());
+                    StartCoroutine(DoTheAnim(t.AnimToPlay));
 
                 }
 
@@ -97,17 +120,17 @@ public class Dweller3rdPerson : ThirdPersonCharacter
 
         DoMove = true;
     }
-    IEnumerator DoTheAnim()
+    IEnumerator DoTheAnim(string arganimname)
     {
 
         DoMove = false;
-        Get_myAnimator().Play("Run");
+        Get_myAnimator().Play(arganimname);
 
 
 
 
         //float lengthofClip = Get_myAnimator().GetNextAnimatorStateInfo(0).length;
-        Debug.Log("LEN ");
+        //Debug.Log("LEN ");
         yield return null;
 
 

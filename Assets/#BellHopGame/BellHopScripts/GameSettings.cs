@@ -71,6 +71,21 @@ public class GameSettings : MonoBehaviour
     string _openDoors = "OpenDoors"; //TODO: currently implemented separately
     string _closeDoors = "CloseDoors";//TODO: currently implemented separately
     string _moveElevator = "MoveElevator";//TODO: currently implemented separately according to old FLowElements
+
+    string _palmpilot = "Palmpilot";
+    string _investigateground = "Investigateground";
+    string _searchground = "Searchground";
+    string _answerphone = "Answerphone";
+    string _slicebread = "Slicebread";
+    string _typelaptop = "Typelaptop";
+    string _raking = "Raking";
+    string _shaving = "Shaving";
+    string _cutonion = "Cutonion";
+    string _eatsandwich = "Eatsandwich";
+    string _playpiano = "Playpiano";
+    string _dialphone = "Dialphone";
+    string _brushteeth = "Brushteeth";
+
     public string Toss { get => _toss; set => _toss = value; }
     public string Catch { get => _catch; set => _catch = value; }
     public string Catch1 { get => _catch1; set => _catch1 = value; }
@@ -91,10 +106,25 @@ public class GameSettings : MonoBehaviour
     public string OpenDoors { get => _openDoors; set => _openDoors = value; }
     public string CloseDoors { get => _closeDoors; set => _closeDoors = value; }
     public string MoveElevator { get => _moveElevator; set => _moveElevator = value; }
+
+    public string Palmpilot { get => _palmpilot; set => _palmpilot = value; }
+    public string Investigateground { get => _investigateground; set => _investigateground = value; }
+    public string Searchground { get => _searchground; set => _searchground = value; }
+    public string Answerphone { get => _answerphone; set => _answerphone = value; }
+    public string Slicebread { get => _slicebread; set => _slicebread = value; }
+    public string Typelaptop { get => _typelaptop; set => _typelaptop = value; }
+    public string Raking { get => _raking; set => _raking = value; }
+    public string Shaving { get => _shaving; set => _shaving = value; }
+    public string Cutonion { get => _cutonion; set => _cutonion = value; }
+    public string Eatsandwich { get => _eatsandwich; set => _eatsandwich = value; }
+    public string Playpiano { get => _playpiano; set => _playpiano = value; }
+    public string Dialphone { get => _dialphone; set => _dialphone = value; }
+    public string Brushteeth { get => _brushteeth; set => _brushteeth = value; }
     #endregion
 
     int _master_Number_of_Floors;
     public int Master_Number_of_Floors { get => _master_Number_of_Floors; set => _master_Number_of_Floors = value; }
+
 
 
     //we only have 9 animals right now , we can create 18 animals male/female. lets keep the max at a power of 2 for now 
