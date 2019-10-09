@@ -561,19 +561,19 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     Quaternion OriginalRot;
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            Quaternion currentRotation = transform.rotation;
-            Quaternion wantedRotation = Quaternion.Euler(0, 0, 90);
-            transform.rotation = Quaternion.RotateTowards(currentRotation, wantedRotation, Time.deltaTime * 20f);
-        }
+        //if (Input.GetKeyDown(KeyCode.W))
+        //{
+        //    Quaternion currentRotation = transform.rotation;
+        //    Quaternion wantedRotation = Quaternion.Euler(0, 0, 90);
+        //    transform.rotation = Quaternion.RotateTowards(currentRotation, wantedRotation, Time.deltaTime * 20f);
+        //}
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            Quaternion currentRotation = transform.rotation;
-            Quaternion wantedRotation = OriginalRot; // Quaternion.Euler(0, 0, 90);
-            transform.rotation = Quaternion.RotateTowards(currentRotation, wantedRotation, Time.deltaTime * 20f);
-        }
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    Quaternion currentRotation = transform.rotation;
+        //    Quaternion wantedRotation = OriginalRot; // Quaternion.Euler(0, 0, 90);
+        //    transform.rotation = Quaternion.RotateTowards(currentRotation, wantedRotation, Time.deltaTime * 20f);
+        //}
     }
 
 }
