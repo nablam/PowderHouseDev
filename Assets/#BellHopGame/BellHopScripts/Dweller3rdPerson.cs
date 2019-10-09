@@ -26,12 +26,15 @@ public class Dweller3rdPerson : ThirdPersonCharacter
             TRANSs[x] = waypoints[x].transform;
         }
 
-        waypoints[2].IsNavTarget = false;
-        waypoints[2].gameObject.GetComponent<Renderer>().material = SpecMat;
-        waypoints[5].IsNavTarget = false;
-        waypoints[5].gameObject.GetComponent<Renderer>().material = SpecMat;
-        waypoints[7].IsNavTarget = false;
-        waypoints[7].gameObject.GetComponent<Renderer>().material = SpecMat;
+        waypoints[0].IsNavTarget = false;
+        waypoints[0].gameObject.GetComponent<Renderer>().material = SpecMat;
+        waypoints[0].AnimToPlay = AnimStr[7];
+        waypoints[1].IsNavTarget = false;
+        waypoints[1].gameObject.GetComponent<Renderer>().material = SpecMat;
+        waypoints[1].AnimToPlay = AnimStr[9];
+        waypoints[3].IsNavTarget = false;
+        waypoints[3].gameObject.GetComponent<Renderer>().material = SpecMat;
+        waypoints[3].AnimToPlay = AnimStr[12];
         target = waypoints[0].transform;
     }
 
@@ -56,7 +59,7 @@ public class Dweller3rdPerson : ThirdPersonCharacter
 
     void Update()
     {
-        if (!DoMove) return;
+        if (!DoMove || target == null) return;
         Vector3 lookdir = target.position - transform.position;
 
         //Move(lookdir.normalized / 2.5f, false, false);
