@@ -59,7 +59,12 @@ public class Dweller3rdPerson : ThirdPersonCharacter
 
     void Update()
     {
-        if (!DoMove || target == null) return;
+        if (!DoMove || target == null)
+        {
+            Move(Vector3.zero, false, false);
+
+            return;
+        }
         Vector3 lookdir = target.position - transform.position;
 
         //Move(lookdir.normalized / 2.5f, false, false);
