@@ -586,6 +586,11 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
         //}
     }
 
+    public void AgentMustSetTarget(Transform artT)
+    {
+        _agent.Set_Destination(artT);
+    }
+
     public void WarpAgent(Transform artT)
     {
         _agent.WarpMe_to(artT);

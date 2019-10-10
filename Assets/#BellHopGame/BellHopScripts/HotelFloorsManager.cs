@@ -63,11 +63,11 @@ public class HotelFloorsManager : MonoBehaviour
         return _curfloor;
     }
 
-    public void WarpAll()
+    public void InitALLagents()
     {
         foreach (HotelFloor hf in _floors)
         {
-            hf.WarpInit();
+            hf.InitDwellerAgentNowIGuess();
         }
 
     }

@@ -263,4 +263,10 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
         throw new NotImplementedException();
     }
 
+    public void AgentMustSetTarget(Transform artT)
+    {
+        throw new NotImplementedException();
+    }
+
+
 }

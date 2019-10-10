@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public class SceneBuilder : MonoBehaviour
@@ -113,14 +114,20 @@ public class SceneBuilder : MonoBehaviour
 
     public List<string> tl = new List<string>();
 
-    private void Awake()
-    {
-        _gs = GameSettings.Instance;
-        if (_gs == null) { Debug.LogError("SceneBuilder: No GameSettings in scene!"); }
-    }
+    //private void Awake()
+    //{
+    //    _gs = GameSettings.Instance;
+    //    if (_gs == null) { Debug.LogError("SceneBuilder: No GameSettings in scene!"); }
+    //}
     // Start is called before the first frame update
     void Start()
+
     {
+
+        _gs = GameSettings.Instance;
+        if (_gs == null) { Debug.LogError("SceneBuilder: No GameSettings in scene!"); }
+
+
         Dict_BoyNames = new Dictionary<char, List<string>>();
         Dict_GirlNames = new Dictionary<char, List<string>>();
         Dict_ItemNames = new Dictionary<char, List<string>>();
@@ -277,6 +284,7 @@ public class SceneBuilder : MonoBehaviour
 
 
             GameObject Dweller = Instantiate(BaseAnimalRef, new Vector3(0, 0, 0), Quaternion.Euler(0, 180, 0));
+            Dweller.GetComponent<NavMeshAgent>().enabled = false;
             DwellerMeshComposer dmc = Dweller.GetComponent<DwellerMeshComposer>();
             dmc.Id = i;
 

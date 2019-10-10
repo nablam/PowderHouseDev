@@ -33,7 +33,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         public void Start()
         {
-            print("base.Start");
+
+
+            DwellerMeshComposer dm = GetComponent<DwellerMeshComposer>();
+            int i = dm.Id;
+            string n = dm.name;
+            print("base3rd.Start" + i + " " + n);
             m_Animator = GetComponent<Animator>();
             m_Rigidbody = GetComponent<Rigidbody>();
             m_Capsule = GetComponent<CapsuleCollider>();
