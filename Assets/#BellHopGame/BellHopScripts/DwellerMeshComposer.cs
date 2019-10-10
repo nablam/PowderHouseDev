@@ -2,6 +2,7 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
@@ -81,7 +82,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     GameObject ShirtPtr;
     GameObject PantsPtr;
 
-    DwellerNavAgentCTRL _agent;
+    //  DwellerNavAgentCTRL _agent;
 
     #region BodySetup
     Material GetMatByEnum(GameEnums.MatColors argMatcolor)
@@ -364,14 +365,22 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
 
     Animator _MyAnimator;
 
+
+    private void OnEnable()
+    {
+        Awake_agent();
+    }
+
     private void Awake()
     {
         BodyRenderer = Body.GetComponent<SkinnedMeshRenderer>();
-        _agent = GetComponent<DwellerNavAgentCTRL>();
+        // Awake_agent();
     }
     // Start is called before the first frame update
     void Start()
     {
+
+        agent.enabled = false;
         //HideHeads();
         //HideFeet();
         //HidePants();
@@ -584,22 +593,102 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
         //    Quaternion wantedRotation = OriginalRot; // Quaternion.Euler(0, 0, 90);
         //    transform.rotation = Quaternion.RotateTowards(currentRotation, wantedRotation, Time.deltaTime * 20f);
         //}
+
+
+        if (_walk)
+            USeAI();
     }
 
     public void AgentMustSetTarget(Transform artT)
     {
-        _agent.Set_Destination(artT);
+        Set_Destination(artT);
     }
 
     public void WarpAgent(Transform artT)
     {
-        _agent.WarpMe_to(artT);
+        WarpMe_to(artT);
     }
 
     public void MoveAgentTo(Transform artT)
     {
-        _agent.Set_Destination(artT);
-        _agent.DoWalk(true);
+        Set_Destination(artT);
+        DoWalk(true);
     }
+
+
+    NavMeshAgent agent;
+
+    Dweller3rdPerson character;
+    /*public*/
+    bool IsMecanim;
+    bool _walk;
+
+    private void Awake_agent()
+    {
+        agent = GetComponent<NavMeshAgent>();
+
+        character = GetComponent<Dweller3rdPerson>();
+
+        //  agent.enabled = false;
+    }
+
+    public void Start_Agent()
+    {
+
+        IsMecanim = true;
+
+        agent.enabled = true;
+        agent.enabled = true;
+        if (agent.isActiveAndEnabled)
+        {
+            print("ACTIVIA");
+        }
+        else
+            print("POOP");
+        DoWalk(false);
+
+        //rotation is done by animated character
+
+        if (IsMecanim)
+        {
+            agent.updateRotation = false;
+        }
+
+
+
+    }
+
+    public void DoWalk(bool argWalk)
+    {
+        _walk = argWalk;
+    }
+
+    void USeAI()
+    {
+
+
+        print("go");
+        if (agent.remainingDistance > agent.stoppingDistance)
+        {
+            character.Move(agent.desiredVelocity, false, false);
+        }
+        else //reached destination
+        {
+            character.Move(Vector3.zero, false, false);
+        }
+
+    }
+
+    public void Set_Destination(Transform argDest)
+    {
+
+        agent.SetDestination(argDest.position);
+    }
+
+    public void WarpMe_to(Transform argDest)
+    {
+        agent.Warp(argDest.position);
+    }
+
 }
 

@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public class SceneBuilder : MonoBehaviour
@@ -284,7 +283,7 @@ public class SceneBuilder : MonoBehaviour
 
 
             GameObject Dweller = Instantiate(BaseAnimalRef, new Vector3(0, 0, 0), Quaternion.Euler(0, 180, 0));
-            Dweller.GetComponent<NavMeshAgent>().enabled = false;
+
             DwellerMeshComposer dmc = Dweller.GetComponent<DwellerMeshComposer>();
             dmc.Id = i;
 

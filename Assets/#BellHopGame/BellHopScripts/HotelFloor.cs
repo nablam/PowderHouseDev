@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
 
 public class HotelFloor : MonoBehaviour
 {
@@ -64,10 +63,11 @@ public class HotelFloor : MonoBehaviour
     public void InitDwellerAgentNowIGuess()
     {
         print("agent init  " + FloorDweller.Id + " " + FloorDweller.name);
-        FloorDweller.gameObject.GetComponent<NavMeshAgent>().enabled = true;
+        //FloorDweller.gameObject.GetComponent<NavMeshAgent>().enabled = true;
+        FloorDweller.Start_Agent();
         FloorDweller.AgentMustSetTarget(TRAN_DoorStep);
         FloorDweller.WarpAgent(TRAN_DoorStep);
-        FloorDweller.AgentMustSetTarget(TRAN_DoorStep);
+
 
     }
 
@@ -81,9 +81,24 @@ public class HotelFloor : MonoBehaviour
         // FloorDweller.WarpAgent(TRAN_DoorStep);
     }
 
+    int cnt = 0;
     public void MoveNave_To()
     {
-        FloorDweller.MoveAgentTo(TRAN_DoorStep);
+
+        if (cnt == 0)
+        {
+            FloorDweller.MoveAgentTo(TRAN_SecondaryPos);
+        }
+        else
+            if (cnt == 1) { FloorDweller.MoveAgentTo(TRAN_DoorStep); }
+        else
+        if (cnt == 2) { FloorDweller.MoveAgentTo(TRAN_DoorStep); }
+
+
+        cnt++;
+
+        if (cnt > 2) cnt = 0;
+
     }
 
     public void ShowHideBArrier(bool argShow)

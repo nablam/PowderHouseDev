@@ -14562,11 +14562,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8594901792100752108, guid: bca4f785006a9eb4fa6c189eabbf2105,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 8594901792100752111, guid: bca4f785006a9eb4fa6c189eabbf2105,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14622,26 +14617,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5136518917686921715, guid: bca4f785006a9eb4fa6c189eabbf2105,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5136518917686921714, guid: bca4f785006a9eb4fa6c189eabbf2105,
-        type: 3}
-      propertyPath: m_UseGeometry
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5136518917686921714, guid: bca4f785006a9eb4fa6c189eabbf2105,
-        type: 3}
-      propertyPath: m_LayerMask.m_Bits
-      value: 1024
-      objectReference: {fileID: 0}
-    - target: {fileID: 5136518917686921714, guid: bca4f785006a9eb4fa6c189eabbf2105,
-        type: 3}
-      propertyPath: m_NavMeshData
-      value: 
-      objectReference: {fileID: 23800000, guid: 908d47c2285fb674ea3915a1ef1ade54,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bca4f785006a9eb4fa6c189eabbf2105, type: 3}

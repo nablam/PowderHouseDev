@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5136518917684780167}
   - component: {fileID: 5136518917688890457}
   - component: {fileID: 5136518917686921714}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5136518917686921715}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5.6, y: 1, z: 6.6}
+  m_LocalScale: {x: 6, y: 0.4, z: 6.6}
   m_Children: []
   m_Father: {fileID: 8594901792100752111}
   m_RootOrder: 0
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1024
   m_UseGeometry: 1
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: 23a32e4f9eebd4944b60844720baad92, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: ea4b459947c7dcf49a445f534ea9f60c, type: 2}
 --- !u!1 &8594901792100752108
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,7 +130,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8594901792100752111}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DynNavFloor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8594901792100752108}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

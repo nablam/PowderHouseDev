@@ -39,7 +39,7 @@ public class GameFlowManager : MonoBehaviour
 #if DebugOn
                 print("startgame");
 #endif
-                //_floorsmngr.InitALLagents();
+                _floorsmngr.InitALLagents();
                 _curDweller = _floorsmngr.GetCurFloorDweller();
                 _curDeliveryItem = _curDweller.HELP_firstGuyOut();
                 _ContextItem = _curDeliveryItem;
@@ -255,7 +255,7 @@ public class GameFlowManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             _floorsmngr.Get_curFloor().MoveNave_To();
 
