@@ -51,7 +51,7 @@ public class SceneBuilder : MonoBehaviour
     /// makes a randome shuffled array making sure no value corresponds to its index
     /// </summary>
     /// <returns></returns>
-    bool CreatePath()
+    bool CreateRandDwellerAndItemPath()
     {
         path = new int[_gs.Master_Number_of_Floors];
         bool success = true;
@@ -167,7 +167,7 @@ public class SceneBuilder : MonoBehaviour
 
         }
 
-        CreatePath();
+        CreateRandDwellerAndItemPath();
 
         LoadedDeliveryItemObjs = Resources.LoadAll<GameObject>("Items/NiceConstructedObjects").ToList();
 
@@ -268,7 +268,7 @@ public class SceneBuilder : MonoBehaviour
 
             GameObject F = Instantiate(FloorObjRef);
             F.name = "floor_" + i;
-            F.transform.position = new Vector3(F.transform.position.x, i * 7f, F.transform.position.z);
+            F.transform.position = new Vector3(F.transform.position.x, i * 6f, F.transform.position.z);
 
 
 

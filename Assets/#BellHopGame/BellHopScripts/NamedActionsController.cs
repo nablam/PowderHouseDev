@@ -280,11 +280,6 @@ public class NamedActionsController : MonoBehaviour
 
     }
 
-
-
-
-
-
     private IEnumerator MoveCurItemRoutine(Transform startMarker, Transform endMarker, DeliveryItem argDeliveryItem)
     {
 
@@ -343,6 +338,33 @@ public class NamedActionsController : MonoBehaviour
 
     }
 
+    IEnumerator Curve(DeliveryItem argItem, Transform startMarker, Transform endMarker, float height, float duration)
+    {
+        Vector3 startPos = startMarker.position;
+        Vector3 endPos = startMarker.position; ;
+        float normalizedTime = 0.0f;
+        while (normalizedTime < 1.0f)
+        {
+            float yOffset = m_Curve.Evaluate(normalizedTime);
+            argItem.transform.position = Vector3.Lerp(startPos, endPos, normalizedTime) + yOffset * Vector3.up;
+            normalizedTime += Time.deltaTime / duration;
+            yield return null;
+        }
+    }
+    public AnimationCurve m_Curve = new AnimationCurve();
+    IEnumerator Parabola(DeliveryItem argItem, Transform startMarker, Transform endMarker, float height, float duration)
+    {
+        Vector3 startPos = startMarker.position;
+        Vector3 endPos = startMarker.position;
+        float normalizedTime = 0.0f;
+        while (normalizedTime < 1.0f)
+        {
+            float yOffset = height * 4.0f * (normalizedTime - normalizedTime * normalizedTime);
+            argItem.transform.position = Vector3.Lerp(startPos, endPos, normalizedTime) + yOffset * Vector3.up;
+            normalizedTime += Time.deltaTime / duration;
+            yield return null;
+        }
+    }
     void JustTellMeSomthinAfterHEardMid__CAtch()
     {
 #if DebugOn

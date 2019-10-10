@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿//#define WayPoints
+using System.Collections;
 using UnityEngine;
 using UnityStandardAssets.Characters.ThirdPerson;
 
@@ -53,12 +54,16 @@ public class Dweller3rdPerson : ThirdPersonCharacter
         AnimStr[10] = GameSettings.Instance.Playpiano;
         AnimStr[11] = GameSettings.Instance.Dialphone;
         AnimStr[12] = GameSettings.Instance.Brushteeth;
+
+#if WayPoints
         Init();
+#endif
         base.Start();
     }
 
     void Update()
     {
+#if WayPoints
         if (!DoMove || target == null)
         {
             Move(Vector3.zero, false, false);
@@ -69,6 +74,7 @@ public class Dweller3rdPerson : ThirdPersonCharacter
 
         //Move(lookdir.normalized / 2.5f, false, false);
         Move(lookdir.normalized, false, false);
+#endif
     }
 
     public new void Move(Vector3 move, bool crouch, bool jump)
@@ -77,6 +83,9 @@ public class Dweller3rdPerson : ThirdPersonCharacter
 
     }
 
+
+
+#if WayPoints
     private void OnTriggerEnter(Collider other)
     {
         //if (other.CompareTag("Finish"))
@@ -112,7 +121,7 @@ public class Dweller3rdPerson : ThirdPersonCharacter
 
         // }
     }
-
+#endif
     void GetNextPoint()
     {
         ptr++;
