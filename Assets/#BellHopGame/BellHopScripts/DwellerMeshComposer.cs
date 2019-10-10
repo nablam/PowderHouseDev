@@ -644,9 +644,11 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
             print("ACTIVIA");
         }
         else
+        {
             print("POOP");
-        DoWalk(false);
 
+        }
+        DoWalk(false);
         //rotation is done by animated character
 
         if (IsMecanim)
@@ -661,13 +663,14 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     public void DoWalk(bool argWalk)
     {
         _walk = argWalk;
+        if (!_walk) character.Move(Vector3.zero, false, false);
     }
 
     void USeAI()
     {
 
 
-        print("go");
+        //   print("go");
         if (agent.remainingDistance > agent.stoppingDistance)
         {
             character.Move(agent.desiredVelocity, false, false);

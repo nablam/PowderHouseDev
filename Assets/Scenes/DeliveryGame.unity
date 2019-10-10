@@ -2719,11 +2719,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuildingFloorZero7
       objectReference: {fileID: 0}
-    - target: {fileID: 3604308529588604398, guid: 19a177500809f8443a548d5fc09a7121,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5171166441784013835, guid: 19a177500809f8443a548d5fc09a7121,
         type: 3}
       propertyPath: m_LocalPosition.x

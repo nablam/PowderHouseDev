@@ -90,14 +90,15 @@ public class HotelFloor : MonoBehaviour
             FloorDweller.MoveAgentTo(TRAN_SecondaryPos);
         }
         else
-            if (cnt == 1) { FloorDweller.MoveAgentTo(TRAN_DoorStep); }
+            if (cnt == 1) { FloorDweller.MoveAgentTo(TRAN_SpawnPos); }
         else
-        if (cnt == 2) { FloorDweller.MoveAgentTo(TRAN_DoorStep); }
-
+        if (cnt == 2) { FloorDweller.MoveAgentTo(TRAN_InteractibleMainPos); }
+        else
+            if (cnt == 3) { FloorDweller.MoveAgentTo(TRAN_DoorStep); }
 
         cnt++;
 
-        if (cnt > 2) cnt = 0;
+        if (cnt > 3) cnt = 0;
 
     }
 
