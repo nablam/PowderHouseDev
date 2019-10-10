@@ -1552,7 +1552,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0.89, z: 0}
 --- !u!114 &7070838487473824747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1610,7 +1610,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e423525cb4d5ee645b585e8fb424ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsMecanim: 1
 --- !u!1 &7070838487640496048
 GameObject:
   m_ObjectHideFlags: 0

@@ -51,7 +51,7 @@ public class HotelFloor : MonoBehaviour
         ReceivedItem = false;
         GameObject nf = Instantiate(NavFloor);
         nf.transform.position = new Vector3(TRAN_516Pos.position.x, TRAN_516Pos.position.y, TRAN_516Pos.position.z);
-        InitialFLoor.SetActive(false);
+        //   InitialFLoor.SetActive(false);
         BuildingMesh.SetActive(false);
         Instantiate(trmpObstcle, new Vector3(TRAN_MidRoom.position.x, TRAN_MidRoom.position.y, TRAN_MidRoom.position.z), Quaternion.identity);
 

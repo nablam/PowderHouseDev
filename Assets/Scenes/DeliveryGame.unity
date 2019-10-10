@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2718,6 +2718,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BuildingFloorZero7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3604308529588604398, guid: 19a177500809f8443a548d5fc09a7121,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5171166441784013835, guid: 19a177500809f8443a548d5fc09a7121,
         type: 3}
@@ -14380,7 +14385,7 @@ Transform:
   - {fileID: 6962885493331718622}
   - {fileID: 6962885493331718608}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6962885494910780939
 GameObject:
@@ -14555,22 +14560,22 @@ PrefabInstance:
     - target: {fileID: 8594901792100752108, guid: bca4f785006a9eb4fa6c189eabbf2105,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8594901792100752111, guid: bca4f785006a9eb4fa6c189eabbf2105,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8594901792100752111, guid: bca4f785006a9eb4fa6c189eabbf2105,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8594901792100752111, guid: bca4f785006a9eb4fa6c189eabbf2105,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 8594901792100752111, guid: bca4f785006a9eb4fa6c189eabbf2105,
         type: 3}
@@ -14595,7 +14600,7 @@ PrefabInstance:
     - target: {fileID: 8594901792100752111, guid: bca4f785006a9eb4fa6c189eabbf2105,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8594901792100752111, guid: bca4f785006a9eb4fa6c189eabbf2105,
         type: 3}
