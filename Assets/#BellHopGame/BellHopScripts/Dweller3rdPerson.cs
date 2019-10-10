@@ -11,9 +11,12 @@ public class Dweller3rdPerson : ThirdPersonCharacter
     int ptr = 0;
     Transform target;
     bool DoMove = true;
+    ICharacterAnim _myI;
 
     string[] AnimStr = new string[13];
     public Material SpecMat;
+
+#if WayPoints
     void Init()
     {
         //print("init");
@@ -38,9 +41,11 @@ public class Dweller3rdPerson : ThirdPersonCharacter
         waypoints[3].AnimToPlay = AnimStr[12];
         target = waypoints[0].transform;
     }
+#endif
 
     private new void Start()
     {
+#if WayPoints
         AnimStr[0] = GameSettings.Instance.Palmpilot;
         AnimStr[1] = GameSettings.Instance.Investigateground;
         AnimStr[2] = GameSettings.Instance.Searchground;
@@ -55,9 +60,10 @@ public class Dweller3rdPerson : ThirdPersonCharacter
         AnimStr[11] = GameSettings.Instance.Dialphone;
         AnimStr[12] = GameSettings.Instance.Brushteeth;
 
-#if WayPoints
+
         Init();
 #endif
+        _myI = GetComponent<ICharacterAnim>();
         base.Start();
     }
 
@@ -121,7 +127,7 @@ public class Dweller3rdPerson : ThirdPersonCharacter
 
         // }
     }
-#endif
+
     void GetNextPoint()
     {
         ptr++;
@@ -131,7 +137,7 @@ public class Dweller3rdPerson : ThirdPersonCharacter
         }
         target = waypoints[ptr].transform;
     }
-
+#endif
     public void SpecialDoeWasDone()
     {
 
@@ -141,7 +147,7 @@ public class Dweller3rdPerson : ThirdPersonCharacter
     {
 
         DoMove = false;
-        Get_myAnimator().Play(arganimname);
+        _myI.AnimatorPlay(arganimname);
 
 
 
@@ -152,5 +158,66 @@ public class Dweller3rdPerson : ThirdPersonCharacter
 
 
 
+    }
+
+
+    DwellerTarget savedT;
+    private void OnTriggerEnter(Collider other)
+    {
+        //if (other.CompareTag("Finish"))
+        //{
+
+        print("bang" + other.name);
+        DwellerTarget t;
+
+
+        t = other.gameObject.GetComponent<DwellerTarget>();
+
+        if (savedT == null)
+        {
+            print("no saved t must be the first");
+        }
+        else
+        {
+            if (t.GetHashCode() != savedT.GetHashCode())
+            {
+
+                StartCoroutine(DoTheAnim(t.AnimToPlay));
+                // DoWalk(false);
+            }
+            else
+            {
+                print("Touched Same");
+            }
+
+        }
+        savedT = t;
+
+        try
+        {
+
+            //if (t.TargId == target.GetComponent<DwellerTarget>().TargId)
+            //{
+
+            //    GetNextPoint();
+
+            //    if (!t.IsNavTarget)
+
+            //    {
+
+            //        //  StartCoroutine(DoTheAnim(t.AnimToPlay));
+
+            //    }
+
+            //}
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log("YO no target id");
+            throw e;
+        }
+
+
+        // }
     }
 }

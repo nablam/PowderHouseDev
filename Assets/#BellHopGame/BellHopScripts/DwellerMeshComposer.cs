@@ -82,7 +82,8 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     GameObject ShirtPtr;
     GameObject PantsPtr;
 
-    //  DwellerNavAgentCTRL _agent;
+
+
 
     #region BodySetup
     Material GetMatByEnum(GameEnums.MatColors argMatcolor)
@@ -364,7 +365,9 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
 
 
     Animator _MyAnimator;
+    NavMeshAgent agent;
 
+    Dweller3rdPerson DWell_3rd_perCTRL;
 
     private void OnEnable()
     {
@@ -374,33 +377,12 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     private void Awake()
     {
         BodyRenderer = Body.GetComponent<SkinnedMeshRenderer>();
-        // Awake_agent();
     }
     // Start is called before the first frame update
     void Start()
     {
 
         agent.enabled = false;
-        //HideHeads();
-        //HideFeet();
-        //HidePants();
-        //HideShirts();
-
-
-        //string animal = "monkey";
-        //string feet = "feetcat";// "feetboots";
-        //string pants = "none";
-        //string shirt = "shirtlong";
-        //SetBodyMat(animal);
-        //SetFeetMat();
-        //ShowHead(animal);
-        //ShowShirts(shirt);
-        //ShowPants(pants);
-        //ShowFeet(feet);
-        // ComposeMesh(GameEnums.DynAnimal.sheep, GameEnums.Shirts.shirtshort, GameEnums.MatColors.yellow, GameEnums.Pants.pantsshort, GameEnums.MatColors.pink, GameEnums.Shoes.feetchicken, GameEnums.MatColors.green);
-
-        //Make(GameEnums.DynAnimal.mole, "milke");
-
 
         _MyAnimator = GetComponent<Animator>();
     }
@@ -559,11 +541,12 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
         return this.gameObject;
     }
 
+    //------------------------------------------------------------------------------------------------------------------------------------------------------>DWELL 3rdPErson
 
-    public void SpecialSequenceFinished()
+    public void ISpecialSequenceFinished()
     {
-        Dweller3rdPerson d3rd = GetComponent<Dweller3rdPerson>();
-        d3rd.SpecialDoeWasDone();
+        //Dweller3rdPerson d3rd = GetComponent<Dweller3rdPerson>();
+        DWell_3rd_perCTRL.SpecialDoeWasDone();
     }
     //public void TossPeack()
     //{
@@ -616,9 +599,6 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     }
 
 
-    NavMeshAgent agent;
-
-    Dweller3rdPerson character;
     /*public*/
     bool IsMecanim;
     bool _walk;
@@ -627,7 +607,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     {
         agent = GetComponent<NavMeshAgent>();
 
-        character = GetComponent<Dweller3rdPerson>();
+        DWell_3rd_perCTRL = GetComponent<Dweller3rdPerson>();
 
         //  agent.enabled = false;
     }
@@ -641,7 +621,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
         agent.enabled = true;
         if (agent.isActiveAndEnabled)
         {
-            print("ACTIVIA");
+            //  print("ACTIVIA");
         }
         else
         {
@@ -654,6 +634,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
         if (IsMecanim)
         {
             agent.updateRotation = false;
+
         }
 
 
@@ -663,7 +644,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     public void DoWalk(bool argWalk)
     {
         _walk = argWalk;
-        if (!_walk) character.Move(Vector3.zero, false, false);
+        if (!_walk) DWell_3rd_perCTRL.Move(Vector3.zero, false, false);
     }
 
     void USeAI()
@@ -673,11 +654,11 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
         //   print("go");
         if (agent.remainingDistance > agent.stoppingDistance)
         {
-            character.Move(agent.desiredVelocity, false, false);
+            DWell_3rd_perCTRL.Move(agent.desiredVelocity, false, false);
         }
         else //reached destination
         {
-            character.Move(Vector3.zero, false, false);
+            DWell_3rd_perCTRL.Move(Vector3.zero, false, false);
         }
 
     }
@@ -693,5 +674,16 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
         agent.Warp(argDest.position);
     }
 
+    public void AnimatorPlay(string argname)
+    {
+        //may need to 
+
+        _MyAnimator.Play(argname);
+    }
+
+    public void ResumAgent()
+    {
+
+    }
 }
 

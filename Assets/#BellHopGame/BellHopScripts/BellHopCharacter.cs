@@ -248,7 +248,7 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
         return this.gameObject;
     }
 
-    public void SpecialSequenceFinished()
+    public void ISpecialSequenceFinished()
     {
         throw new NotImplementedException();
     }
@@ -268,5 +268,13 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
         throw new NotImplementedException();
     }
 
+    public void AnimatorPlay(string argname)
+    {
+        _MyAnimator.Play(argname);
+    }
 
+    public void ResumAgent()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -43,7 +43,7 @@ public class HotelFloor : MonoBehaviour
         argDwellerObj.transform.parent = this.transform;
         FloorDweller = argDwellerObj.GetComponent<DwellerMeshComposer>();
 
-        print("setting pos  " + FloorDweller.Id + " " + FloorDweller.name);
+        // print("setting pos  " + FloorDweller.Id + " " + FloorDweller.name);
         FloorDweller.WarpAgent(TRAN_DoorStep);
         // argDwellerObj.transform.parent = this.transform;
         m_Text_Billboard.text = FloorDweller.Gender + ". " + FloorDweller.AnimalName + " the " + FloorDweller.AnimalType;
@@ -62,7 +62,7 @@ public class HotelFloor : MonoBehaviour
     }
     public void InitDwellerAgentNowIGuess()
     {
-        print("agent init  " + FloorDweller.Id + " " + FloorDweller.name);
+        //        print("agent init  " + FloorDweller.Id + " " + FloorDweller.name);
         //FloorDweller.gameObject.GetComponent<NavMeshAgent>().enabled = true;
         FloorDweller.Start_Agent();
         FloorDweller.AgentMustSetTarget(TRAN_DoorStep);

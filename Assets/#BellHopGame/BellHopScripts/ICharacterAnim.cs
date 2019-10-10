@@ -19,13 +19,17 @@ public interface ICharacterAnim
 
     void AnimateNamedAction(string argactionNAme, Action OnEnded_slash_ArrivedAtPos_Callback = null);
 
+    void AnimatorPlay(string argname);
+    void ResumAgent();
+
+
     void ReleaseObj_CalledExternally();
     Transform GetMyRightHandHold();
     Transform GetMyLeftHandHold();
     void NotifyMeWheanAnimationStateExit();
     GameObject TemMyGO();
 
-    void SpecialSequenceFinished();
+    void ISpecialSequenceFinished();
 
 
     void WarpAgent(Transform artT);

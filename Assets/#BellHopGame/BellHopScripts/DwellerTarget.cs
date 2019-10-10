@@ -13,11 +13,13 @@ public class DwellerTarget : MonoBehaviour
 
 
 
-    //// Start is called before the first frame update
-    //void Start()
-    //{
-
-    //}
+    // Start is called before the first frame update
+    void Start()
+    {
+        _targId = 0;
+        _isNavTarget = false;
+        _animToPlay = GameSettings.Instance.Shaving;
+    }
 
     //// Update is called once per frame
     //void Update()
