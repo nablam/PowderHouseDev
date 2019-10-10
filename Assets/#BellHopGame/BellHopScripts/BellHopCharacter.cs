@@ -46,13 +46,13 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
 
 
 
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            ClockWeis = !ClockWeis;
-            //Quaternion currentRotation = transform.rotation;
-            reachedWantedRot = false;
-            timeT = Time.time;
-        }
+        //if (Input.GetKeyDown(KeyCode.D))
+        //{
+        //    ClockWeis = !ClockWeis;
+        //    //Quaternion currentRotation = transform.rotation;
+        //    reachedWantedRot = false;
+        //    timeT = Time.time;
+        //}
 
         if (ClockWeis)
         {
@@ -252,4 +252,15 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
     {
         throw new NotImplementedException();
     }
+
+    public void WarpAgent(Transform artT)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void MoveAgentTo(Transform artT)
+    {
+        throw new NotImplementedException();
+    }
+
 }

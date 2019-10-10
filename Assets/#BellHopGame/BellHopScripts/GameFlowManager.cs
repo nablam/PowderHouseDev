@@ -198,8 +198,14 @@ public class GameFlowManager : MonoBehaviour
         _cam = argCam;
         _ElevatorDoors = ElevatorDoorsMasterControl.Instance;
         _NamedActionsController = argNameActionCTRL;
+
+        //WarpAllDwellersNow();
     }
 
+    //void WarpAllDwellersNow()
+    //{
+    //    _floorsmngr.WarpAll();
+    //}
 
     public static GameFlowManager Instance = null;
 
@@ -245,6 +251,15 @@ public class GameFlowManager : MonoBehaviour
 
     public Vector3 GEt_BEllhopPos() { return _bellHop.transform.position; }
 
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _floorsmngr.Get_curFloor().MoveNave_To();
+
+        }
+    }
 }
 
 

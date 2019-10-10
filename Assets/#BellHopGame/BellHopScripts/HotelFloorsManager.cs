@@ -62,4 +62,13 @@ public class HotelFloorsManager : MonoBehaviour
     {
         return _curfloor;
     }
+
+    public void WarpAll()
+    {
+        foreach (HotelFloor hf in _floors)
+        {
+            hf.WarpInit();
+        }
+
+    }
 }

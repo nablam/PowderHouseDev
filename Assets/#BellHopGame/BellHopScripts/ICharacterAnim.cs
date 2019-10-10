@@ -26,4 +26,8 @@ public interface ICharacterAnim
     GameObject TemMyGO();
 
     void SpecialSequenceFinished();
+
+
+    void WarpAgent(Transform artT);
+    void MoveAgentTo(Transform artT);
 }

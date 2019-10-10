@@ -81,6 +81,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     GameObject ShirtPtr;
     GameObject PantsPtr;
 
+    DwellerNavAgentCTRL _agent;
 
     #region BodySetup
     Material GetMatByEnum(GameEnums.MatColors argMatcolor)
@@ -366,6 +367,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     private void Awake()
     {
         BodyRenderer = Body.GetComponent<SkinnedMeshRenderer>();
+        _agent = GetComponent<DwellerNavAgentCTRL>();
     }
     // Start is called before the first frame update
     void Start()
@@ -565,6 +567,8 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     //}
     #endregion
     Quaternion OriginalRot;
+
+
     void Update()
     {
         //if (Input.GetKeyDown(KeyCode.W))
@@ -582,5 +586,15 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
         //}
     }
 
+    public void WarpAgent(Transform artT)
+    {
+        _agent.WarpMe_to(artT);
+    }
+
+    public void MoveAgentTo(Transform artT)
+    {
+        _agent.Set_Destination(artT);
+        _agent.DoWalk(true);
+    }
 }
 

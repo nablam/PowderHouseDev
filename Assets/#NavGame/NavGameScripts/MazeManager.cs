@@ -611,17 +611,17 @@ public class MazeManager : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
 
-            if (node.ptrT_ActualParent != null)
-            {
+        //    if (node.ptrT_ActualParent != null)
+        //    {
 
-                node = node.ptrT_ActualParent.GetComponent<NavMazeBlock>();
-                node.UpdateTileMAterial(DarkTiles[0]);
-            }
+        //        node = node.ptrT_ActualParent.GetComponent<NavMazeBlock>();
+        //        node.UpdateTileMAterial(DarkTiles[0]);
+        //    }
 
-        }
+        //}
 
     }
 }

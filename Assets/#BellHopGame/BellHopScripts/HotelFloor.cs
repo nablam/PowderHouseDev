@@ -23,6 +23,8 @@ public class HotelFloor : MonoBehaviour
     public Transform TRAN_516Pos;
     //---------------
 
+    public GameObject trmpObstcle;
+
     int _floorNumber;
     // bool _deliveryItemStillOnFloor;
     bool _receivedItem;
@@ -37,19 +39,33 @@ public class HotelFloor : MonoBehaviour
 
     public void SetDweller(GameObject argDwellerObj)
     {
-
-        argDwellerObj.transform.position = new Vector3(TRAN_DoorStep.position.x, TRAN_DoorStep.position.y, TRAN_DoorStep.position.z);
-        argDwellerObj.transform.parent = this.transform;
+        //argDwellerObj.transform.position = new Vector3(TRAN_DoorStep.position.x, TRAN_DoorStep.position.y, TRAN_DoorStep.position.z);
+        //argDwellerObj.transform.parent = this.transform;
         FloorDweller = argDwellerObj.GetComponent<DwellerMeshComposer>();
+
+        FloorDweller.WarpAgent(TRAN_DoorStep);
+        argDwellerObj.transform.parent = this.transform;
         m_Text_Billboard.text = FloorDweller.Gender + ". " + FloorDweller.AnimalName + " the " + FloorDweller.AnimalType;
         //     DeliveryItemStillOnFloor = true;
         ReceivedItem = false;
         GameObject nf = Instantiate(NavFloor);
         nf.transform.position = new Vector3(TRAN_516Pos.position.x, TRAN_516Pos.position.y, TRAN_516Pos.position.z);
-        //InitialFLoor.SetActive(false);
+        InitialFLoor.SetActive(false);
+        BuildingMesh.SetActive(false);
+        Instantiate(trmpObstcle, new Vector3(TRAN_MidRoom.position.x, TRAN_MidRoom.position.y, TRAN_MidRoom.position.z), Quaternion.identity);
+
         //nf.transform.parent = this.transform;
     }
 
+    public void WarpInit()
+    {
+        // FloorDweller.WarpAgent(TRAN_DoorStep);
+    }
+
+    public void MoveNave_To()
+    {
+        FloorDweller.MoveAgentTo(TRAN_DoorStep);
+    }
 
     public void ShowHideBArrier(bool argShow)
     {

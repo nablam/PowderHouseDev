@@ -424,6 +424,8 @@ MonoBehaviour:
     type: 3}
   InitialFLoor: {fileID: 94529720445548624}
   TRAN_516Pos: {fileID: 6263877184881713310}
+  trmpObstcle: {fileID: 8174622403403484305, guid: 2f46a7e7ecac397469873543b4ed592a,
+    type: 3}
   FloorDweller: {fileID: 0}
 --- !u!1 &4105216601897946888
 GameObject:
@@ -1331,7 +1333,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8501822982931950802}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0.71, y: 0, z: 3.34}
+  m_LocalPosition: {x: 0.71, y: 0, z: 4.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1779202966776558807}
