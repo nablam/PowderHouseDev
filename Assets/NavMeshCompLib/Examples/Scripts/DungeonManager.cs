@@ -10,7 +10,7 @@ public class DungeonManager : MonoBehaviour
 
     void Awake()
     {
-        Random.InitState(23431);
+        Random.InitState(1337);
         var map = new int[m_Width * m_Height];
         for (int y = 0; y < m_Height; y++)
         {

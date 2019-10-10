@@ -15,6 +15,14 @@ public class HotelFloor : MonoBehaviour
     public GameObject BaseCamPos;
     public TMPro.TextMeshPro m_Text_Billboard;
 
+
+    public GameObject NavFloor;
+
+    //--------------------
+    public GameObject InitialFLoor;
+    public Transform TRAN_516Pos;
+    //---------------
+
     int _floorNumber;
     // bool _deliveryItemStillOnFloor;
     bool _receivedItem;
@@ -36,6 +44,10 @@ public class HotelFloor : MonoBehaviour
         m_Text_Billboard.text = FloorDweller.Gender + ". " + FloorDweller.AnimalName + " the " + FloorDweller.AnimalType;
         //     DeliveryItemStillOnFloor = true;
         ReceivedItem = false;
+        GameObject nf = Instantiate(NavFloor);
+        nf.transform.position = new Vector3(TRAN_516Pos.position.x, TRAN_516Pos.position.y, TRAN_516Pos.position.z);
+        //InitialFLoor.SetActive(false);
+        //nf.transform.parent = this.transform;
     }
 
 
