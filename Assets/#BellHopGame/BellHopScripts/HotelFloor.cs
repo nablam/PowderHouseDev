@@ -44,7 +44,7 @@ public class HotelFloor : MonoBehaviour
         FloorDweller = argDwellerObj.GetComponent<DwellerMeshComposer>();
 
         // print("setting pos  " + FloorDweller.Id + " " + FloorDweller.name);
-        FloorDweller.WarpAgent(TRAN_DoorStep);
+        //  FloorDweller.WarpAgent(TRAN_DoorStep);
         // argDwellerObj.transform.parent = this.transform;
         m_Text_Billboard.text = FloorDweller.Gender + ". " + FloorDweller.AnimalName + " the " + FloorDweller.AnimalType;
         //     DeliveryItemStillOnFloor = true;
@@ -65,7 +65,7 @@ public class HotelFloor : MonoBehaviour
         //        print("agent init  " + FloorDweller.Id + " " + FloorDweller.name);
         //FloorDweller.gameObject.GetComponent<NavMeshAgent>().enabled = true;
         FloorDweller.Start_Agent();
-        FloorDweller.AgentMustSetTarget(TRAN_DoorStep);
+        FloorDweller.MoveAgentTo(TRAN_DoorStep, false);//<false just sets dest , no walking
         FloorDweller.WarpAgent(TRAN_DoorStep);
 
 
@@ -73,7 +73,7 @@ public class HotelFloor : MonoBehaviour
 
     public void SetInitDest()
     {
-        FloorDweller.AgentMustSetTarget(TRAN_DoorStep);
+        FloorDweller.MoveAgentTo(TRAN_DoorStep, false);//<false just sets dest , no walking
     }
 
     public void WarpInit()
@@ -87,14 +87,14 @@ public class HotelFloor : MonoBehaviour
 
         if (cnt == 0)
         {
-            FloorDweller.MoveAgentTo(TRAN_SecondaryPos);
+            FloorDweller.MoveAgentTo(TRAN_SecondaryPos, true);
         }
         else
-            if (cnt == 1) { FloorDweller.MoveAgentTo(TRAN_SpawnPos); }
+            if (cnt == 1) { FloorDweller.MoveAgentTo(TRAN_SpawnPos, true); }
         else
-        if (cnt == 2) { FloorDweller.MoveAgentTo(TRAN_InteractibleMainPos); }
+        if (cnt == 2) { FloorDweller.MoveAgentTo(TRAN_InteractibleMainPos, true); }
         else
-            if (cnt == 3) { FloorDweller.MoveAgentTo(TRAN_DoorStep); }
+            if (cnt == 3) { FloorDweller.MoveAgentTo(TRAN_DoorStep, true); }
 
         cnt++;
 
@@ -107,16 +107,7 @@ public class HotelFloor : MonoBehaviour
         Barrier.SetActive(argShow);
 
     }
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void CoordinateTossCatch()
     {

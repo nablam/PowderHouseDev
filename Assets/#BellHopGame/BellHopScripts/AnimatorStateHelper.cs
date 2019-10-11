@@ -11,7 +11,7 @@ public class AnimatorStateHelper : StateMachineBehaviour
         if (stateInfo.IsTag("Done.Tag"))
         {
             ICharacterAnim ica = animator.gameObject.GetComponent<ICharacterAnim>();
-            ica.ISpecialSequenceFinished();
+            ica.OnAnimationstateTaggedDoneExit();
         }
         else
             foreach (string actionstr in GameSettings.Instance.ActionNames)

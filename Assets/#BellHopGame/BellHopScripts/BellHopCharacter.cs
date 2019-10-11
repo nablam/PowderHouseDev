@@ -206,11 +206,8 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
     }
 
 
-    //public void AnimTrigger(GameEnums.DwellerAnimTrigger argtrig)
-    //{
-    //    _MyAnimator.SetTrigger(argtrig.ToString());
-    //}
 
+    //NOTUSED TODO:
     public void ReleaseObj_CalledExternally()
     {
         _CurHeldObject.transform.parent = null;
@@ -222,7 +219,6 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
 
     public void AnimTrigger(string argTrig)
     {
-        // print("sanitycheck Bunny anim " + "Trig" + argTrig);
         _MyAnimator.SetTrigger("Trig" + argTrig);
     }
 
@@ -248,7 +244,7 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
         return this.gameObject;
     }
 
-    public void ISpecialSequenceFinished()
+    public void OnAnimationstateTaggedDoneExit()
     {
         throw new NotImplementedException();
     }
@@ -258,15 +254,12 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
         throw new NotImplementedException();
     }
 
-    public void MoveAgentTo(Transform artT)
+    public void MoveAgentTo(Transform artT, bool argDoWalk)
     {
         throw new NotImplementedException();
     }
 
-    public void AgentMustSetTarget(Transform artT)
-    {
-        throw new NotImplementedException();
-    }
+
 
     public void AnimatorPlay(string argname)
     {

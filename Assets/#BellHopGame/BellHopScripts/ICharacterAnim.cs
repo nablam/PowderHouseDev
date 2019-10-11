@@ -29,10 +29,10 @@ public interface ICharacterAnim
     void NotifyMeWheanAnimationStateExit();
     GameObject TemMyGO();
 
-    void ISpecialSequenceFinished();
+    void OnAnimationstateTaggedDoneExit();
 
 
     void WarpAgent(Transform artT);
-    void MoveAgentTo(Transform artT);
-    void AgentMustSetTarget(Transform artT);
+    void MoveAgentTo(Transform artT, bool argDoWalk);
+    // void AgentMustSetTarget(Transform artT);
 }

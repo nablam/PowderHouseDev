@@ -86,9 +86,7 @@ public class Dweller3rdPerson : ThirdPersonCharacter
     public new void Move(Vector3 move, bool crouch, bool jump)
     {
         base.Move(move, false, false);
-
     }
-
 
 
 #if WayPoints
@@ -138,22 +136,17 @@ public class Dweller3rdPerson : ThirdPersonCharacter
         target = waypoints[ptr].transform;
     }
 #endif
-    public void SpecialDoeWasDone()
-    {
+    //public void SpecialDoeWasDone()
+    //{
 
-        DoMove = true;
-    }
+    //    DoMove = true;
+    //}
     IEnumerator DoTheAnim(string arganimname)
     {
 
-        DoMove = false;
+
         _myI.AnimatorPlay(arganimname);
 
-
-
-
-        //float lengthofClip = Get_myAnimator().GetNextAnimatorStateInfo(0).length;
-        //Debug.Log("LEN ");
         yield return null;
 
 
@@ -176,6 +169,7 @@ public class Dweller3rdPerson : ThirdPersonCharacter
         if (savedT == null)
         {
             print("no saved t must be the first");
+            StartCoroutine(DoTheAnim(t.AnimToPlay));
         }
         else
         {
@@ -183,7 +177,6 @@ public class Dweller3rdPerson : ThirdPersonCharacter
             {
 
                 StartCoroutine(DoTheAnim(t.AnimToPlay));
-                // DoWalk(false);
             }
             else
             {

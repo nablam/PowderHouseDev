@@ -125,10 +125,7 @@ public class AnimalDweller : MonoBehaviour
     //    throw new System.NotImplementedException();
     //}
 
-    public void ReleaseObj_CalledExternally()
-    {
-        throw new System.NotImplementedException();
-    }
+
 
     public Transform GetMyRightHandHold()
     {
