@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2957,8 +2957,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CellPrefab: {fileID: 1234042796393194189, guid: cb0ba3fdb7557c94ba09b5cf5e9a8298,
     type: 3}
-  Size: {x: 21, y: 1, z: 11}
-  Portal: {fileID: 1762529684940675268, guid: ee6485d0e47fde84eb517e4848eb723f, type: 3}
+  Size: {x: 5, y: 1, z: 4}
+  Portal: {fileID: 1003268666}
   wall: {fileID: 4599298731175404302, guid: 91163153bf19ea2479562ecf5cdc5ecd, type: 3}
   Set: []
 --- !u!4 &437200059
@@ -5422,7 +5422,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &688688915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7545,7 +7545,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1077204288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11210,7 +11210,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1501166671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11603,7 +11603,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1567599147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12791,7 +12791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1693275053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14147,7 +14147,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1845881695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14448,7 +14448,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1867949714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14748,7 +14748,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1902102734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16428,7 +16428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2095328261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18034,7 +18034,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &8649803336640807439
 MonoBehaviour:
   m_ObjectHideFlags: 0
