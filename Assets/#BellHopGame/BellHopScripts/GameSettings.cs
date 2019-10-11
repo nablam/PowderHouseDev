@@ -134,3 +134,40 @@ public class GameSettings : MonoBehaviour
     float _elevatorSpeed;
 
 }
+
+
+/*
+ * 
+"Toss";
+"Catch"; // goes into a looped pose
+"Catch2";
+"Turn";
+"UnTurn";
+"Wave1";
+ "Wave2";
+_lo = "Hello";
+_ce1 = "Dance1";
+_ce2 = "Dance2";
+   _ = "Bad";
+    _ug = "Shrug";
+    _d = "Good";
+    _py = "Happy";
+    _e = "Come";
+ _ "OpenDoors"; 
+  _ "CloseDoors"; 
+    _ "MoveElevator";
+ _ "Palmpilot";
+ "Investigateground";
+  "Searchground";
+ "Answerphone";
+  "Slicebread";
+  _ "Typelaptop";
+    _ing = "Raking";
+    _ving = "Shaving";
+_ "Cutonion";
+   _ "Eatsandwich";
+ _ "Playpiano";
+ _ "Dialphone";
+  _ "Brushteeth";
+     
+     */
