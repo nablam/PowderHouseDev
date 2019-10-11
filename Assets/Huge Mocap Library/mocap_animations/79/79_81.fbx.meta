@@ -93,8 +93,10 @@ ModelImporter:
     400084: rThigh
     400086: rThumb1
     400088: rThumb2
-    7400000: 79_81
+    7400000: 79_81BrushStart
     7400002: 79_81|brushing.teeth
+    7400004: 79_81_brushTeethMID
+    7400006: 79_81BrushEnd
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -127,8 +129,8 @@ ModelImporter:
     - serializedVersion: 16
       name: 79_81|brushing.teeth
       takeName: 79_81
-      firstFrame: 0
-      lastFrame: 187
+      firstFrame: 23
+      lastFrame: 181
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -137,7 +139,7 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 0
+      loopBlendOrientation: 1
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
@@ -146,6 +148,90 @@ ModelImporter:
       heightFromFeet: 0
       mirror: 0
       bodyMask: 0100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: 79_81BrushStart
+      takeName: 79_81
+      firstFrame: 23
+      lastFrame: 80
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: 79_81_brushTeethMID
+      takeName: 79_81
+      firstFrame: 80
+      lastFrame: 149
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: 79_81BrushEnd
+      takeName: 79_81
+      firstFrame: 90
+      lastFrame: 181
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask: []
@@ -298,32 +384,32 @@ ModelImporter:
     - boneName: lShldr
       humanName: LeftUpperArm
       limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
+        min: {x: -47.368423, y: -100, z: -60}
+        max: {x: 54.47368, y: 100, z: 100}
         value: {x: 0, y: 0, z: 0}
         length: 0
-        modified: 0
+        modified: 1
     - boneName: rShldr
       humanName: RightUpperArm
       limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
+        min: {x: -59.210526, y: -100, z: -60}
+        max: {x: 54.473686, y: 100, z: 100}
         value: {x: 0, y: 0, z: 0}
         length: 0
-        modified: 0
+        modified: 1
     - boneName: lForeArm
       humanName: LeftLowerArm
       limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
+        min: {x: -90, y: 0, z: -90}
+        max: {x: 90, y: 0, z: 90}
         value: {x: 0, y: 0, z: 0}
         length: 0
-        modified: 0
+        modified: 1
     - boneName: rForeArm
       humanName: RightLowerArm
       limit:
-        min: {x: -90, y: 0, z: -14.315793}
-        max: {x: 90, y: 0, z: 68.368416}
+        min: {x: -90, y: 0, z: -90}
+        max: {x: 90, y: 0, z: 90}
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 1
