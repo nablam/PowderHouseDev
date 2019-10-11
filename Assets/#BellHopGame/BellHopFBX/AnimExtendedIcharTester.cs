@@ -128,9 +128,10 @@ public class AnimExtendedIcharTester : MonoBehaviour, ICharacterAnim
     }
 
     public int AnimIndex;
+    public int LayerNumber;
 
     string curStr = "";
-    public bool UpdateOnceToggel = false;
+
 
     public List<string> AnimsNames;
 
@@ -160,7 +161,7 @@ public class AnimExtendedIcharTester : MonoBehaviour, ICharacterAnim
         curStr = AnimsNames[AnimIndex];
 
         print("playing " + AnimIndex + " " + curStr);
-        _myanim.Play(curStr, 0);
+        _myanim.Play(curStr, LayerNumber);
 
     }
 
@@ -169,7 +170,7 @@ public class AnimExtendedIcharTester : MonoBehaviour, ICharacterAnim
         if (Input.GetKeyDown(KeyCode.A))
         {
             ReadInoutPlayAnim();
-            UpdateOnceToggel = false;
+
 
         }
     }
