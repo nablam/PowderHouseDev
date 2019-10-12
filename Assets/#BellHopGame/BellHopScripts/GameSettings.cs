@@ -86,6 +86,10 @@ public class GameSettings : MonoBehaviour
     string _dialphone = "Dialphone";
     string _brushteeth = "Brushteeth";
 
+    string _sitChair = "SitChair";
+    string _sitCCouch = "SitCouch";
+    string _sitCross = "SitCross";
+
     public string Toss { get => _toss; set => _toss = value; }
     public string Catch { get => _catch; set => _catch = value; }
     public string Catch1 { get => _catch1; set => _catch1 = value; }
@@ -120,10 +124,14 @@ public class GameSettings : MonoBehaviour
     public string Playpiano { get => _playpiano; set => _playpiano = value; }
     public string Dialphone { get => _dialphone; set => _dialphone = value; }
     public string Brushteeth { get => _brushteeth; set => _brushteeth = value; }
+    public string SitChair { get => _sitChair; set => _sitChair = value; }
+    public string SitCouch { get => _sitCCouch; set => _sitCCouch = value; }
+    public string SitCross { get => _sitCross; set => _sitCross = value; }
     #endregion
 
     int _master_Number_of_Floors;
     public int Master_Number_of_Floors { get => _master_Number_of_Floors; set => _master_Number_of_Floors = value; }
+
 
 
 

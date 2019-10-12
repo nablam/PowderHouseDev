@@ -96,6 +96,7 @@ ModelImporter:
     7400000: 143_19
     7400002: 143_19|Sit.On.Stool.And.Get.Up
     9500000: //RootNode
+    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -109,7 +110,10 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: 
+    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Errors found in
+      old project file will be treated as a warnings. Configuration mis-match will
+      be ignored, but current Configuration needs to be fixed:\n\tTransform '143_19'
+      not found in HumanDescription.\n"
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -187,7 +191,7 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   importAnimation: 1
-  copyAvatar: 0
+  copyAvatar: 1
   humanDescription:
     serializedVersion: 2
     human:
@@ -520,12 +524,12 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: 143_19(Clone)
+    - name: 143_18(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-    - name: 143_19
+    - name: 143_18
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: -0.7071069, y: 0, z: -0, w: 0.70710677}
@@ -756,7 +760,8 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 0
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 4201a2572e6262648a6c4519e85cd165,
+    type: 3}
   animationType: 3
   humanoidOversampling: 1
   additionalBone: 0

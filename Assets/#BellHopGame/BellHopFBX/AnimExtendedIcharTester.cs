@@ -68,7 +68,9 @@ public class AnimExtendedIcharTester : MonoBehaviour, ICharacterAnim
 
     public void OnAnimationstateTaggedDoneExit()
     {
+
         Debug.Log("Done.Tag anim EXIT");
+        if (cancelAutoPlay) return;
         ReadInoutPlayAnim();
     }
 
@@ -122,7 +124,10 @@ public class AnimExtendedIcharTester : MonoBehaviour, ICharacterAnim
             GameSettings.Instance.Shrug,
             GameSettings.Instance.Typelaptop,
             GameSettings.Instance.Wave1,
-            GameSettings.Instance.Wave2
+            GameSettings.Instance.Wave2,
+             GameSettings.Instance.SitCouch,
+              GameSettings.Instance.SitChair,
+               GameSettings.Instance.SitCross
 
         };
     }
@@ -160,17 +165,24 @@ public class AnimExtendedIcharTester : MonoBehaviour, ICharacterAnim
         }
         curStr = AnimsNames[AnimIndex];
 
-        print("playing " + AnimIndex + " " + curStr);
+        //print("playing " + AnimIndex + " " + curStr);
         _myanim.Play(curStr, LayerNumber);
 
     }
+
+    bool cancelAutoPlay = false;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
             ReadInoutPlayAnim();
+            cancelAutoPlay = true;
 
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            cancelAutoPlay = false;
 
         }
     }
