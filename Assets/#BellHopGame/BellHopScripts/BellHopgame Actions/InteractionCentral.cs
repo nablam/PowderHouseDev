@@ -1,18 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class InteractionCentral : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    Transform LookitHere;
+
+    public string argActionString;
     void Start()
     {
-        
+        LookitHere = this.transform.GetChild(0);
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public Transform GetLookTarg()
     {
-        
+        return this.LookitHere;
     }
 }

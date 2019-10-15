@@ -11,6 +11,7 @@ public class Dweller3rdPerson : ThirdPersonCharacter
     int ptr = 0;
     Transform target;
     bool DoMove = true;
+
     ICharacterAnim _myI;
 
     string[] AnimStr = new string[13];
@@ -83,9 +84,10 @@ public class Dweller3rdPerson : ThirdPersonCharacter
 #endif
     }
 
-    public new void Move(Vector3 move, bool crouch, bool jump)
+    public new void Move(Vector3 move, bool crouch, bool jump, bool UseBAse)
     {
-        base.Move(move, false, false);
+        if (UseBAse)
+            base.Move(move, false, false);
     }
 
 
@@ -136,11 +138,11 @@ public class Dweller3rdPerson : ThirdPersonCharacter
         target = waypoints[ptr].transform;
     }
 #endif
-    //public void SpecialDoeWasDone()
-    //{
+    public void ManualStartAnim(string animationName)
+    {
 
-    //    DoMove = true;
-    //}
+        StartCoroutine(DoTheAnim(animationName));
+    }
     IEnumerator DoTheAnim(string arganimname)
     {
 

@@ -34,5 +34,6 @@ public interface ICharacterAnim
 
     void WarpAgent(Transform artT);
     void MoveAgentTo(Transform artT, bool argDoWalk);
+
     // void AgentMustSetTarget(Transform artT);
 }

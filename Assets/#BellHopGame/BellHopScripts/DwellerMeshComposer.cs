@@ -389,7 +389,9 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     NavMeshAgent agent;
 
     Dweller3rdPerson DWell_3rd_perCTRL;
+    bool Reached = false;
 
+    bool ReachedINITIALIZED = false;
     private void OnEnable()
     {
         Awake_agent();
@@ -402,6 +404,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     // Start is called before the first frame update
     void Start()
     {
+
         agent.enabled = false;
         _MyAnimator = GetComponent<Animator>();
     }
@@ -555,7 +558,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     void Update()
     {
         if (_walk)
-            USeAI();
+            USeAI2();
     }
 
 
@@ -568,7 +571,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     Transform CahsedDESTINATION;
     public void MoveAgentTo(Transform artT, bool argDoWalk)
     {
-
+        Reached = false;
         CahsedDESTINATION = artT;
         agent.SetDestination(artT.position);
         DoWalk(argDoWalk);
@@ -581,6 +584,8 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
 
     private void Awake_agent()
     {
+        ReachedINITIALIZED = false;
+        Reached = true;
         agent = GetComponent<NavMeshAgent>();
 
         DWell_3rd_perCTRL = GetComponent<Dweller3rdPerson>();
@@ -594,7 +599,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
         agent.enabled = true;
         if (agent.isActiveAndEnabled)
         {
-            //  print("ACTIVIA");
+            print("ACTIVIA");
         }
         else
         {
@@ -621,6 +626,26 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
         }
     }
 
+
+    int targetPoint = 0;
+    void USeAI2()
+    {
+        if (!agent.pathPending)
+        {
+            if (agent.remainingDistance <= agent.stoppingDistance)
+            {
+                if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                {
+                    // Done
+                    Debug.Log("Executes 2 times");
+                    DWell_3rd_perCTRL.Move(Vector3.zero, false, false);
+
+                }
+            }
+        }
+
+    }
+
     void USeAI()
     {
 
@@ -633,6 +658,36 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
         else //reached destination
         {
             DWell_3rd_perCTRL.Move(Vector3.zero, false, false);
+            if (!ReachedINITIALIZED)
+            {
+                ReachedINITIALIZED = true;
+                return;
+            }
+            //  WarpMe_to(CahsedDESTINATION);
+
+            if (!Reached)
+            {
+                //DWell_3rd_perCTRL.Move(Vector3.zero, false, false);
+
+                InteractionCentral IC = CahsedDESTINATION.gameObject.GetComponent<InteractionCentral>();
+                if (IC == null)
+                {
+                    Debug.Log("this target is not interactible");
+                }
+                else
+                {
+
+                    //  this.transform.LookAt(IC.GetLookTarg());
+                    // AnimatorPlay(IC.argActionString);
+
+                    DWell_3rd_perCTRL.ManualStartAnim(IC.argActionString);
+                    print("reached");
+                    Reached = true;
+                }
+
+
+            }
+
         }
 
     }
@@ -649,9 +704,10 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
 
         _MyAnimator.Play(argname);
         //  agent.SetDestination(Vector3.zero);
-        DWell_3rd_perCTRL.Move(transform.position, false, false);
+        // DWell_3rd_perCTRL.Move(transform.position, false, false);
         DoWalk(false);
         agent.isStopped = true;
+        print("play" + argname);
     }
 
     public void ResumAgent()

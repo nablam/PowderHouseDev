@@ -27,9 +27,9 @@ public class BackRowFurnitureBuilder : MonoBehaviour
     Vector3 Orientup = new Vector3(0, -90, 0);
     void Start()
     {
-        BuildColun(4, 0);
+        BuildRow(0, 0);
 
-        BuildColun(0, 0);
+
 
     }
 
@@ -71,42 +71,9 @@ public class BackRowFurnitureBuilder : MonoBehaviour
         }
     }
 
-    void BuildColun(int argX, int argY)
+    void BuildRowInsure(int Arg12)
     {
-        argY += ConstZposTopLeft;
-        argX += constXposTopLeft;
-        int CumBlocksLen = 0;
-        int leftover = 0;
 
-        int Maxpossible = 2;
-        int curSizeTouse = 1;
-
-        for (int x = 0; x < ConstWidth; x++)
-        {
-            leftover = ConstWidth - CumBlocksLen;
-            if (CumBlocksLen >= ConstWidth + 1) { Debug.Log("break"); break; }
-
-            if (leftover >= 2)
-            {
-                Maxpossible = 2 + 1;
-
-                curSizeTouse = Random.Range(1, Maxpossible);
-            }
-            else
-                if (leftover < 2)
-            {
-                Maxpossible = 1 + 1;
-
-                curSizeTouse = Random.Range(1, Maxpossible);
-            }
-
-            Debug.Log(curSizeTouse);
-
-            InstantiateBlockSizeForBackWall(curSizeTouse, CumBlocksLen, argY, argX, Oriantation.Down);
-            // argLeftest_X += curSizeTouse;
-            CumBlocksLen += curSizeTouse;
-
-        }
     }
 
     void InstantiateBlockSizeForBackWall(int s, int xCumBlock, int argxOffset, int argyOffset, Oriantation argOr)
