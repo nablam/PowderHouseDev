@@ -383,15 +383,20 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
 
     #endregion
 
+
+    #region NonAgent
+
     DeliveryItem _initiallyAssignedAtSceneBuild;
 
     Animator _MyAnimator;
     NavMeshAgent agent;
+    bool AgentIsAwake = false;
+    bool AgentReachedDestination = false;
 
     Dweller3rdPerson DWell_3rd_perCTRL;
-    bool Reached = false;
 
-    bool ReachedINITIALIZED = false;
+
+
     private void OnEnable()
     {
         Awake_agent();
@@ -410,13 +415,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     }
 
 
-
-
-
-
-
-
-
+    Quaternion OriginalRot;
     public DeliveryItem GetInitialDeliveryItem()
     {
         try
@@ -462,6 +461,8 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     }
 
 
+
+    #endregion
 
     #region InterfaceForAnimatorListen
 
@@ -552,40 +553,42 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     }
 
     #endregion
-    Quaternion OriginalRot;
 
+
+    #region AGENT
 
     void Update()
     {
-        if (_walk)
-            USeAI2();
+        Navigate();
     }
-
-
     public void WarpAgent(Transform artT)
     {
-        WarpMe_to(artT);
+        agent.Warp(artT.position);
     }
-
 
     Transform CahsedDESTINATION;
+    InteractionCentral IC;
     public void MoveAgentTo(Transform artT, bool argDoWalk)
     {
-        Reached = false;
+        AgentReachedDestination = false;
+        IsMecanim = true;
+        if (IsMecanim)
+        {
+            agent.updateRotation = false;
+
+        }
         CahsedDESTINATION = artT;
+        IC = CahsedDESTINATION.gameObject.GetComponent<InteractionCentral>();
         agent.SetDestination(artT.position);
-        DoWalk(argDoWalk);
+
     }
-
-
     /*public*/
     bool IsMecanim;
-    bool _walk;
+
 
     private void Awake_agent()
     {
-        ReachedINITIALIZED = false;
-        Reached = true;
+
         agent = GetComponent<NavMeshAgent>();
 
         DWell_3rd_perCTRL = GetComponent<Dweller3rdPerson>();
@@ -606,7 +609,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
             print("POOP");
 
         }
-        DoWalk(false);
+
         //rotation is done by animated character
 
         if (IsMecanim)
@@ -614,43 +617,27 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
             agent.updateRotation = false;
 
         }
-    }
 
-    public void DoWalk(bool argWalk)
-    {
-        _walk = argWalk;
-        if (!_walk)
-        {
-            print("NOT WALK");
-            //DWell_3rd_perCTRL.Move(transform.position, false, false);
-        }
+        AgentIsAwake = true;
     }
 
 
-    int targetPoint = 0;
-    void USeAI2()
+    #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+    void Navigate()
     {
-        if (!agent.pathPending)
-        {
-            if (agent.remainingDistance <= agent.stoppingDistance)
-            {
-                if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
-                {
-                    // Done
-                    Debug.Log("Executes 2 times");
-                    DWell_3rd_perCTRL.Move(Vector3.zero, false, false);
-
-                }
-            }
-        }
-
-    }
-
-    void USeAI()
-    {
-
-
-        //   print("go");
+        if (!AgentIsAwake) return;
         if (agent.remainingDistance > agent.stoppingDistance)
         {
             DWell_3rd_perCTRL.Move(agent.desiredVelocity, false, false);
@@ -658,34 +645,31 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
         else //reached destination
         {
             DWell_3rd_perCTRL.Move(Vector3.zero, false, false);
-            if (!ReachedINITIALIZED)
+            if (!AgentReachedDestination)
             {
-                ReachedINITIALIZED = true;
-                return;
+                print("reached once");
+
+
+                IsMecanim = false;
+                if (IsMecanim)
+                {
+                    agent.updateRotation = true;
+
+                }
+
+
+
+                AgentReachedDestination = true;
             }
-            //  WarpMe_to(CahsedDESTINATION);
-
-            if (!Reached)
+            if (!IsMecanim)
             {
-                //DWell_3rd_perCTRL.Move(Vector3.zero, false, false);
-
-                InteractionCentral IC = CahsedDESTINATION.gameObject.GetComponent<InteractionCentral>();
-                if (IC == null)
-                {
-                    Debug.Log("this target is not interactible");
-                }
-                else
+                if (IC != null)
                 {
 
-                    //  this.transform.LookAt(IC.GetLookTarg());
-                    // AnimatorPlay(IC.argActionString);
+                    transform.LookAt(IC.GetLookTarg());
 
-                    DWell_3rd_perCTRL.ManualStartAnim(IC.argActionString);
-                    print("reached");
-                    Reached = true;
+                    AnimatorPlay(IC.argActionString);
                 }
-
-
             }
 
         }
@@ -693,21 +677,13 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     }
 
 
-    public void WarpMe_to(Transform argDest)
-    {
-        agent.Warp(argDest.position);
-    }
+
 
     public void AnimatorPlay(string argname)
     {
-        //may need to 
-
-        _MyAnimator.Play(argname);
-        //  agent.SetDestination(Vector3.zero);
-        // DWell_3rd_perCTRL.Move(transform.position, false, false);
-        DoWalk(false);
-        agent.isStopped = true;
         print("play" + argname);
+        _MyAnimator.Play(argname, 0);
+
     }
 
     public void ResumAgent()
