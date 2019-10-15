@@ -1,4 +1,5 @@
 ﻿
+//#define Debug_On
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -199,8 +200,9 @@ public class AnimExtendedIcharTester : MonoBehaviour, ICharacterAnim
         }
 
         float D = Vector3.Dot(transform.right, (TargetLoooook.position - transform.position).normalized);
+#if Debug_On
         Debug.Log(D);
-
+#endif
         _myanim.SetFloat("Dot", D);
     }
 }
