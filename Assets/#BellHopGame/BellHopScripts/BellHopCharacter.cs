@@ -254,7 +254,7 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
         throw new NotImplementedException();
     }
 
-    public void MoveAgentTo(Transform artT, bool argDoWalk)
+    public void Plz_GOTO(Transform artT, bool argDoWalk)
     {
         throw new NotImplementedException();
     }

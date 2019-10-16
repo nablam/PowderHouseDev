@@ -13,8 +13,7 @@ public class TempAgentCTRL : MonoBehaviour
     void Start()
     {
 
-
-        Dweller.Invoke("Start_Agent", 1);
+        Dweller.Invoke("Activate_NAvAgent", 0.3f);
     }
 
     // Update is called once per frame
@@ -25,11 +24,11 @@ public class TempAgentCTRL : MonoBehaviour
             isMain = !isMain;
             if (isMain)
             {
-                Dweller.MoveAgentTo(MainInteraction.transform, true);
+                Dweller.Plz_GOTO(MainInteraction.transform, true);
             }
             else
             {
-                Dweller.MoveAgentTo(SecondaryInteraction.transform, true);
+                Dweller.Plz_GOTO(SecondaryInteraction.transform, true);
             }
 
 

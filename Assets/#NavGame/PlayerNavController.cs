@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿#define eseMEcanimOption
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityStandardAssets.Characters.ThirdPerson;
@@ -9,6 +10,7 @@ public class PlayerNavController : MonoBehaviour
     NavMeshAgent agent;
     Camera cam;
     ThirdPersonCharacter character;
+
     public bool IsMecanim;
     public Joystick Jstk;
     public bool IsJoyStick;

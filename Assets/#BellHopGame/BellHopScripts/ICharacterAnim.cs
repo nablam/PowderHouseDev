@@ -27,13 +27,13 @@ public interface ICharacterAnim
     Transform GetMyRightHandHold();
     Transform GetMyLeftHandHold();
     void NotifyMeWheanAnimationStateExit();
-    GameObject TemMyGO();
+    //GameObject TemMyGO();
 
     void OnAnimationstateTaggedDoneExit();
 
 
     void WarpAgent(Transform artT);
-    void MoveAgentTo(Transform artT, bool argDoWalk);
+    void Plz_GOTO(Transform artT, bool argDoWalk);
 
     // void AgentMustSetTarget(Transform artT);
 }

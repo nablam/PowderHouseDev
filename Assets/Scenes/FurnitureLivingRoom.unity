@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -14403,26 +14403,7 @@ MonoBehaviour:
   Brown: {fileID: 2100000, guid: e958c3b7438bbea428275ac5b378d4db, type: 2}
   RightHandHoldPos: {fileID: 840832085129326128}
   LeftHandHoldPos: {fileID: 840832085419036089}
-  _id: 0
   _myFinalResidenceFloorNumber: 0
-  _gender: 0
-  BodyRenderer: {fileID: 0}
-  _CurHeldObject: {fileID: 0}
-  _CurReceivedObject: {fileID: 0}
-  ShirtPtr: {fileID: 0}
-  PantsPtr: {fileID: 0}
-  _initiallyAssignedAtSceneBuild: {fileID: 0}
-  _MyAnimator: {fileID: 0}
-  agent: {fileID: 0}
-  AgentIsAwake: 0
-  AgentReachedDestination: 0
-  DWell_3rd_perCTRL: {fileID: 0}
-  OriginalRot: {x: 0, y: 0, z: 0, w: 0}
-  PlayingAnimState: 
-  _mystate: 0
-  CahsedDESTINATION: {fileID: 0}
-  IC: {fileID: 0}
-  IsMecanim: 0
 --- !u!4 &840832084814832197
 Transform:
   m_ObjectHideFlags: 0
@@ -14459,11 +14440,11 @@ GameObject:
   - component: {fileID: 840832084814832197}
   - component: {fileID: 840832084814832194}
   - component: {fileID: 840832084814832195}
+  - component: {fileID: 7502467268122602311}
+  - component: {fileID: 7727804635586240241}
+  - component: {fileID: 840832084814832222}
   - component: {fileID: 840832084814832192}
   - component: {fileID: 840832084814832193}
-  - component: {fileID: 840832084814832222}
-  - component: {fileID: 7727804635586240241}
-  - component: {fileID: 7502467268122602311}
   m_Layer: 10
   m_Name: BaseAnimal (Nav)
   m_TagString: Dweller
@@ -14491,9 +14472,6 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 1
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.2
-  waypoints: []
-  TRANSs: []
-  SpecMat: {fileID: 2100000, guid: 9952de548c00d4949a21d49a0b24530f, type: 2}
 --- !u!4 &840832084837138770
 Transform:
   m_ObjectHideFlags: 0

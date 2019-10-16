@@ -64,8 +64,8 @@ public class HotelFloor : MonoBehaviour
     {
         //        print("agent init  " + FloorDweller.Id + " " + FloorDweller.name);
         //FloorDweller.gameObject.GetComponent<NavMeshAgent>().enabled = true;
-        FloorDweller.Start_Agent();
-        FloorDweller.MoveAgentTo(TRAN_DoorStep, false);//<false just sets dest , no walking
+        FloorDweller.Activate_NAvAgent();
+        FloorDweller.Plz_GOTO(TRAN_DoorStep, false);//<false just sets dest , no walking
         FloorDweller.WarpAgent(TRAN_DoorStep);
 
 
@@ -73,7 +73,7 @@ public class HotelFloor : MonoBehaviour
 
     public void SetInitDest()
     {
-        FloorDweller.MoveAgentTo(TRAN_DoorStep, false);//<false just sets dest , no walking
+        FloorDweller.Plz_GOTO(TRAN_DoorStep, false);//<false just sets dest , no walking
     }
 
     public void WarpInit()
@@ -87,14 +87,14 @@ public class HotelFloor : MonoBehaviour
 
         if (cnt == 0)
         {
-            FloorDweller.MoveAgentTo(TRAN_SecondaryPos, true);
+            FloorDweller.Plz_GOTO(TRAN_SecondaryPos, true);
         }
         else
-            if (cnt == 1) { FloorDweller.MoveAgentTo(TRAN_SpawnPos, true); }
+            if (cnt == 1) { FloorDweller.Plz_GOTO(TRAN_SpawnPos, true); }
         else
-        if (cnt == 2) { FloorDweller.MoveAgentTo(TRAN_InteractibleMainPos, true); }
+        if (cnt == 2) { FloorDweller.Plz_GOTO(TRAN_InteractibleMainPos, true); }
         else
-            if (cnt == 3) { FloorDweller.MoveAgentTo(TRAN_DoorStep, true); }
+            if (cnt == 3) { FloorDweller.Plz_GOTO(TRAN_DoorStep, true); }
 
         cnt++;
 

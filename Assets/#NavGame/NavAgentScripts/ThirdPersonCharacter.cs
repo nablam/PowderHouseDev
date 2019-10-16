@@ -77,9 +77,28 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             ScaleCapsuleForCrouching(crouch);
             PreventStandingInLowHeadroom();
-
+            print("X " + move.x + "|  T " + m_TurnAmount);
             // send input and other state parameters to the animator
             UpdateAnimator(move);
+        }
+
+        public void JustTurn(Vector3 argDirection)
+        {
+
+            // convert the world relative moveInput vector into a local-relative
+            // turn amount and forward amount required to head in the desired
+            // direction.
+            if (argDirection.magnitude > 1f) argDirection.Normalize();
+            argDirection = transform.InverseTransformDirection(argDirection);
+            CheckGroundStatus();
+            argDirection = Vector3.ProjectOnPlane(argDirection, m_GroundNormal);
+            argDirection.z = 0.25f;
+            m_TurnAmount = Mathf.Atan2(argDirection.x, argDirection.z);
+            m_ForwardAmount = argDirection.z * -1f;
+            ApplyExtraTurnRotationPURE();
+            // send input and other state parameters to the animator
+            UpdateAnimator(argDirection);
+            print("x " + argDirection.x + "|  t " + m_TurnAmount);
         }
 
 
@@ -194,6 +213,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
         }
 
+        void ApplyExtraTurnRotationPURE()
+        {
+            // help the character turn faster (this is in addition to root rotation in the animation)
+            float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, 0.6f);
+            transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
+        }
+
 
         public void OnAnimatorMove()
         {
@@ -215,7 +241,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             RaycastHit hitInfo;
 #if UNITY_EDITOR
             // helper to visualise the ground check ray in the scene view
-            Debug.DrawLine(transform.position + (Vector3.up * 0.1f), transform.position + (Vector3.up * 0.1f) + (Vector3.down * m_GroundCheckDistance));
+            Debug.DrawLine(transform.position + (Vector3.up * 0.5f), transform.position + (Vector3.up * 0.5f) + (Vector3.down * m_GroundCheckDistance));
 #endif
             // 0.1f is a small offset to start the ray from inside the character
             // it is also good to note that the transform position in the sample assets is at the base of the character
