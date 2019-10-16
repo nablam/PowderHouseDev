@@ -7,6 +7,17 @@ using Random = UnityEngine.Random;
 
 public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
 {
+
+
+    enum AgentStates
+    {
+
+        NotInitialized,
+        Initialized,
+        MovingToTarget,
+        ReachedTargetAndDoinstuff,
+        WaitingForNextTask,
+    }
     #region PublicVars
     public string AnimalName;
     public string AnimalType;
@@ -399,6 +410,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
 
     private void OnEnable()
     {
+        _mystate = AgentStates.NotInitialized;
         Awake_agent();
     }
 
@@ -556,11 +568,20 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
 
 
     #region AGENT
+    AgentStates _mystate;
 
     void Update()
     {
-        Navigate();
+        if (_mystate == AgentStates.MovingToTarget)
+            DoNav();
+
+        else
+
+            if (_mystate == AgentStates.ReachedTargetAndDoinstuff)
+            Dostuff();
     }
+
+
     public void WarpAgent(Transform artT)
     {
         agent.Warp(artT.position);
@@ -570,6 +591,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     InteractionCentral IC;
     public void MoveAgentTo(Transform artT, bool argDoWalk)
     {
+        _mystate = AgentStates.MovingToTarget;
         AgentReachedDestination = false;
         IsMecanim = true;
         if (IsMecanim)
@@ -619,6 +641,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
         }
 
         AgentIsAwake = true;
+        _mystate = AgentStates.Initialized;
     }
 
 
@@ -628,9 +651,31 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
 
 
 
+    void DoNav()
+    {
+        agent.updateRotation = false;
+        if (agent.remainingDistance > agent.stoppingDistance)
+        {
+            DWell_3rd_perCTRL.Move(agent.desiredVelocity, false, false);
+        }
+        else
+        {
+            _mystate = AgentStates.ReachedTargetAndDoinstuff;
+        }
+    }
 
+    void Dostuff()
+    {
+        DWell_3rd_perCTRL.Move(Vector3.zero, false, false);
+        agent.updateRotation = true;
+        if (IC != null)
+        {
 
+            transform.LookAt(IC.GetLookTarg());
 
+            AnimatorPlay(IC.argActionString);
+        }
+    }
 
 
 
