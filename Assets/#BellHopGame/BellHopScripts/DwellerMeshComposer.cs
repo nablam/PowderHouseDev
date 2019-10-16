@@ -1,6 +1,7 @@
 ﻿//define DebugOn
 //#define UseMEcanimOption
 using System;
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -533,6 +534,9 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     public void OnAnimationstateTaggedDoneExit()
     {
         print("OnAnimationstateTaggedDoneExit ");
+        // wait for responce from nada tag done
+
+        StartCoroutine(Wait2secondsToclearStartanim2());
 
     }
 
@@ -549,20 +553,56 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     }
 
 
-
+    Transform SavedTarget;
     public void Plz_GOTO(Transform artT, bool argDoWalk)
     {
-
-        _A_C_coordinator.DoUseAi = argDoWalk;
-
-        if (argDoWalk)
+        if (_A_C_coordinator.Mystate() == GameEnums.AgentStates.Initialized || _A_C_coordinator.Mystate() == GameEnums.AgentStates.MovingToTarget || _A_C_coordinator.Mystate() == GameEnums.AgentStates.RotatingToPlace)
         {
-            _A_C_coordinator.ResetAgent();
-            _A_C_coordinator.Set_Destination(artT);
+            DirrectGoTOTarg(artT);
+
         }
+        else
+             if (_A_C_coordinator.Mystate() == GameEnums.AgentStates.Interacting)
+        {
+            SavedTarget = artT;
+            Interupt_then_GOTO(artT);
+
+        }
+
+    }
+
+    void DirrectGoTOTarg(Transform artT)
+    {
+        _A_C_coordinator.DoUseAi = true;
+
+
+        _A_C_coordinator.ResetAgent();
+        _A_C_coordinator.Set_Destination(artT);
+
         _A_C_coordinator.Set_TargetTRans(artT);
     }
 
+    public void Interupt_then_GOTO(Transform artT)
+    {
+        //wait 2 secinds, 
+        StartCoroutine(Wait2secondsToclearStartanim());
+        //trigger move on, 
+        // wait for responce from nada tag done
+
+    }
+    IEnumerator Wait2secondsToclearStartanim()
+    {
+
+        yield return new WaitForSeconds(2f);
+        _MyAnimator.SetTrigger("TrigMoveOn");
+    }
+    IEnumerator Wait2secondsToclearStartanim2()
+    {
+
+        yield return new WaitForSeconds(1f);
+        DirrectGoTOTarg(SavedTarget);
+
+    }
 
 
     public void Activate_NAvAgent()

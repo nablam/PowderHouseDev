@@ -270,4 +270,12 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
     {
         throw new NotImplementedException();
     }
+
+    public void Interupt_then_GOTO(Transform artT)
+    {
+
+        throw new NotImplementedException();
+    }
 }
+
+

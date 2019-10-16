@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.AI;
+using static GameEnums;
 
 public class DwellerAgentCharacterCoordinator : MonoBehaviour
 {
@@ -17,18 +18,11 @@ public class DwellerAgentCharacterCoordinator : MonoBehaviour
     public bool DoUseAi;
     bool NOtStartedWalking;
     bool arrived;
-    enum AgentStates
-    {
 
-        NotInitialized,
-        Initialized,
-
-        MovingToTarget,
-        RotatingToPlace,
-        Interacting,
-
-    }
     Action OnRotationComplete;
+
+    public AgentStates Mystate() { return _mystate; }
+
     void RotationCompleted()
     {
         print("fin trn");

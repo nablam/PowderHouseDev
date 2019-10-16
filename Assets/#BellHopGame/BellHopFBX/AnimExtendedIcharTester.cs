@@ -95,6 +95,10 @@ public class AnimExtendedIcharTester : MonoBehaviour, ICharacterAnim
     {
         throw new NotImplementedException();
     }
+    public void Interupt_then_GOTO(Transform artT)
+    {
+        throw new NotImplementedException();
+    }
     #endregion
     // Start is called before the first frame update
 

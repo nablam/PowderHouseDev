@@ -300,4 +300,16 @@
     //    TrigCome
 
     //}
+
+    public enum AgentStates
+    {
+
+        NotInitialized,
+        Initialized,
+
+        MovingToTarget,
+        RotatingToPlace,
+        Interacting,
+
+    }
 }
