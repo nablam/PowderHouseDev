@@ -97,27 +97,32 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 
 
-            if (Mathf.Abs(m_TurnAmount) > 0.1f)
-            {
-                argDirection.z = 0.25f;
-                m_TurnAmount = Mathf.Atan2(argDirection.x, argDirection.z);
-                m_ForwardAmount = argDirection.z * 0f;
 
-                UpdateAnimator(argDirection);
-                return;
-            }
-            else
-            {
-                argDirection.z = 0.25f;
-                m_TurnAmount = Mathf.Atan2(argDirection.x, argDirection.z);
-                m_ForwardAmount = argDirection.z * -1f;
 
-                print(Mathf.Abs(m_TurnAmount));
-                ApplyExtraTurnRotationPURE();
-                // send input and other state parameters to the animator
-                // UpdateAnimator(argDirection);
-            }
-            // print("x " + argDirection.x + "|  t " + m_TurnAmount);
+            m_TurnAmount = Mathf.Atan2(argDirection.x, argDirection.z);
+            m_ForwardAmount = argDirection.z * -m_TurnAmount / 10f;
+
+            UpdateAnimator(argDirection);
+            ApplyExtraTurnRotationPURE();
+
+            //if (Mathf.Abs(m_TurnAmount) > 0.1f)
+            //{
+            //    argDirection.z = 0.25f;
+
+            //    return;
+            //}
+            //else
+            //{
+            //    argDirection.z = 0.25f;
+            //    m_TurnAmount = Mathf.Atan2(argDirection.x, argDirection.z);
+            //    m_ForwardAmount = argDirection.z * -1f;
+
+            //    print(Mathf.Abs(m_TurnAmount));
+
+            //    // send input and other state parameters to the animator
+            //    // UpdateAnimator(argDirection);
+            //}
+            //// print("x " + argDirection.x + "|  t " + m_TurnAmount);
 
         }
 
