@@ -240,8 +240,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (tothis < 0.05f)
             {
                 if (!reachedRot)
+                {
                     print("fin trn");
-                reachedRot = true;
+                    reachedRot = true;
+                }
             }
         }
 
