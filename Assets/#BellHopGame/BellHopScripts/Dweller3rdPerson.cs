@@ -19,9 +19,9 @@ public class Dweller3rdPerson : ThirdPersonCharacter
         base.Move(move, false, false);
     }
 
-    public new void JustTurn(Vector3 move)
+    public void JustTurn(Vector3 move)
     {
-        base.JustTurn(move);
+        base.JustTurnBack(move);
     }
     public void ManualStartAnim(string animationName)
     {

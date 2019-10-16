@@ -82,8 +82,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             UpdateAnimator(move);
         }
 
-        public void JustTurn(Vector3 argDirection)
+        public void JustTurnBack(Vector3 argDirection)
         {
+
+
 
             // convert the world relative moveInput vector into a local-relative
             // turn amount and forward amount required to head in the desired
@@ -92,13 +94,31 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             argDirection = transform.InverseTransformDirection(argDirection);
             CheckGroundStatus();
             argDirection = Vector3.ProjectOnPlane(argDirection, m_GroundNormal);
-            argDirection.z = 0.25f;
-            m_TurnAmount = Mathf.Atan2(argDirection.x, argDirection.z);
-            m_ForwardAmount = argDirection.z * -1f;
-            ApplyExtraTurnRotationPURE();
-            // send input and other state parameters to the animator
-            UpdateAnimator(argDirection);
-            print("x " + argDirection.x + "|  t " + m_TurnAmount);
+
+
+
+            if (Mathf.Abs(m_TurnAmount) > 0.1f)
+            {
+                argDirection.z = 0.25f;
+                m_TurnAmount = Mathf.Atan2(argDirection.x, argDirection.z);
+                m_ForwardAmount = argDirection.z * 0f;
+
+                UpdateAnimator(argDirection);
+                return;
+            }
+            else
+            {
+                argDirection.z = 0.25f;
+                m_TurnAmount = Mathf.Atan2(argDirection.x, argDirection.z);
+                m_ForwardAmount = argDirection.z * -1f;
+
+                print(Mathf.Abs(m_TurnAmount));
+                ApplyExtraTurnRotationPURE();
+                // send input and other state parameters to the animator
+                // UpdateAnimator(argDirection);
+            }
+            // print("x " + argDirection.x + "|  t " + m_TurnAmount);
+
         }
 
 

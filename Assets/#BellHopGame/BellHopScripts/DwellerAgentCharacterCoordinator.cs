@@ -51,19 +51,24 @@ public class DwellerAgentCharacterCoordinator : MonoBehaviour
 
         AgentIsAwake = true;
     }
-    void Update()
+    void FixedUpdate()
     {
         if (CahsedDESTINATION == null) return;
+        TempOnlyTurnBackCharacter();
 
-        Vector3 Direction = CahsedDESTINATION.position - this.transform.position;
-        character.JustTurn(Direction.normalized);
-        Debug.DrawRay(transform.position + new Vector3(0, 1f, 0), Direction, Color.red, 0.1f);
     }
 
     void TempOnlyUseCahar()
     {
         Vector3 Direction = CahsedDESTINATION.position - this.transform.position;
         character.Move(Direction.normalized, false, false);
+        Debug.DrawRay(transform.position + new Vector3(0, 1f, 0), Direction, Color.red, 0.1f);
+    }
+
+    void TempOnlyTurnBackCharacter()
+    {
+        Vector3 Direction = CahsedDESTINATION.position - this.transform.position;
+        character.JustTurn(Direction.normalized);
         Debug.DrawRay(transform.position + new Vector3(0, 1f, 0), Direction, Color.red, 0.1f);
     }
     void USeAI()
