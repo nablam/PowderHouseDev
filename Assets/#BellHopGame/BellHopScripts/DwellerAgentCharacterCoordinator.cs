@@ -13,7 +13,7 @@ public class DwellerAgentCharacterCoordinator : MonoBehaviour
     AgentStates _mystate;
     Transform CahsedDESTINATION = null;
     InteractionCentral IC;
-    public bool UseAI;
+    public bool DoUseAi;
     bool NOtStartedWalking;
     bool arrived;
     enum AgentStates
@@ -21,9 +21,11 @@ public class DwellerAgentCharacterCoordinator : MonoBehaviour
 
         NotInitialized,
         Initialized,
+
         MovingToTarget,
-        ReachedTargetAndDoinstuff,
-        WaitingForNextTask,
+        RotatingToPlace,
+        Interacting,
+
     }
     private void OnEnable()
     {
@@ -53,12 +55,14 @@ public class DwellerAgentCharacterCoordinator : MonoBehaviour
             print("POOP");
 
         AgentIsAwake = true;
+
+        _mystate = AgentStates.Initialized;
     }
     void FixedUpdate()
     {
         if (CahsedDESTINATION == null) return;
 
-        if (UseAI) USeAI();
+        if (DoUseAi) USeAI();
         else
             TempOnlyTurnBackCharacter();
 
@@ -73,9 +77,14 @@ public class DwellerAgentCharacterCoordinator : MonoBehaviour
 
     void TempOnlyTurnBackCharacter()
     {
-        Vector3 Direction = CahsedDESTINATION.position - this.transform.position;
+        IC = CahsedDESTINATION.gameObject.GetComponent<InteractionCentral>();
+        if (IC == null)
+        {
+            Debug.Log("NOT AN INTERACTION CENTRAL!");
+        }
+        Vector3 Direction = IC.GetLookTarg().position - this.transform.position;
         character.JustTurn(Direction.normalized);
-        Debug.DrawRay(transform.position + new Vector3(0, 1f, 0), Direction, Color.red, 0.1f);
+        Debug.DrawRay(new Vector3(transform.position.x, 1f, transform.position.z), new Vector3(Direction.x, 0f, Direction.z), Color.red, 0.1f);
     }
     void USeAI()
     {
@@ -89,6 +98,7 @@ public class DwellerAgentCharacterCoordinator : MonoBehaviour
             if (!NOtStartedWalking)
             {
                 print("started Nav To TArget");
+                _mystate = AgentStates.MovingToTarget;
                 NOtStartedWalking = true;
             }
             character.Move(Vector3.zero, false, false);
@@ -113,7 +123,10 @@ public class DwellerAgentCharacterCoordinator : MonoBehaviour
                     if (!arrived)
                     {
                         print("NOW WE HERE");
+                        DoUseAi = false;
                         arrived = true;
+                        character.Reset_ReachedRot();
+                        _mystate = AgentStates.RotatingToPlace;
                     }
                 }
             }

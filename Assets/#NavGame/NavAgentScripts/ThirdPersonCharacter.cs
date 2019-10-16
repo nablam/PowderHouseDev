@@ -30,7 +30,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         CapsuleCollider m_Capsule;
         bool m_Crouching;
 
-
+        bool reachedRot = false;
         public void Start()
         {
 
@@ -85,11 +85,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public void JustTurnBack(Vector3 argDirection)
         {
 
+            //float D = Vector3.Dot(transform.forward, (transform.position - argDirection).normalized);
+
+            //Debug.Log(D);
 
 
-            // convert the world relative moveInput vector into a local-relative
-            // turn amount and forward amount required to head in the desired
-            // direction.
+
             if (argDirection.magnitude > 1f) argDirection.Normalize();
             argDirection = transform.InverseTransformDirection(argDirection);
             CheckGroundStatus();
@@ -102,27 +103,17 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             m_TurnAmount = Mathf.Atan2(argDirection.x, argDirection.z);
             m_ForwardAmount = argDirection.z * -m_TurnAmount / 10f;
 
+
+
             UpdateAnimator(argDirection);
             ApplyExtraTurnRotationPURE();
 
-            //if (Mathf.Abs(m_TurnAmount) > 0.1f)
+            //if (m_ForwardAmount < 0.05f)
             //{
-            //    argDirection.z = 0.25f;
-
-            //    return;
+            //    // Debug.Log("ReachedRot");
             //}
-            //else
-            //{
-            //    argDirection.z = 0.25f;
-            //    m_TurnAmount = Mathf.Atan2(argDirection.x, argDirection.z);
-            //    m_ForwardAmount = argDirection.z * -1f;
 
-            //    print(Mathf.Abs(m_TurnAmount));
 
-            //    // send input and other state parameters to the animator
-            //    // UpdateAnimator(argDirection);
-            //}
-            //// print("x " + argDirection.x + "|  t " + m_TurnAmount);
 
         }
 
@@ -242,8 +233,19 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             // help the character turn faster (this is in addition to root rotation in the animation)
             float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, 0.6f);
-            transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
+            float tothis = m_TurnAmount * turnSpeed * Time.deltaTime;
+            transform.Rotate(0, tothis, 0);
+
+            //print(tothis);
+            if (tothis < 0.05f)
+            {
+                if (!reachedRot)
+                    print("fin trn");
+                reachedRot = true;
+            }
         }
+
+        public void Reset_ReachedRot() { reachedRot = false; }
 
 
         public void OnAnimatorMove()

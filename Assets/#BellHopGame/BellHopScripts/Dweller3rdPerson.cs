@@ -23,6 +23,8 @@ public class Dweller3rdPerson : ThirdPersonCharacter
     {
         base.JustTurnBack(move);
     }
+
+
     public void ManualStartAnim(string animationName)
     {
 
