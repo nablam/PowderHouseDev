@@ -77,7 +77,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             ScaleCapsuleForCrouching(crouch);
             PreventStandingInLowHeadroom();
-            print("X " + move.x + "|  T " + m_TurnAmount);
+            //print("X " + move.x + "|  T " + m_TurnAmount);
             // send input and other state parameters to the animator
             UpdateAnimator(move);
         }

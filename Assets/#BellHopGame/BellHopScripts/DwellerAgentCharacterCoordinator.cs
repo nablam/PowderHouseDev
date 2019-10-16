@@ -13,6 +13,9 @@ public class DwellerAgentCharacterCoordinator : MonoBehaviour
     AgentStates _mystate;
     Transform CahsedDESTINATION = null;
     InteractionCentral IC;
+    public bool UseAI;
+    bool NOtStartedWalking;
+    bool arrived;
     enum AgentStates
     {
 
@@ -54,7 +57,10 @@ public class DwellerAgentCharacterCoordinator : MonoBehaviour
     void FixedUpdate()
     {
         if (CahsedDESTINATION == null) return;
-        TempOnlyTurnBackCharacter();
+
+        if (UseAI) USeAI();
+        else
+            TempOnlyTurnBackCharacter();
 
     }
 
@@ -74,27 +80,56 @@ public class DwellerAgentCharacterCoordinator : MonoBehaviour
     void USeAI()
     {
 
-
-
         if (agent.remainingDistance > agent.stoppingDistance)
         {
             character.Move(agent.desiredVelocity, false, false);
         }
         else //reached destination
         {
+            if (!NOtStartedWalking)
+            {
+                print("started Nav To TArget");
+                NOtStartedWalking = true;
+            }
             character.Move(Vector3.zero, false, false);
+            //
         }
 
+
+
+        CheckIfReached();
+
+    }
+
+    void CheckIfReached()
+    {
+
+        if (!agent.pathPending)
+        {
+            if (agent.remainingDistance <= agent.stoppingDistance)
+            {
+                if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                {
+                    if (!arrived)
+                    {
+                        print("NOW WE HERE");
+                        arrived = true;
+                    }
+                }
+            }
+        }
     }
 
     public void Set_TargetTRans(Transform artT)
     {
         CahsedDESTINATION = artT;
 
-    }
-    void Set_Destination(Transform argDest)
-    {
 
+    }
+    public void Set_Destination(Transform argDest)
+    {
+        NOtStartedWalking = false;
+        arrived = false;
         agent.SetDestination(argDest.position);
     }
 
@@ -103,6 +138,10 @@ public class DwellerAgentCharacterCoordinator : MonoBehaviour
         agent.Warp(argDest.position);
     }
 
+    public void ResetAgent()
+    {
+        agent.ResetPath();
+    }
 
 
 

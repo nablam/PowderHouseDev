@@ -22218,6 +22218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e423525cb4d5ee645b585e8fb424ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UseAI: 0
 --- !u!4 &7504469634413886560
 Transform:
   m_ObjectHideFlags: 0
@@ -22468,7 +22469,7 @@ NavMeshAgent:
   m_Acceleration: 1
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0.1
+  m_StoppingDistance: 0.25
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

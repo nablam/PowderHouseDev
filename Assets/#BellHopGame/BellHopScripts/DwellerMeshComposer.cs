@@ -553,6 +553,13 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     public void Plz_GOTO(Transform artT, bool argDoWalk)
     {
 
+        _A_C_coordinator.UseAI = argDoWalk;
+
+        if (argDoWalk)
+        {
+            _A_C_coordinator.ResetAgent();
+            _A_C_coordinator.Set_Destination(artT);
+        }
         _A_C_coordinator.Set_TargetTRans(artT);
     }
 
