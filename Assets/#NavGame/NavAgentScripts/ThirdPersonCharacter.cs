@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
@@ -82,7 +83,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             UpdateAnimator(move);
         }
 
-        public void JustTurnBack(Vector3 argDirection)
+        public void JustTurnBack(Vector3 argDirection, string argNameAnimToPlayNext, Action argOnRotCompledCallBAck)
         {
 
             //float D = Vector3.Dot(transform.forward, (transform.position - argDirection).normalized);
@@ -106,7 +107,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 
             UpdateAnimator(argDirection);
-            ApplyExtraTurnRotationPURE();
+            ApplyExtraTurnRotationPURE(argNameAnimToPlayNext, argOnRotCompledCallBAck);
 
             //if (m_ForwardAmount < 0.05f)
             //{
@@ -229,7 +230,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
         }
 
-        void ApplyExtraTurnRotationPURE()
+        void ApplyExtraTurnRotationPURE(string argstr, Action argOnRotCompledCallBAck)
         {
             // help the character turn faster (this is in addition to root rotation in the animation)
             float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, 0.6f);
@@ -241,7 +242,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 if (!reachedRot)
                 {
-                    print("fin trn");
+                    //print("fin trn");
+                    argOnRotCompledCallBAck();
+                    m_Animator.Play(argstr, 0);
                     reachedRot = true;
                 }
             }

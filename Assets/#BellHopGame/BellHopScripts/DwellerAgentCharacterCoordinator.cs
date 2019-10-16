@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class DwellerAgentCharacterCoordinator : MonoBehaviour
@@ -25,6 +26,13 @@ public class DwellerAgentCharacterCoordinator : MonoBehaviour
         MovingToTarget,
         RotatingToPlace,
         Interacting,
+
+    }
+    Action OnRotationComplete;
+    void RotationCompleted()
+    {
+        print("fin trn");
+        _mystate = AgentStates.Interacting;
 
     }
     private void OnEnable()
@@ -83,7 +91,7 @@ public class DwellerAgentCharacterCoordinator : MonoBehaviour
             Debug.Log("NOT AN INTERACTION CENTRAL!");
         }
         Vector3 Direction = IC.GetLookTarg().position - this.transform.position;
-        character.JustTurn(Direction.normalized);
+        character.JustTurn(Direction.normalized, IC.argActionString, RotationCompleted);
         Debug.DrawRay(new Vector3(transform.position.x, 1f, transform.position.z), new Vector3(Direction.x, 0f, Direction.z), Color.red, 0.1f);
     }
     void USeAI()

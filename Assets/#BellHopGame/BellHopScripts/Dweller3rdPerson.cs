@@ -1,4 +1,5 @@
 ﻿//#define WayPoints
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityStandardAssets.Characters.ThirdPerson;
@@ -19,9 +20,9 @@ public class Dweller3rdPerson : ThirdPersonCharacter
         base.Move(move, false, false);
     }
 
-    public void JustTurn(Vector3 move)
+    public void JustTurn(Vector3 move, string NameOFAnimToplayOnFinished, Action argOnRotCompledCallBAck)
     {
-        base.JustTurnBack(move);
+        base.JustTurnBack(move, NameOFAnimToplayOnFinished, argOnRotCompledCallBAck);
     }
 
 
