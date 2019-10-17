@@ -89,6 +89,7 @@ public class GameSettings : MonoBehaviour
     string _sitChair = "SitChair";
     string _sitCCouch = "SitCouch";
     string _sitCross = "SitCross";
+    string _bedtime = "Bedtime";
 
     public string Toss { get => _toss; set => _toss = value; }
     public string Catch { get => _catch; set => _catch = value; }
@@ -127,6 +128,9 @@ public class GameSettings : MonoBehaviour
     public string SitChair { get => _sitChair; set => _sitChair = value; }
     public string SitCouch { get => _sitCCouch; set => _sitCCouch = value; }
     public string SitCross { get => _sitCross; set => _sitCross = value; }
+    public string Bedtime { get => _bedtime; set => _bedtime = value; }
+
+
     #endregion
 
     int _master_Number_of_Floors;
