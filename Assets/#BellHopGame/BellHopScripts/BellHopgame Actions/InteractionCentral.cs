@@ -9,6 +9,19 @@ public class InteractionCentral : MonoBehaviour
     void Start()
     {
         LookitHere = this.transform.GetChild(0);
+        string output = "";
+        if (argActionString == "Dance")
+        {
+            int rand = Random.Range(0, 13);
+            if (rand < 10)
+            {
+                output = "0" + rand.ToString();
+            }
+            else
+                output = rand.ToString();
+
+            argActionString += output;
+        }
     }
 
 
