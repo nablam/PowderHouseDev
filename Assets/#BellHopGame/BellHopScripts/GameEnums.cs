@@ -312,4 +312,13 @@
         Interacting,
 
     }
+
+    public enum RoomType
+    {
+        Bedroom,
+        Kitchen,
+        Livingroom,
+        Lab,
+
+    }
 }

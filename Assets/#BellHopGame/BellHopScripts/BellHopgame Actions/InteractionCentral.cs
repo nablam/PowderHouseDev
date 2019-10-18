@@ -4,11 +4,19 @@ public class InteractionCentral : MonoBehaviour
 {
 
     Transform LookitHere;
+    Transform ActionPos;
+
+
+
 
     public string argActionString;
+
+
+
     void Start()
     {
-        LookitHere = this.transform.GetChild(0);
+        ActionPos = this.transform.GetChild(0);
+        LookitHere = ActionPos.GetChild(0);
         string output = "";
         if (argActionString == "Dance")
         {
@@ -26,6 +34,11 @@ public class InteractionCentral : MonoBehaviour
 
 
     public Transform GetLookTarg()
+    {
+        return this.LookitHere;
+    }
+
+    public Transform GetActionPos()
     {
         return this.LookitHere;
     }
