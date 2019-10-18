@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8669,7 +8669,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62db7bec1ce90e74a96fc85d0a17d557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StarDance: {fileID: 0}
+  StarDance: {fileID: 882789036057973492, guid: 882246c0a48be57418aa1bdae39dd22f,
+    type: 3}
+  cornershelf_L: {fileID: 335949647794544414, guid: 4f680ed13e04fb8449a0d28bee35b59b,
+    type: 3}
+  cornershelf_R: {fileID: 7456662838791319110, guid: e14b52527991c6d4daacf1359b50ed24,
+    type: 3}
   StandaloneActions2x1:
   - {fileID: 8847633076109505742, guid: 7b9936205442bdc4f87b0456374c84bb, type: 3}
   - {fileID: 697363341388046951, guid: c7439108543f3c14986f8f8b8ae41774, type: 3}
@@ -8680,21 +8685,43 @@ MonoBehaviour:
   - {fileID: 4608538719037052497, guid: 698c24bd791df5c45b5a0a9b8c7bcb47, type: 3}
   - {fileID: 2513891620421543171, guid: 3f12e11ca6e5ebc449e817daaa331726, type: 3}
   - {fileID: 6433350131660000168, guid: 53bf1c7030b7550428f7cf77dd66eb6b, type: 3}
-  Kitchen2x1: []
-  Kitchen1x1: []
+  Kitchen2x1:
+  - {fileID: 4255302026105506666, guid: e746ca1d2b2aeed4b887566ac64c3ca7, type: 3}
+  - {fileID: 8212175994996227353, guid: 384b4b603c318fe45960057b54435a98, type: 3}
+  Kitchen1x1:
+  - {fileID: 6585944152068805376, guid: e216fba5ace9e3b468b36ffafd2dfb91, type: 3}
+  - {fileID: 5834988071108249199, guid: 36ec42d561f485c4f93e3817d8fb8480, type: 3}
+  - {fileID: 6463941368278673940, guid: 271dc386943d285419c625e2c526d70d, type: 3}
+  - {fileID: 7657923616771171674, guid: 43a4280ada0e423409b9981f732cc793, type: 3}
+  - {fileID: 933972037213076443, guid: 7e93451a232c2024b95c98e3c4da8ac7, type: 3}
   Bedroom2x1Action:
   - {fileID: 1913010178438860944, guid: 56d3fc1c4e749da439f47d0f4379f4e7, type: 3}
   - {fileID: 1214950581753892594, guid: 3680ed4368fc0f34aa7941eb64cf9cb6, type: 3}
-  Bedroom2x1: []
-  Bedroom1x1: []
+  Bedroom2x1:
+  - {fileID: 1392422666398752041, guid: 699b75505d1a5264da5548387228ed90, type: 3}
+  - {fileID: 1482305677698292005, guid: fa4f9e10a5fb4d7448695631c279d00c, type: 3}
+  - {fileID: 9025518543038558836, guid: 99acad8cfb14733409769b9f387da937, type: 3}
+  - {fileID: 2141870424941239072, guid: bfdef7a56471fae45ba7c7eb055943d1, type: 3}
+  Bedroom1x1:
+  - {fileID: 1755456594745034341, guid: 207a3a25b90df98489e5cc42d4e66a0f, type: 3}
+  - {fileID: 5401872728086333293, guid: 1bcf2bee06b614242adc117da067d573, type: 3}
   Livingroom2x1Action:
   - {fileID: 8330331579970361732, guid: 3528ce8dcd69bb24586821db7f9e6237, type: 3}
-  Livingroom2x1: []
-  Livingroom1x1: []
+  Livingroom2x1:
+  - {fileID: 6271974382578209977, guid: d5bca98633f4614418821637343caeb3, type: 3}
+  - {fileID: 575781890887618037, guid: adad38e7a97546c428f2f9263dcf8fe8, type: 3}
+  - {fileID: 9025518543038558836, guid: 99acad8cfb14733409769b9f387da937, type: 3}
+  - {fileID: 1482305677698292005, guid: fa4f9e10a5fb4d7448695631c279d00c, type: 3}
+  Livingroom1x1:
+  - {fileID: 6832309761244315266, guid: 23600feb88a66d94e8e565cf193b50f8, type: 3}
+  - {fileID: 7180805394177651727, guid: 7c6b282c8f89aec4188bdeff9a364fa9, type: 3}
   Lab2x1Action:
   - {fileID: 1397320170225422111, guid: 7524fd6ee38cf7d44a84c80723e05bc4, type: 3}
-  Lab2x1: []
-  Lab1x1: []
+  Lab2x1:
+  - {fileID: 575781890887618037, guid: adad38e7a97546c428f2f9263dcf8fe8, type: 3}
+  - {fileID: 6271974382578209977, guid: d5bca98633f4614418821637343caeb3, type: 3}
+  Lab1x1:
+  - {fileID: 2543265273133068832, guid: 2cee866b76fa67945855ed50ab1406cc, type: 3}
 --- !u!4 &478780893
 Transform:
   m_ObjectHideFlags: 0
