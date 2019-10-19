@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 62178420}
   - component: {fileID: 62178419}
   m_Layer: 0
-  m_Name: Deco_ToyTruck
+  m_Name: Deco_ToyTruck_toy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5080,7 +5080,7 @@ GameObject:
   - component: {fileID: 99249760}
   - component: {fileID: 99249759}
   m_Layer: 0
-  m_Name: Deco_Toybowlingball
+  m_Name: Deco_Toybowlingball_toy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5157,7 +5157,7 @@ GameObject:
   - component: {fileID: 156183644}
   - component: {fileID: 156183643}
   m_Layer: 0
-  m_Name: Deco_TV0_Mon
+  m_Name: Deco_TV0_tv
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5234,7 +5234,7 @@ GameObject:
   - component: {fileID: 190366018}
   - component: {fileID: 190366017}
   m_Layer: 0
-  m_Name: Deco_TV3_box
+  m_Name: Deco_TV3_tv
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5311,7 +5311,7 @@ GameObject:
   - component: {fileID: 231052890}
   - component: {fileID: 231052889}
   m_Layer: 0
-  m_Name: Deco_ToyBowlingball
+  m_Name: Deco_ToyBowlingball_toy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5388,7 +5388,7 @@ GameObject:
   - component: {fileID: 258379601}
   - component: {fileID: 258379600}
   m_Layer: 0
-  m_Name: Deco_Tubes
+  m_Name: Deco_Tubes_surf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5509,7 +5509,7 @@ GameObject:
   - component: {fileID: 276442144}
   - component: {fileID: 276442143}
   m_Layer: 0
-  m_Name: Deco_ToyBoat
+  m_Name: Deco_ToyBoat_toy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5619,7 +5619,7 @@ GameObject:
   - component: {fileID: 290860843}
   - component: {fileID: 290860842}
   m_Layer: 0
-  m_Name: Deco_GolfClubs
+  m_Name: Deco_GolfClubs_foor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5770,7 +5770,7 @@ GameObject:
   - component: {fileID: 317473169}
   - component: {fileID: 317473168}
   m_Layer: 0
-  m_Name: Deco_Vcr1
+  m_Name: Deco_Vcr1_surf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5847,7 +5847,7 @@ GameObject:
   - component: {fileID: 319945929}
   - component: {fileID: 319945928}
   m_Layer: 0
-  m_Name: Deco_DeskKeyboard_Surf
+  m_Name: Deco_DeskKeyboard_desk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6007,7 +6007,7 @@ GameObject:
   - component: {fileID: 379221940}
   - component: {fileID: 379221939}
   m_Layer: 0
-  m_Name: Deco_Floor_Oddbox
+  m_Name: Deco_Box4_box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6084,7 +6084,7 @@ GameObject:
   - component: {fileID: 395980886}
   - component: {fileID: 395980885}
   m_Layer: 0
-  m_Name: Deco_Books1_UP
+  m_Name: Deco_Books1_book
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6161,7 +6161,7 @@ GameObject:
   - component: {fileID: 402785653}
   - component: {fileID: 402785652}
   m_Layer: 0
-  m_Name: Deco_Books0_CS
+  m_Name: Deco_Books0_book
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6238,7 +6238,7 @@ GameObject:
   - component: {fileID: 405877609}
   - component: {fileID: 405877608}
   m_Layer: 0
-  m_Name: Deco_Lamp1
+  m_Name: Deco_Lamp1_bedside
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6392,7 +6392,7 @@ GameObject:
   - component: {fileID: 447701032}
   - component: {fileID: 447701031}
   m_Layer: 0
-  m_Name: Deco_ToyBall
+  m_Name: Deco_ToyBall_toy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6469,7 +6469,7 @@ GameObject:
   - component: {fileID: 471975019}
   - component: {fileID: 471975018}
   m_Layer: 0
-  m_Name: Deco_KitchenTopKnives
+  m_Name: Deco_KitchenTopKnives_surf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6644,7 +6644,7 @@ GameObject:
   - component: {fileID: 520991040}
   - component: {fileID: 520991039}
   m_Layer: 0
-  m_Name: Deco_Goblet
+  m_Name: Deco_Goblet_surf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6721,7 +6721,7 @@ GameObject:
   - component: {fileID: 532282445}
   - component: {fileID: 532282444}
   m_Layer: 0
-  m_Name: Deco_Books4_Fla
+  m_Name: Deco_Books4_book
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6798,7 +6798,7 @@ GameObject:
   - component: {fileID: 592669994}
   - component: {fileID: 592669993}
   m_Layer: 0
-  m_Name: Deco_Bottle
+  m_Name: Deco_Bottle_surf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7021,7 +7021,7 @@ GameObject:
   - component: {fileID: 660646331}
   - component: {fileID: 660646330}
   m_Layer: 0
-  m_Name: Deco_Mug
+  m_Name: Deco_Mug_surf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7098,7 +7098,7 @@ GameObject:
   - component: {fileID: 665426533}
   - component: {fileID: 665426532}
   m_Layer: 0
-  m_Name: Deco_Books5_Fla
+  m_Name: Deco_Books5_book
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7272,7 +7272,7 @@ GameObject:
   - component: {fileID: 767945256}
   - component: {fileID: 767945255}
   m_Layer: 0
-  m_Name: Deco_Purs3_han
+  m_Name: Deco_Purs3_surf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7349,7 +7349,7 @@ GameObject:
   - component: {fileID: 808162636}
   - component: {fileID: 808162635}
   m_Layer: 0
-  m_Name: Deco_ToyCd
+  m_Name: Deco_ToyCd_toy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7426,7 +7426,7 @@ GameObject:
   - component: {fileID: 811524701}
   - component: {fileID: 811524700}
   m_Layer: 0
-  m_Name: Deco_Console
+  m_Name: Deco_Console_surf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7503,7 +7503,7 @@ GameObject:
   - component: {fileID: 847373745}
   - component: {fileID: 847373744}
   m_Layer: 0
-  m_Name: Deco_Purs4_bag
+  m_Name: Deco_Purs4_surf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7580,7 +7580,7 @@ GameObject:
   - component: {fileID: 868616802}
   - component: {fileID: 868616801}
   m_Layer: 0
-  m_Name: Deco_TV2_FLA
+  m_Name: Deco_TV2_tv
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7751,7 +7751,7 @@ GameObject:
   - component: {fileID: 914466252}
   - component: {fileID: 914466251}
   m_Layer: 0
-  m_Name: Deco_ToyHelmet
+  m_Name: Deco_ToyHelmet_toy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7936,7 +7936,7 @@ GameObject:
   - component: {fileID: 972852188}
   - component: {fileID: 972852187}
   m_Layer: 0
-  m_Name: Deco_Stereo1
+  m_Name: Deco_Stereo1_surf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8013,7 +8013,7 @@ GameObject:
   - component: {fileID: 986288174}
   - component: {fileID: 986288173}
   m_Layer: 0
-  m_Name: Deco_Device
+  m_Name: Deco_Device_surf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8091,7 +8091,7 @@ GameObject:
   - component: {fileID: 1018694113}
   - component: {fileID: 1018694112}
   m_Layer: 0
-  m_Name: Deco_Microscope
+  m_Name: Deco_Microscope_surf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8245,7 +8245,7 @@ GameObject:
   - component: {fileID: 1047888077}
   - component: {fileID: 1047888076}
   m_Layer: 0
-  m_Name: Deco_Boombox
+  m_Name: Deco_Boombox_surf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8476,7 +8476,7 @@ GameObject:
   - component: {fileID: 1119640563}
   - component: {fileID: 1119640562}
   m_Layer: 0
-  m_Name: Deco_lamp3
+  m_Name: Deco_lamp3_bedside
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8553,7 +8553,7 @@ GameObject:
   - component: {fileID: 1128014663}
   - component: {fileID: 1128014662}
   m_Layer: 0
-  m_Name: Deco_DeskCup
+  m_Name: Deco_DeskCup_surf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8630,7 +8630,7 @@ GameObject:
   - component: {fileID: 1166353864}
   - component: {fileID: 1166353863}
   m_Layer: 0
-  m_Name: Deco_AlarmClock_surf
+  m_Name: Deco_AlarmClock_desk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8707,7 +8707,7 @@ GameObject:
   - component: {fileID: 1203948692}
   - component: {fileID: 1203948691}
   m_Layer: 0
-  m_Name: Deco_crate_box
+  m_Name: Deco_Box6_box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8784,7 +8784,7 @@ GameObject:
   - component: {fileID: 1206056714}
   - component: {fileID: 1206056713}
   m_Layer: 0
-  m_Name: Deco_Purs1_yel
+  m_Name: Deco_Purs1_surf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8938,7 +8938,7 @@ GameObject:
   - component: {fileID: 1234970864}
   - component: {fileID: 1234970863}
   m_Layer: 0
-  m_Name: Deco_Box3_Rack
+  m_Name: Deco_Box3_box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9062,7 +9062,7 @@ GameObject:
   - component: {fileID: 1352781233}
   - component: {fileID: 1352781232}
   m_Layer: 0
-  m_Name: Deco_Box0_basic
+  m_Name: Deco_Box0_box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9139,7 +9139,7 @@ GameObject:
   - component: {fileID: 1353754568}
   - component: {fileID: 1353754567}
   m_Layer: 0
-  m_Name: Deco_Bin_flor
+  m_Name: Deco_Box5_box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9403,7 +9403,7 @@ GameObject:
   - component: {fileID: 1505405238}
   - component: {fileID: 1505405237}
   m_Layer: 0
-  m_Name: Deco_TV1_FLA
+  m_Name: Deco_TV1_tv
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9480,7 +9480,7 @@ GameObject:
   - component: {fileID: 1533844753}
   - component: {fileID: 1533844752}
   m_Layer: 0
-  m_Name: Deco_Purs2_bla
+  m_Name: Deco_Purs2_surf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9557,7 +9557,7 @@ GameObject:
   - component: {fileID: 1547144098}
   - component: {fileID: 1547144097}
   m_Layer: 0
-  m_Name: Deco_ToyRocket
+  m_Name: Deco_ToyRocket_toy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9780,7 +9780,7 @@ GameObject:
   - component: {fileID: 1634361676}
   - component: {fileID: 1634361675}
   m_Layer: 0
-  m_Name: Deco_ToyBat
+  m_Name: Deco_ToyBat_toy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10083,7 +10083,7 @@ GameObject:
   - component: {fileID: 1722612547}
   - component: {fileID: 1722612546}
   m_Layer: 0
-  m_Name: Deco_DeskMat_surf
+  m_Name: Deco_DeskMat_desk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10160,7 +10160,7 @@ GameObject:
   - component: {fileID: 1752386543}
   - component: {fileID: 1752386542}
   m_Layer: 0
-  m_Name: Deco_Box2_Open
+  m_Name: Deco_Box2_box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10350,7 +10350,7 @@ GameObject:
   - component: {fileID: 1838132228}
   - component: {fileID: 1838132227}
   m_Layer: 0
-  m_Name: Deco_Books3_Fla
+  m_Name: Deco_Books3_bool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10465,7 +10465,7 @@ GameObject:
   - component: {fileID: 1926047421}
   - component: {fileID: 1926047420}
   m_Layer: 0
-  m_Name: Deco_Remote
+  m_Name: Deco_Remote_surf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10542,7 +10542,7 @@ GameObject:
   - component: {fileID: 1936594500}
   - component: {fileID: 1936594499}
   m_Layer: 0
-  m_Name: Deco_Books2_UP
+  m_Name: Deco_Books2_book
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10619,7 +10619,7 @@ GameObject:
   - component: {fileID: 1944603907}
   - component: {fileID: 1944603906}
   m_Layer: 0
-  m_Name: Deco_Purs0_pin
+  m_Name: Deco_Purs0_surf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10730,7 +10730,7 @@ GameObject:
   - component: {fileID: 1981869655}
   - component: {fileID: 1981869654}
   m_Layer: 0
-  m_Name: Deco_Box1_pink
+  m_Name: Deco_Box1_box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10853,7 +10853,7 @@ GameObject:
   - component: {fileID: 2026965355}
   - component: {fileID: 2026965354}
   m_Layer: 0
-  m_Name: Deco_Lamp2
+  m_Name: Deco_Lamp2_bedside
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11039,7 +11039,7 @@ GameObject:
   - component: {fileID: 2060498215}
   - component: {fileID: 2060498214}
   m_Layer: 0
-  m_Name: Deco_LampDesk
+  m_Name: Deco_Lamp4_desk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

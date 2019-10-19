@@ -18,10 +18,14 @@ public class quadsMaker : MonoBehaviour
         for (int x = 0; x < this.transform.childCount; x++)
         {
 
+            //string[] arra = this.transform.GetChild(x).gameObject.name.Split('_');
+            //print((arra.Length));
+            //if (arra.Length < 2) print(" less than 3" + this.transform.GetChild(x).gameObject.name);
+
             GameObject OBJ = new GameObject();
             GameObject Copy = Instantiate(this.transform.GetChild(x).gameObject);
             Copy.name = this.transform.GetChild(x).gameObject.name.Split('_')[1];
-            OBJ.name = "Dco_" + Copy.name;
+            OBJ.name = this.transform.GetChild(x).gameObject.name.Split('_')[2] + "_" + this.transform.GetChild(x).gameObject.name.Split('_')[1];
             Copy.transform.parent = OBJ.transform;
 
 
