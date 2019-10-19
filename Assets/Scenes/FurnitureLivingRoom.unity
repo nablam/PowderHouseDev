@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8711,6 +8711,7 @@ GameObject:
   m_Component:
   - component: {fileID: 478780893}
   - component: {fileID: 478780892}
+  - component: {fileID: 478780894}
   m_Layer: 0
   m_Name: __FFurnisher
   m_TagString: Untagged
@@ -8799,6 +8800,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &478780894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478780891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8955b2840211b549bc87fef8d1a7793, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChanceOfDeco: 90
+  Surfs:
+  - {fileID: 2536641023023989882, guid: 95fcdde048450294b93c9e7f601496ad, type: 3}
+  - {fileID: 4566621029691790655, guid: 595ded8ff4fa30a4c8c4ef931d7c2549, type: 3}
+  - {fileID: 2265895199356983192, guid: f8a9d4833b82c914893b3762b53b5c30, type: 3}
+  - {fileID: 414152192038354560, guid: 03f2ba5b9129b1749b1f1484a3aa31a7, type: 3}
+  - {fileID: 5357600267932738703, guid: fc2394609a617b04bb3828e0a83729ab, type: 3}
+  - {fileID: 6245323142986201302, guid: a4e4ae89ed89ec94f88e09a4789bda6b, type: 3}
+  - {fileID: 7295922194681440832, guid: bc6b2df45bca9c6458e3cf7c98b0931d, type: 3}
+  - {fileID: 6027832504683303539, guid: c340e8ba80c049e4199e51bec361f5fc, type: 3}
+  - {fileID: 8636370438689015535, guid: 335f41cd208ea7d45b2776cf05d93ebe, type: 3}
+  - {fileID: 7671855336839854658, guid: d2db7a4eb9ba6a8498bf23e37ff84d52, type: 3}
+  Toys:
+  - {fileID: 8745996347271638220, guid: 2c55cfd1f7d81bf40bf9eda382399bd3, type: 3}
+  - {fileID: 2364472916277623827, guid: 4b207508967cd75428913b98fe511496, type: 3}
+  - {fileID: 8553272382774169617, guid: 27bc35e968e4a9344bc5a809ffb92519, type: 3}
+  - {fileID: 4376317514473458424, guid: 6a8cd65afd1bd4e498f38f9cefa15aaf, type: 3}
+  - {fileID: 2833443144127570972, guid: ec0358f46837add4da637d955cecbb52, type: 3}
+  - {fileID: 275650419197337325, guid: 0e3c13e9368dfcf4e9b5e9d7ac1f79e1, type: 3}
+  - {fileID: 5458882632901806507, guid: 37631600c78274a43b385ca37e2ef749, type: 3}
+  - {fileID: 2364472916277623827, guid: 4b207508967cd75428913b98fe511496, type: 3}
+  - {fileID: 585660563396890043, guid: 64b2b84d07e0fc54990368467db42e28, type: 3}
+  - {fileID: 3058208614879515483, guid: 6a69fe9ea5456794f9aad16e9715194f, type: 3}
+  Rest:
+  - {fileID: 7501363427370700940, guid: 1590e1792eedd2c40ac75643695769e7, type: 3}
+  - {fileID: 1833113354069741456, guid: 828da6e6ca6257848acccef1e53f9f1c, type: 3}
+  - {fileID: 5927810201390829015, guid: f312a8ddb8cfd42498f4f2fae2abdab4, type: 3}
+  - {fileID: 985075129585779633, guid: 560854a7f79d7db4e80368284d34c293, type: 3}
+  - {fileID: 7111659545880682883, guid: b7d0ca45882ef7b41a039d4d0625ca7d, type: 3}
+  - {fileID: 2548607057810661574, guid: d051801c898fd074d8ea53dc1ff78983, type: 3}
+  - {fileID: 4448283365460071571, guid: bb98f59f86361004783a95e05d8af45a, type: 3}
+  - {fileID: 7260273218410251403, guid: 4345e88afc296044a92e0d47a8fe8c50, type: 3}
+  - {fileID: 2548607057810661574, guid: d051801c898fd074d8ea53dc1ff78983, type: 3}
+  - {fileID: 5927810201390829015, guid: f312a8ddb8cfd42498f4f2fae2abdab4, type: 3}
 --- !u!1 &613678701
 GameObject:
   m_ObjectHideFlags: 0

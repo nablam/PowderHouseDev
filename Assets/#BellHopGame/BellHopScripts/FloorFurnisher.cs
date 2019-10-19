@@ -43,9 +43,12 @@ public class FloorFurnisher : MonoBehaviour
 
     const int Width = 6;
     const int Height = 6;
+
+    FurnitureFurnisher _ff;
     // Start is called before the first frame update
     void Start()
     {
+        _ff = GetComponent<FurnitureFurnisher>();
         for (int y = 0; y < Height; y++)
         {
 
@@ -210,7 +213,7 @@ public class FloorFurnisher : MonoBehaviour
     bool StovePlaced = false;
     void Instantiate_a_1or2(int ursizeTouse, int Offset)
     {
-        GameObject FurnitureMesh;
+        GameObject FurnitureMesh = null;
         if (ursizeTouse == 1)
         {
 
@@ -238,6 +241,15 @@ public class FloorFurnisher : MonoBehaviour
             FurnitureMesh = Instantiate(Kitchen2x1[Random.Range(0, Kitchen2x1.Count)]);
             FurnitureMesh.transform.parent = Base00.transform;
             FurnitureMesh.transform.localPosition = new Vector3(Offset, 0, Height - 1);
+        }
+
+        if (FurnitureMesh == null)
+        {
+            print("no furniture made");
+        }
+        else
+        {
+            _ff.FurnishThis(FurnitureMesh);
         }
 
 
