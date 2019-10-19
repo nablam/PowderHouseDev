@@ -8,7 +8,7 @@ public class TempAgentCTRL : MonoBehaviour
     public InteractionCentral MainInteraction;
     public InteractionCentral SecondaryInteraction;
     // Start is called before the first frame update
-
+    public FloorFurnisher ff;
     bool isMain;
     void Start()
     {
@@ -19,19 +19,33 @@ public class TempAgentCTRL : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    isMain = !isMain;
+        //    if (isMain)
+        //    {
+        //        Dweller.Plz_GOTO(MainInteraction.transform, true);
+        //    }
+        //    else
+        //    {
+        //        Dweller.Plz_GOTO(SecondaryInteraction.transform, true);
+        //    }
+
+
+        //}
+
+        if (Input.GetKeyDown(KeyCode.A))
         {
+
             isMain = !isMain;
             if (isMain)
             {
-                Dweller.Plz_GOTO(MainInteraction.transform, true);
+                Dweller.Plz_GOTO(ff.GetMainAction().transform, true);
             }
             else
             {
-                Dweller.Plz_GOTO(SecondaryInteraction.transform, true);
+                Dweller.Plz_GOTO(ff.GetDanceAction().transform, true);
             }
-
-
         }
     }
 }

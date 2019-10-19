@@ -18,7 +18,7 @@ public class FurnitureFurnisher : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         All.AddRange(Surfs);
         All.AddRange(Rest);

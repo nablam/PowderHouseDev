@@ -34,10 +34,11 @@ public class FloorFurnisher : MonoBehaviour
     //-------------------------------------------
     GameObject ActionObj;
     InteractionCentral AoIC;
+    public InteractionCentral GetMainAction() { return this.AoIC; }
 
     GameObject DanceActionObj;
     InteractionCentral DanceAoIC;
-
+    public InteractionCentral GetDanceAction() { return this.DanceAoIC; }
     GameObject GreetingsActionObj;
     InteractionCentral GreetingsAoIC;
 
