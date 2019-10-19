@@ -10,8 +10,29 @@ public class quadsMaker : MonoBehaviour
 
     int cnt = 0;
     bool ismat1;
+    int chidrencnt;
     void Start()
     {
+
+
+        for (int x = 0; x < this.transform.childCount; x++)
+        {
+
+            GameObject OBJ = new GameObject();
+            GameObject Copy = Instantiate(this.transform.GetChild(x).gameObject);
+            Copy.name = this.transform.GetChild(x).gameObject.name.Split('_')[1];
+            OBJ.name = "Dco_" + Copy.name;
+            Copy.transform.parent = OBJ.transform;
+
+
+
+        }
+
+    }
+
+    void MAkeQuadGrid()
+    {
+
         for (int y = 0; y < 6; y++)
         {
             ismat1 = !ismat1;
@@ -36,7 +57,6 @@ public class quadsMaker : MonoBehaviour
                 }
             }
         }
-
     }
 
     // Update is called once per frame
