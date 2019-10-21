@@ -67,11 +67,26 @@ public class FloorFurnisher : MonoBehaviour
             }
         }
 
+
+        // BuildKichen();
+        // Build_BEdroom();
+        // Build_Livingroom();
+
+    }
+
+    public void BuildRoomType(GameEnums.RoomType argTypr)
+    {
+
         PlaceDance_All();
         PlaceGreetings_All(2);
-        // BuildKichen();
-        Build_BEdroom();
-        // Build_Livingroom();
+
+        if (argTypr == GameEnums.RoomType.Kitchen) { BuildKichen(); }
+        else
+                    if (argTypr == GameEnums.RoomType.Bedroom) { Build_BEdroom(); }
+        else
+                    if (argTypr == GameEnums.RoomType.Livingroom) { Build_Livingroom(); }
+        else
+                    if (argTypr == GameEnums.RoomType.Lab) { Build_Lab(); }
 
     }
 
@@ -95,6 +110,13 @@ public class FloorFurnisher : MonoBehaviour
         PlaceActionObj_andFillRow(Random.Range(2, Width), 5, Livingroom2x1Action, Livingroom1x1, Livingroom2x1);
     }
 
+    void Build_Lab()
+    {
+        _roomtypeToBuild = GameEnums.RoomType.Lab;
+        PlaceActionObj_andFillRow(Random.Range(0, Width), 5, Lab2x1Action, Lab1x1, Lab2x1);
+    }
+
+
     public bool[,] blueprint = new bool[Width, Height];
 
 
@@ -113,7 +135,7 @@ public class FloorFurnisher : MonoBehaviour
         blueprint[x + 1, y] = true;
 
         ActionObj = Instantiate(AcionObjs[Random.Range(0, AcionObjs.Count)]);
-        AoIC = ActionObj.GetComponent<InteractionCentral>();
+        AoIC = ActionObj.GetComponentInParent<InteractionCentral>();
         ActionObj.transform.parent = Base00.transform;
         ActionObj.transform.localPosition = new Vector3(x, 0, y);
 
@@ -152,7 +174,7 @@ public class FloorFurnisher : MonoBehaviour
         blueprint[x, y] = true; //reserves a path quad to access the dang spot
 
         GreetingsActionObj = Instantiate(Greatings);
-        GreetingsAoIC = GreetingsActionObj.GetComponent<InteractionCentral>();
+        GreetingsAoIC = GreetingsActionObj.GetComponentInParent<InteractionCentral>();
         GreetingsActionObj.transform.parent = Base00.transform;
         GreetingsActionObj.transform.localPosition = new Vector3(x, 0, y - 1);
     }
@@ -165,7 +187,7 @@ public class FloorFurnisher : MonoBehaviour
         blueprint[x, y] = true; //reserves a path quad to access the dang spot
 
         DanceActionObj = Instantiate(StarDance);
-        DanceAoIC = DanceActionObj.GetComponent<InteractionCentral>();
+        DanceAoIC = DanceActionObj.GetComponentInParent<InteractionCentral>();
         DanceActionObj.transform.parent = Base00.transform;
         DanceActionObj.transform.localPosition = new Vector3(x, 0, y);
     }

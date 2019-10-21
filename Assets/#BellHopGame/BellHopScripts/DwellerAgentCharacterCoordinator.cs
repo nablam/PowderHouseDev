@@ -13,6 +13,7 @@ public class DwellerAgentCharacterCoordinator : MonoBehaviour
     bool IsMecanim;
     //bool _activateUpdate;
     AgentStates _mystate;
+    [SerializeField]
     Transform CahsedDESTINATION = null;
     InteractionCentral IC;
     public bool DoUseAi;
@@ -79,7 +80,7 @@ public class DwellerAgentCharacterCoordinator : MonoBehaviour
 
     void TempOnlyTurnBackCharacter()
     {
-        IC = CahsedDESTINATION.gameObject.GetComponent<InteractionCentral>();
+        IC = CahsedDESTINATION.gameObject.GetComponentInParent<InteractionCentral>();
         if (IC == null)
         {
             Debug.Log("NOT AN INTERACTION CENTRAL!");

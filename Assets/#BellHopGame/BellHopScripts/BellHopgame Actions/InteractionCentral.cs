@@ -40,6 +40,6 @@ public class InteractionCentral : MonoBehaviour
 
     public Transform GetActionPos()
     {
-        return this.LookitHere;
+        return this.ActionPos;
     }
 }
