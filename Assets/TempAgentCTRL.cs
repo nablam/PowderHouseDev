@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TempAgentCTRL : MonoBehaviour
 {
@@ -33,6 +34,11 @@ public class TempAgentCTRL : MonoBehaviour
 
 
         //}
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            SceneManager.LoadScene("FurnitureLivingRoom");
+        }
 
         if (Input.GetKeyDown(KeyCode.A))
         {

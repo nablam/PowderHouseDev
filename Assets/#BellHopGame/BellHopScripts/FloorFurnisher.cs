@@ -12,21 +12,27 @@ public class FloorFurnisher : MonoBehaviour
 
     public List<GameObject> Kitchen2x1Action = new List<GameObject>();
     public List<GameObject> Kitchen2x1 = new List<GameObject>();
+    [Tooltip("MYST CONTAIN at least 2Mustplace objs")]
+
     public List<GameObject> Kitchen1x1 = new List<GameObject>();
 
 
     public List<GameObject> Bedroom2x1Action = new List<GameObject>();
     public List<GameObject> Bedroom2x1 = new List<GameObject>();
+    [Tooltip("MYST CONTAIN at least 2Mustplace objs")]
     public List<GameObject> Bedroom1x1 = new List<GameObject>();
 
 
     public List<GameObject> Livingroom2x1Action = new List<GameObject>();
     public List<GameObject> Livingroom2x1 = new List<GameObject>();
+    [Tooltip("MYST CONTAIN at least 2Mustplace objs")]
+
     public List<GameObject> Livingroom1x1 = new List<GameObject>();
 
 
     public List<GameObject> Lab2x1Action = new List<GameObject>();
     public List<GameObject> Lab2x1 = new List<GameObject>();
+    [Tooltip("MYST CONTAIN at least 2Mustplace objs")]
     public List<GameObject> Lab1x1 = new List<GameObject>();
 
 
@@ -47,6 +53,8 @@ public class FloorFurnisher : MonoBehaviour
 
     FurnitureFurnisher _ff;
     // Start is called before the first frame update
+
+    GameEnums.RoomType _roomtypeToBuild;
     void Start()
     {
         _ff = GetComponent<FurnitureFurnisher>();
@@ -61,19 +69,38 @@ public class FloorFurnisher : MonoBehaviour
 
         PlaceDance_All();
         PlaceGreetings_All(2);
-        PlaceActionObj_Kitchen(Random.Range(0, Width), 5);
-        // PlaceActionObj_Kitchen(5, 5);
+        // BuildKichen();
+        Build_BEdroom();
+        // Build_Livingroom();
+
+    }
+
+    void BuildKichen()
+    {
+        _roomtypeToBuild = GameEnums.RoomType.Kitchen;
+        PlaceActionObj_andFillRow(Random.Range(0, Width), 5, Kitchen2x1Action, Kitchen1x1, Kitchen2x1);
     }
 
 
+    void Build_BEdroom()
+    {
+        _roomtypeToBuild = GameEnums.RoomType.Bedroom;
+        PlaceActionObj_andFillRow(Random.Range(0, Width), 5, Bedroom2x1Action, Bedroom1x1, Bedroom2x1);
+    }
 
+    void Build_Livingroom()
+    {
+        _roomtypeToBuild = GameEnums.RoomType.Livingroom;
+        //allow couchspace
+        PlaceActionObj_andFillRow(Random.Range(2, Width), 5, Livingroom2x1Action, Livingroom1x1, Livingroom2x1);
+    }
 
     public bool[,] blueprint = new bool[Width, Height];
 
 
 
     public GameObject Base00;
-    void PlaceActionObj_Kitchen(int x, int y)
+    void PlaceActionObj_andFillRow(int x, int y, List<GameObject> AcionObjs, List<GameObject> OtherObjsOfSameType_X1, List<GameObject> OtherObjsOfSameType_X2)
     {
         //insure a 2x1 not placed out of bound
         if (x > Width - 2)
@@ -84,13 +111,14 @@ public class FloorFurnisher : MonoBehaviour
 
         blueprint[x, y] = true;
         blueprint[x + 1, y] = true;
-        ActionObj = Instantiate(Kitchen2x1Action[Random.Range(0, Kitchen2x1Action.Count)]);
+
+        ActionObj = Instantiate(AcionObjs[Random.Range(0, AcionObjs.Count)]);
         AoIC = ActionObj.GetComponent<InteractionCentral>();
         ActionObj.transform.parent = Base00.transform;
         ActionObj.transform.localPosition = new Vector3(x, 0, y);
 
 
-        FillLeftRight(x);
+        FillLeftRight(x, OtherObjsOfSameType_X1, OtherObjsOfSameType_X2);
     }
 
 
@@ -142,13 +170,13 @@ public class FloorFurnisher : MonoBehaviour
         DanceActionObj.transform.localPosition = new Vector3(x, 0, y);
     }
 
-    void FillLeftRight(int XposOf2x1Action)
+    void FillLeftRight(int XposOf2x1Action, List<GameObject> OtherObjsOfSameType_size1, List<GameObject> OtherObjsOfSameType_size2)
     {
 
         print(XposOf2x1Action);
-        BuildBase0(XposOf2x1Action, "le", 0);
+        BuildBase0(XposOf2x1Action, "le", 0, OtherObjsOfSameType_size1, OtherObjsOfSameType_size2);
 
-        BuildBase0(Width - (2 + XposOf2x1Action), "ri", (2 + XposOf2x1Action));
+        BuildBase0(Width - (2 + XposOf2x1Action), "ri", (2 + XposOf2x1Action), OtherObjsOfSameType_size1, OtherObjsOfSameType_size2);
         //if (XposOf2x1Action == 0) { BuildBase0(Width - (2 + XposOf2x1Action), "right", (2 + XposOf2x1Action)); }
         //else
         //if (XposOf2x1Action == Width - 2) { BuildBase0(XposOf2x1Action, "left", 0); }
@@ -162,7 +190,7 @@ public class FloorFurnisher : MonoBehaviour
 
     }
 
-    void BuildBase0(int upTo_Not_Including, string log, int CurInstOffset)
+    void BuildBase0(int upTo_Not_Including, string log, int CurInstOffset, List<GameObject> OtherObjsFiller_1, List<GameObject> OtherObjsFiller_2)
     {
         int CumBlocksLen = 0;
         int leftover = 0;
@@ -198,7 +226,7 @@ public class FloorFurnisher : MonoBehaviour
             }
 
             Debug.Log(curSizeTouse + log);
-            Instantiate_a_1or2(curSizeTouse, CumBlocksLen + CurInstOffset);
+            Instantiate_a_1or2(curSizeTouse, CumBlocksLen + CurInstOffset, OtherObjsFiller_1, OtherObjsFiller_2);
 
             //InstantiateBlockSizeForBackWall(curSizeTouse, CumBlocksLen, argX, Height);
             // argLeftest_X += curSizeTouse;
@@ -212,34 +240,103 @@ public class FloorFurnisher : MonoBehaviour
 
     bool fridgeplaced = false;
     bool StovePlaced = false;
-    void Instantiate_a_1or2(int ursizeTouse, int Offset)
+    void Instantiate_a_1or2(int ursizeTouse, int Offset, List<GameObject> OtherObjsFiller_x1, List<GameObject> OtherObjsFiller_x2)
     {
         GameObject FurnitureMesh = null;
         if (ursizeTouse == 1)
         {
 
-            if (!fridgeplaced && !StovePlaced)
-            {
-                FurnitureMesh = Instantiate(Kitchen1x1[0]);
-                fridgeplaced = true;
-            }
-            else if (!StovePlaced)
-            {
-                FurnitureMesh = Instantiate(Kitchen1x1[1]);
-                StovePlaced = true;
-            }
-            else
-            {
 
-                FurnitureMesh = Instantiate(Kitchen1x1[Random.Range(2, Kitchen1x1.Count)]);
+
+            if (_roomtypeToBuild == GameEnums.RoomType.Bedroom)
+            {
+                if (!fridgeplaced && Offset == 0)
+                {
+                    FurnitureMesh = Instantiate(OtherObjsFiller_x1[0]);
+                    fridgeplaced = true;
+                }
+                else if (!StovePlaced && Offset == Width - 1)
+                {
+                    FurnitureMesh = Instantiate(OtherObjsFiller_x1[1]);
+                    StovePlaced = true;
+                }
+                else
+                {
+
+                    FurnitureMesh = Instantiate(OtherObjsFiller_x1[Random.Range(2, OtherObjsFiller_x1.Count)]); //MYST CONTAIN at least 2Mustlace objs
+                }
+
+
             }
+            else if (_roomtypeToBuild == GameEnums.RoomType.Kitchen)
+            {
+                if (!fridgeplaced && !StovePlaced)
+                {
+                    FurnitureMesh = Instantiate(OtherObjsFiller_x1[0]);
+                    fridgeplaced = true;
+                }
+                else if (!StovePlaced)
+                {
+                    FurnitureMesh = Instantiate(OtherObjsFiller_x1[1]);
+                    StovePlaced = true;
+                }
+                else
+                {
+
+                    FurnitureMesh = Instantiate(OtherObjsFiller_x1[Random.Range(2, OtherObjsFiller_x1.Count)]); //MYST CONTAIN at least 2Mustlace objs
+                }
+
+            }
+
+            else if (_roomtypeToBuild == GameEnums.RoomType.Livingroom)
+            {
+                if (!fridgeplaced && !StovePlaced)
+                {
+                    FurnitureMesh = Instantiate(OtherObjsFiller_x1[0]);
+                    fridgeplaced = true;
+                }
+                else if (!StovePlaced)
+                {
+                    FurnitureMesh = Instantiate(OtherObjsFiller_x1[1]);
+                    StovePlaced = true;
+                }
+                else
+                {
+
+                    FurnitureMesh = Instantiate(OtherObjsFiller_x1[Random.Range(2, OtherObjsFiller_x1.Count)]); //MYST CONTAIN at least 2Mustlace objs
+                }
+
+            }
+
+            else//lab
+            {
+                if (!fridgeplaced && !StovePlaced)
+                {
+                    FurnitureMesh = Instantiate(OtherObjsFiller_x1[0]);
+                    fridgeplaced = true;
+                }
+                else if (!StovePlaced)
+                {
+                    FurnitureMesh = Instantiate(OtherObjsFiller_x1[1]);
+                    StovePlaced = true;
+                }
+                else
+                {
+
+                    FurnitureMesh = Instantiate(OtherObjsFiller_x1[Random.Range(2, OtherObjsFiller_x1.Count)]); //MYST CONTAIN at least 2Mustlace objs
+                }
+
+            }
+
+
+
             FurnitureMesh.transform.parent = Base00.transform;
             FurnitureMesh.transform.localPosition = new Vector3(Offset, 0, Height - 1);
         }
         else
         if (ursizeTouse == 2)
         {
-            FurnitureMesh = Instantiate(Kitchen2x1[Random.Range(0, Kitchen2x1.Count)]);
+            FurnitureMesh = Instantiate(OtherObjsFiller_x2[Random.Range(0, OtherObjsFiller_x2.Count)]);
             FurnitureMesh.transform.parent = Base00.transform;
             FurnitureMesh.transform.localPosition = new Vector3(Offset, 0, Height - 1);
         }

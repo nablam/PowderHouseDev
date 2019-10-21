@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8766,8 +8766,10 @@ MonoBehaviour:
   - {fileID: 9025518543038558836, guid: 99acad8cfb14733409769b9f387da937, type: 3}
   - {fileID: 2141870424941239072, guid: bfdef7a56471fae45ba7c7eb055943d1, type: 3}
   Bedroom1x1:
-  - {fileID: 1755456594745034341, guid: 207a3a25b90df98489e5cc42d4e66a0f, type: 3}
+  - {fileID: 335949647794544414, guid: 4f680ed13e04fb8449a0d28bee35b59b, type: 3}
+  - {fileID: 7456662838791319110, guid: e14b52527991c6d4daacf1359b50ed24, type: 3}
   - {fileID: 5401872728086333293, guid: 1bcf2bee06b614242adc117da067d573, type: 3}
+  - {fileID: 1755456594745034341, guid: 207a3a25b90df98489e5cc42d4e66a0f, type: 3}
   Livingroom2x1Action:
   - {fileID: 8330331579970361732, guid: 3528ce8dcd69bb24586821db7f9e6237, type: 3}
   Livingroom2x1:
@@ -8778,12 +8780,15 @@ MonoBehaviour:
   Livingroom1x1:
   - {fileID: 6832309761244315266, guid: 23600feb88a66d94e8e565cf193b50f8, type: 3}
   - {fileID: 7180805394177651727, guid: 7c6b282c8f89aec4188bdeff9a364fa9, type: 3}
+  - {fileID: 7180805394177651727, guid: 7c6b282c8f89aec4188bdeff9a364fa9, type: 3}
   Lab2x1Action:
   - {fileID: 1397320170225422111, guid: 7524fd6ee38cf7d44a84c80723e05bc4, type: 3}
   Lab2x1:
   - {fileID: 575781890887618037, guid: adad38e7a97546c428f2f9263dcf8fe8, type: 3}
   - {fileID: 6271974382578209977, guid: d5bca98633f4614418821637343caeb3, type: 3}
   Lab1x1:
+  - {fileID: 2543265273133068832, guid: 2cee866b76fa67945855ed50ab1406cc, type: 3}
+  - {fileID: 2543265273133068832, guid: 2cee866b76fa67945855ed50ab1406cc, type: 3}
   - {fileID: 2543265273133068832, guid: 2cee866b76fa67945855ed50ab1406cc, type: 3}
   Base00: {fileID: 711452998}
 --- !u!4 &478780893
