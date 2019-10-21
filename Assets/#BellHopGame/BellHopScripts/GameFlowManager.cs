@@ -1,6 +1,7 @@
 ﻿#define DebugOn
 
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class GameFlowManager : MonoBehaviour
@@ -253,6 +254,18 @@ public class GameFlowManager : MonoBehaviour
 
     public Vector3 GEt_BEllhopPos() { return _bellHop.transform.position; }
 
+
+    void Start()
+    {
+        StartCoroutine(WaitTostartMovingCam());
+    }
+
+    IEnumerator WaitTostartMovingCam()
+    {
+        yield return new WaitForSeconds(2);
+        _floorsmngr.StartMovingCam();
+
+    }
 
     //private void Update()
     //{

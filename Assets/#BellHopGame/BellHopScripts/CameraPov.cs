@@ -62,11 +62,12 @@ public class CameraPov : MonoBehaviour
         _target = here;
     }
 
-
-
+    bool startedMoving = false;
+    public void StartMovingCameraDown() { startedMoving = true; }
     // Update is called once per frame
     void Update()
     {
+        if (!startedMoving) { return; }
         if (ReachedInitialPos)
             MoveToTargetFloor();
         else

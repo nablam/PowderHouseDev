@@ -24,10 +24,9 @@ public class HotelFloorsManager : MonoBehaviour
         _curfloor = _floors[x];
         camPov.SetNextPos(_curfloor.BaseCamPos.transform);
 
-
     }
     #endregion
-
+    public void StartMovingCam() { camPov.StartMovingCameraDown(); }
     public CameraPov camPov;
 
     public List<HotelFloor> _floors;

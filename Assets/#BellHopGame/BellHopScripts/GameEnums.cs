@@ -230,6 +230,7 @@
 
     public enum GameSequenceType
     {
+        SettingUp,
         GameStart,
 
         ReachedFloor,

@@ -32,10 +32,11 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
         _isEmptyHanded = true;
         // UpdateHeldObject("None");
         _HeldObject = GameEnums.StoryObjects.aaNone;
+        this.transform.rotation = RotationFaceScreen;
         OriginalRot = this.transform.rotation;
     }
     Quaternion RotationFaceScreen = Quaternion.Euler(0, 180, 0);
-    Quaternion Rotation_faceDweller = Quaternion.Euler(0, 330f, 0);
+    Quaternion Rotation_faceDweller = Quaternion.Euler(0, 310f, 0);
     Quaternion Rotation_faceBunny = Quaternion.Euler(0, 160f, 0);
     bool ClockWeis = true;
     bool reachedWantedRot = false;
@@ -54,7 +55,7 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
         //    timeT = Time.time;
         //}
 
-        if (ClockWeis)
+        if (!ClockWeis)
         {
 
 
