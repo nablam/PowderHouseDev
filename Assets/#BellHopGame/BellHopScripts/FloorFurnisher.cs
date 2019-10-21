@@ -256,7 +256,7 @@ public class FloorFurnisher : MonoBehaviour
 
             }
 
-            Debug.Log(curSizeTouse + log);
+            //Debug.Log(curSizeTouse + log);
             Instantiate_a_1or2(curSizeTouse, CumBlocksLen + CurInstOffset, OtherObjsFiller_1, OtherObjsFiller_2);
 
             //InstantiateBlockSizeForBackWall(curSizeTouse, CumBlocksLen, argX, Height);

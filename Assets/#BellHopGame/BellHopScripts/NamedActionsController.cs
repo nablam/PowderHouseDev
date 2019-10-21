@@ -112,9 +112,11 @@ public class NamedActionsController : MonoBehaviour
     }
     public void InitActionCTRL(GameEnums.TaskSequenceType argSequenceType, ICharacterAnim argBunny, ICharacterAnim argDweller, DeliveryItem argContextItem)
     {
+
         _CurSequenceType = argSequenceType;
         MyBunny = argBunny;
         MyDweller = argDweller;
+        MyDweller.AnimTrigger("Actions");
         MyContextItem = argContextItem;
         if (_CurSequenceType == GameEnums.TaskSequenceType.CutScene)
         {

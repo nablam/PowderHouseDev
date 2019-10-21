@@ -36,7 +36,7 @@ public class FurnitureFurnisher : MonoBehaviour
 
             if (Go.transform.GetChild(x).name.CompareTo("DecoBase") == 0)
             {
-                print("found DecoBase in " + Go.name);
+                //print("found DecoBase in " + Go.name);
                 found_DecoBase = true;
                 DecobaseTran = Go.transform.GetChild(x);
                 break;

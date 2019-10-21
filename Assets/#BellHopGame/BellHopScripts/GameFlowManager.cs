@@ -120,6 +120,7 @@ public class GameFlowManager : MonoBehaviour
 
         if (FirstTime)
         {
+
             _NamedActionsController.InitActionCTRL(GameEnums.TaskSequenceType.Dweller_toss_Bunny, _bellHop, _curDweller, _ContextItem);
             firstTime = false;
 
@@ -253,26 +254,26 @@ public class GameFlowManager : MonoBehaviour
     public Vector3 GEt_BEllhopPos() { return _bellHop.transform.position; }
 
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            _floorsmngr.Get_curFloor().MoveNave_To_MainAction();
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Alpha1))
+    //    {
+    //        _floorsmngr.Get_curFloor().MoveNave_To_MainAction();
 
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            _floorsmngr.Get_curFloor().MoveNave_To_MidDoor();
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.Alpha2))
+    //    {
+    //        _floorsmngr.Get_curFloor().MoveNave_To_MidDoor();
 
-        }
+    //    }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            _floorsmngr.Get_curFloor().MoveNave_To_Dance();
+    //    if (Input.GetKeyDown(KeyCode.Alpha3))
+    //    {
+    //        _floorsmngr.Get_curFloor().MoveNave_To_Dance();
 
-        }
+    //    }
 
-    }
+    //}
 }
 
 
