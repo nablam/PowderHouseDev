@@ -415,7 +415,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
         }
         catch (Exception e)
         {
-            print("error");
+            print("fixed error");
 
         }
 
@@ -493,6 +493,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
 
     public void ReleaseObj_CalledExternally() //after anim event handled
     {
+        print("ISItEverReleased?????");
         _CurHeldObject.transform.parent = null;
         _initiallyAssignedAtSceneBuild = null;
         _CurHeldObject = null;
@@ -549,6 +550,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
 
     public void WarpAgent(Transform argt)
     {
+        print("DMC WarpMeAgentto to " + argt.parent.name);
         _A_C_coordinator.WarpMeAgentto(argt);
     }
 
@@ -558,6 +560,12 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     Transform InitializedMainActionPos;
     public void InitSomePoints(Transform argMidDoorActionPos, Transform argDanceActionPos, Transform argMainActionPos)
     {
+
+        //print("initing dweller " + argMidDoorActionPos.parent.name);
+
+        //print("initing dweller " + argDanceActionPos.parent.name);
+        //print("initing dweller " + argMainActionPos.parent.name);
+
         InitializedMidDoorActionPos = argMidDoorActionPos;
         InitializedDanceActionPos = argDanceActionPos;
         InitializedMainActionPos = argMainActionPos;

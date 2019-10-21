@@ -116,7 +116,7 @@ public class NamedActionsController : MonoBehaviour
         _CurSequenceType = argSequenceType;
         MyBunny = argBunny;
         MyDweller = argDweller;
-        MyDweller.AnimTrigger("Actions");
+
         MyContextItem = argContextItem;
         if (_CurSequenceType == GameEnums.TaskSequenceType.CutScene)
         {
@@ -126,6 +126,7 @@ public class NamedActionsController : MonoBehaviour
         else
             if (_CurSequenceType == GameEnums.TaskSequenceType.Dweller_toss_Bunny)
         {
+            MyDweller.AnimTrigger("Actions");
             MAkeDweller_toss_Bunny();
             BHG_Task task = taskSystem.RequestNextTask();
             if (task != null)
@@ -154,7 +155,7 @@ public class NamedActionsController : MonoBehaviour
 
 
 #if DebugOn
-        print("the call back when task ends");
+        print("the call back when task ends " + _CurSequenceType.ToString());
 #endif
         BHG_Task task = taskSystem.RequestNextTask();
         if (task != null)
@@ -162,7 +163,7 @@ public class NamedActionsController : MonoBehaviour
         else
         {
 #if DebugOn
-            print("Signal End of Animations on this floor");
+            print("Signal End of Animations on this floor" + _CurSequenceType.ToString());
 #endif
             if (_CurSequenceType == GameEnums.TaskSequenceType.CutScene) { }
             else
@@ -279,6 +280,7 @@ public class NamedActionsController : MonoBehaviour
         journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
 
         StartCoroutine(MoveCurItemRoutine(startMarker, endMarker, argItem));
+        //StartCoroutine(Parabola(startMarker, endMarker, argItem, 1f, 1.2f));
 
     }
 
@@ -340,7 +342,7 @@ public class NamedActionsController : MonoBehaviour
 
     }
 
-    IEnumerator Curve(DeliveryItem argItem, Transform startMarker, Transform endMarker, float height, float duration)
+    IEnumerator Curve(Transform startMarker, Transform endMarker, DeliveryItem argItem, float height, float duration)
     {
         Vector3 startPos = startMarker.position;
         Vector3 endPos = startMarker.position; ;
@@ -354,10 +356,10 @@ public class NamedActionsController : MonoBehaviour
         }
     }
     public AnimationCurve m_Curve = new AnimationCurve();
-    IEnumerator Parabola(DeliveryItem argItem, Transform startMarker, Transform endMarker, float height, float duration)
+    IEnumerator Parabola(Transform startMarker, Transform endMarker, DeliveryItem argItem, float height, float duration)
     {
         Vector3 startPos = startMarker.position;
-        Vector3 endPos = startMarker.position;
+        Vector3 endPos = endMarker.position;
         float normalizedTime = 0.0f;
         while (normalizedTime < 1.0f)
         {

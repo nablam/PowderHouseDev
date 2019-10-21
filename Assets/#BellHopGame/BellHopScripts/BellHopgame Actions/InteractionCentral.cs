@@ -14,7 +14,7 @@ public class InteractionCentral : MonoBehaviour
 
 
 
-    void Start()
+    void OnEnable()
     {
         ActionPos = this.transform.GetChild(0);
         LookitHere = ActionPos.GetChild(0);

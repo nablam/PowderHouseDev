@@ -40,7 +40,7 @@ public class GameFlowManager : MonoBehaviour
 #if DebugOn
                 print("startgame");
 #endif
-                _floorsmngr.InitALLagents();
+
                 _curDweller = _floorsmngr.GetCurFloorDweller();
                 _curDeliveryItem = _curDweller.HELP_firstGuyOut();
                 _ContextItem = _curDeliveryItem;

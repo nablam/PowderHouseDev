@@ -37,7 +37,17 @@ public class HotelFloorsManager : MonoBehaviour
         //curfloor 0 is set upon initialization
     }
 
-    public void InitializeFLoors(List<HotelFloor> argFloors) { _floors = argFloors; _curfloor = _floors[0]; }
+    public void InitializeFLoors(List<HotelFloor> argFloors)
+    {
+        _floors = argFloors; _curfloor = _floors[0];
+
+
+        print("INITIALIZINGAGENTS");
+        foreach (HotelFloor hf in _floors)
+        {
+            hf.InitDwellerAgentNowIGuess();
+        }
+    }
 
     public void HideShowAllBarriers(bool argShow)
     {
@@ -62,13 +72,5 @@ public class HotelFloorsManager : MonoBehaviour
         return _curfloor;
     }
 
-    public void InitALLagents()
-    {
-        print("INITIALIZINGAGENTS");
-        foreach (HotelFloor hf in _floors)
-        {
-            hf.InitDwellerAgentNowIGuess();
-        }
 
-    }
 }

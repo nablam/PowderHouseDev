@@ -272,14 +272,15 @@ public class SceneBuilder : MonoBehaviour
 
 
 
-            GameObject F = Instantiate(FloorObjRef);
-            F.name = "floor_" + i;
-            F.transform.position = new Vector3(F.transform.position.x, i * 6f, F.transform.position.z);
+            GameObject FloorObjectInstance = Instantiate(FloorObjRef);
+            FloorObjectInstance.name = "floor_" + i;
+            FloorObjectInstance.transform.position = new Vector3(FloorObjectInstance.transform.position.x, i * 6f, FloorObjectInstance.transform.position.z);
 
 
 
-            HotelFloor hf = F.GetComponent<HotelFloor>();
-            hf.FloorNumber = i;
+            HotelFloor _holtelfloorOfInstance = FloorObjectInstance.GetComponent<HotelFloor>();
+            _holtelfloorOfInstance.FloorNumber = i;
+            _holtelfloorOfInstance.EarlyBuildFurniture();
 
 
             GameObject Dweller = Instantiate(BaseAnimalRef, new Vector3(0, 0, 0), Quaternion.Euler(0, 180, 0));
@@ -314,8 +315,8 @@ public class SceneBuilder : MonoBehaviour
 
             Dwellers_Instances.Add(Dweller);
 
-            F.transform.parent = Hotel.transform;
-            HotelAsListOfFloors.Add(hf);
+            FloorObjectInstance.transform.parent = Hotel.transform;
+            HotelAsListOfFloors.Add(_holtelfloorOfInstance);
         }
 
 
@@ -341,8 +342,13 @@ public class SceneBuilder : MonoBehaviour
             HotelAsListOfFloors[floortosetup].SetDweller(Dwellers_Instances[p]);
         }
 
-        InitializeThingsPostBuild();
 
+
+        HotelFloorsMNG.InitializeFLoors(HotelAsListOfFloors);
+        GameFlow.InitializeMyThings(Hop.GetComponent<BellHopCharacter>(), HotelFloorsMNG, camlobby, ActionsControllerObj);
+        camlobby.assignBunny(Hop);
+
+        camlobby.SetInitialPos(HotelAsListOfFloors[_gs.Master_Number_of_Floors - 1].BaseCamPos.transform);
 
 
     }
@@ -350,10 +356,11 @@ public class SceneBuilder : MonoBehaviour
     void InitializeThingsPostBuild()
     {
 
-        camlobby.assignBunny(Hop);
-        HotelFloorsMNG.InitializeFLoors(HotelAsListOfFloors);
-        camlobby.SetInitialPos(HotelAsListOfFloors[_gs.Master_Number_of_Floors - 1].BaseCamPos.transform);
-        GameFlow.InitializeMyThings(Hop.GetComponent<BellHopCharacter>(), HotelFloorsMNG, camlobby, ActionsControllerObj);
+
+
+
+
+
     }
 
     GameObject GetItemRefBySimpleName(string argSimpleName)

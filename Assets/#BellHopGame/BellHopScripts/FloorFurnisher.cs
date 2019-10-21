@@ -204,7 +204,7 @@ public class FloorFurnisher : MonoBehaviour
     void FillLeftRight(int XposOf2x1Action, List<GameObject> OtherObjsOfSameType_size1, List<GameObject> OtherObjsOfSameType_size2)
     {
 
-        print(XposOf2x1Action);
+        ///  print(XposOf2x1Action);
         BuildBase0(XposOf2x1Action, "le", 0, OtherObjsOfSameType_size1, OtherObjsOfSameType_size2);
 
         BuildBase0(Width - (2 + XposOf2x1Action), "ri", (2 + XposOf2x1Action), OtherObjsOfSameType_size1, OtherObjsOfSameType_size2);
@@ -252,7 +252,7 @@ public class FloorFurnisher : MonoBehaviour
             }
             else
             {
-                Debug.Log("break"); break;
+                //  Debug.Log("break"); break;
 
             }
 

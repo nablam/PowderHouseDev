@@ -41,22 +41,28 @@ public class DwellerAgentCharacterCoordinator : MonoBehaviour
     {
         IsMecanim = true;
         agent = GetComponent<NavMeshAgent>();
+        if (IsMecanim) agent.updateRotation = false;
+
     }
 
     private void Start()
     {
         //rotation is done by animated character
-        if (IsMecanim) agent.updateRotation = false;
-        agent.enabled = false;
+        // agent.enabled = false;
+
     }
 
     public void ActivateAgent()
     {
         agent.enabled = true;
-        if (agent.isActiveAndEnabled) print("ACTIVIA");
+        if (agent.isActiveAndEnabled)
+        {
+            // print("ACTIVIA");
+        }
         else
-            print("POOP");
-
+        {
+            // print("POOP");
+        }
         AgentIsAwake = true;
 
         _mystate = AgentStates.Initialized;
@@ -151,6 +157,7 @@ public class DwellerAgentCharacterCoordinator : MonoBehaviour
 
     public void WarpMeAgentto(Transform argDest)
     {
+        //  print("_A_0_C WarpMeAgentto to " + argDest.parent.name);
         agent.Warp(argDest.position);
     }
 
