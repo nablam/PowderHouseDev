@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PrimGame.unity
     guid: 055af27f94bb0fa4cb9a2729cda227f2
+  - enabled: 1
+    path: Assets/Scenes/FurnitureLivingRoom.unity
+    guid: 9ecb880a4d768d44f80abd8c46d1bcd9
   m_configObjects: {}

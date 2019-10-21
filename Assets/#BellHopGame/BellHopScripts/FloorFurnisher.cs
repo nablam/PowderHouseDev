@@ -48,6 +48,8 @@ public class FloorFurnisher : MonoBehaviour
     GameObject GreetingsActionObj;
     InteractionCentral GreetingsAoIC;
 
+    public InteractionCentral GetGreetingsAction() { return this.GreetingsAoIC; }
+
     const int Width = 6;
     const int Height = 6;
 
@@ -55,7 +57,7 @@ public class FloorFurnisher : MonoBehaviour
     // Start is called before the first frame update
 
     GameEnums.RoomType _roomtypeToBuild;
-    void Start()
+    void Awake()
     {
         _ff = GetComponent<FurnitureFurnisher>();
         for (int y = 0; y < Height; y++)
@@ -72,6 +74,13 @@ public class FloorFurnisher : MonoBehaviour
         // Build_BEdroom();
         // Build_Livingroom();
 
+    }
+
+    public void Build_rand_RoomType()
+    {
+        //SetTransDoorStepAsInteraction = GreetingsActionObj.transform;
+        //BuildRoomType((GameEnums.RoomType)Random.Range(0, 4));
+        BuildRoomType(GameEnums.RoomType.Bedroom);
     }
 
     public void BuildRoomType(GameEnums.RoomType argTypr)
@@ -169,7 +178,7 @@ public class FloorFurnisher : MonoBehaviour
         if (x < 2)
             x = 2;
 
-        int y = 0;
+        int y = 1;
 
         blueprint[x, y] = true; //reserves a path quad to access the dang spot
 

@@ -553,12 +553,23 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     }
 
 
+    Transform InitializedMidDoorActionPos;
+    Transform InitializedDanceActionPos;
+    Transform InitializedMainActionPos;
+    public void InitSomePoints(Transform argMidDoorActionPos, Transform argDanceActionPos, Transform argMainActionPos)
+    {
+        InitializedMidDoorActionPos = argMidDoorActionPos;
+        InitializedDanceActionPos = argDanceActionPos;
+        InitializedMainActionPos = argMainActionPos;
+
+    }
     Transform SavedTarget;
     public void Plz_GOTO(Transform artT, bool argDoWalk)
     {
         if (_A_C_coordinator.Mystate() == GameEnums.AgentStates.Initialized || _A_C_coordinator.Mystate() == GameEnums.AgentStates.MovingToTarget || _A_C_coordinator.Mystate() == GameEnums.AgentStates.RotatingToPlace)
         {
             DirrectGoTOTarg(artT);
+            // SavedTarget = artT;
 
         }
         else
@@ -569,6 +580,22 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
 
         }
 
+    }
+
+    public void Go_to_my_Main()
+    {
+        Plz_GOTO(InitializedMainActionPos, true);
+    }
+    public void Go_to_my_MidDoor()
+    {
+
+
+        Plz_GOTO(InitializedMidDoorActionPos, true);
+    }
+    public void Go_to_my_Dance()
+    {
+
+        Plz_GOTO(InitializedDanceActionPos, true);
     }
 
     void DirrectGoTOTarg(Transform artT)
@@ -584,6 +611,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
 
     public void Interupt_then_GOTO(Transform artT)
     {
+        SavedTarget = artT;
         //wait 2 secinds, 
         StartCoroutine(Wait2secondsToclearStartanim());
         //trigger move on, 

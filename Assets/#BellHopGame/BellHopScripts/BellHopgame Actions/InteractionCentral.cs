@@ -2,8 +2,9 @@
 
 public class InteractionCentral : MonoBehaviour
 {
-
+    [SerializeField]
     Transform LookitHere;
+    [SerializeField]
     Transform ActionPos;
 
 

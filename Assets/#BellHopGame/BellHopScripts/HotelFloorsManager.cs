@@ -65,6 +65,7 @@ public class HotelFloorsManager : MonoBehaviour
 
     public void InitALLagents()
     {
+        print("INITIALIZINGAGENTS");
         foreach (HotelFloor hf in _floors)
         {
             hf.InitDwellerAgentNowIGuess();

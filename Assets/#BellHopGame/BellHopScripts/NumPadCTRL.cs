@@ -24,13 +24,13 @@ public class NumPadCTRL : MonoBehaviour
 
         if (_gs == null)
         {
-            Debug.LogError("NumPadCTRL: no gm in scene!");
+            Debug.LogWarning("NumPadCTRL: no gm in scene!");
         }
         _flowMngr = GameFlowManager.Instance;
 
         if (_flowMngr == null)
         {
-            Debug.LogError("NumPadCTRL: no flowMngr in scene!");
+            Debug.LogWarning("NumPadCTRL: no flowMngr in scene!");
         }
 
 

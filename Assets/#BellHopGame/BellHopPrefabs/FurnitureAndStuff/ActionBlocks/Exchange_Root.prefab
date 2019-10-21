@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eaef02edbf75cd45832a5c919b6b927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  argActionString: Hello
+  argActionString: MidDoor
 --- !u!1 &6239690703869212107
 GameObject:
   m_ObjectHideFlags: 0

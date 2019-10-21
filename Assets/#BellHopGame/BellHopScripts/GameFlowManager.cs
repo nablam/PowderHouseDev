@@ -255,11 +255,23 @@ public class GameFlowManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            _floorsmngr.Get_curFloor().MoveNave_To();
+            _floorsmngr.Get_curFloor().MoveNave_To_MainAction();
 
         }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            _floorsmngr.Get_curFloor().MoveNave_To_MidDoor();
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            _floorsmngr.Get_curFloor().MoveNave_To_Dance();
+
+        }
+
     }
 }
 
