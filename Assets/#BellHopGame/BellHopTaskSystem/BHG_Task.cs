@@ -11,6 +11,7 @@
         TheActionName = actionName;
         TheCharacter = theCharacter;
         TheContextItem = theContextItem;
+
     }
 
     public string TheActionName { get => _theActionName; private set => _theActionName = value; }

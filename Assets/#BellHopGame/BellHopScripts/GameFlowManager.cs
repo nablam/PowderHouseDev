@@ -43,7 +43,7 @@ public class GameFlowManager : MonoBehaviour
 #endif
 
                 _curDweller = _floorsmngr.GetCurFloorDweller();
-                _curDeliveryItem = _curDweller.HELP_firstGuyOut();
+                _curDeliveryItem = _curDweller.Get_CurHeldObj();
                 _ContextItem = _curDeliveryItem;
 
                 print("GOES TO " + _ContextItem.GetDestFloorDweller().AnimalName);
@@ -82,7 +82,7 @@ public class GameFlowManager : MonoBehaviour
 
 
             case GameEnums.GameSequenceType.PlayerInputs:
-                _ContextItem = _bellHop.HELP_firstGuyOut();
+                _ContextItem = _bellHop.Get_CurHeldObj();
                 IsAllowKeypad = true;
 
 

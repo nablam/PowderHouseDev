@@ -433,24 +433,42 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
         OriginalRot = transform.rotation;
     }
 
-    public DwellerMeshComposer GetMyHeldObjectDestination()
+    public int GetMyHeldObjectDestinationFloor()
     {
         if (_CurHeldObject != null)
         {
 
 
-            return _CurHeldObject.GetComponent<DeliveryItem>().GetDestFloorDweller();
+            return _CurHeldObject.GetComponent<DeliveryItem>().GetDestFloorDweller().MyFinalResidenceFloorNumber;
         }
         else
-            return null;
+            return -1;
     }
 
-    public DeliveryItem HELP_firstGuyOut()
+    public DeliveryItem Get_CurHeldObj()
     {
-        return _CurHeldObject.GetComponent<DeliveryItem>();
+        return RightHandHoldPos.GetChild(0).GetComponent<DeliveryItem>();
+        //return _CurHeldObject.GetComponent<DeliveryItem>();
     }
 
-
+    public void ShowMy_R_HeldDeliveryItem(bool argShow)
+    {
+        if (RightHandHoldPos.childCount > 0)
+        {
+            RightHandHoldPos.GetChild(0).GetComponent<DeliveryItem>().ShowMe(argShow);
+        }
+        else
+            Debug.Log("NO RightHandChild!");
+    }
+    public void ShowMy_L_HeldDeliveryItem(bool argShow)
+    {
+        if (LeftHandHoldPos.childCount > 0)
+        {
+            LeftHandHoldPos.GetChild(0).GetComponent<DeliveryItem>().ShowMe(argShow);
+        }
+        else
+            Debug.Log("NO LeftHandChild!");
+    }
 
     #endregion
 
@@ -551,7 +569,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
 
     public void WarpAgent(Transform argt)
     {
-        print("DMC WarpMeAgentto to " + argt.parent.name);
+        // print("DMC WarpMeAgentto to " + argt.parent.name);
         _A_C_coordinator.WarpMeAgentto(argt);
     }
 
@@ -658,7 +676,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     public void AnimatorPlay(string argname)
     {
         print("play" + argname);
-        _MyAnimator.Play(argname, 0);
+        _MyAnimator.CrossFade(argname, 0.4f);
 
     }
 

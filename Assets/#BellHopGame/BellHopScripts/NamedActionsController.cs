@@ -61,7 +61,7 @@ public class NamedActionsController : MonoBehaviour
 
     private void Start()
     {
-        DelayedCallBAckWhenTossPeacks = TheCallBAckFor_delayGetNestTask;
+        DelayedCallBAckWhenTossPeacks = CB_MoveContextItem;
         taskSystem = new BHG_TaskSystem();
     }
     #endregion
@@ -267,7 +267,7 @@ public class NamedActionsController : MonoBehaviour
 
     public Transform tempSTART;
     public Transform tempEND;
-    void TheCallBAckFor_delayGetNestTask()
+    void CB_MoveContextItem()
     {
 #if DebugOn
         print("Yo I think TossMidMarker just kickedin");
@@ -275,17 +275,11 @@ public class NamedActionsController : MonoBehaviour
 
         DeliveryItem tempItem = MyContextItem;
 
-
-
-
         if (_CurSequenceType == GameEnums.TaskSequenceType.Bunny_tossDweller)
         {
-            //MoveTO(taskSystem.getCurTak().TheContextItem, taskSystem.getCurTak().TheContextItem)
             tempSTART = MyBunny.GetMyRightHandHold();
-
             tempEND = MyDweller.GetMyLeftHandHold();
-            //MyBunny.ReleaseObj_CalledExternally();
-            //  MoveTO(MyContextItem, tempSTART, tempEND);
+
         }
         else
               if (_CurSequenceType == GameEnums.TaskSequenceType.Dweller_toss_Bunny)
@@ -294,14 +288,9 @@ public class NamedActionsController : MonoBehaviour
 
             tempSTART = MyDweller.GetMyRightHandHold();
             tempEND = MyBunny.GetMyRightHandHold();
-
-            // MyDweller.ReleaseObj_CalledExternally();
-            //  MoveTO(MyContextItem, tempSTART, tempEND);
         }
 
         MoveTO(MyContextItem, tempSTART, tempEND);
-
-
 
     }
 

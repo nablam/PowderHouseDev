@@ -9,7 +9,7 @@ public interface ICharacterAnim
     void AnimTossPeack();
     void AnimCatchPeack();
 
-    DeliveryItem HELP_firstGuyOut();
+    DeliveryItem Get_CurHeldObj();
     //to be called by other objects
     void AnimateToss(Action CallBackOnAnimEvent);
     void AnimateCatch(Action CallBackOnAnimEvent);
@@ -36,4 +36,9 @@ public interface ICharacterAnim
     void Plz_GOTO(Transform artT, bool argDoWalk);
     void Interupt_then_GOTO(Transform artT);
     // void AgentMustSetTarget(Transform artT);
+
+    void ShowMy_R_HeldDeliveryItem(bool argShow);
+    void ShowMy_L_HeldDeliveryItem(bool argShow);
 }
+
+

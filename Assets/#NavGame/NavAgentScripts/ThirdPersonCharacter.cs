@@ -244,7 +244,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 {
                     //print("fin trn");
                     argOnRotCompledCallBAck();
-                    m_Animator.Play(argstr, 0);
+                    m_Animator.CrossFade(argstr, 0.4f);
+                    // m_Animator.Play(argstr, 0);
                     reachedRot = true;
                 }
             }

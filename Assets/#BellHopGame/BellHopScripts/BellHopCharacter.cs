@@ -9,7 +9,6 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
 
 
     public GameEnums.StoryObjects _HeldObject;
-    StoryItem ItemToToss;
     public Transform RightHandHoldPos;
     public Transform LeftHandHoldPos;
     public void UpdateNameText(string argName) { transform.GetChild(0).GetComponent<TextMesh>().text = argName; }
@@ -38,128 +37,111 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
     Quaternion RotationFaceScreen = Quaternion.Euler(0, 180, 0);
     Quaternion Rotation_faceDweller = Quaternion.Euler(0, 310f, 0);
     Quaternion Rotation_faceBunny = Quaternion.Euler(0, 160f, 0);
-    bool ClockWeis = true;
-    bool reachedWantedRot = false;
+    //  bool ClockWeis = true;
+    // bool reachedWantedRot = false;
     float timeT;
-    void Update()
-    {
+    /*  void Update()
+      {
+
+
+          //if (Input.GetKeyDown(KeyCode.D))
+          //{
+          //    ClockWeis = !ClockWeis;
+          //    //Quaternion currentRotation = transform.rotation;
+          //    reachedWantedRot = false;
+          //    timeT = Time.time;
+          //}
+
+          if (!ClockWeis)
+          {
+
+
+              if (!reachedWantedRot)
+              {
+
+
+                  Vector3 relativePos = GameFlowManager.Instance.GEt_DwellerPos() - transform.position;
+                  Quaternion toRotation = Quaternion.LookRotation(relativePos);
+                  transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, 2 * Time.deltaTime);
+
+
+                  //timeT += Time.deltaTime;
+                  // transform.rotation = Quaternion.Lerp(RotationFaceScreen, Rotation_faceDweller, timeT * 0.5f);
+                  float angle = Quaternion.Angle(transform.rotation, toRotation);
 
 
 
-
-        //if (Input.GetKeyDown(KeyCode.D))
-        //{
-        //    ClockWeis = !ClockWeis;
-        //    //Quaternion currentRotation = transform.rotation;
-        //    reachedWantedRot = false;
-        //    timeT = Time.time;
-        //}
-
-        if (!ClockWeis)
-        {
+                  if (angle < 5f)
+                  {
+                      Debug.Log("Reached Rot dwell");
+                      reachedWantedRot = true;
+                  }
 
 
-            if (!reachedWantedRot)
-            {
+              }
 
 
-                Vector3 relativePos = GameFlowManager.Instance.GEt_DwellerPos() - transform.position;
-                Quaternion toRotation = Quaternion.LookRotation(relativePos);
-                transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, 2 * Time.deltaTime);
+          }
+          else
+          {
 
 
-                //timeT += Time.deltaTime;
-                // transform.rotation = Quaternion.Lerp(RotationFaceScreen, Rotation_faceDweller, timeT * 0.5f);
-                float angle = Quaternion.Angle(transform.rotation, toRotation);
+              if (!reachedWantedRot)
+              {
+                  // timeT += Time.deltaTime;
+                  // transform.rotation = Quaternion.Lerp(Rotation_faceDweller, RotationFaceScreen, timeT * 0.5f);
+                  Vector3 relativePos = new Vector3(Camera.main.transform.position.x, transform.position.y, Camera.main.transform.position.z) - transform.position;
+                  Quaternion toRotation = Quaternion.LookRotation(relativePos);
+                  transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, 2 * Time.deltaTime);
+                  float angle = Quaternion.Angle(transform.rotation, toRotation);
 
 
 
-                if (angle < 5f)
-                {
-                    Debug.Log("Reached Rot dwell");
-                    reachedWantedRot = true;
-                }
+                  if (angle < 3f)
+                  {
+                      Debug.Log("Reached Rot screen");
+                      reachedWantedRot = true;
+                  }
 
 
-            }
+              }
 
 
-        }
-        else
-        {
+              // Quaternion wantedRotation = Quaternion.Euler(0, 0, 0);
+              //transform.rotation = Quaternion.RotateTowards(currentRotation, wantedRotation, Time.deltaTime * 20f);
+              //  transform.rotation = Quaternion.Lerp(t, OriginalRot, Time.time * 0.2f);
+          }
+
+          //if (Input.GetKeyDown(KeyCode.A))
+          //{
+          //    Quaternion currentRotation = transform.rotation;
+          //    Quaternion wantedRotation = OriginalRot; // Quaternion.Euler(0, 0, 90);
+          //    transform.rotation = Quaternion.RotateTowards(currentRotation, wantedRotation, Time.deltaTime * 20f);
+          //}
 
 
-            if (!reachedWantedRot)
-            {
-                // timeT += Time.deltaTime;
-                // transform.rotation = Quaternion.Lerp(Rotation_faceDweller, RotationFaceScreen, timeT * 0.5f);
-                Vector3 relativePos = new Vector3(Camera.main.transform.position.x, transform.position.y, Camera.main.transform.position.z) - transform.position;
-                Quaternion toRotation = Quaternion.LookRotation(relativePos);
-                transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, 2 * Time.deltaTime);
-                float angle = Quaternion.Angle(transform.rotation, toRotation);
+          //if (Input.GetKeyDown(KeyCode.T))
+          //{
+          //    AnimateToss();
+          //}
+          //if (Input.GetKeyDown(KeyCode.C))
+          //{
+          //    AnimateCatch();
+          //}
+          //if (Input.GetKeyDown(KeyCode.Space))
+          //{
+          //    Animateturn();
+          //}
+      } 
 
 
-
-                if (angle < 3f)
-                {
-                    Debug.Log("Reached Rot screen");
-                    reachedWantedRot = true;
-                }
-
-
-            }
-
-
-            // Quaternion wantedRotation = Quaternion.Euler(0, 0, 0);
-            //transform.rotation = Quaternion.RotateTowards(currentRotation, wantedRotation, Time.deltaTime * 20f);
-            //  transform.rotation = Quaternion.Lerp(t, OriginalRot, Time.time * 0.2f);
-        }
-
-        //if (Input.GetKeyDown(KeyCode.A))
-        //{
-        //    Quaternion currentRotation = transform.rotation;
-        //    Quaternion wantedRotation = OriginalRot; // Quaternion.Euler(0, 0, 90);
-        //    transform.rotation = Quaternion.RotateTowards(currentRotation, wantedRotation, Time.deltaTime * 20f);
-        //}
-
-
-        //if (Input.GetKeyDown(KeyCode.T))
-        //{
-        //    AnimateToss();
-        //}
-        //if (Input.GetKeyDown(KeyCode.C))
-        //{
-        //    AnimateCatch();
-        //}
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    Animateturn();
-        //}
-    }
+           */
 
     public void Set_ItemReached(GameObject ItemObj)
     {
-        ItemToToss = ItemObj.GetComponent<StoryItem>();
-        _HeldObject = ItemToToss.MyType;
-        ItemObj.transform.parent = GetMyRightHandHold();
+
     }
 
-
-    //void ActialTossPeakRegisterStartMoveObject()
-    //{
-    //    if (_gm != null)
-    //    {
-    //        _gm.AirBornObj = ItemToToss.transform;
-    //        ItemToToss.MoveTO(GetMyRightHandHold(), _gm.GetCurDweller().LeftHandHoldPos, false);
-    //    }
-    //    else
-    //    {
-    //        Debug.LogWarning("No GameManager!!");
-    //    }
-
-    //}
-    //public void AnimateToss() { _MyAnimator.SetTrigger("TrigToss"); }
-    //public void AnimateCatch() { _MyAnimator.SetTrigger("TrigCatch"); }
 
     bool turnright = false;
     public void Animateturn()
@@ -178,14 +160,14 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
     public void AnimateToss(Action argTossAimeEvnet)
     {
         MidTossCallBAck = argTossAimeEvnet;
-        PlayingAnimState = GameSettings.Instance.Toss;
+        Playing_Exchange_AnimState = GameSettings.Instance.Toss;
         _MyAnimator.SetTrigger("TrigToss");
     }
 
     public void AnimateCatch(Action argCatchAimeEvnet)
     {
         MidCatchCallBAck = argCatchAimeEvnet;
-        PlayingAnimState = GameSettings.Instance.Catch;
+        Playing_Exchange_AnimState = GameSettings.Instance.Catch;
         _MyAnimator.SetTrigger("TrigCatch");
     }
     public void AnimTossPeack()
@@ -227,13 +209,13 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
         _MyAnimator.SetTrigger("Trig" + argTrig);
     }
 
-    string PlayingAnimState = "";
+    string Playing_Exchange_AnimState = "";
     Action WhatToDoWhenThisAnimStateEnds = null;
-    public void AnimateNamedAction(string argactionNAme, Action OnEnded_slash_ArrivedAtPos_Callback = null)
+    public void AnimateNamedAction(string arg_Exchange_actionNAme, Action OnEnded_slash_ArrivedAtPos_Callback = null)
     {
-        PlayingAnimState = argactionNAme;
+        Playing_Exchange_AnimState = arg_Exchange_actionNAme;
         WhatToDoWhenThisAnimStateEnds = OnEnded_slash_ArrivedAtPos_Callback;
-        AnimTrigger(argactionNAme); //ads trig to it 
+        AnimTrigger(arg_Exchange_actionNAme); //ads trig to it 
     }
 
     public void NotifyMeWheanAnimationStateExit()
@@ -243,15 +225,29 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
 #endif
         WhatToDoWhenThisAnimStateEnds();
     }
-    public DeliveryItem HELP_firstGuyOut()
+    public DeliveryItem Get_CurHeldObj()
     {
         return RightHandHoldPos.GetChild(0).GetComponent<DeliveryItem>();
         //        return _CurHeldObject.GetComponent<DeliveryItem>();
     }
 
-    public GameObject TemMyGO()
+    public void ShowMy_R_HeldDeliveryItem(bool argShow)
     {
-        return this.gameObject;
+        if (RightHandHoldPos.childCount > 0)
+        {
+            RightHandHoldPos.GetChild(0).GetComponent<DeliveryItem>().ShowMe(argShow);
+        }
+        else
+            Debug.Log("NO RightHandChild!");
+    }
+    public void ShowMy_L_HeldDeliveryItem(bool argShow)
+    {
+        if (LeftHandHoldPos.childCount > 0)
+        {
+            LeftHandHoldPos.GetChild(0).GetComponent<DeliveryItem>().ShowMe(argShow);
+        }
+        else
+            Debug.Log("NO LeftHandChild!");
     }
 
     public void OnAnimationstateTaggedDoneExit()
@@ -273,7 +269,9 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
 
     public void AnimatorPlay(string argname)
     {
-        _MyAnimator.Play(argname);
+        _MyAnimator.CrossFade(argname, 0.4f);
+
+        // _MyAnimator.Play(argname);
     }
 
     public void ResumAgent()

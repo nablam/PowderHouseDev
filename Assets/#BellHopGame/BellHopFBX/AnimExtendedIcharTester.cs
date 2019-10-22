@@ -99,6 +99,17 @@ public class AnimExtendedIcharTester : MonoBehaviour, ICharacterAnim
     {
         throw new NotImplementedException();
     }
+
+    public void ShowMy_R_HeldDeliveryItem(bool argShow)
+    {
+        throw new NotImplementedException();
+
+    }
+    public void ShowMy_L_HeldDeliveryItem(bool argShow)
+    {
+        throw new NotImplementedException();
+
+    }
     #endregion
     // Start is called before the first frame update
 
@@ -210,7 +221,7 @@ public class AnimExtendedIcharTester : MonoBehaviour, ICharacterAnim
         _myanim.SetFloat("Dot", D);
     }
 
-    public DeliveryItem HELP_firstGuyOut()
+    public DeliveryItem Get_CurHeldObj()
     {
         throw new NotImplementedException();
     }
