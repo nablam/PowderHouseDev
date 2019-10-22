@@ -304,7 +304,7 @@
 
     //}
 
-    public enum AgentStates
+    public enum CharCoordinatorStates
     {
 
         NotInitialized,

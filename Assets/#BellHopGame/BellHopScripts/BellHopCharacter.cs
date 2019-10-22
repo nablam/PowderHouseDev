@@ -218,7 +218,7 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
         AnimTrigger(arg_Exchange_actionNAme); //ads trig to it 
     }
 
-    public void NotifyMeWheanAnimationStateExit()
+    public void OnExchangeSequencExited()
     {
 #if DebugOn
         Debug.Log("Hops: Notifiedby animator end of " + PlayingAnimState);
@@ -250,7 +250,7 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
             Debug.Log("NO LeftHandChild!");
     }
 
-    public void OnAnimationstateTaggedDoneExit()
+    public void OnCrossFadedAnimationMainDoneTagExit()
     {
         throw new NotImplementedException();
     }

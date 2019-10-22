@@ -539,7 +539,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     }
 
 
-    public void NotifyMeWheanAnimationStateExit()
+    public void OnExchangeSequencExited()
     {
 #if DebugOn
         Debug.Log("Dweller: stateExit " + PlayingAnimState);
@@ -551,7 +551,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------>DWELL 3rdPErson
 
-    public void OnAnimationstateTaggedDoneExit()
+    public void OnCrossFadedAnimationMainDoneTagExit()
     {
         print("OnAnimationstateTaggedDoneExit ");
         // wait for responce from nada tag done
@@ -593,14 +593,14 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     Transform SavedTarget;
     public void Plz_GOTO(Transform artT, bool argDoWalk)
     {
-        if (_A_C_coordinator.Mystate() == GameEnums.AgentStates.Initialized || _A_C_coordinator.Mystate() == GameEnums.AgentStates.MovingToTarget || _A_C_coordinator.Mystate() == GameEnums.AgentStates.RotatingToPlace)
+        if (_A_C_coordinator.Mystate() == GameEnums.CharCoordinatorStates.Initialized || _A_C_coordinator.Mystate() == GameEnums.CharCoordinatorStates.MovingToTarget || _A_C_coordinator.Mystate() == GameEnums.CharCoordinatorStates.RotatingToPlace)
         {
             DirrectGoTOTarg(artT);
             // SavedTarget = artT;
 
         }
         else
-             if (_A_C_coordinator.Mystate() == GameEnums.AgentStates.Interacting)
+             if (_A_C_coordinator.Mystate() == GameEnums.CharCoordinatorStates.Interacting)
         {
             SavedTarget = artT;
             Interupt_then_GOTO(artT);

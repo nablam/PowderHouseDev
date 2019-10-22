@@ -12,7 +12,7 @@ public class DwellerAgentCharacterCoordinator : MonoBehaviour
     ICharacterAnim _myIchar;
     bool IsMecanim;
     //bool _activateUpdate;
-    AgentStates _mystate;
+    CharCoordinatorStates _mystate;
     [SerializeField]
     Transform CahsedDESTINATION = null;
     InteractionCentral IC;
@@ -22,17 +22,17 @@ public class DwellerAgentCharacterCoordinator : MonoBehaviour
 
     Action OnRotationComplete;
 
-    public AgentStates Mystate() { return _mystate; }
+    public CharCoordinatorStates Mystate() { return _mystate; }
 
     void RotationCompleted()
     {
         print("fin trn");
-        _mystate = AgentStates.Interacting;
+        _mystate = CharCoordinatorStates.Interacting;
 
     }
     private void OnEnable()
     {
-        _mystate = AgentStates.NotInitialized;
+        _mystate = CharCoordinatorStates.NotInitialized;
         _myIchar = GetComponent<ICharacterAnim>();
         character = GetComponent<Dweller3rdPerson>();
         agent = GetComponent<NavMeshAgent>();
@@ -65,7 +65,7 @@ public class DwellerAgentCharacterCoordinator : MonoBehaviour
         }
         AgentIsAwake = true;
 
-        _mystate = AgentStates.Initialized;
+        _mystate = CharCoordinatorStates.Initialized;
     }
     void FixedUpdate()
     {
@@ -107,7 +107,7 @@ public class DwellerAgentCharacterCoordinator : MonoBehaviour
             if (!NOtStartedWalking)
             {
                 print("started Nav To TArget");
-                _mystate = AgentStates.MovingToTarget;
+                _mystate = CharCoordinatorStates.MovingToTarget;
                 NOtStartedWalking = true;
             }
             character.Move(Vector3.zero, false, false);
@@ -135,7 +135,7 @@ public class DwellerAgentCharacterCoordinator : MonoBehaviour
                         DoUseAi = false;
                         arrived = true;
                         character.Reset_ReachedRot();
-                        _mystate = AgentStates.RotatingToPlace;
+                        _mystate = CharCoordinatorStates.RotatingToPlace;
                     }
                 }
             }

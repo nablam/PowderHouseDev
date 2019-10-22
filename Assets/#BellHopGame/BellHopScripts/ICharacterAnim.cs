@@ -26,10 +26,10 @@ public interface ICharacterAnim
     void ReleaseObj_CalledExternally();
     Transform GetMyRightHandHold();
     Transform GetMyLeftHandHold();
-    void NotifyMeWheanAnimationStateExit();
+    void OnExchangeSequencExited();
     //GameObject TemMyGO();
 
-    void OnAnimationstateTaggedDoneExit();
+    void OnCrossFadedAnimationMainDoneTagExit();
 
 
     void WarpAgent(Transform artT);

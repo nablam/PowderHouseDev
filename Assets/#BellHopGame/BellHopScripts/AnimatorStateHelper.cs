@@ -11,7 +11,7 @@ public class AnimatorStateHelper : StateMachineBehaviour
         if (stateInfo.IsTag("Done.Tag"))
         {
             ICharacterAnim ica = animator.gameObject.GetComponent<ICharacterAnim>();
-            ica.OnAnimationstateTaggedDoneExit();
+            ica.OnCrossFadedAnimationMainDoneTagExit();
         }
         else
             foreach (string actionstr in GameSettings.Instance.ActionNames)
@@ -22,7 +22,7 @@ public class AnimatorStateHelper : StateMachineBehaviour
                 if (stateInfo.IsTag(actionstr + ".Tag"))
                 {
                     ICharacterAnim ica = animator.gameObject.GetComponent<ICharacterAnim>();
-                    ica.NotifyMeWheanAnimationStateExit();
+                    ica.OnExchangeSequencExited();
 
 
 

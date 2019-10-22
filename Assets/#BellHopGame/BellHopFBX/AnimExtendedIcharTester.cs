@@ -63,17 +63,17 @@ public class AnimExtendedIcharTester : MonoBehaviour, ICharacterAnim
         throw new NotImplementedException();
     }
 
-    public void NotifyMeWheanAnimationStateExit()
+    public void OnExchangeSequencExited()
     {
         throw new NotImplementedException();
     }
 
-    public void OnAnimationstateTaggedDoneExit()
+    public void OnCrossFadedAnimationMainDoneTagExit()
     {
 
-        Debug.Log("Done.Tag anim EXIT");
-        if (cancelAutoPlay) return;
-        ReadInoutPlayAnim();
+        //Debug.Log("Done.Tag anim EXIT");
+        //if (cancelAutoPlay) return;
+        //ReadInoutPlayAnim();
     }
 
     public void ReleaseObj_CalledExternally()
