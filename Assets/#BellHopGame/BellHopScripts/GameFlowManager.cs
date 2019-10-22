@@ -37,6 +37,7 @@ public class GameFlowManager : MonoBehaviour
         {
             case GameEnums.GameSequenceType.GameStart:
                 _floorsmngr.HideShowAllBarriers(false);
+                _floorsmngr.INNNINNTNPOOOW();
 #if DebugOn
                 print("startgame");
 #endif

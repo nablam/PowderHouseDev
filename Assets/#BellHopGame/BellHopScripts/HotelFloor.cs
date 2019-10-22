@@ -76,16 +76,17 @@ public class HotelFloor : MonoBehaviour
     {
 
 
-
-
         InteractionCentral Greetings = floorFurnisherChild.GetGreetingsAction();
         InteractionCentral Dance = floorFurnisherChild.GetDanceAction();
         InteractionCentral Mainaction = floorFurnisherChild.GetMainAction();
 
-
         FloorDweller.InitSomePoints(Greetings.GetActionPos(), Dance.GetActionPos(), Mainaction.GetActionPos());
         FloorDweller.Activate_NAvAgent();
         FloorDweller.WarpAgent(Dance.GetActionPos());
+
+
+
+
 
 
     }
@@ -101,9 +102,8 @@ public class HotelFloor : MonoBehaviour
     }
 
     int cnt = 0;
-    public void MoveNave_To()
+    public void InitFloor()
     {
-
 
     }
 

@@ -42,11 +42,7 @@ public class HotelFloorsManager : MonoBehaviour
         _floors = argFloors; _curfloor = _floors[0];
 
 
-        print("INITIALIZINGAGENTS");
-        foreach (HotelFloor hf in _floors)
-        {
-            hf.InitDwellerAgentNowIGuess();
-        }
+
     }
 
     public void HideShowAllBarriers(bool argShow)
@@ -70,6 +66,15 @@ public class HotelFloorsManager : MonoBehaviour
     public HotelFloor Get_curFloor()
     {
         return _curfloor;
+    }
+
+    public void INNNINNTNPOOOW()
+    {
+        print("INITIALIZINGAGENTS");
+        foreach (HotelFloor hf in _floors)
+        {
+            hf.InitDwellerAgentNowIGuess();
+        }
     }
 
 
