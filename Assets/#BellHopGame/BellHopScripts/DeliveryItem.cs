@@ -23,7 +23,8 @@ public class DeliveryItem : MonoBehaviour
 
     public bool IsMyOwner(DwellerMeshComposer argThisGuy)
     {
-        if (argThisGuy.Id == this.Id)
+
+        if (argThisGuy.GetHashCode() == _dwellerOwner.GetHashCode())
             return true;
         return false;
     }

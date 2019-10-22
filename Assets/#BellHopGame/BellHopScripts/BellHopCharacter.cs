@@ -211,8 +211,11 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
     //NOTUSED TODO:
     public void ReleaseObj_CalledExternally()
     {
-        _CurHeldObject.transform.parent = null;
-        _CurHeldObject = null;
+        if (_CurHeldObject != null)
+        {
+            _CurHeldObject.transform.parent = null;
+            _CurHeldObject = null;
+        }
     }
 
     public Transform GetMyRightHandHold() { return this.RightHandHoldPos; }
@@ -220,6 +223,7 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
 
     public void AnimTrigger(string argTrig)
     {
+        //_MyAnimator.ResetTrigger();
         _MyAnimator.SetTrigger("Trig" + argTrig);
     }
 

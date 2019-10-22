@@ -120,12 +120,14 @@ public class NamedActionsController : MonoBehaviour
         MyContextItem = argContextItem;
         if (_CurSequenceType == GameEnums.TaskSequenceType.CutScene)
         {
+            MyDweller.AnimTrigger("MoveOn");
             MAkeTasks();
             TheCallBackAfterAnimStetends();
         }
         else
             if (_CurSequenceType == GameEnums.TaskSequenceType.Dweller_toss_Bunny)
         {
+            MyBunny.AnimTrigger("Actions");
             MyDweller.AnimTrigger("Actions");
             MAkeDweller_toss_Bunny();
             BHG_Task task = taskSystem.RequestNextTask();
@@ -135,6 +137,8 @@ public class NamedActionsController : MonoBehaviour
         else
             if (_CurSequenceType == GameEnums.TaskSequenceType.Bunny_tossDweller)
         {
+            MyBunny.AnimTrigger("Actions");
+            MyDweller.AnimTrigger("Actions");
             MAkeBunnyTossDweller();
             // TheCallBackAfterAnimStetends();
             BHG_Task task = taskSystem.RequestNextTask();
@@ -165,11 +169,15 @@ public class NamedActionsController : MonoBehaviour
 #if DebugOn
             print("Signal End of Animations on this floor" + _CurSequenceType.ToString());
 #endif
-            if (_CurSequenceType == GameEnums.TaskSequenceType.CutScene) { }
+            if (_CurSequenceType == GameEnums.TaskSequenceType.CutScene)
+            {
+                print("No tast left cutscnene");
+
+            }
             else
-                 if (_CurSequenceType == GameEnums.TaskSequenceType.Dweller_toss_Bunny) { }
+                 if (_CurSequenceType == GameEnums.TaskSequenceType.Dweller_toss_Bunny) { print("No tast left dwell -> bun"); }
             else
-                 if (_CurSequenceType == GameEnums.TaskSequenceType.Bunny_tossDweller) { }
+                 if (_CurSequenceType == GameEnums.TaskSequenceType.Bunny_tossDweller) { print("No tast left bun -> dwell"); }
             //else
             //     if (_CurSequenceType == GameEnums.TaskSequenceType.InitialHAndoffToDweller) { }
 
@@ -193,7 +201,9 @@ public class NamedActionsController : MonoBehaviour
         {
             //MoveTO(taskSystem.getCurTak().TheContextItem, taskSystem.getCurTak().TheContextItem)
             tempSTART = MyBunny.GetMyRightHandHold();
+
             tempEND = MyDweller.GetMyRightHandHold();
+            MyBunny.ReleaseObj_CalledExternally();
             //  MoveTO(MyContextItem, tempSTART, tempEND);
         }
         else
@@ -203,6 +213,8 @@ public class NamedActionsController : MonoBehaviour
 
             tempSTART = MyDweller.GetMyRightHandHold();
             tempEND = MyBunny.GetMyRightHandHold();
+
+            MyDweller.ReleaseObj_CalledExternally();
             //  MoveTO(MyContextItem, tempSTART, tempEND);
         }
 
@@ -279,8 +291,8 @@ public class NamedActionsController : MonoBehaviour
         startTime = Time.time;
         journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
 
-        StartCoroutine(MoveCurItemRoutine(startMarker, endMarker, argItem));
-        //StartCoroutine(Parabola(startMarker, endMarker, argItem, 1f, 1.2f));
+        // StartCoroutine(MoveCurItemRoutine(startMarker, endMarker, argItem));
+        StartCoroutine(Parabola(startMarker, endMarker, argItem, 0.6f, 0.5f));
 
     }
 
@@ -303,7 +315,7 @@ public class NamedActionsController : MonoBehaviour
             time = 2f;
         }
         //timeTrigcatcher = time * 0.8f;
-        timeTrigcatcher = time - 0.16f;
+        timeTrigcatcher = time - 0.26f;
 
         while (elapsedTime < time)
         {
@@ -358,16 +370,50 @@ public class NamedActionsController : MonoBehaviour
     public AnimationCurve m_Curve = new AnimationCurve();
     IEnumerator Parabola(Transform startMarker, Transform endMarker, DeliveryItem argItem, float height, float duration)
     {
+
+
         Vector3 startPos = startMarker.position;
         Vector3 endPos = endMarker.position;
         float normalizedTime = 0.0f;
+
+
+        //float elapsedTime = 0;
+        //float timeTrigcatcher;
+        bool catcherTriggered = false;
+        //float time;
+        //if (endMarker == null)
+        //    yield return null;
+
+
         while (normalizedTime < 1.0f)
         {
             float yOffset = height * 4.0f * (normalizedTime - normalizedTime * normalizedTime);
             argItem.transform.position = Vector3.Lerp(startPos, endPos, normalizedTime) + yOffset * Vector3.up;
+
+
+            if (normalizedTime > .7f)
+            {
+                if (!catcherTriggered)
+                {
+                    Debug.Log("hey catch reflex NOW");
+                    endMarker.gameObject.GetComponentInParent<ICharacterAnim>().AnimTrigger(GameSettings.Instance.Catch1);
+                    catcherTriggered = true;
+                }
+            }
+
             normalizedTime += Time.deltaTime / duration;
+
+
+            //float distCovered = (Time.time - startTime) * speed;
+            //fracJourney = distCovered / journeyLength;
+
+
+
             yield return null;
         }
+        Debug.Log("ReachedDestination");
+        argItem.transform.parent = endMarker;
+        endMarker.gameObject.GetComponentInParent<ICharacterAnim>().AnimTrigger(GameSettings.Instance.Catch2);
     }
     void JustTellMeSomthinAfterHEardMid__CAtch()
     {

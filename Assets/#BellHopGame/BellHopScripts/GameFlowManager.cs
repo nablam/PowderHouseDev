@@ -30,7 +30,7 @@ public class GameFlowManager : MonoBehaviour
 
     int _requestedFloor;
     int _floorNumArrivedAt;
-    bool firstTime = true;
+
     void HeardSequenceChanged(GameEnums.GameSequenceType argGST)
     {
         switch (argGST)
@@ -45,6 +45,8 @@ public class GameFlowManager : MonoBehaviour
                 _curDweller = _floorsmngr.GetCurFloorDweller();
                 _curDeliveryItem = _curDweller.HELP_firstGuyOut();
                 _ContextItem = _curDeliveryItem;
+
+                print("GOES TO " + _ContextItem.GetDestFloorDweller().AnimalName);
                 //then setup context later when bunny owns it
                 _ElevatorDoors.OpenDoors();
                 IsAllowKeypad = true;
@@ -57,6 +59,7 @@ public class GameFlowManager : MonoBehaviour
 #endif
                 _curDweller = _floorsmngr.GetCurFloorDweller();
 
+                //_curDeliveryItem = _bellHop.HELP_firstGuyOut();
                 _ElevatorDoors.OpenDoors();
                 break;
 
@@ -89,7 +92,7 @@ public class GameFlowManager : MonoBehaviour
 
             case GameEnums.GameSequenceType.DoorsClosed:
 #if DebugOn
-                print("here");
+                //  print("here");
 #endif
                 _bellHop.Animateturn();
                 _floorsmngr.UpdateCurFloorDest(_requestedFloor);
@@ -124,12 +127,12 @@ public class GameFlowManager : MonoBehaviour
         {
 
             _NamedActionsController.InitActionCTRL(GameEnums.TaskSequenceType.Dweller_toss_Bunny, _bellHop, _curDweller, _ContextItem);
-            firstTime = false;
+            FirstTime = false;
 
         }
         else
         {
-
+            _ContextItem = _curDeliveryItem;
 
             if (_ContextItem.IsMyOwner(_curDweller))
             {
@@ -185,6 +188,7 @@ public class GameFlowManager : MonoBehaviour
     DwellerMeshComposer _curDweller;
     [SerializeField]
     DeliveryItem _curDeliveryItem;
+    [SerializeField]
     DeliveryItem _ContextItem;
     [SerializeField]
     BellHopCharacter _bellHop;
