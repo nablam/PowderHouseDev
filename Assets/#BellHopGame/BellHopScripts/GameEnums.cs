@@ -324,4 +324,10 @@
         Lab,
 
     }
+
+    public enum AnimalCharacterHands
+    {
+        Right,
+        Left,
+    }
 }
