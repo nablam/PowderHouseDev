@@ -82,6 +82,10 @@ public class GameFlowManager : MonoBehaviour
 
 
             case GameEnums.GameSequenceType.PlayerInputs:
+                _ContextItem = _bellHop.HELP_firstGuyOut();
+                IsAllowKeypad = true;
+
+
                 break;
             //case GameEnums.GameSequenceType.DwellerReleaseObject:
             //    _curDweller.ReleaseObj_CalledExternally();
@@ -94,7 +98,7 @@ public class GameFlowManager : MonoBehaviour
 #if DebugOn
                 //  print("here");
 #endif
-                _bellHop.Animateturn();
+                // _bellHop.Animateturn();
                 _floorsmngr.UpdateCurFloorDest(_requestedFloor);
                 break;
 
@@ -141,7 +145,7 @@ public class GameFlowManager : MonoBehaviour
 #endif
                 _GOODFLOOR = true;
 
-                _NamedActionsController.InitActionCTRL(GameEnums.TaskSequenceType.Bunny_tossDweller, _bellHop, _curDweller, _ContextItem);
+                _NamedActionsController.InitActionCTRL(GameEnums.TaskSequenceType.TowWayExchange, _bellHop, _curDweller, _ContextItem);
             }
             else
             {
@@ -149,7 +153,7 @@ public class GameFlowManager : MonoBehaviour
                 Debug.Log("nay");
 #endif
                 _GOODFLOOR = false;
-                _NamedActionsController.InitActionCTRL(GameEnums.TaskSequenceType.CutScene, _bellHop, _curDweller, _ContextItem);
+                _NamedActionsController.InitActionCTRL(GameEnums.TaskSequenceType.Wrongfloor, _bellHop, _curDweller, _ContextItem);
             }
 
         }

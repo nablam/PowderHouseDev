@@ -32,6 +32,7 @@ public class GameSettings : MonoBehaviour
             ActionNames.Add(_good);
             ActionNames.Add(_happy);
             ActionNames.Add(_come);
+            ActionNames.Add(_no);
             ActionNames.Add(_openDoors);
             ActionNames.Add(_closeDoors);
             ActionNames.Add(_moveElevator);
@@ -90,7 +91,7 @@ public class GameSettings : MonoBehaviour
     string _sitCCouch = "SitCouch";
     string _sitCross = "SitCross";
     string _bedtime = "Bedtime";
-
+    string _no = "No";
     public string Toss { get => _toss; set => _toss = value; }
     public string Catch { get => _catch; set => _catch = value; }
     public string Catch1 { get => _catch1; set => _catch1 = value; }
@@ -107,6 +108,7 @@ public class GameSettings : MonoBehaviour
     public string Good { get => _good; set => _good = value; }
     public string Happy { get => _happy; set => _happy = value; }
     public string Come { get => _come; set => _come = value; }
+    public string No { get => _no; set => _no = value; }
     public float ElevatorSpeed { get => _elevatorSpeed; set => _elevatorSpeed = value; }
     public string OpenDoors { get => _openDoors; set => _openDoors = value; }
     public string CloseDoors { get => _closeDoors; set => _closeDoors = value; }

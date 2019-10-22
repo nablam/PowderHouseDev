@@ -494,6 +494,7 @@ public class DwellerMeshComposer : MonoBehaviour, ICharacterAnim
     public void ReleaseObj_CalledExternally() //after anim event handled
     {
         print("ISItEverReleased?????");
+        if (_CurHeldObject == null) return;
         _CurHeldObject.transform.parent = null;
         _initiallyAssignedAtSceneBuild = null;
         _CurHeldObject = null;

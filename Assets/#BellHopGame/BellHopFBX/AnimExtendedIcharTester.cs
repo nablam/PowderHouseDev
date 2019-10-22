@@ -209,4 +209,9 @@ public class AnimExtendedIcharTester : MonoBehaviour, ICharacterAnim
 #endif
         _myanim.SetFloat("Dot", D);
     }
+
+    public DeliveryItem HELP_firstGuyOut()
+    {
+        throw new NotImplementedException();
+    }
 }

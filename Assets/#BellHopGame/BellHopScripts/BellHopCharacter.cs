@@ -243,6 +243,11 @@ public class BellHopCharacter : MonoBehaviour, ICharacterAnim
 #endif
         WhatToDoWhenThisAnimStateEnds();
     }
+    public DeliveryItem HELP_firstGuyOut()
+    {
+        return RightHandHoldPos.GetChild(0).GetComponent<DeliveryItem>();
+        //        return _CurHeldObject.GetComponent<DeliveryItem>();
+    }
 
     public GameObject TemMyGO()
     {

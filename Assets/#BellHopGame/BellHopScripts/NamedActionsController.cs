@@ -83,6 +83,28 @@ public class NamedActionsController : MonoBehaviour
         taskSystem.AddTask(BunnyCome);
     }
 
+    void MakeToss2wayTAsk()
+    {
+
+        BHG_Task DwellerSayHi = new BHG_Task(GameSettings.Instance.Wave1, MyDweller, MyContextItem);
+        BHG_Task BunnyToss = new BHG_Task(GameSettings.Instance.Toss, MyBunny, MyContextItem);
+        BHG_Task DwellerCatch1 = new BHG_Task(GameSettings.Instance.Catch1, MyDweller, MyContextItem);
+        BHG_Task BunnySayHi = new BHG_Task(GameSettings.Instance.Wave2, MyBunny, MyContextItem);
+        BHG_Task DwellerToss = new BHG_Task(GameSettings.Instance.Toss, MyDweller, MyContextItem);
+        BHG_Task BunnyCatch1 = new BHG_Task(GameSettings.Instance.Catch1, MyBunny, MyContextItem);
+
+        taskSystem.AddTask(DwellerSayHi);
+        taskSystem.AddTask(BunnyToss);
+
+        taskSystem.AddTask(DwellerCatch1);
+
+        taskSystem.AddTask(BunnySayHi);
+        taskSystem.AddTask(DwellerToss);
+
+        taskSystem.AddTask(BunnyCatch1);
+
+    }
+
     void MAkeDweller_toss_Bunny()
     {
 
@@ -110,6 +132,15 @@ public class NamedActionsController : MonoBehaviour
         taskSystem.AddTask(BunnyToss);
         taskSystem.AddTask(DwellerSayHEllo);
     }
+
+    void MAkeWrongFloorTAsk()
+    {
+
+        BHG_Task DwellerSayNO = new BHG_Task(GameSettings.Instance.No, MyDweller, MyContextItem);
+
+        taskSystem.AddTask(DwellerSayNO);
+
+    }
     public void InitActionCTRL(GameEnums.TaskSequenceType argSequenceType, ICharacterAnim argBunny, ICharacterAnim argDweller, DeliveryItem argContextItem)
     {
 
@@ -118,11 +149,21 @@ public class NamedActionsController : MonoBehaviour
         MyDweller = argDweller;
 
         MyContextItem = argContextItem;
-        if (_CurSequenceType == GameEnums.TaskSequenceType.CutScene)
+        if (_CurSequenceType == GameEnums.TaskSequenceType.Wrongfloor)
+        {
+            MyBunny.AnimTrigger("Actions");
+            MyDweller.AnimTrigger("Actions");
+            MAkeWrongFloorTAsk();
+            BHG_Task task = taskSystem.RequestNextTask();
+            if (task != null)
+                ExecuteTask(task);
+        }
+        else
+     if (_CurSequenceType == GameEnums.TaskSequenceType.CutScene)
         {
             MyDweller.AnimTrigger("MoveOn");
-            MAkeTasks();
-            TheCallBackAfterAnimStetends();
+            //  MAkeTasks();
+            // TheCallBackAfterAnimStetends();
         }
         else
             if (_CurSequenceType == GameEnums.TaskSequenceType.Dweller_toss_Bunny)
@@ -140,6 +181,19 @@ public class NamedActionsController : MonoBehaviour
             MyBunny.AnimTrigger("Actions");
             MyDweller.AnimTrigger("Actions");
             MAkeBunnyTossDweller();
+
+            // TheCallBackAfterAnimStetends();
+            BHG_Task task = taskSystem.RequestNextTask();
+            if (task != null)
+                ExecuteTask(task);
+        }
+        else
+            if (_CurSequenceType == GameEnums.TaskSequenceType.TowWayExchange)
+        {
+            MyBunny.AnimTrigger("Actions");
+            MyDweller.AnimTrigger("Actions");
+
+            MakeToss2wayTAsk();
             // TheCallBackAfterAnimStetends();
             BHG_Task task = taskSystem.RequestNextTask();
             if (task != null)
@@ -156,10 +210,10 @@ public class NamedActionsController : MonoBehaviour
     {
 
 
-
+        curActionIndex++;
 
 #if DebugOn
-        print("the call back when task ends " + _CurSequenceType.ToString());
+        // print("the call back when task ends  " + curActionIndex + " " + _CurSequenceType.ToString());
 #endif
         BHG_Task task = taskSystem.RequestNextTask();
         if (task != null)
@@ -171,13 +225,40 @@ public class NamedActionsController : MonoBehaviour
 #endif
             if (_CurSequenceType == GameEnums.TaskSequenceType.CutScene)
             {
+                BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.PlayerInputs);
+
                 print("No tast left cutscnene");
 
             }
             else
-                 if (_CurSequenceType == GameEnums.TaskSequenceType.Dweller_toss_Bunny) { print("No tast left dwell -> bun"); }
+                 if (_CurSequenceType == GameEnums.TaskSequenceType.Dweller_toss_Bunny)
+            {
+
+                print("No tast left dwell -> bun");
+                BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.PlayerInputs);
+
+            }
             else
-                 if (_CurSequenceType == GameEnums.TaskSequenceType.Bunny_tossDweller) { print("No tast left bun -> dwell"); }
+                 if (_CurSequenceType == GameEnums.TaskSequenceType.Bunny_tossDweller)
+            {
+                print("No tast left bun -> dwell");
+                BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.PlayerInputs);
+                //   InitActionCTRL(GameEnums.TaskSequenceType.Dweller_toss_Bunny, MyBunny, MyDweller, MyDweller.HELP_firstGuyOut());
+            }
+            else
+                 if (_CurSequenceType == GameEnums.TaskSequenceType.TowWayExchange)
+            {
+                print("No tast left 2way");
+                BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.PlayerInputs);
+                //   InitActionCTRL(GameEnums.TaskSequenceType.Dweller_toss_Bunny, MyBunny, MyDweller, MyDweller.HELP_firstGuyOut());
+            }
+            else
+                 if (_CurSequenceType == GameEnums.TaskSequenceType.Wrongfloor)
+            {
+                print("No tast left wrongfloor");
+                BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.PlayerInputs);
+                //   InitActionCTRL(GameEnums.TaskSequenceType.Dweller_toss_Bunny, MyBunny, MyDweller, MyDweller.HELP_firstGuyOut());
+            }
             //else
             //     if (_CurSequenceType == GameEnums.TaskSequenceType.InitialHAndoffToDweller) { }
 
@@ -202,8 +283,8 @@ public class NamedActionsController : MonoBehaviour
             //MoveTO(taskSystem.getCurTak().TheContextItem, taskSystem.getCurTak().TheContextItem)
             tempSTART = MyBunny.GetMyRightHandHold();
 
-            tempEND = MyDweller.GetMyRightHandHold();
-            MyBunny.ReleaseObj_CalledExternally();
+            tempEND = MyDweller.GetMyLeftHandHold();
+            //MyBunny.ReleaseObj_CalledExternally();
             //  MoveTO(MyContextItem, tempSTART, tempEND);
         }
         else
@@ -214,7 +295,7 @@ public class NamedActionsController : MonoBehaviour
             tempSTART = MyDweller.GetMyRightHandHold();
             tempEND = MyBunny.GetMyRightHandHold();
 
-            MyDweller.ReleaseObj_CalledExternally();
+            // MyDweller.ReleaseObj_CalledExternally();
             //  MoveTO(MyContextItem, tempSTART, tempEND);
         }
 

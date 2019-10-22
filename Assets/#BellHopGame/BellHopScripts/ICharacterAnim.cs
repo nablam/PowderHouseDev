@@ -9,7 +9,7 @@ public interface ICharacterAnim
     void AnimTossPeack();
     void AnimCatchPeack();
 
-
+    DeliveryItem HELP_firstGuyOut();
     //to be called by other objects
     void AnimateToss(Action CallBackOnAnimEvent);
     void AnimateCatch(Action CallBackOnAnimEvent);

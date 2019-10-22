@@ -279,6 +279,8 @@
         //InitialHAndoffToDweller,
         Dweller_toss_Bunny,
         Bunny_tossDweller,
+        TowWayExchange,
+        Wrongfloor,
         CutScene
     }
     //public enum DwellerAnimTrigger
