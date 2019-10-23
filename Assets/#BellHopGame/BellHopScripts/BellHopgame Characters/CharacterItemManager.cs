@@ -108,19 +108,13 @@ public class CharacterItemManager : MonoBehaviour
     /// <returns></returns>
     public DeliveryItem GetItem_LR(AnimalCharacterHands argLeftright)
     {
-
         if (argLeftright == AnimalCharacterHands.Right)
         {
             return _deliveryItem_R;
-
         }
         else
         {
-
             return _deliveryItem_L;
         }
-
-
-
     }
 }

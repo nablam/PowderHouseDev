@@ -52,8 +52,16 @@ public class NumPadCTRL : MonoBehaviour
     }
     public void ReadButtonTouch(int argnum)
     {
-        if (!_flowMngr.IsAllowKeypad) return;
-        if (_flowMngr.GameEnded) return;
+        if (!_flowMngr.IsAllowKeypad)
+        {
+            Debug.LogWarning("Flowmanager NO KEYPADallowed");
+            return;
+        }
+        if (_flowMngr.GameEnded)
+        {
+            Debug.LogWarning("Flowmanager gameneded");
+            return;
+        }
         if (argnum >= _gs.Master_Number_of_Floors) return;
 
         //if (_gs.Master_CurentFloorNumber < argnum) { UpArrow.SetActive(true); DownArrowArrow.SetActive(false); }

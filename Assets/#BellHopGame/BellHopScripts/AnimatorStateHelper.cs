@@ -1,4 +1,5 @@
 ﻿//#define Debug_On
+//#define oldway
 using UnityEngine;
 
 public class AnimatorStateHelper : StateMachineBehaviour
@@ -10,8 +11,8 @@ public class AnimatorStateHelper : StateMachineBehaviour
     {
         if (stateInfo.IsTag("Done.Tag"))
         {
-            ICharacterAnim ica = animator.gameObject.GetComponent<ICharacterAnim>();
-            ica.OnCrossFadedAnimationMainDoneTagExit();
+            //ICharacterAnim ica = animator.gameObject.GetComponent<ICharacterAnim>();
+            //ica.OnCrossFadedAnimationMainDoneTagExit();
         }
         else
             foreach (string actionstr in GameSettings.Instance.ActionNames)
@@ -21,8 +22,8 @@ public class AnimatorStateHelper : StateMachineBehaviour
 
                 if (stateInfo.IsTag(actionstr + ".Tag"))
                 {
-                    ICharacterAnim ica = animator.gameObject.GetComponent<ICharacterAnim>();
-                    ica.OnExchangeSequencExited();
+                    //ICharacterAnim ica = animator.gameObject.GetComponent<ICharacterAnim>();
+                    //ica.OnExchangeSequencExited();
 
 
 
