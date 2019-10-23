@@ -23,6 +23,12 @@ public class NewCharTester : MonoBehaviour
     List<Func<string, CharacterAnimatorController, IEnumerator>> MyCoroutines;
     int curFuncIndex = 0;
     bool started = false;
+
+    public GameObject targ1;
+    public GameObject targ2;
+    public GameObject targ3;
+
+    Transform target = null;
     private void Awake()
     {
 
@@ -36,6 +42,7 @@ public class NewCharTester : MonoBehaviour
 
         Func<string, CharacterAnimatorController, IEnumerator> F1 = new Func<string, CharacterAnimatorController, IEnumerator>(DoTheAnim);
         Func<string, CharacterAnimatorController, IEnumerator> F2 = new Func<string, CharacterAnimatorController, IEnumerator>(DoTheAnimwait);
+        //  Func<Vector3, string, Action, CharacterAnimatorController, IEnumerator> FA1 = new Func<Vector3, string, Action, CharacterAnimatorController, IEnumerator>();
         MyCoroutines.Add(F1);
         MyCoroutines.Add(F2);
         _dwellerItemManager = DwellerObj.GetComponent<CharacterItemManager>();
@@ -62,6 +69,32 @@ public class NewCharTester : MonoBehaviour
     void Update()
     {
 
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            target = targ1.transform;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            target = targ2.transform;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            target = targ3.transform;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            target = null;
+        }
+
+
+    }
+
+    #region TestAttch_andAnimCoroutines
+    void UpdateMyCoroutinesMethod()
+    {
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (!started)
@@ -85,9 +118,7 @@ public class NewCharTester : MonoBehaviour
             }
 
         }
-
     }
-
 
 
     void Test_AttachItem(DeliveryItem Di, AnimalCharacterHands argLR, CharacterItemManager arggItemmanager)
@@ -118,6 +149,15 @@ public class NewCharTester : MonoBehaviour
         print("and bedtime");
         _animtor = argAnimatorCtrl.Get_myAnimator();
         _animtor.CrossFade(GameSettings.Instance.Come, 0.4f);
+    }
+    #endregion
+
+
+
+    IEnumerator DoTheRot(Vector3 argDirection, string argNameAnimToPlayNext, Action argOnRotCompledCallBAck, CharacterAnimatorController argAnimatorCtrl)
+    {
+        argAnimatorCtrl.TurnTo(argDirection, argNameAnimToPlayNext, argOnRotCompledCallBAck);
+        yield return null;
     }
 
 
