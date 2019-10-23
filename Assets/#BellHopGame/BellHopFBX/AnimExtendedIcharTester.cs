@@ -191,28 +191,28 @@ public class AnimExtendedIcharTester : MonoBehaviour, ICharacterAnim
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            ReadInoutPlayAnim();
-            cancelAutoPlay = true;
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    ReadInoutPlayAnim();
+        //    cancelAutoPlay = true;
 
-        }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            cancelAutoPlay = false;
+        //}
+        //if (Input.GetKeyDown(KeyCode.B))
+        //{
+        //    cancelAutoPlay = false;
 
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            _myanim.Play("Run", 0);
+        //}
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    _myanim.Play("Run", 0);
 
-        }
+        //}
 
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            _myanim.Play("Idle", 0);
+        //if (Input.GetKeyDown(KeyCode.I))
+        //{
+        //    _myanim.Play("Idle", 0);
 
-        }
+        //}
 
         float D = Vector3.Dot(transform.right, (TargetLoooook.position - transform.position).normalized);
 #if Debug_On

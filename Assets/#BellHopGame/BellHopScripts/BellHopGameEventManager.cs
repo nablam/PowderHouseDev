@@ -80,4 +80,12 @@ public class BellHopGameEventManager : MonoBehaviour
     {
         OnEventNamedActionFinished?.Invoke(gs);
     }
+
+
+    public delegate void EvenKeyStroke(char k);
+    public static EvenKeyStroke OnEvenKeyStroked;
+    public void Call_KeyStroked(char k)
+    {
+        OnEvenKeyStroked?.Invoke(k);
+    }
 }
