@@ -38,7 +38,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         #region Original
 
-        public void Start()
+        public void Awake()
         {
             m_Animator = GetComponent<Animator>();
             m_Rigidbody = GetComponent<Rigidbody>();
@@ -235,7 +235,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         public void TurnTo(Vector3 argDirection, string argNameAnimToPlayNext, Action argOnRotCompledCallBAck)
         {
-
+            if (reachedRot) return;
 
             if (argDirection.magnitude > 1f) argDirection.Normalize();
             argDirection = transform.InverseTransformDirection(argDirection);
@@ -275,16 +275,23 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 if (!reachedRot)
                 {
+                    reachedRot = true;
                     //print("fin trn");
                     argOnRotCompledCallBAck();
                     m_Animator.CrossFade(argstr, 0.4f);
                     // m_Animator.Play(argstr, 0);
-                    reachedRot = true;
+
                 }
             }
         }
 
-        public void Reset_ReachedRot() { reachedRot = false; }
+
+
+        public void Reset_ReachedRot()
+        {
+            reachedRot = false;
+            print("reset");
+        }
         #endregion
     }
 }

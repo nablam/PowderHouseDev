@@ -33,7 +33,7 @@ public class NewCharTester : MonoBehaviour
     {
 
     }
-
+    Func<Vector3, string, Action, CharacterAnimatorController, IEnumerator> FA1;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +42,7 @@ public class NewCharTester : MonoBehaviour
 
         Func<string, CharacterAnimatorController, IEnumerator> F1 = new Func<string, CharacterAnimatorController, IEnumerator>(DoTheAnim);
         Func<string, CharacterAnimatorController, IEnumerator> F2 = new Func<string, CharacterAnimatorController, IEnumerator>(DoTheAnimwait);
-        //  Func<Vector3, string, Action, CharacterAnimatorController, IEnumerator> FA1 = new Func<Vector3, string, Action, CharacterAnimatorController, IEnumerator>();
+        FA1 = new Func<Vector3, string, Action, CharacterAnimatorController, IEnumerator>(DoTheRot);
         MyCoroutines.Add(F1);
         MyCoroutines.Add(F2);
         _dwellerItemManager = DwellerObj.GetComponent<CharacterItemManager>();
@@ -63,20 +63,28 @@ public class NewCharTester : MonoBehaviour
 
         Test_AttachItem(Di_b, AnimalCharacterHands.Left, _dwellerItemManager);
         Test_Show_LR(true, AnimalCharacterHands.Left, _dwellerItemManager);
+
+        target = targ3.transform;
+        // StartCoroutine(FA1(target.position, "Wave2", () => print("hi"), _dwellerAnimatorController));
     }
 
     // Update is called once per frame
+    bool useUpdate = false;
     void Update()
     {
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            //  _bellhopAnimatorController.Reset_ReachedRot();
             target = targ1.transform;
+            useUpdate = true;
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
+            //  _bellhopAnimatorController.Reset_ReachedRot();
             target = targ2.transform;
+            useUpdate = true;
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
@@ -86,11 +94,42 @@ public class NewCharTester : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             target = null;
+            useUpdate = true;
         }
 
+        //if (Input.GetKeyDown(KeyCode.Alpha5))
+        //{
+        //    if (target == null)
+        //    {
+        //        Debug.Log("no targ");
+        //        StopCoroutine(FA1(Vector3.zero, "Wave2", () => _bellhopAnimatorController.Reset_ReachedRot(), _bellhopAnimatorController));
+
+
+        //        return;
+        //    }
+        //    else
+        //    {
+        //        // StopCoroutine(FA1(target.position, "Wave2", () => print("hi"), _bellhopAnimatorController));
+        //        useUpdate = true;
+        //        // FA1.Invoke(target.position, "Wave2", () => print("hi"), _bellhopAnimatorController);
+        //    }
+        //}
+
+        //if (useUpdate)
+        //{
+        //    if (target == null) return;
+        //    if (!iscoroutineStarted)
+        //        StartCoroutine(FA1(target.position, "Wave2", () => _bellhopAnimatorController.Reset_ReachedRot(), _bellhopAnimatorController));
+        //    else
+        //    {
+        //        StopCoroutine(FA1(Vector3.zero, "Wave2", () => _bellhopAnimatorController.Reset_ReachedRot(), _bellhopAnimatorController));
+        //        iscoroutineStarted = false;
+        //        StartCoroutine(FA1(target.position, "Wave2", () => _bellhopAnimatorController.Reset_ReachedRot(), _bellhopAnimatorController));
+        //    }
+        //}
 
     }
-
+    bool iscoroutineStarted = false;
     #region TestAttch_andAnimCoroutines
     void UpdateMyCoroutinesMethod()
     {
@@ -156,6 +195,7 @@ public class NewCharTester : MonoBehaviour
 
     IEnumerator DoTheRot(Vector3 argDirection, string argNameAnimToPlayNext, Action argOnRotCompledCallBAck, CharacterAnimatorController argAnimatorCtrl)
     {
+        iscoroutineStarted = true;
         argAnimatorCtrl.TurnTo(argDirection, argNameAnimToPlayNext, argOnRotCompledCallBAck);
         yield return null;
     }
