@@ -67,7 +67,7 @@ public class NewCharTester : MonoBehaviour
         target = targ3.transform;
         // StartCoroutine(FA1(target.position, "Wave2", () => print("hi"), _dwellerAnimatorController));
         _bellhopAnimatorController.ActivateAgent();
-        _bellhopAnimatorController.WarpMeAgentto(targ4.transform);
+        //  _bellhopAnimatorController.WarpMeAgentto(targ4.transform);
     }
 
     // Update is called once per frame
@@ -98,11 +98,18 @@ public class NewCharTester : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             target = targ3.transform;
+            _bellhopAnimatorController.ResetAgent();
+            _bellhopAnimatorController.Set_Destination(target);
+
+            _bellhopAnimatorController.Set_TargetTRans(target);
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            target = targ3.transform;
-            _bellhopAnimatorController.Set_RotToTarget(target, () => print("callback rot fin"));
+            target = targ4.transform;
+            _bellhopAnimatorController.ResetAgent();
+            _bellhopAnimatorController.Set_Destination(target);
+
+            _bellhopAnimatorController.Set_TargetTRans(target);
         }
 
         //if (Input.GetKeyDown(KeyCode.Alpha5))

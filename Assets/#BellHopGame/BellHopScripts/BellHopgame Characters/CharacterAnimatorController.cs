@@ -318,6 +318,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         public void Set_RotToTarget(Transform argRotTo, Action finturnCallback)
         {
+            Vector3 fakeloc = (argRotTo.position - this.transform.position).normalized;
+            Move(fakeloc, false, false);
+        }
+
+        public void Set_RotToTargetOLD(Transform argRotTo, Action finturnCallback)
+        {
             if (!coroutineturnStarted)
             {
                 StartCoroutine(Set_RotToTargetCOROUT(argRotTo.position, finturnCallback));
