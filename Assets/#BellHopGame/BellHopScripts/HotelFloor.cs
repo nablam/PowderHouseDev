@@ -84,11 +84,6 @@ public class HotelFloor : MonoBehaviour
         FloorDweller.Activate_NAvAgent();
         FloorDweller.WarpAgent(Dance.GetActionPos());
 
-
-
-
-
-
     }
 
     public void SetInitDest()

@@ -111,13 +111,8 @@ public class DwellerAgentCharacterCoordinator : MonoBehaviour
                 NOtStartedWalking = true;
             }
             character.Move(Vector3.zero, false, false);
-            //
         }
-
-
-
         CheckIfReached();
-
     }
 
     void CheckIfReached()

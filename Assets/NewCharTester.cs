@@ -27,7 +27,7 @@ public class NewCharTester : MonoBehaviour
     public GameObject targ1;
     public GameObject targ2;
     public GameObject targ3;
-
+    public GameObject targ4;
     Transform target = null;
     private void Awake()
     {
@@ -66,6 +66,8 @@ public class NewCharTester : MonoBehaviour
 
         target = targ3.transform;
         // StartCoroutine(FA1(target.position, "Wave2", () => print("hi"), _dwellerAnimatorController));
+        _bellhopAnimatorController.ActivateAgent();
+        _bellhopAnimatorController.WarpMeAgentto(targ4.transform);
     }
 
     // Update is called once per frame
@@ -75,16 +77,22 @@ public class NewCharTester : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            //  _bellhopAnimatorController.Reset_ReachedRot();
+
             target = targ1.transform;
-            useUpdate = true;
+            _bellhopAnimatorController.ResetAgent();
+            _bellhopAnimatorController.Set_Destination(target);
+
+            _bellhopAnimatorController.Set_TargetTRans(target);
+
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            //  _bellhopAnimatorController.Reset_ReachedRot();
             target = targ2.transform;
-            useUpdate = true;
+            _bellhopAnimatorController.ResetAgent();
+            _bellhopAnimatorController.Set_Destination(target);
+
+            _bellhopAnimatorController.Set_TargetTRans(target);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
@@ -93,8 +101,8 @@ public class NewCharTester : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            target = null;
-            useUpdate = true;
+            target = targ3.transform;
+            _bellhopAnimatorController.Set_RotToTarget(target, () => print("callback rot fin"));
         }
 
         //if (Input.GetKeyDown(KeyCode.Alpha5))
@@ -196,7 +204,7 @@ public class NewCharTester : MonoBehaviour
     IEnumerator DoTheRot(Vector3 argDirection, string argNameAnimToPlayNext, Action argOnRotCompledCallBAck, CharacterAnimatorController argAnimatorCtrl)
     {
         iscoroutineStarted = true;
-        argAnimatorCtrl.TurnTo(argDirection, argNameAnimToPlayNext, argOnRotCompledCallBAck);
+        // argAnimatorCtrl.TurnTo(argDirection, argNameAnimToPlayNext, argOnRotCompledCallBAck);
         yield return null;
     }
 
