@@ -656,8 +656,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 62.8
-  orthographic: 0
-  orthographic size: 2
+  orthographic: 1
+  orthographic size: 1.44
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -680,15 +680,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349089605}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.3, z: -4}
+  m_LocalRotation: {x: 0.07610995, y: 0, z: 0, w: 0.9970995}
+  m_LocalPosition: {x: 0, y: 2.06, z: -4.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1976096234}
   - {fileID: 725963538}
   m_Father: {fileID: 995437169}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 8.73, y: 0, z: 0}
 --- !u!114 &349089609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3176,7 +3176,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1735558216}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.3, z: -4}
+  m_LocalPosition: {x: 0, y: 1.96, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 995437169}
@@ -3719,15 +3719,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3076443047538695377, guid: 6bc66b3f724be5543b32432833ab9dd5,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7336008878681322701, guid: 6bc66b3f724be5543b32432833ab9dd5,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.458
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076443047538695377, guid: 6bc66b3f724be5543b32432833ab9dd5,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bc66b3f724be5543b32432833ab9dd5, type: 3}

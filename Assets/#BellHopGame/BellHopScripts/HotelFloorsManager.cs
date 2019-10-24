@@ -35,6 +35,7 @@ public class HotelFloorsManager : MonoBehaviour
     {
         //_curfloor = 0; 
         //curfloor 0 is set upon initialization
+        HideShowAllBarriers(false);
     }
 
     public void InitializeFLoors(List<HotelFloor> argFloors)
