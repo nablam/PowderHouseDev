@@ -54,11 +54,16 @@ public class NewCharTester : MonoBehaviour
         DeliveryItem Di_a = Item_a.GetComponent<DeliveryItem>();
         GameObject Item_b = Instantiate(Items[UnityEngine.Random.Range(0, 3)].gameObject);
         DeliveryItem Di_b = Item_b.GetComponent<DeliveryItem>();
+        GameObject Item_c = Instantiate(Items[UnityEngine.Random.Range(3, Items.Count)].gameObject);
+        DeliveryItem Di_c = Item_c.GetComponent<DeliveryItem>();
 
         Test_AttachItem(Di_a, AnimalCharacterHands.Right, _bellhopItemManager);
         Test_Show_LR(true, AnimalCharacterHands.Right, _bellhopItemManager);
 
-        Test_AttachItem(Di_b, AnimalCharacterHands.Left, _dwellerItemManager);
+        Test_AttachItem(Di_b, AnimalCharacterHands.Right, _dwellerItemManager);
+        Test_Show_LR(true, AnimalCharacterHands.Right, _dwellerItemManager);
+
+        Test_AttachItem(Di_c, AnimalCharacterHands.Left, _dwellerItemManager);
         Test_Show_LR(true, AnimalCharacterHands.Left, _dwellerItemManager);
 
         // target = targ3.transform;
