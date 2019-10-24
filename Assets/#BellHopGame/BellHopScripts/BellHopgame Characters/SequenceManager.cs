@@ -42,6 +42,12 @@ public class SequenceManager : MonoBehaviour
     List<ITaskAction> Sequence_WrongFloor;
     ITaskAction _DwellerAnimate_NO;
 
+    List<ITaskAction> Sequence_MovesAndAnims;
+    ITaskAction _DwellerMove_Room;
+    ITaskAction _rotLook;
+    ITaskAction _DwellerMove_Dance;
+    ITaskAction _DwellerAnimateRoom;
+
     List<ITaskAction> Sequence_BellPulls;
 
     List<ITaskAction> Sequence_DwellerPulls;
@@ -75,6 +81,16 @@ public class SequenceManager : MonoBehaviour
 
         Sequence_WrongFloor = new List<ITaskAction>();
         _DwellerAnimate_NO = new TA_DwellerAnimate(_Dweller, _gs.No);
+
+        Sequence_MovesAndAnims = new List<ITaskAction>();
+        _DwellerMove_Room = new TA_DwellerMoveTo(_Dweller, _couchI.GetActionPos());
+        _rotLook = new TA_DwellerFace(_Dweller, _couchI.GetLookTarg());
+        _DwellerAnimateRoom = new TA_DwellerAnimate(_Dweller, _couchI.argActionString);
+
+        Sequence_MovesAndAnims.Add(_DwellerWarp_door);
+        Sequence_MovesAndAnims.Add(_DwellerMove_Room);
+        Sequence_MovesAndAnims.Add(_rotLook);
+        Sequence_MovesAndAnims.Add(_DwellerAnimateRoom);
     }
 
 }
