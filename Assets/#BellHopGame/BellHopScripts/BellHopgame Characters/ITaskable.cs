@@ -10,4 +10,5 @@ public interface ITaskable
     void Warp(Transform argTransWarp);
 
     void TaskEnded();
+    void ActivateAgent();
 }

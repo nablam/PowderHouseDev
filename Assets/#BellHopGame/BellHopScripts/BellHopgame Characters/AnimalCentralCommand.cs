@@ -115,6 +115,11 @@ public class AnimalCentralCommand : MonoBehaviour, ITaskable
 
     public void TaskEnded()
     {
-        Debug.Log("task or animationeneded BROADCAST");
+
+        BellHopGameEventManager.Instance.Call_SimpleTaskEnded();
+    }
+    public void ActivateAgent()
+    {
+        _myAnimatorCtrl.ActivateAgent();
     }
 }

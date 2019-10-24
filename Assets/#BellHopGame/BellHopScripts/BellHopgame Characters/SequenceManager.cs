@@ -32,13 +32,6 @@ public class SequenceManager : MonoBehaviour
     ITaskAction _DwellerWarp_Room;
     ITaskAction _DwellerMove_door;
 
-    //ITaskAction _DwellerFace_1;
-    //ITaskAction _BellhopFace;
-    //ITaskAction _DwellerPull;
-    //ITaskAction _BellHopPull;
-    //ITaskAction _DwellerAnimate_Toss;
-
-
     List<ITaskAction> Sequence_WrongFloor;
     ITaskAction _DwellerAnimate_NO;
 
@@ -52,9 +45,26 @@ public class SequenceManager : MonoBehaviour
 
     List<ITaskAction> Sequence_DwellerPulls;
 
+    BHG_TaskSystem TaskSys;
 
+    private void OnEnable()
+    {
+        BellHopGameEventManager.OnSimpleTaskEnded += HeardTaskEnded;
+    }
+
+    private void OnDisable()
+    {
+        BellHopGameEventManager.OnSimpleTaskEnded -= HeardTaskEnded;
+    }
+    void HeardTaskEnded()
+    {
+        ITaskAction task = TaskSys.RequestNextTask();
+        if (task != null)
+            task.RunME();
+    }
     private void Start()
     {
+        TaskSys = new BHG_TaskSystem();
         _gs = GameSettings.Instance;
         Sequence_SimpleGreet = new List<ITaskAction>();
 
@@ -91,6 +101,29 @@ public class SequenceManager : MonoBehaviour
         Sequence_MovesAndAnims.Add(_DwellerMove_Room);
         Sequence_MovesAndAnims.Add(_rotLook);
         Sequence_MovesAndAnims.Add(_DwellerAnimateRoom);
+
+
+        Setup_Tasksystem(Sequence_SimpleGreet);
+
+        _Bellhop.ActivateAgent();
+        _Bellhop.ActivateAgent();
     }
 
+
+    void Setup_Tasksystem(List<ITaskAction> argListTasks)
+    {
+
+        foreach (ITaskAction it in argListTasks)
+        {
+            TaskSys.AddTask(it);
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            HeardTaskEnded();
+        }
+    }
 }

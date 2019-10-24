@@ -305,7 +305,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public void Reset_ReachedRot()
         {
             reachedRot = false;
-            print("reset");
+            // print("reset");
         }
         #endregion
 
@@ -361,6 +361,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public void WarpMeAgentto(Transform argDest)
         {
             agent.Warp(argDest.position);
+            SignalEndTask();
         }
 
         public void ResetAgent()
@@ -399,10 +400,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             Debug.DrawRay(new Vector3(transform.position.x, 1f, transform.position.z), new Vector3(heading.x, 0f, heading.z), Color.red, 0.1f);
             Debug.DrawRay(new Vector3(transform.position.x, 1f, transform.position.z), new Vector3(direction.x, 0f, direction.z), Color.blue, 0.1f);
 
-            TurnToSimple(heading, () => print("NOW WE HERE"));
+            TurnToSimple(heading, SignalEndTask);
         }
 
-
+        void SignalEndTask()
+        {
+            BellHopGameEventManager.Instance.Call_SimpleTaskEnded();
+        }
         void CheckIfReached()
         {
 
@@ -422,7 +426,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                         //  print("!agent.hasPath || agent.velocity.sqrMagnitude == 0");
                         if (!arrived)
                         {
-                            print("NOW WE HERE do i need to reset rot now?");
+                            // print("NOW WE HERE do i need to reset rot now?");
+                            SignalEndTask();
                             //DoUseAi = false;
                             arrived = true;
                             // Reset_ReachedRot();

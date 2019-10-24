@@ -63,7 +63,8 @@ public class NewCharTester : MonoBehaviour
 
         // target = targ3.transform;
         // StartCoroutine(FA1(target.position, "Wave2", () => print("hi"), _dwellerAnimatorController));
-        //  _bellhopAnimatorController.ActivateAgent();
+        //_bellhopAnimatorController.ActivateAgent();
+        //_dwellerAnimatorController.ActivateAgent();
         //  _bellhopAnimatorController.WarpMeAgentto(targ4.transform);
     }
 

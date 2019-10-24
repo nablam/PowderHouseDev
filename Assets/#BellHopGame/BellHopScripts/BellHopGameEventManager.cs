@@ -88,4 +88,13 @@ public class BellHopGameEventManager : MonoBehaviour
     {
         OnEvenKeyStroked?.Invoke(k);
     }
+
+
+    public delegate void EventSimpleTaskEnded();
+    public static EventSimpleTaskEnded OnSimpleTaskEnded;
+    public void Call_SimpleTaskEnded()
+    {
+        Debug.Log("task or animationeneded BROADCAST");
+        OnSimpleTaskEnded?.Invoke();
+    }
 }
