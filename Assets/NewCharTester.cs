@@ -71,77 +71,61 @@ public class NewCharTester : MonoBehaviour
     }
 
     // Update is called once per frame
-    bool useUpdate = false;
+    bool useRotonly = false;
     void Update()
     {
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-
+            _bellhopAnimatorController.Reset_ReachedRot();
             target = targ1.transform;
             _bellhopAnimatorController.ResetAgent();
-            _bellhopAnimatorController.Set_Destination(target);
+            _bellhopAnimatorController.Set_Destination(target, useRotonly);
 
-            _bellhopAnimatorController.Set_TargetTRans(target);
+            //_bellhopAnimatorController.Set_TargetTRans(target);
 
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
+            _bellhopAnimatorController.Reset_ReachedRot();
             target = targ2.transform;
             _bellhopAnimatorController.ResetAgent();
-            _bellhopAnimatorController.Set_Destination(target);
+            _bellhopAnimatorController.Set_Destination(target, useRotonly);
 
-            _bellhopAnimatorController.Set_TargetTRans(target);
+            //_bellhopAnimatorController.Set_TargetTRans(target);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
+            useRotonly = true;
+            _bellhopAnimatorController.Reset_ReachedRot();
             target = targ3.transform;
             _bellhopAnimatorController.ResetAgent();
-            _bellhopAnimatorController.Set_Destination(target);
+            _bellhopAnimatorController.Set_Destination(target, useRotonly);
 
-            _bellhopAnimatorController.Set_TargetTRans(target);
+            // _bellhopAnimatorController.Set_TargetTRans(target);
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
+            useRotonly = true;
+            _bellhopAnimatorController.Reset_ReachedRot();
             target = targ4.transform;
             _bellhopAnimatorController.ResetAgent();
-            _bellhopAnimatorController.Set_Destination(target);
+            _bellhopAnimatorController.Set_Destination(target, useRotonly);
 
-            _bellhopAnimatorController.Set_TargetTRans(target);
+            // _bellhopAnimatorController.Set_TargetTRans(target);
         }
 
-        //if (Input.GetKeyDown(KeyCode.Alpha5))
-        //{
-        //    if (target == null)
-        //    {
-        //        Debug.Log("no targ");
-        //        StopCoroutine(FA1(Vector3.zero, "Wave2", () => _bellhopAnimatorController.Reset_ReachedRot(), _bellhopAnimatorController));
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            useRotonly = !useRotonly;
+            if (useRotonly == true)
+            {
 
+            }
+        }
 
-        //        return;
-        //    }
-        //    else
-        //    {
-        //        // StopCoroutine(FA1(target.position, "Wave2", () => print("hi"), _bellhopAnimatorController));
-        //        useUpdate = true;
-        //        // FA1.Invoke(target.position, "Wave2", () => print("hi"), _bellhopAnimatorController);
-        //    }
-        //}
-
-        //if (useUpdate)
-        //{
-        //    if (target == null) return;
-        //    if (!iscoroutineStarted)
-        //        StartCoroutine(FA1(target.position, "Wave2", () => _bellhopAnimatorController.Reset_ReachedRot(), _bellhopAnimatorController));
-        //    else
-        //    {
-        //        StopCoroutine(FA1(Vector3.zero, "Wave2", () => _bellhopAnimatorController.Reset_ReachedRot(), _bellhopAnimatorController));
-        //        iscoroutineStarted = false;
-        //        StartCoroutine(FA1(target.position, "Wave2", () => _bellhopAnimatorController.Reset_ReachedRot(), _bellhopAnimatorController));
-        //    }
-        //}
 
     }
     bool iscoroutineStarted = false;

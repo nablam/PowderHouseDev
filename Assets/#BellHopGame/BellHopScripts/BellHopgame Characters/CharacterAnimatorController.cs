@@ -1,6 +1,5 @@
 ﻿
 using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 namespace UnityStandardAssets.Characters.ThirdPerson
@@ -60,9 +59,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             m_OrigGroundCheckDistance = m_GroundCheckDistance;
 
 
-            IsMecanim = true;
+            // IsMecanim = true;
             agent = GetComponent<NavMeshAgent>();
-            if (IsMecanim) agent.updateRotation = false;
+            //if (IsMecanim) agent.updateRotation = false;
         }
 
         void ScaleCapsuleForCrouching(bool crouch)
@@ -168,9 +167,18 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         void ApplyExtraTurnRotation()
         {
+
             // help the character turn faster (this is in addition to root rotation in the animation)
             float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, m_ForwardAmount);
             transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
+
+            //else
+            //{
+            //    float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, 0.6f);
+            //    float tothis = m_TurnAmount * turnSpeed * Time.deltaTime;
+            //    transform.Rotate(0, tothis, 0);
+            //}
+
         }
 
         public void OnAnimatorMove()
@@ -223,6 +231,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             m_TurnAmount = Mathf.Atan2(move.x, move.z);
             m_ForwardAmount = move.z;
 
+
             ApplyExtraTurnRotation();
 
             // control and velocity handling is different when grounded and airborne:
@@ -237,7 +246,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             ScaleCapsuleForCrouching(crouch);
             PreventStandingInLowHeadroom();
-            //print("X " + move.x + "|  T " + m_TurnAmount);
             // send input and other state parameters to the animator
             UpdateAnimator(move);
         }
@@ -248,28 +256,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         #region dwellergame
         public Animator Get_myAnimator() { return this.m_Animator; }
 
-        //void TurnTo(Vector3 argDirection, string argNameAnimToPlayNext, Action argOnRotCompledCallBAck)
-        //{
-        //    if (reachedRot) return;
-
-        //    if (argDirection.magnitude > 1f) argDirection.Normalize();
-        //    argDirection = transform.InverseTransformDirection(argDirection);
-        //    CheckGroundStatus();
-        //    argDirection = Vector3.ProjectOnPlane(argDirection, m_GroundNormal);
-
-
-
-
-
-        //    m_TurnAmount = Mathf.Atan2(argDirection.x, argDirection.z);
-        //    m_ForwardAmount = argDirection.z * -m_TurnAmount / 10f;
-
-
-
-        //    UpdateAnimator(argDirection);
-        //    ApplyExtraTurnRotationPURE(argNameAnimToPlayNext, argOnRotCompledCallBAck);
-
-        //}
 
         void TurnToSimple(Vector3 argDirection, Action argOnRotCompledCallBAck)
         {
@@ -296,84 +282,25 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         void ApplyExtraTurnimple(Action argOnRotCompledCallBAck)
         {
-            // help the character turn faster (this is in addition to root rotation in the animation)
-            float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, 0.6f);
+            float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, 0.5f);
             float tothis = m_TurnAmount * turnSpeed * Time.deltaTime;
             transform.Rotate(0, tothis, 0);
 
-            //print(tothis);
-            if (tothis < 0.05f)
+            if (Mathf.Abs(tothis) < 0.55f) //it's the abs value! otherwise no turning smoothly if turning left
             {
                 if (!reachedRot)
                 {
                     reachedRot = true;
-                    print("fin trn");
+                    //print("fin trn");
                     argOnRotCompledCallBAck();
 
                 }
             }
+
+
         }
 
         bool coroutineturnStarted = false;
-
-        public void Set_RotToTarget(Transform argRotTo, Action finturnCallback)
-        {
-            Vector3 fakeloc = (argRotTo.position - this.transform.position).normalized;
-            Move(fakeloc, false, false);
-        }
-
-        public void Set_RotToTargetOLD(Transform argRotTo, Action finturnCallback)
-        {
-            if (!coroutineturnStarted)
-            {
-                StartCoroutine(Set_RotToTargetCOROUT(argRotTo.position, finturnCallback));
-            }
-            else
-            {
-
-                StopCoroutine(Set_RotToTargetCOROUT(Vector3.zero, finturnCallback));
-
-            }
-        }
-        IEnumerator Set_RotToTargetCOROUT(Vector3 argRotTo, Action finturnCallback)
-        {
-            reachedRot = false;
-            arrived = false;
-            coroutineturnStarted = true;
-            while (!reachedRot)
-            {
-
-                TurnToSimple(argRotTo, finturnCallback)
-;
-            }
-            yield return null;
-            coroutineturnStarted = false;
-            print("fin fin");
-        }
-
-        //void ApplyExtraTurnRotationPURE(string argstr, Action argOnRotCompledCallBAck)
-        //{
-        //    // help the character turn faster (this is in addition to root rotation in the animation)
-        //    float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, 0.6f);
-        //    float tothis = m_TurnAmount * turnSpeed * Time.deltaTime;
-        //    transform.Rotate(0, tothis, 0);
-
-        //    //print(tothis);
-        //    if (tothis < 0.05f)
-        //    {
-        //        if (!reachedRot)
-        //        {
-        //            reachedRot = true;
-        //            //print("fin trn");
-        //            argOnRotCompledCallBAck();
-        //            m_Animator.CrossFade(argstr, 0.4f);
-        //            // m_Animator.Play(argstr, 0);
-
-        //        }
-        //    }
-        //}
-
-
 
         public void Reset_ReachedRot()
         {
@@ -402,11 +329,33 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             CahsedDESTINATION = artT;
         }
-        public void Set_Destination(Transform argDest)
+
+        public void Set_Destination(Transform argDest, bool isRortateOnly)
         {
+            agent.isStopped = true;
+            isUpdateAIPos = !isRortateOnly;
+            CahsedDESTINATION = argDest;
             NOtStartedWalking = false;
             arrived = false;
-            agent.SetDestination(argDest.position);
+            if (!isRortateOnly)
+            {
+                agent.isStopped = false;
+                agent.updateRotation = true;
+                agent.updatePosition = true;
+                agent.SetDestination(argDest.position);
+                agent.ResetPath();
+            }
+            else
+            {
+
+
+                agent.updateRotation = false;
+                agent.updatePosition = false;
+                agent.isStopped = true;
+                //ector3 fakeloc = this.transform.position + ((argDest.position - this.transform.position).normalized / 4f);
+                //agent.SetDestination(fakeloc);
+
+            } // agent.ResetPath();
         }
 
         public void WarpMeAgentto(Transform argDest)
@@ -418,6 +367,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             agent.ResetPath();
         }
+        //  bool SetRotateOnly_onSetDest = false;
         void USeAI()
         {
 
@@ -438,6 +388,20 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             CheckIfReached();
         }
 
+        void NoAI()
+        {
+            // Vector3 Direction = transform.LookAt(CahsedDESTINATION);// (this.transform.position + (CahsedDESTINATION.position - this.transform.position)).normalized;
+            Vector3 heading = CahsedDESTINATION.position - this.transform.position;
+            float distance = heading.magnitude;
+            Vector3 direction = heading / distance;
+
+
+            Debug.DrawRay(new Vector3(transform.position.x, 1f, transform.position.z), new Vector3(heading.x, 0f, heading.z), Color.red, 0.1f);
+            Debug.DrawRay(new Vector3(transform.position.x, 1f, transform.position.z), new Vector3(direction.x, 0f, direction.z), Color.blue, 0.1f);
+
+            TurnToSimple(heading, () => print("NOW WE HERE"));
+        }
+
 
         void CheckIfReached()
         {
@@ -446,8 +410,16 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 if (agent.remainingDistance <= agent.stoppingDistance)
                 {
+                    //  print("agent.remainingDistance <= agent.stoppingDistance");
                     if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
                     {
+                        //string str = "x";
+
+                        //if (agent.velocity.sqrMagnitude == 0f) { str += "_1_"; }
+                        //if (!agent.hasPath) { str += "_2_"; }
+                        //print(str);
+
+                        //  print("!agent.hasPath || agent.velocity.sqrMagnitude == 0");
                         if (!arrived)
                         {
                             print("NOW WE HERE do i need to reset rot now?");
@@ -467,6 +439,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (CahsedDESTINATION == null) return;
 
             if (isUpdateAIPos) USeAI();
+            else
+                NoAI();
         }
     }
 }
