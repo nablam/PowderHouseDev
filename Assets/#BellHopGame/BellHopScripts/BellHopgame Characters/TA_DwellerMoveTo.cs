@@ -15,6 +15,7 @@ public class TA_DwellerMoveTo : ITaskAction
 
     public void RunME()
     {
+        Debug.Log("run dwel move");
         _theCharacter.GoTo(TargetNavTrans);
     }
 }

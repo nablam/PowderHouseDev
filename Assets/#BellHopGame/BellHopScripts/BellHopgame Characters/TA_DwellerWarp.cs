@@ -15,6 +15,7 @@ public class TA_DwellerWarp : ITaskAction
 
     public void RunME()
     {
+        Debug.Log("run warp");
         _theCharacter.Warp(TargetNavTrans);
     }
 }

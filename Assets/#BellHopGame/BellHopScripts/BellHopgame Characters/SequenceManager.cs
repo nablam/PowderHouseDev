@@ -40,7 +40,7 @@ public class SequenceManager : MonoBehaviour
     ITaskAction _rotLook;
     ITaskAction _DwellerMove_Dance;
     ITaskAction _DwellerAnimateRoom;
-
+    ITaskAction _BellAnimCatch1;
     List<ITaskAction> Sequence_BellPulls;
 
     List<ITaskAction> Sequence_DwellerPulls;
@@ -76,10 +76,12 @@ public class SequenceManager : MonoBehaviour
         _BellHopPull = new TA_BellHopPull(_Bellhop, _Dweller.GetComponent<CharacterItemManager>());
         _DwellerWarp_Room = new TA_DwellerWarp(_Dweller, _couchI.GetActionPos());
         _DwellerMove_door = new TA_DwellerMoveTo(_Dweller, _exhangeI.GetActionPos());
+        _BellAnimCatch1 = new TA_DwellerAnimate(_Bellhop, _gs.Catch1);
         Sequence_SimpleGreet.Add(_DwellerWarp_door);
         Sequence_SimpleGreet.Add(_DwellerFace_bell);
         Sequence_SimpleGreet.Add(_BellhopFace_dwell);
         Sequence_SimpleGreet.Add(_DwellerAnimate_wave2);
+        Sequence_SimpleGreet.Add(_BellAnimCatch1);
         Sequence_SimpleGreet.Add(_DwellerAnimate_Toss);
         Sequence_SimpleGreet.Add(_BellHopPull);
 
@@ -95,18 +97,21 @@ public class SequenceManager : MonoBehaviour
         Sequence_MovesAndAnims = new List<ITaskAction>();
         _DwellerMove_Room = new TA_DwellerMoveTo(_Dweller, _couchI.GetActionPos());
         _rotLook = new TA_DwellerFace(_Dweller, _couchI.GetLookTarg());
-        _DwellerAnimateRoom = new TA_DwellerAnimate(_Dweller, _couchI.argActionString);
-
-        Sequence_MovesAndAnims.Add(_DwellerWarp_door);
+        _DwellerMove_Dance = new TA_DwellerMoveTo(_Dweller, _danceI.GetActionPos());
+        Sequence_MovesAndAnims.Add(_DwellerWarp_Room);
+        Sequence_MovesAndAnims.Add(_DwellerMove_door);
         Sequence_MovesAndAnims.Add(_DwellerMove_Room);
-        Sequence_MovesAndAnims.Add(_rotLook);
-        Sequence_MovesAndAnims.Add(_DwellerAnimateRoom);
+        Sequence_MovesAndAnims.Add(_DwellerMove_Dance);
+        Sequence_MovesAndAnims.Add(_DwellerMove_door);
+        Sequence_MovesAndAnims.Add(_DwellerMove_Room);
+
+        //Sequence_MovesAndAnims.Add(_DwellerAnimateRoom);
 
 
         Setup_Tasksystem(Sequence_SimpleGreet);
 
         _Bellhop.ActivateAgent();
-        _Bellhop.ActivateAgent();
+        _Dweller.ActivateAgent();
     }
 
 

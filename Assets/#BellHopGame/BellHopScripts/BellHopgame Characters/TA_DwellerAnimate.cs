@@ -1,4 +1,6 @@
-﻿public class TA_DwellerAnimate : ITaskAction
+﻿using UnityEngine;
+
+public class TA_DwellerAnimate : ITaskAction
 {
     ITaskable _theCharacter;
     string _animaStateName;
@@ -13,6 +15,7 @@
 
     public void RunME()
     {
+        Debug.Log("run dwel anim");
         _theCharacter.Animate(_animaStateName);
     }
 }

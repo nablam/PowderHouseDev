@@ -95,6 +95,7 @@ public class BellHopGameEventManager : MonoBehaviour
     public void Call_SimpleTaskEnded()
     {
         Debug.Log("task or animationeneded BROADCAST");
+        //  Debug.Break();
         OnSimpleTaskEnded?.Invoke();
     }
 }

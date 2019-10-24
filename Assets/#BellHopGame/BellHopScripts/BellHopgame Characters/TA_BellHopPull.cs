@@ -1,4 +1,5 @@
-﻿using static GameEnums;
+﻿using UnityEngine;
+using static GameEnums;
 
 public class TA_BellHopPull : ITaskAction
 {
@@ -15,6 +16,7 @@ public class TA_BellHopPull : ITaskAction
 
     public void RunME()
     {
+        Debug.Log("run Bell pull");
         _theCharacter.Pull(_theOTHERCharacter, AnimalCharacterHands.Right);//Bellhop always pulls to his RIght hand making it the context item the first time he gets it
     }
 }

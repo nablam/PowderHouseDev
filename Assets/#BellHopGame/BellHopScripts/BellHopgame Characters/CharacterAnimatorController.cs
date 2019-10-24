@@ -343,7 +343,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 agent.updateRotation = true;
                 agent.updatePosition = true;
                 agent.SetDestination(argDest.position);
-                agent.ResetPath();
+                // agent.ResetPath();
             }
             else
             {
@@ -380,7 +380,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 if (!NOtStartedWalking)
                 {
-                    print("started Nav To TArget");
+                    //print("started Nav To TArget");
 
                     NOtStartedWalking = true;
                 }

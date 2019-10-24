@@ -31,7 +31,7 @@ public class AnimalCentralCommand : MonoBehaviour, ITaskable
     public void GoTo(Transform argTransNav)
     {
         _myAnimatorCtrl.Reset_ReachedRot();
-        _myAnimatorCtrl.ResetAgent();
+        // _myAnimatorCtrl.ResetAgent();
         _myAnimatorCtrl.Set_Destination(argTransNav, false);
 
     }
@@ -45,7 +45,11 @@ public class AnimalCentralCommand : MonoBehaviour, ITaskable
 
     public void Animate(string argAnimStateName)
     {
-        _myAnimatorCtrl.Get_myAnimator().CrossFade(argAnimStateName, 0.4f);
+
+        if (argAnimStateName == "Toss")
+            _myAnimatorCtrl.Get_myAnimator().Play(argAnimStateName, 0);
+        else
+            _myAnimatorCtrl.Get_myAnimator().CrossFade(argAnimStateName, 0.4f);
     }
 
     public void Pull(CharacterItemManager argOtherCharItemManager, AnimalCharacterHands argToMyHand)
@@ -94,7 +98,6 @@ public class AnimalCentralCommand : MonoBehaviour, ITaskable
             {
                 if (!catcherTriggered)
                 {
-                    Debug.Log("hey catch reflex NOW");
 
                     catcherTriggered = true;
                 }
@@ -102,9 +105,10 @@ public class AnimalCentralCommand : MonoBehaviour, ITaskable
             normalizedTime += Time.deltaTime / duration;
             yield return null;
         }
-
-        Debug.Log("ReachedDestination");
+        Debug.Log("hey catch reflex NOW");
         TaskEnded();
+        Debug.Log("ReachedDestination");
+
     }
 
 

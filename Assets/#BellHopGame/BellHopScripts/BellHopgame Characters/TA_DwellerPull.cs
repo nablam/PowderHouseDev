@@ -1,4 +1,5 @@
-﻿using static GameEnums;
+﻿using UnityEngine;
+using static GameEnums;
 public class TA_DwellerPull : ITaskAction
 {
     ITaskable _theCharacter;
@@ -14,6 +15,7 @@ public class TA_DwellerPull : ITaskAction
 
     public void RunME()
     {
+        Debug.Log("run dwelpull");
         _theCharacter.Pull(_theOTHERCharacter, AnimalCharacterHands.Left);//dwellersalwaspull to left
     }
 }

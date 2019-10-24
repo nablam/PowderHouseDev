@@ -15,6 +15,7 @@ public class TA_DwellerFace : ITaskAction
 
     public void RunME()
     {
+        Debug.Log("run dwel face");
         _theCharacter.Face(TargetNavTrans);
     }
 }
