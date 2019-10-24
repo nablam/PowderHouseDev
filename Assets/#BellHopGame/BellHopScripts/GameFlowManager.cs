@@ -245,7 +245,7 @@ public class GameFlowManager : MonoBehaviour
     }
 
     bool _isAllowKeypad;
-    public bool IsAllowKeypad { get => _isAllowKeypad; private set => _isAllowKeypad = value; }
+    public bool IsAllowKeypad { get => _isAllowKeypad; private set => _isAllowKeypad = value; } //s the culprit
 
 
     Action<BellHopCharacter, DwellerMeshComposer> _ActionBunnyandDweller;

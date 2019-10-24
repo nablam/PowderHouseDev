@@ -69,6 +69,8 @@ public class GameSettings : MonoBehaviour
     string _good = "Good";
     string _happy = "Happy";
     string _come = "Come";
+    string _idlesLong = "IdlesLong";
+    string _idleMocap = "IdleMocap";
     string _openDoors = "OpenDoors"; //TODO: currently implemented separately
     string _closeDoors = "CloseDoors";//TODO: currently implemented separately
     string _moveElevator = "MoveElevator";//TODO: currently implemented separately according to old FLowElements
@@ -109,6 +111,9 @@ public class GameSettings : MonoBehaviour
     public string Happy { get => _happy; set => _happy = value; }
     public string Come { get => _come; set => _come = value; }
     public string No { get => _no; set => _no = value; }
+    public string IdlesLong { get => _idlesLong; set => _idlesLong = value; }
+    public string IdleMocap { get => _idleMocap; set => _idleMocap = value; }
+
     public float ElevatorSpeed { get => _elevatorSpeed; set => _elevatorSpeed = value; }
     public string OpenDoors { get => _openDoors; set => _openDoors = value; }
     public string CloseDoors { get => _closeDoors; set => _closeDoors = value; }
@@ -137,6 +142,7 @@ public class GameSettings : MonoBehaviour
 
     int _master_Number_of_Floors;
     public int Master_Number_of_Floors { get => _master_Number_of_Floors; set => _master_Number_of_Floors = value; }
+
 
 
 
