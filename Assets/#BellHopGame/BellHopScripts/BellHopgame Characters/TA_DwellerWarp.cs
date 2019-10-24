@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class TA_DwellerWarp
+public class TA_DwellerWarp : ITaskAction
 {
     ITaskable _theCharacter;
     Transform _taretNav;

@@ -1,5 +1,5 @@
 ﻿using static GameEnums;
-public class TA_DwellerPull
+public class TA_DwellerPull : ITaskAction
 {
     ITaskable _theCharacter;
     CharacterItemManager _theOTHERCharacter;

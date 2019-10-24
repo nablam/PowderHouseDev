@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class TA_DwellerFace
+public class TA_DwellerFace : ITaskAction
 {
     ITaskable _theCharacter;
     Transform _taretNav;

@@ -4,25 +4,25 @@ public class BHG_TaskSystem
 {
 
 
-    private List<BHG_Task> taskList;
+    private List<ITaskAction> taskList;
 
-    private BHG_Task _curTask = null;
+    private ITaskAction _curTask = null;
     public BHG_TaskSystem()
     {
-        taskList = new List<BHG_Task>();
+        taskList = new List<ITaskAction>();
     }
 
 
-    public BHG_Task getCurTak()
+    public ITaskAction getCurTak()
     {
 
         return _curTask;
     }
-    public BHG_Task RequestNextTask()
+    public ITaskAction RequestNextTask()
     {
         if (taskList.Count > 0)
         {
-            BHG_Task task = taskList[0];
+            ITaskAction task = taskList[0];
             _curTask = task;
             taskList.RemoveAt(0);
             return task;
@@ -34,7 +34,7 @@ public class BHG_TaskSystem
         }
     }
 
-    public void AddTask(BHG_Task task)
+    public void AddTask(ITaskAction task)
     {
         taskList.Add(task);
     }

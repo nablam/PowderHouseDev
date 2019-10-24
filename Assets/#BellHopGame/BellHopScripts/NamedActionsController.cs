@@ -154,7 +154,7 @@ public class NamedActionsController : MonoBehaviour
             MyBunny.AnimTrigger("Actions");
             MyDweller.AnimTrigger("Actions");
             MAkeWrongFloorTAsk();
-            BHG_Task task = taskSystem.RequestNextTask();
+            ITaskAction task = taskSystem.RequestNextTask();
             if (task != null)
                 ExecuteTask(task);
         }
@@ -171,7 +171,7 @@ public class NamedActionsController : MonoBehaviour
             MyBunny.AnimTrigger("Actions");
             MyDweller.AnimTrigger("Actions");
             MAkeDweller_toss_Bunny();
-            BHG_Task task = taskSystem.RequestNextTask();
+            ITaskAction task = taskSystem.RequestNextTask();
             if (task != null)
                 ExecuteTask(task);
         }
@@ -183,7 +183,7 @@ public class NamedActionsController : MonoBehaviour
             MAkeBunnyTossDweller();
 
             // TheCallBackAfterAnimStetends();
-            BHG_Task task = taskSystem.RequestNextTask();
+            ITaskAction task = taskSystem.RequestNextTask();
             if (task != null)
                 ExecuteTask(task);
         }
@@ -195,7 +195,7 @@ public class NamedActionsController : MonoBehaviour
 
             MakeToss2wayTAsk();
             // TheCallBackAfterAnimStetends();
-            BHG_Task task = taskSystem.RequestNextTask();
+            ITaskAction task = taskSystem.RequestNextTask();
             if (task != null)
                 ExecuteTask(task);
         }
@@ -210,59 +210,59 @@ public class NamedActionsController : MonoBehaviour
     {
 
 
-        curActionIndex++;
+        //        curActionIndex++;
 
-#if DebugOn
-        // print("the call back when task ends  " + curActionIndex + " " + _CurSequenceType.ToString());
-#endif
-        BHG_Task task = taskSystem.RequestNextTask();
-        if (task != null)
-            ExecuteTask(task);
-        else
-        {
-#if DebugOn
-            print("Signal End of Animations on this floor" + _CurSequenceType.ToString());
-#endif
-            if (_CurSequenceType == GameEnums.TaskSequenceType.CutScene)
-            {
-                BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.PlayerInputs);
+        //#if DebugOn
+        //        // print("the call back when task ends  " + curActionIndex + " " + _CurSequenceType.ToString());
+        //#endif
+        //        BHG_Task task = taskSystem.RequestNextTask();
+        //        if (task != null)
+        //            ExecuteTask(task);
+        //        else
+        //        {
+        //#if DebugOn
+        //            print("Signal End of Animations on this floor" + _CurSequenceType.ToString());
+        //#endif
+        //            if (_CurSequenceType == GameEnums.TaskSequenceType.CutScene)
+        //            {
+        //                BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.PlayerInputs);
 
-                print("No tast left cutscnene");
+        //                print("No tast left cutscnene");
 
-            }
-            else
-                 if (_CurSequenceType == GameEnums.TaskSequenceType.Dweller_toss_Bunny)
-            {
+        //            }
+        //            else
+        //                 if (_CurSequenceType == GameEnums.TaskSequenceType.Dweller_toss_Bunny)
+        //            {
 
-                print("No tast left dwell -> bun");
-                BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.PlayerInputs);
+        //                print("No tast left dwell -> bun");
+        //                BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.PlayerInputs);
 
-            }
-            else
-                 if (_CurSequenceType == GameEnums.TaskSequenceType.Bunny_tossDweller)
-            {
-                print("No tast left bun -> dwell");
-                BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.PlayerInputs);
-                //   InitActionCTRL(GameEnums.TaskSequenceType.Dweller_toss_Bunny, MyBunny, MyDweller, MyDweller.HELP_firstGuyOut());
-            }
-            else
-                 if (_CurSequenceType == GameEnums.TaskSequenceType.TowWayExchange)
-            {
-                print("No tast left 2way");
-                BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.PlayerInputs);
-                //   InitActionCTRL(GameEnums.TaskSequenceType.Dweller_toss_Bunny, MyBunny, MyDweller, MyDweller.HELP_firstGuyOut());
-            }
-            else
-                 if (_CurSequenceType == GameEnums.TaskSequenceType.Wrongfloor)
-            {
-                print("No tast left wrongfloor");
-                BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.PlayerInputs);
-                //   InitActionCTRL(GameEnums.TaskSequenceType.Dweller_toss_Bunny, MyBunny, MyDweller, MyDweller.HELP_firstGuyOut());
-            }
-            //else
-            //     if (_CurSequenceType == GameEnums.TaskSequenceType.InitialHAndoffToDweller) { }
+        //            }
+        //            else
+        //                 if (_CurSequenceType == GameEnums.TaskSequenceType.Bunny_tossDweller)
+        //            {
+        //                print("No tast left bun -> dwell");
+        //                BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.PlayerInputs);
+        //                //   InitActionCTRL(GameEnums.TaskSequenceType.Dweller_toss_Bunny, MyBunny, MyDweller, MyDweller.HELP_firstGuyOut());
+        //            }
+        //            else
+        //                 if (_CurSequenceType == GameEnums.TaskSequenceType.TowWayExchange)
+        //            {
+        //                print("No tast left 2way");
+        //                BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.PlayerInputs);
+        //                //   InitActionCTRL(GameEnums.TaskSequenceType.Dweller_toss_Bunny, MyBunny, MyDweller, MyDweller.HELP_firstGuyOut());
+        //            }
+        //            else
+        //                 if (_CurSequenceType == GameEnums.TaskSequenceType.Wrongfloor)
+        //            {
+        //                print("No tast left wrongfloor");
+        //                BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameEnums.GameSequenceType.PlayerInputs);
+        //                //   InitActionCTRL(GameEnums.TaskSequenceType.Dweller_toss_Bunny, MyBunny, MyDweller, MyDweller.HELP_firstGuyOut());
+        //            }
+        //            //else
+        //            //     if (_CurSequenceType == GameEnums.TaskSequenceType.InitialHAndoffToDweller) { }
 
-        }
+        //        }
     }
 
     public Transform tempSTART;
@@ -316,23 +316,23 @@ public class NamedActionsController : MonoBehaviour
     Action DelayedCallBAckWhenTossPeacks;
 
 
-    private void ExecuteTask(BHG_Task task)
+    private void ExecuteTask(ITaskAction task)
     {
-        ICharacterAnim ica = task.TheCharacter;
+        //ICharacterAnim ica = task.TheCharacter;
 
-        if (task.TheActionName.CompareTo(GameSettings.Instance.Toss) == 0)
-        {
+        //if (task.TheActionName.CompareTo(GameSettings.Instance.Toss) == 0)
+        //{
 
-            ica.AnimateToss(DelayedCallBAckWhenTossPeacks);
-        }
-        else
-        if (task.TheActionName.CompareTo(GameSettings.Instance.Catch) == 0)
-        {
+        //    ica.AnimateToss(DelayedCallBAckWhenTossPeacks);
+        //}
+        //else
+        //if (task.TheActionName.CompareTo(GameSettings.Instance.Catch) == 0)
+        //{
 
-        }
-        else
+        //}
+        //else
 
-            ica.AnimateNamedAction(task.TheActionName, TheCallBackAfterAnimStetends);//and when he gets there run the call backs  or void Onarrivetopos(){ state= Stae.WaitingForNexrTask;}
+        //    ica.AnimateNamedAction(task.TheActionName, TheCallBackAfterAnimStetends);//and when he gets there run the call backs  or void Onarrivetopos(){ state= Stae.WaitingForNexrTask;}
 
     }
 

@@ -29,13 +29,10 @@ public class NewCharTester : MonoBehaviour
     public GameObject targ3;
     public GameObject targ4;
     Transform target = null;
-    private void Awake()
-    {
 
-    }
     Func<Vector3, string, Action, CharacterAnimatorController, IEnumerator> FA1;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         MyCoroutines = new List<Func<string, CharacterAnimatorController, IEnumerator>>();
 
@@ -64,70 +61,70 @@ public class NewCharTester : MonoBehaviour
         Test_AttachItem(Di_b, AnimalCharacterHands.Left, _dwellerItemManager);
         Test_Show_LR(true, AnimalCharacterHands.Left, _dwellerItemManager);
 
-        target = targ3.transform;
+        // target = targ3.transform;
         // StartCoroutine(FA1(target.position, "Wave2", () => print("hi"), _dwellerAnimatorController));
-        _bellhopAnimatorController.ActivateAgent();
+        //  _bellhopAnimatorController.ActivateAgent();
         //  _bellhopAnimatorController.WarpMeAgentto(targ4.transform);
     }
 
     // Update is called once per frame
     bool useRotonly = false;
-    void Update()
-    {
+    /*  void Update()
+      {
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            _bellhopAnimatorController.Reset_ReachedRot();
-            target = targ1.transform;
-            _bellhopAnimatorController.ResetAgent();
-            _bellhopAnimatorController.Set_Destination(target, useRotonly);
+          if (Input.GetKeyDown(KeyCode.Alpha1))
+          {
+              _bellhopAnimatorController.Reset_ReachedRot();
+              target = targ1.transform;
+              _bellhopAnimatorController.ResetAgent();
+              _bellhopAnimatorController.Set_Destination(target, useRotonly);
 
-            //_bellhopAnimatorController.Set_TargetTRans(target);
+              //_bellhopAnimatorController.Set_TargetTRans(target);
 
-        }
+          }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            _bellhopAnimatorController.Reset_ReachedRot();
-            target = targ2.transform;
-            _bellhopAnimatorController.ResetAgent();
-            _bellhopAnimatorController.Set_Destination(target, useRotonly);
+          if (Input.GetKeyDown(KeyCode.Alpha2))
+          {
+              _bellhopAnimatorController.Reset_ReachedRot();
+              target = targ2.transform;
+              _bellhopAnimatorController.ResetAgent();
+              _bellhopAnimatorController.Set_Destination(target, useRotonly);
 
-            //_bellhopAnimatorController.Set_TargetTRans(target);
-        }
+              //_bellhopAnimatorController.Set_TargetTRans(target);
+          }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            useRotonly = true;
-            _bellhopAnimatorController.Reset_ReachedRot();
-            target = targ3.transform;
-            _bellhopAnimatorController.ResetAgent();
-            _bellhopAnimatorController.Set_Destination(target, useRotonly);
+          if (Input.GetKeyDown(KeyCode.Alpha3))
+          {
+              useRotonly = true;
+              _bellhopAnimatorController.Reset_ReachedRot();
+              target = targ3.transform;
+              _bellhopAnimatorController.ResetAgent();
+              _bellhopAnimatorController.Set_Destination(target, useRotonly);
 
-            // _bellhopAnimatorController.Set_TargetTRans(target);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            useRotonly = true;
-            _bellhopAnimatorController.Reset_ReachedRot();
-            target = targ4.transform;
-            _bellhopAnimatorController.ResetAgent();
-            _bellhopAnimatorController.Set_Destination(target, useRotonly);
+              // _bellhopAnimatorController.Set_TargetTRans(target);
+          }
+          if (Input.GetKeyDown(KeyCode.Alpha4))
+          {
+              useRotonly = true;
+              _bellhopAnimatorController.Reset_ReachedRot();
+              target = targ4.transform;
+              _bellhopAnimatorController.ResetAgent();
+              _bellhopAnimatorController.Set_Destination(target, useRotonly);
 
-            // _bellhopAnimatorController.Set_TargetTRans(target);
-        }
+              // _bellhopAnimatorController.Set_TargetTRans(target);
+          }
 
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            useRotonly = !useRotonly;
-            if (useRotonly == true)
-            {
+          if (Input.GetKeyDown(KeyCode.Alpha5))
+          {
+              useRotonly = !useRotonly;
+              if (useRotonly == true)
+              {
 
-            }
-        }
+              }
+          }
 
 
-    }
+      } */
     bool iscoroutineStarted = false;
     #region TestAttch_andAnimCoroutines
     void UpdateMyCoroutinesMethod()

@@ -1,6 +1,6 @@
 ﻿using static GameEnums;
 
-public class TA_BellHopPull
+public class TA_BellHopPull : ITaskAction
 {
     ITaskable _theCharacter;
     CharacterItemManager _theOTHERCharacter;

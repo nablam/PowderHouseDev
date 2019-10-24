@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class TA_DwellerAnimate : MonoBehaviour
+﻿public class TA_DwellerAnimate : ITaskAction
 {
     ITaskable _theCharacter;
     string _animaStateName;
