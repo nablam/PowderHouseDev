@@ -352,7 +352,7 @@ public class SceneBuilder : MonoBehaviour
 
 
         HotelFloorsMNG.InitializeFLoors(HotelAsListOfFloors);
-        GameFlow.InitializeMyThings(Hop.GetComponent<BellHopCharacter>(), HotelFloorsMNG, camlobby, ActionsControllerObj);
+        GameFlow.InitializeMyThings(Hop.GetComponent<AnimalCentralCommand>(), HotelFloorsMNG, camlobby, ActionsControllerObj);
         camlobby.assignBunny(Hop);
 
         camlobby.SetInitialPos(HotelAsListOfFloors[_gs.Master_Number_of_Floors - 1].BaseCamPos.transform);

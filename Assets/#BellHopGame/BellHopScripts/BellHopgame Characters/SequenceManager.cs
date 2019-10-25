@@ -75,8 +75,10 @@ public class SequenceManager : MonoBehaviour
     {
         BellHopGameEventManager.OnSimpleTaskEnded -= HeardTaskEnded;
     }
+    public bool gamestarted = false;
     void HeardTaskEnded()
     {
+        if (!gamestarted) return; //make listen to state change instead
         ITaskAction task = TaskSys.RequestNextTask();
         if (task != null)
             task.RunME();

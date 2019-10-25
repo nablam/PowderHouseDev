@@ -41,7 +41,7 @@ public class GameFlowManager : MonoBehaviour
         {
             case GameEnums.GameSequenceType.GameStart:
                 _floorsmngr.HideShowAllBarriers(false);
-
+                _seqMNGR.gamestarted = true;
 #if DebugOn
                 print("startgame");
 #endif
@@ -86,7 +86,7 @@ public class GameFlowManager : MonoBehaviour
 
 
             case GameEnums.GameSequenceType.PlayerInputs:
-                _ContextItem = _bellHop.Get_CurHeldObj();
+                //    _ContextItem = _bellHop.Get_CurHeldObj();
                 IsAllowKeypad = true;
 
 
@@ -156,7 +156,7 @@ public class GameFlowManager : MonoBehaviour
     }
     void ThrowRoutine()
     {
-        _bellHop.Animateturn();
+        ///  _bellHop.Animateturn();
     }
 
 
@@ -169,14 +169,14 @@ public class GameFlowManager : MonoBehaviour
     [SerializeField]
     DeliveryItem _ContextItem;
     [SerializeField]
-    BellHopCharacter _bellHop;
+    AnimalCentralCommand _bellHop;
 
     HotelFloorsManager _floorsmngr;
     ElevatorDoorsMasterControl _ElevatorDoors;
     CameraPov _cam;
 
 
-    public void InitializeMyThings(BellHopCharacter argbh, HotelFloorsManager argfloors, CameraPov argCam, NamedActionsController argNameActionCTRL)
+    public void InitializeMyThings(AnimalCentralCommand argbh, HotelFloorsManager argfloors, CameraPov argCam, NamedActionsController argNameActionCTRL)
     {
 
         _bellHop = argbh;
