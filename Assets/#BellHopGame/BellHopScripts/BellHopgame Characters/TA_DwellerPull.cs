@@ -16,6 +16,6 @@ public class TA_DwellerPull : ITaskAction
     public void RunME()
     {
         Debug.Log("run dwelpull");
-        _theCharacter.Pull(_theOTHERCharacter, AnimalCharacterHands.Left);//dwellersalwaspull to left
+        _theCharacter.Pull_Coordinate(_theOTHERCharacter, AnimalCharacterHands.Left);//dwellersalwaspull to left
     }
 }

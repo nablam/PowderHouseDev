@@ -52,7 +52,7 @@ public class AnimalCentralCommand : MonoBehaviour, ITaskable
             _myAnimatorCtrl.Get_myAnimator().CrossFade(argAnimStateName, 0.4f);
     }
 
-    public void Pull(CharacterItemManager argOtherCharItemManager, AnimalCharacterHands argToMyHand)
+    public void Pull_Coordinate(CharacterItemManager argOtherCharItemManager, AnimalCharacterHands argToMyHand)
     {
         //check the other dude's right hand only
         if (argOtherCharItemManager.HasItem(AnimalCharacterHands.Right))
