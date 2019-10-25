@@ -3,6 +3,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameFlowManager : MonoBehaviour
 {
@@ -37,17 +38,17 @@ public class GameFlowManager : MonoBehaviour
         {
             case GameEnums.GameSequenceType.GameStart:
                 _floorsmngr.HideShowAllBarriers(false);
-                _floorsmngr.INNNINNTNPOOOW();
+
 #if DebugOn
                 print("startgame");
 #endif
 
                 _curDweller = _floorsmngr.GetCurFloorDweller();
-                _curDeliveryItem = _curDweller.Get_CurHeldObj();
+                _curDeliveryItem = _curDweller.GetMyItemManager().GetItem_LR(GameEnums.AnimalCharacterHands.Right);
                 _ContextItem = _curDeliveryItem;
 
                 print("GOES TO " + _ContextItem.GetDestFloorDweller().AnimalName);
-                //then setup context later when bunny owns it
+                // 
                 _ElevatorDoors.OpenDoors();
                 IsAllowKeypad = true;
 
@@ -59,7 +60,7 @@ public class GameFlowManager : MonoBehaviour
 #endif
                 _curDweller = _floorsmngr.GetCurFloorDweller();
 
-                //_curDeliveryItem = _bellHop.HELP_firstGuyOut();
+
                 _ElevatorDoors.OpenDoors();
                 break;
 
@@ -87,18 +88,11 @@ public class GameFlowManager : MonoBehaviour
 
 
                 break;
-            //case GameEnums.GameSequenceType.DwellerReleaseObject:
-            //    _curDweller.ReleaseObj_CalledExternally();
-            //    MoveTO(_curDeliveryItem, _curDweller.GetMyRightHandHold(), _bellHop.GetMyRightHandHold());
-            //    //_curDeliveryItem
-            //    //_curDeliveryItem.transform.parent = null;
-            //    break;
 
             case GameEnums.GameSequenceType.DoorsClosed:
 #if DebugOn
                 //  print("here");
 #endif
-                // _bellHop.Animateturn();
                 _floorsmngr.UpdateCurFloorDest(_requestedFloor);
                 break;
 
@@ -123,14 +117,12 @@ public class GameFlowManager : MonoBehaviour
 
     bool _GOODFLOOR = false;
     bool FirstTime = true;
-    //is called when 
     void CheckFloorStatusUponArrival()
     {
 
         if (FirstTime)
         {
 
-            _NamedActionsController.InitActionCTRL(GameEnums.TaskSequenceType.Dweller_toss_Bunny, _bellHop, _curDweller, _ContextItem);
             FirstTime = false;
 
         }
@@ -138,14 +130,13 @@ public class GameFlowManager : MonoBehaviour
         {
             _ContextItem = _curDeliveryItem;
 
-            if (_ContextItem.IsMyOwner(_curDweller))
+            if (_ContextItem.IsMyOwner(_curDweller.GetComponent<DwellerMeshComposer>()))
             {
 #if DebugOn
                 Debug.Log("YAYA");
 #endif
                 _GOODFLOOR = true;
 
-                _NamedActionsController.InitActionCTRL(GameEnums.TaskSequenceType.TowWayExchange, _bellHop, _curDweller, _ContextItem);
             }
             else
             {
@@ -153,43 +144,20 @@ public class GameFlowManager : MonoBehaviour
                 Debug.Log("nay");
 #endif
                 _GOODFLOOR = false;
-                _NamedActionsController.InitActionCTRL(GameEnums.TaskSequenceType.Wrongfloor, _bellHop, _curDweller, _ContextItem);
             }
 
         }
-        //_curDeliveryItem = null;
-
-        //if (_curDeliveryItem.IsMyOwner(_curDweller))
-        //{
-        //    Debug.Log("WOOT");
-
-        //    if (_bellHop.IsEmptyHAnded())
-        //    {
-        //        Debug.Log("bunny empty handed");
-        //    }
-        //    else
-        //    {
-        //        Debug.Log("bunny full handed");
-        //    }
-
-        //}
-        //else
-        //{
-        //    Debug.Log("original floor item not here");
-        //}
     }
     void ThrowRoutine()
     {
         _bellHop.Animateturn();
-        //_curDweller.AnimateToss();
-
     }
 
 
 
 
     [SerializeField]
-    DwellerMeshComposer _curDweller;
+    AnimalCentralCommand _curDweller;
     [SerializeField]
     DeliveryItem _curDeliveryItem;
     [SerializeField]
@@ -200,7 +168,7 @@ public class GameFlowManager : MonoBehaviour
     HotelFloorsManager _floorsmngr;
     ElevatorDoorsMasterControl _ElevatorDoors;
     CameraPov _cam;
-    NamedActionsController _NamedActionsController;
+
 
     public void InitializeMyThings(BellHopCharacter argbh, HotelFloorsManager argfloors, CameraPov argCam, NamedActionsController argNameActionCTRL)
     {
@@ -209,15 +177,9 @@ public class GameFlowManager : MonoBehaviour
         _floorsmngr = argfloors;
         _cam = argCam;
         _ElevatorDoors = ElevatorDoorsMasterControl.Instance;
-        _NamedActionsController = argNameActionCTRL;
-
-        //WarpAllDwellersNow();
     }
 
-    //void WarpAllDwellersNow()
-    //{
-    //    _floorsmngr.WarpAll();
-    //}
+
 
     public static GameFlowManager Instance = null;
 
@@ -267,6 +229,7 @@ public class GameFlowManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(WaitTostartMovingCam());
+        _floorsmngr.INNNINNTNPOOOW();
     }
 
     IEnumerator WaitTostartMovingCam()
@@ -276,26 +239,14 @@ public class GameFlowManager : MonoBehaviour
 
     }
 
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Alpha1))
-    //    {
-    //        _floorsmngr.Get_curFloor().MoveNave_To_MainAction();
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            SceneManager.LoadScene("DeliveryGame");
+        }
+    }
 
-    //    }
-    //    if (Input.GetKeyDown(KeyCode.Alpha2))
-    //    {
-    //        _floorsmngr.Get_curFloor().MoveNave_To_MidDoor();
-
-    //    }
-
-    //    if (Input.GetKeyDown(KeyCode.Alpha3))
-    //    {
-    //        _floorsmngr.Get_curFloor().MoveNave_To_Dance();
-
-    //    }
-
-    //}
 }
 
 

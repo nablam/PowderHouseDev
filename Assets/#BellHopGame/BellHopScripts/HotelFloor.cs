@@ -29,7 +29,7 @@ public class HotelFloor : MonoBehaviour
     // bool _deliveryItemStillOnFloor;
     bool _receivedItem;
 
-    public DwellerMeshComposer FloorDweller;
+    public AnimalCentralCommand FloorDweller;
     public FloorFurnisher floorFurnisherChild;
 
     public int FloorNumber { get => _floorNumber; set => _floorNumber = value; }
@@ -54,8 +54,9 @@ public class HotelFloor : MonoBehaviour
 
         argDwellerObj.transform.position = new Vector3(InitialFLoor.transform.position.x, InitialFLoor.transform.position.y, InitialFLoor.transform.position.z);
         argDwellerObj.transform.parent = this.transform;
-        FloorDweller = argDwellerObj.GetComponent<DwellerMeshComposer>();
-        m_Text_Billboard.text = FloorDweller.Gender + ". " + FloorDweller.AnimalName + " the " + FloorDweller.AnimalType;
+        FloorDweller = argDwellerObj.GetComponent<AnimalCentralCommand>();
+
+        m_Text_Billboard.text = argDwellerObj.GetComponent<DwellerMeshComposer>().Gender + ". " + argDwellerObj.GetComponent<DwellerMeshComposer>().AnimalName + " the " + argDwellerObj.GetComponent<DwellerMeshComposer>().AnimalType;
 
 
         ReceivedItem = false;
@@ -80,10 +81,9 @@ public class HotelFloor : MonoBehaviour
         InteractionCentral Dance = floorFurnisherChild.GetDanceAction();
         InteractionCentral Mainaction = floorFurnisherChild.GetMainAction();
 
-        FloorDweller.InitSomePoints(Greetings.GetActionPos(), Dance.GetActionPos(), Mainaction.GetActionPos());
-        FloorDweller.Activate_NAvAgent();
-        FloorDweller.WarpAgent(Dance.GetActionPos());
+        FloorDweller.ActivateAgent();
 
+        FloorDweller.Warp(Greetings.GetActionPos());
     }
 
     public void SetInitDest()
@@ -102,9 +102,6 @@ public class HotelFloor : MonoBehaviour
 
     }
 
-    public void MoveNave_To_MidDoor() { FloorDweller.Go_to_my_MidDoor(); }
-    public void MoveNave_To_MainAction() { FloorDweller.Go_to_my_Main(); }
-    public void MoveNave_To_Dance() { FloorDweller.Go_to_my_Dance(); }
 
     public void ShowHideBArrier(bool argShow)
     {

@@ -50,7 +50,7 @@ public class HotelFloorsManager : MonoBehaviour
         foreach (HotelFloor hf in _floors) { hf.ShowHideBArrier(argShow); }
     }
 
-    public DwellerMeshComposer GetCurFloorDweller() { return _curfloor.FloorDweller; }
+    public AnimalCentralCommand GetCurFloorDweller() { return _curfloor.FloorDweller; }
 
 
     public int GetFloorByAnimal(int argID)

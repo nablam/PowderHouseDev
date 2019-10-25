@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static GameEnums;
 using Random = UnityEngine.Random;
 
 public class SceneBuilder : MonoBehaviour
@@ -337,8 +338,14 @@ public class SceneBuilder : MonoBehaviour
             int floortosetup = path[p];
             DwellerMeshComposer dmc = Dwellers_Instances[p].GetComponent<DwellerMeshComposer>();
 
-            dmc.InitializeHeldObject(DeliveryItem_Instances[p]);
+
             dmc.MyFinalResidenceFloorNumber = floortosetup;
+            CharacterItemManager Cim = Dwellers_Instances[p].GetComponent<CharacterItemManager>();
+            DeliveryItem Di = DeliveryItem_Instances[p].GetComponent<DeliveryItem>();
+            Cim.AttachItem(Di, AnimalCharacterHands.Right);
+            Cim.Show_LR(false, AnimalCharacterHands.Right);
+
+
             HotelAsListOfFloors[floortosetup].SetDweller(Dwellers_Instances[p]);
         }
 

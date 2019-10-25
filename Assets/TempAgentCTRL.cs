@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TempAgentCTRL : MonoBehaviour
 {
@@ -34,43 +35,28 @@ public class TempAgentCTRL : MonoBehaviour
 
         //}
 
-        //if (Input.GetKeyDown(KeyCode.Q))
-        //{
-        //    SceneManager.LoadScene("FurnitureLivingRoom");
-        //}
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            SceneManager.LoadScene("FurnitureLivingRoom");
+        }
 
-        //if (Input.GetKeyDown(KeyCode.Alpha1))
-        //{
-        //    ff.BuildRoomType(GameEnums.RoomType.Kitchen);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Alpha2))
-        //{
-        //    ff.BuildRoomType(GameEnums.RoomType.Bedroom);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Alpha3))
-        //{
-        //    ff.BuildRoomType(GameEnums.RoomType.Livingroom);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Alpha4))
-        //{
-        //    ff.BuildRoomType(GameEnums.RoomType.Lab);
-        //}
-
-
-        //if (Input.GetKeyDown(KeyCode.A))
-        //{
-
-        //    isMain = !isMain;
-        //    if (isMain)
-        //    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ff.BuildRoomType(GameEnums.RoomType.Kitchen);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ff.BuildRoomType(GameEnums.RoomType.Bedroom);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            ff.BuildRoomType(GameEnums.RoomType.Livingroom);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            ff.BuildRoomType(GameEnums.RoomType.Lab);
+        }
 
 
-        //        Dweller.Plz_GOTO(ff.GetMainAction().GetActionPos(), true);
-        //    }
-        //    else
-        //    {
-        //        Dweller.Plz_GOTO(ff.GetDanceAction().GetActionPos(), true);
-        //    }
-        //}
     }
 }
