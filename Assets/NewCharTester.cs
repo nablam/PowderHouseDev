@@ -57,14 +57,14 @@ public class NewCharTester : MonoBehaviour
         GameObject Item_c = Instantiate(Items[UnityEngine.Random.Range(3, Items.Count)].gameObject);
         DeliveryItem Di_c = Item_c.GetComponent<DeliveryItem>();
 
-        Test_AttachItem(Di_a, AnimalCharacterHands.Right, _bellhopItemManager);
-        Test_Show_LR(true, AnimalCharacterHands.Right, _bellhopItemManager);
+        //Test_AttachItem(Di_a, AnimalCharacterHands.Right, _bellhopItemManager);
+        //Test_Show_LR(true, AnimalCharacterHands.Right, _bellhopItemManager);
 
         Test_AttachItem(Di_b, AnimalCharacterHands.Right, _dwellerItemManager);
         Test_Show_LR(true, AnimalCharacterHands.Right, _dwellerItemManager);
 
-        Test_AttachItem(Di_c, AnimalCharacterHands.Left, _dwellerItemManager);
-        Test_Show_LR(true, AnimalCharacterHands.Left, _dwellerItemManager);
+        //Test_AttachItem(Di_c, AnimalCharacterHands.Left, _dwellerItemManager);
+        //Test_Show_LR(true, AnimalCharacterHands.Left, _dwellerItemManager);
 
         // target = targ3.transform;
         // StartCoroutine(FA1(target.position, "Wave2", () => print("hi"), _dwellerAnimatorController));

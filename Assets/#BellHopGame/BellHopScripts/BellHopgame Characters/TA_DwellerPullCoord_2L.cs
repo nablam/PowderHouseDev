@@ -1,20 +1,20 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using static GameEnums;
 
-public class TA_Coordination : ITaskAction
+public class TA_DwellerPullCoord_2L : MonoBehaviour, ITaskAction
 {
     ITaskable _theCharacter;
     ITaskable _theOTHERCharacter;
     AnimalCharacterHands _fromHand;
     AnimalCharacterHands _toMyHand;
 
-    public TA_Coordination(ITaskable taskableAnimal, ITaskable theOtherstolenFrom, AnimalCharacterHands argTheirhandFrom, AnimalCharacterHands argMyHandTO)
+    // Dweller Always pulls from Bunny 's right ,  ... forget it , just make a pull 2L and pull 2R objects
+    public TA_DwellerPullCoord_2L(ITaskable taskableAnimal, ITaskable theOtherstolenFrom/* , AnimalCharacterHands argTheirhandFrom,  AnimalCharacterHands argMyHandTO*/)
     {
         TheCharacter = taskableAnimal;
         TheOTHERCharacter = theOtherstolenFrom;
-        FromHand = argTheirhandFrom;
-        ToMyHand = argMyHandTO;
+        FromHand = AnimalCharacterHands.Right;
+        ToMyHand = AnimalCharacterHands.Left;//<--------------------------------------------2L
 
     }
 
@@ -23,9 +23,13 @@ public class TA_Coordination : ITaskAction
     public AnimalCharacterHands FromHand { get => _fromHand; set => _fromHand = value; }
     public AnimalCharacterHands ToMyHand { get => _toMyHand; set => _toMyHand = value; }
 
+
+
+
     public void RunME()
     {
-        Debug.Log("run Bell pull");
-        _theCharacter.Pull_Coordinate(_theOTHERCharacter, FromHand, ToMyHand);//Bellhop always pulls to his RIght hand making it the context item the first time he gets it
+        Debug.Log("run Dwel pull 2L");
+        _theCharacter.Pull_Coordinate(_theOTHERCharacter, _fromHand, _toMyHand);
+
     }
 }

@@ -6,9 +6,13 @@ public interface ITaskable
     void GoTo(Transform argTransNav);
     void Face(Transform argTransLookAt);
     void Animate(string argAnimStateName);
-    void Pull_Coordinate(CharacterItemManager argOtherCharItemManager, ITaskable argOther, AnimalCharacterHands argToMyHand);
+    // void Pull_FromTheirRight_ToMyRight(CharacterItemManager argOtherCharItemManager, AnimalCharacterHands argToMyHand);
+    void Pull_Coordinate(ITaskable argOther, AnimalCharacterHands argFromTheirMyHand, AnimalCharacterHands argToMyHand);
     void Warp(Transform argTransWarp);
 
+
+    CharacterItemManager GetMyItemManager();
+    void MoveOnTrigger();
     void TaskEnded();
     void ActivateAgent();
 }

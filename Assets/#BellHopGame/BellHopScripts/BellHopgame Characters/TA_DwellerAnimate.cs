@@ -15,7 +15,7 @@ public class TA_DwellerAnimate : ITaskAction
 
     public void RunME()
     {
-        Debug.Log("run dwel anim");
+        Debug.Log("run dwel anim" + _animaStateName);
         _theCharacter.Animate(_animaStateName);
     }
 }

@@ -19,28 +19,47 @@ public class SequenceManager : MonoBehaviour
 
 
 
+
+    TA_DwellerWarp W_D_ExchandePos;
+    TA_DwellerWarp W_D_RoomPos;
+    TA_DwellerWarp W_D_DancePos;
+
+    TA_DwellerMoveTo M_D_ExchandePos;
+    TA_DwellerMoveTo M_D_RoomPos;
+    TA_DwellerMoveTo M_D_DancePos;
+
+    TA_DwellerFace F_D_Camera;
+    TA_DwellerFace F_D_Bell;
+    TA_DwellerFace F_D_RoomLookat;
+    TA_DwellerFace F_B_Dweller;
+
+    TA_DwellerAnimate A_D_Wave1;
+    TA_DwellerAnimate A_D_Wave2;
+    TA_DwellerAnimate A_D_Hello;
+    TA_DwellerAnimate A_D_No;
+    TA_DwellerAnimate A_D_Good;
+    TA_DwellerAnimate A_D_RoomAction;
+    TA_DwellerAnimate A_D_Toss;
+    //TA_DwellerAnimate A_D_Catch1;//NOT NEEDED , the coordinator runs it
+    TA_DwellerAnimate A_B_Toss;
+    TA_DwellerPullCoord_2L P_D_2L;
+    TA_DwellerPullCoord_2R P_B_2R;
+
+
+
     List<ITaskAction> Sequence_SimpleGreet;
-    ITaskAction _DwellerWarp_door;
-    ITaskAction _DwellerFace_bell;
-    ITaskAction _BellhopFace_dwell;
-    ITaskAction _DwellerPull;
-    ITaskAction _BellHopPull;
-    ITaskAction _DwellerAnimate_wave2;
-    ITaskAction _DwellerAnimate_Toss;
+
+
+
 
     List<ITaskAction> Sequence_Greet_fromRomm;
-    ITaskAction _DwellerWarp_Room;
-    ITaskAction _DwellerMove_door;
+
 
     List<ITaskAction> Sequence_WrongFloor;
     ITaskAction _DwellerAnimate_NO;
 
     List<ITaskAction> Sequence_MovesAndAnims;
-    ITaskAction _DwellerMove_Room;
-    ITaskAction _rotLook;
-    ITaskAction _DwellerMove_Dance;
-    ITaskAction _DwellerAnimateRoom;
-    ITaskAction _BellAnimCatch1;
+
     List<ITaskAction> Sequence_BellPulls;
 
     List<ITaskAction> Sequence_DwellerPulls;
@@ -67,51 +86,63 @@ public class SequenceManager : MonoBehaviour
         TaskSys = new BHG_TaskSystem();
         _gs = GameSettings.Instance;
         Sequence_SimpleGreet = new List<ITaskAction>();
-
-        _DwellerWarp_door = new TA_DwellerWarp(_Dweller, _exhangeI.GetActionPos());
-        _DwellerFace_bell = new TA_DwellerFace(_Dweller, _Bellhop.transform);
-        _BellhopFace_dwell = new TA_DwellerFace(_Bellhop, _Dweller.transform);
-        _DwellerAnimate_wave2 = new TA_DwellerAnimate(_Dweller, _gs.Wave2);
-        _DwellerAnimate_Toss = new TA_DwellerAnimate(_Dweller, _gs.Toss); //as soon as thats done next task is bellhop pull
-        _BellHopPull = new TA_BellHopPull(_Bellhop, _Dweller.GetComponent<CharacterItemManager>());
-        _DwellerWarp_Room = new TA_DwellerWarp(_Dweller, _couchI.GetActionPos());
-        _DwellerMove_door = new TA_DwellerMoveTo(_Dweller, _exhangeI.GetActionPos());
-        _BellAnimCatch1 = new TA_DwellerAnimate(_Bellhop, _gs.Catch1);
-        Sequence_SimpleGreet.Add(_DwellerWarp_door);
-        Sequence_SimpleGreet.Add(_DwellerFace_bell);
-        Sequence_SimpleGreet.Add(_BellhopFace_dwell);
-        Sequence_SimpleGreet.Add(_DwellerAnimate_wave2);
-        Sequence_SimpleGreet.Add(_BellAnimCatch1);
-        Sequence_SimpleGreet.Add(_DwellerAnimate_Toss);
-        Sequence_SimpleGreet.Add(_BellHopPull);
+        W_D_ExchandePos = new TA_DwellerWarp(_Dweller, _exhangeI.GetActionPos());
+        W_D_RoomPos = new TA_DwellerWarp(_Dweller, _couchI.GetActionPos());
+        W_D_DancePos = new TA_DwellerWarp(_Dweller, _danceI.GetActionPos());
 
 
-        Sequence_Greet_fromRomm = new List<ITaskAction>();
-        Sequence_Greet_fromRomm.Add(_DwellerWarp_Room);
-        Sequence_Greet_fromRomm.Add(_DwellerMove_door);
-        Sequence_Greet_fromRomm.AddRange(Sequence_SimpleGreet);
+        M_D_ExchandePos = new TA_DwellerMoveTo(_Dweller, _exhangeI.GetActionPos());
+        M_D_RoomPos = new TA_DwellerMoveTo(_Dweller, _couchI.GetActionPos());
+        M_D_DancePos = new TA_DwellerMoveTo(_Dweller, _danceI.GetActionPos());
 
-        Sequence_WrongFloor = new List<ITaskAction>();
-        _DwellerAnimate_NO = new TA_DwellerAnimate(_Dweller, _gs.No);
 
-        Sequence_MovesAndAnims = new List<ITaskAction>();
-        _DwellerMove_Room = new TA_DwellerMoveTo(_Dweller, _couchI.GetActionPos());
-        _rotLook = new TA_DwellerFace(_Dweller, _couchI.GetLookTarg());
-        _DwellerMove_Dance = new TA_DwellerMoveTo(_Dweller, _danceI.GetActionPos());
-        Sequence_MovesAndAnims.Add(_DwellerWarp_Room);
-        Sequence_MovesAndAnims.Add(_DwellerMove_door);
-        Sequence_MovesAndAnims.Add(_DwellerMove_Room);
-        Sequence_MovesAndAnims.Add(_DwellerMove_Dance);
-        Sequence_MovesAndAnims.Add(_DwellerMove_door);
-        Sequence_MovesAndAnims.Add(_DwellerMove_Room);
+        F_D_Camera = new TA_DwellerFace(_Dweller, Camera.main.transform);
+        F_D_Bell = new TA_DwellerFace(_Dweller, _Bellhop.transform);
+        F_D_RoomLookat = new TA_DwellerFace(_Dweller, _couchI.GetLookTarg());
+        F_B_Dweller = new TA_DwellerFace(_Bellhop, _Dweller.transform);
 
-        //Sequence_MovesAndAnims.Add(_DwellerAnimateRoom);
+        //dweller pulls to his left AKA good delivery 
+        P_B_2R = new TA_DwellerPullCoord_2R(_Bellhop, _Dweller);
+        P_D_2L = new TA_DwellerPullCoord_2L(_Dweller, _Bellhop);
+
+
+        A_D_Wave1 = new TA_DwellerAnimate(_Dweller, _gs.Wave1);
+        A_D_Wave2 = new TA_DwellerAnimate(_Dweller, _gs.Wave2);
+        A_D_Hello = new TA_DwellerAnimate(_Dweller, _gs.Hello);
+        A_D_No = new TA_DwellerAnimate(_Dweller, _gs.No);
+        A_D_Good = new TA_DwellerAnimate(_Dweller, _gs.Good);
+        A_D_RoomAction = new TA_DwellerAnimate(_Dweller, _couchI.argActionString);
+        A_D_Toss = new TA_DwellerAnimate(_Dweller, _gs.Toss);
+        A_B_Toss = new TA_DwellerAnimate(_Bellhop, _gs.Toss);
+
+        Sequence_SimpleGreet.Add(W_D_RoomPos);
+        Sequence_SimpleGreet.Add(F_D_Bell);
+        Sequence_SimpleGreet.Add(F_B_Dweller);
+        Sequence_SimpleGreet.Add(A_D_Toss);
+        Sequence_SimpleGreet.Add(P_B_2R);
+        Sequence_SimpleGreet.Add(M_D_DancePos);
+        Sequence_SimpleGreet.Add(F_D_Camera);
+
+        Sequence_SimpleGreet.Add(F_D_Bell);
+        Sequence_SimpleGreet.Add(F_B_Dweller);
+        Sequence_SimpleGreet.Add(A_B_Toss);
+        Sequence_SimpleGreet.Add(P_D_2L);
 
 
         Setup_Tasksystem(Sequence_SimpleGreet);
 
         _Bellhop.ActivateAgent();
         _Dweller.ActivateAgent();
+
+        CharacterItemManager cim = _Dweller.GetComponent<CharacterItemManager>();
+        if (cim != null)
+        {
+            cim.Show_LR(false, GameEnums.AnimalCharacterHands.Left);
+        }
+        else
+            Debug.LogError("NO ItemMAnager ");
+
+
     }
 
 

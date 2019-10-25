@@ -47,29 +47,14 @@ public class AnimalCentralCommand : MonoBehaviour, ITaskable
     {
 
         if (argAnimStateName == "Toss")
-            _myAnimatorCtrl.Get_myAnimator().Play(argAnimStateName, 0);
+            _myAnimatorCtrl.Get_myAnimator().CrossFade(argAnimStateName, 0f);
+        else if (argAnimStateName == "Catch1")
+            _myAnimatorCtrl.Get_myAnimator().CrossFade(argAnimStateName, 0.2f);
         else
             _myAnimatorCtrl.Get_myAnimator().CrossFade(argAnimStateName, 0.4f);
-    }
-
-    public void Pull_Coordinate(CharacterItemManager argOtherCharItemManager, AnimalCharacterHands argToMyHand)
-    {
-        //check the other dude's right hand only
-        if (argOtherCharItemManager.HasItem(AnimalCharacterHands.Right))
-        {
-            Transform MyTempHand_Trans = (argToMyHand == AnimalCharacterHands.Right) ? _myItemManager.RightHandHoldPos : _myItemManager.LeftHandHoldPos;
-
-            Transform startMarker_ChildTrans = argOtherCharItemManager.GetItem_LR(AnimalCharacterHands.Right).transform;
-            argOtherCharItemManager.DetachItem(AnimalCharacterHands.Right);
-            PullItem(startMarker_ChildTrans, argOtherCharItemManager.RightHandHoldPos, MyTempHand_Trans, argToMyHand);
-        }
-        else
-        {
-            Debug.Log("no Item in hand");
-            TaskEnded();
-        }
 
     }
+
 
     void PullItem(Transform argPulledObjTran, Transform startMarker, Transform endMarker, AnimalCharacterHands argmyhand)
     {
@@ -77,7 +62,8 @@ public class AnimalCentralCommand : MonoBehaviour, ITaskable
         if (di == null)
         {
             Debug.LogError("not an  Item ");
-            TaskEnded();
+            _myAnimatorCtrl.Get_myAnimator().SetTrigger("TrigMoveOn");
+            //TaskEnded();
             return;
         }
         StartCoroutine(Parabola(startMarker, endMarker, argPulledObjTran, 0.6f, 0.5f, () => _myItemManager.AttachItem(di, argmyhand)));
@@ -100,13 +86,16 @@ public class AnimalCentralCommand : MonoBehaviour, ITaskable
                 {
 
                     catcherTriggered = true;
+                    Debug.Log("hey catch reflex NOW");
                 }
             }
             normalizedTime += Time.deltaTime / duration;
             yield return null;
         }
-        Debug.Log("hey catch reflex NOW");
-        TaskEnded();
+
+        //TaskEnded();
+        arrivedCallBAck();//for attaching to new owner
+        _myAnimatorCtrl.Get_myAnimator().SetTrigger("TrigMoveOn");
         Debug.Log("ReachedDestination");
 
     }
@@ -125,5 +114,41 @@ public class AnimalCentralCommand : MonoBehaviour, ITaskable
     public void ActivateAgent()
     {
         _myAnimatorCtrl.ActivateAgent();
+    }
+    // [Tooltip("must run Toss action on other before this")]
+    public void Pull_Coordinate(ITaskable argOther, AnimalCharacterHands argfromTheirHand, AnimalCharacterHands argToMyHand) //these hands get gobbled up in next stack call
+    {
+
+        Animate(GameSettings.Instance.Catch1);// and I chill waiting for the object to finsh its flight to me, i then trgger moveon on myself to finshe my catch animwhich will in turn trigger the NADA Done.tag and signal end of task and request the next task 
+        Pull_FromTheirhand_TomyHand(argOther.GetMyItemManager(), argfromTheirHand, argToMyHand);
+    }
+
+    void Pull_FromTheirhand_TomyHand(CharacterItemManager argOtherCharItemManager, AnimalCharacterHands argfromTheirHand, AnimalCharacterHands argToMyHand)
+    {
+        //check the other dude's right hand only
+        if (argOtherCharItemManager.HasItem(argfromTheirHand))
+        {
+            Transform MyTempHand_Trans = (argToMyHand == AnimalCharacterHands.Right) ? _myItemManager.RightHandHoldPos : _myItemManager.LeftHandHoldPos;
+
+            Transform startMarker_ChildTrans = argOtherCharItemManager.GetItem_LR(argfromTheirHand).transform;
+            argOtherCharItemManager.DetachItem(argfromTheirHand);
+            PullItem(startMarker_ChildTrans, argOtherCharItemManager.RightHandHoldPos, MyTempHand_Trans, argToMyHand);
+        }
+        else
+        {
+            Debug.LogError("no Item their " + argfromTheirHand.ToString() + " hand");
+            _myAnimatorCtrl.Get_myAnimator().SetTrigger("TrigMoveOn");
+            //TaskEnded();
+        }
+    }
+
+    public CharacterItemManager GetMyItemManager()
+    {
+        return _myItemManager;
+    }
+
+    public void MoveOnTrigger()
+    {
+        _myAnimatorCtrl.Get_myAnimator().SetTrigger("TrigMoveOn");
     }
 }
