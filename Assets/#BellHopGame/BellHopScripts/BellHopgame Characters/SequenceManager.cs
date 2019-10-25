@@ -32,6 +32,7 @@ public class SequenceManager : MonoBehaviour
     TA_DwellerFace F_D_Bell;
     TA_DwellerFace F_D_RoomLookat;
     TA_DwellerFace F_B_Dweller;
+    TA_DwellerFace F_B_cam;
 
     TA_DwellerAnimate A_D_Wave1;
     TA_DwellerAnimate A_D_Wave2;
