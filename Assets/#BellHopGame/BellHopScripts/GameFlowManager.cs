@@ -235,12 +235,13 @@ public class GameFlowManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(WaitTostartMovingCam());
-        _floorsmngr.INNNINNTNPOOOW();
+
     }
 
     IEnumerator WaitTostartMovingCam()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
+        _floorsmngr.INNNINNTNPOOOW();
         _floorsmngr.StartMovingCam();
 
     }
