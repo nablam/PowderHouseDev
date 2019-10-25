@@ -81,8 +81,22 @@ public class SequenceManager : MonoBehaviour
         if (task != null)
             task.RunME();
     }
-    private void Start()
+
+    public void InitAllPointsAccordingToCurFloor(HotelFloor argHF)
     {
+        _Dweller = argHF.FloorDweller;
+        _exhangeI = argHF.Greetings;
+        _danceI = argHF.Dance;
+        _couchI = argHF.Mainaction;
+        Make_newSystem();
+    }
+
+    void Make_newSystem()
+    {
+        _Bellhop.ActivateAgent();
+        _Dweller.ActivateAgent();
+
+
         TaskSys = new BHG_TaskSystem();
         _gs = GameSettings.Instance;
         Sequence_SimpleGreet = new List<ITaskAction>();
@@ -130,10 +144,6 @@ public class SequenceManager : MonoBehaviour
 
 
         Setup_Tasksystem(Sequence_SimpleGreet);
-
-        _Bellhop.ActivateAgent();
-        _Dweller.ActivateAgent();
-
         CharacterItemManager cim = _Dweller.GetComponent<CharacterItemManager>();
         if (cim != null)
         {
@@ -141,6 +151,14 @@ public class SequenceManager : MonoBehaviour
         }
         else
             Debug.LogError("NO ItemMAnager ");
+
+    }
+
+    private void Start()
+    {
+
+
+
 
 
     }

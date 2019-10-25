@@ -19,6 +19,7 @@ public class GameFlowManager : MonoBehaviour
     #region EventSubscription
     private void OnEnable()
     {
+        _seqMNGR = GetComponent<SequenceManager>();
         BellHopGameEventManager.OnCurSequenceChanged += HeardSequenceChanged;
         BellHopGameEventManager.OnButtonPressed += FloorDestRequested;
     }
@@ -28,6 +29,8 @@ public class GameFlowManager : MonoBehaviour
         BellHopGameEventManager.OnCurSequenceChanged -= HeardSequenceChanged;
         BellHopGameEventManager.OnButtonPressed += FloorDestRequested;
     }
+
+    SequenceManager _seqMNGR;
 
     int _requestedFloor;
     int _floorNumArrivedAt;
@@ -119,6 +122,9 @@ public class GameFlowManager : MonoBehaviour
     bool FirstTime = true;
     void CheckFloorStatusUponArrival()
     {
+
+        _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor());
+
 
         if (FirstTime)
         {
