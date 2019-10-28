@@ -10,10 +10,28 @@ public class AnimalCentralCommand : MonoBehaviour, ITaskable
     CharacterAnimatorController _myAnimatorCtrl;
     CharacterItemManager _myItemManager;
 
+    string Myname = "bellhopDefault";
+
+    public string GEtMyName(bool Compound)
+    {
+        if (!gameObject.CompareTag("Player"))
+        {
+            if (Compound)
+                Myname = GetComponent<DwellerMeshComposer>().AnimalName;
+            else
+                Myname = GetComponent<DwellerMeshComposer>().AnimalName + " the " + GetComponent<DwellerMeshComposer>().AnimalType;
+        }
+        else
+            Myname = "bellhopDefault";
+
+        return Myname;
+    }
     private void OnEnable()
     {
         _myAnimatorCtrl = GetComponent<CharacterAnimatorController>();
         _myItemManager = GetComponent<CharacterItemManager>();
+
+
     }
     public void InitializeHeldObject(GameObject argItemInHand)
     {
@@ -63,7 +81,6 @@ public class AnimalCentralCommand : MonoBehaviour, ITaskable
         {
             Debug.LogError("not an  Item ");
             _myAnimatorCtrl.Get_myAnimator().SetTrigger("TrigMoveOn");
-            //TaskEnded();
             return;
         }
         StartCoroutine(Parabola(startMarker, endMarker, argPulledObjTran, 0.6f, 0.5f, () => _myItemManager.AttachItem(di, argmyhand)));
@@ -86,16 +103,17 @@ public class AnimalCentralCommand : MonoBehaviour, ITaskable
                 {
 
                     catcherTriggered = true;
-                    Debug.Log("hey catch reflex NOW");
+                    if (GameSettings.Instance.ShowDebugs)
+                        Debug.Log("hey catch reflex NOW");
                 }
             }
             normalizedTime += Time.deltaTime / duration;
             yield return null;
         }
 
-        //TaskEnded();
         arrivedCallBAck();//for attaching to new owner
         _myAnimatorCtrl.Get_myAnimator().SetTrigger("TrigMoveOn");
+
         Debug.Log("ReachedDestination");
 
     }
@@ -138,7 +156,6 @@ public class AnimalCentralCommand : MonoBehaviour, ITaskable
         {
             Debug.LogError("no Item their " + argfromTheirHand.ToString() + " hand");
             _myAnimatorCtrl.Get_myAnimator().SetTrigger("TrigMoveOn");
-            //TaskEnded();
         }
     }
 

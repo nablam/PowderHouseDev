@@ -22,6 +22,9 @@ public class HotelFloorsManager : MonoBehaviour
         if (_floors == null) { Debug.LogError("HotelFloorsManager: No Floors list!"); return; }
         if (x >= _floors.Count) { Debug.LogError("HotelFloorsManager: floor index out of range"); return; }
         _curfloor = _floors[x];
+
+        if (!DiscoveredFloors.Contains(x))
+            DiscoveredFloors.Add(x);
         camPov.SetNextPos(_curfloor.BaseCamPos.transform);
 
     }
@@ -30,6 +33,8 @@ public class HotelFloorsManager : MonoBehaviour
     public CameraPov camPov;
 
     public List<HotelFloor> _floors;
+
+    public List<int> DiscoveredFloors;
     HotelFloor _curfloor;
     void Start()
     {
@@ -40,9 +45,16 @@ public class HotelFloorsManager : MonoBehaviour
     public void InitializeFLoors(List<HotelFloor> argFloors)
     {
         _floors = argFloors; _curfloor = _floors[0];
+        DiscoveredFloors = new List<int>();
+        DiscoveredFloors.Add(0);
+    }
 
+    public int Get_Random_FloorDiscovered()
+    {
+        if (DiscoveredFloors == null) { return 0; }
+        if (DiscoveredFloors.Count == 0) { return 0; }
 
-
+        return DiscoveredFloors[Random.Range(0, DiscoveredFloors.Count)];
     }
 
     public void HideShowAllBarriers(bool argShow)
@@ -51,6 +63,10 @@ public class HotelFloorsManager : MonoBehaviour
     }
 
     public AnimalCentralCommand GetCurFloorDweller() { return _curfloor.FloorDweller; }
+    public string Get_FloorDwellerNAmeOnFloor(int x)
+    {
+        return _floors[x].FloorDweller.GEtMyName(true);
+    }
 
 
     public int GetFloorByAnimal(int argID)

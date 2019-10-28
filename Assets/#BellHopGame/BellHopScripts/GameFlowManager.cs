@@ -22,12 +22,20 @@ public class GameFlowManager : MonoBehaviour
         _seqMNGR = GetComponent<SequenceManager>();
         BellHopGameEventManager.OnCurSequenceChanged += HeardSequenceChanged;
         BellHopGameEventManager.OnButtonPressed += FloorDestRequested;
+        BellHopGameEventManager.OnDeliveryItemObtained += HeardDeliveryItemObtainedByBellhop;
     }
 
     private void OnDisable()
     {
         BellHopGameEventManager.OnCurSequenceChanged -= HeardSequenceChanged;
-        BellHopGameEventManager.OnButtonPressed += FloorDestRequested;
+        BellHopGameEventManager.OnButtonPressed -= FloorDestRequested;
+        BellHopGameEventManager.OnDeliveryItemObtained -= HeardDeliveryItemObtainedByBellhop;
+    }
+
+    void HeardDeliveryItemObtainedByBellhop(DeliveryItem argItem)
+    {
+        _sessionMNGR.CreateSessionWhenBellHopObtainsANewItem(argItem);
+        _cam.m_Text_Game.text = _StoryTextGen.SimpleRiddle_takethisto(argItem, _floorsmngr.Get_curFloor().FloorNumber, _sessionMNGR.GetFloorsVisitedINThisSession());
     }
 
     SequenceManager _seqMNGR;
@@ -66,7 +74,8 @@ public class GameFlowManager : MonoBehaviour
 
             case GameEnums.GameSequenceType.DoorsOppned:
 #if DebugOn
-                print("doorsOpened");
+                if (GameSettings.Instance.ShowDebugs)
+                    print("doorsOpened");
 #endif
 
 
@@ -94,6 +103,7 @@ public class GameFlowManager : MonoBehaviour
                 //  print("here");
 #endif
                 _floorsmngr.UpdateCurFloorDest(_requestedFloor);
+                _cam.m_Text_Game.text = "";
                 break;
 
             case GameEnums.GameSequenceType.GameEnd:
@@ -133,7 +143,7 @@ public class GameFlowManager : MonoBehaviour
             _curDeliveryItem = _curDweller.GetMyItemManager().GetItem_LR(GameEnums.AnimalCharacterHands.Right);
             _ContextItem = _curDeliveryItem;
             _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.DwellerToss_short);
-            print("GOES TO " + _ContextItem.GetDestFloorDweller().AnimalName);
+            _cam.m_Text_Game.text = _StoryTextGen.SimpleRiddle_takethisto(_ContextItem, _floorsmngr.Get_curFloor().FloorNumber, _sessionMNGR.GetFloorsVisitedINThisSession());
 
         }
         else
@@ -148,13 +158,17 @@ public class GameFlowManager : MonoBehaviour
             if (_ContextItem.IsMyOwner(_curDweller.GetComponent<DwellerMeshComposer>()))
             {
                 _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.GoodFloor_short);
+
             }
             else
             {
                 _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.Badfloor_short);
+                _cam.m_Text_Game.text = "NO " + _StoryTextGen.SimpleRiddle_takethisto(_ContextItem, _floorsmngr.Get_curFloor().FloorNumber, _sessionMNGR.GetFloorsVisitedINThisSession());
             }
-            print("GOES TO " + _ContextItem.GetDestFloorDweller().AnimalName);
+
         }
+
+        // print("GOES TO " + _ContextItem.GetDestFloorDweller().AnimalName + " floor" + _ContextItem.GetDestFloorDweller().MyFinalResidenceFloorNumber);
     }
     void ThrowRoutine()
     {
@@ -180,8 +194,9 @@ public class GameFlowManager : MonoBehaviour
     InteractionCentral _BellhopPos;
 
     DeliverySessionManager _sessionMNGR;
+    StoryTextGenerator _StoryTextGen;
+    public void InitializeMyThings(AnimalCentralCommand argbh, HotelFloorsManager argfloors, CameraPov argCam, InteractionCentral argBellhopCocation, DeliverySessionManager argSessionMNGR, StoryTextGenerator argStoryTExtGen)
 
-    public void InitializeMyThings(AnimalCentralCommand argbh, HotelFloorsManager argfloors, CameraPov argCam, InteractionCentral argBellhopCocation, DeliverySessionManager argSessionMNGR)
     {
         _sessionMNGR = argSessionMNGR;
         _BellhopPos = argBellhopCocation;
@@ -189,6 +204,9 @@ public class GameFlowManager : MonoBehaviour
         _floorsmngr = argfloors;
         _cam = argCam;
         _ElevatorDoors = ElevatorDoorsMasterControl.Instance;
+
+        _StoryTextGen = argStoryTExtGen;
+        _StoryTextGen.InitMyRefs(_floorsmngr);
     }
 
 

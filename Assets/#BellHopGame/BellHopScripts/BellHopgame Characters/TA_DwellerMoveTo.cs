@@ -15,7 +15,8 @@ public class TA_DwellerMoveTo : ITaskAction
 
     public void RunME()
     {
-        Debug.Log("run dwel move");
+        if (GameSettings.Instance.ShowDebugs)
+            Debug.Log("run dwel move");
         _theCharacter.GoTo(TargetNavTrans);
     }
 }

@@ -32,7 +32,7 @@ public class CameraPov : MonoBehaviour
     GameSettings _gs;
     ElevatorDoorsMasterControl _ElevatorDoorsCTRL;
     BellHopGameEventManager _eventManager;
-
+    public TMPro.TextMeshProUGUI m_Text_Game;
     private void Start()
     {
         _gs = GameSettings.Instance;

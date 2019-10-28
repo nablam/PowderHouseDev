@@ -28,7 +28,8 @@ public class TA_DwellerPullCoord_2L : MonoBehaviour, ITaskAction
 
     public void RunME()
     {
-        Debug.Log("run Dwel pull 2L");
+        if (GameSettings.Instance.ShowDebugs)
+            Debug.Log("run Dwel pull 2L");
         _theCharacter.Pull_Coordinate(_theOTHERCharacter, _fromHand, _toMyHand);
 
     }

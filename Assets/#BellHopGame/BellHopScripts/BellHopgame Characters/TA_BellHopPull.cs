@@ -29,7 +29,8 @@ public class TA_BellHopPull : ITaskAction
 
     public void RunME()
     {
-        Debug.Log("run Bell pull");
+        if (GameSettings.Instance.ShowDebugs)
+            Debug.Log("run Bell pull");
         _theCharacter.Pull_Coordinate(_theOTHERCharacter, _fromHand, _toMyHand);
     }
 }

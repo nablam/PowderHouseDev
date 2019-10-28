@@ -29,12 +29,14 @@ public class HotelFloor : MonoBehaviour
     // bool _deliveryItemStillOnFloor;
     bool _receivedItem;
 
+
     public AnimalCentralCommand FloorDweller;
     public FloorFurnisher floorFurnisherChild;
 
     public int FloorNumber { get => _floorNumber; set => _floorNumber = value; }
     // public bool DeliveryItemStillOnFloor { get => _deliveryItemStillOnFloor; set => _deliveryItemStillOnFloor = value; }
     public bool ReceivedItem { get => _receivedItem; set => _receivedItem = value; }
+
     public InteractionCentral Greetings { get => _greetings; set => _greetings = value; }
     public InteractionCentral Dance { get => _dance; set => _dance = value; }
     public InteractionCentral Mainaction { get => _mainaction; set => _mainaction = value; }

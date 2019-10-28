@@ -12,6 +12,16 @@ public class CharacterItemManager : MonoBehaviour
     [SerializeField]
     DeliveryItem _deliveryItem_L = null;
 
+    bool isBellHopPlayer;
+
+    private void Awake()
+    {
+        if (gameObject.CompareTag("Player"))
+        {
+            isBellHopPlayer = true;
+        }
+    }
+
 
     public void AttachItem(DeliveryItem argDeliveryItem, AnimalCharacterHands argLeftright)
     {
@@ -22,6 +32,10 @@ public class CharacterItemManager : MonoBehaviour
                 _deliveryItem_R = argDeliveryItem;
                 _deliveryItem_R.transform.position = new Vector3(RightHandHoldPos.position.x, RightHandHoldPos.position.y, RightHandHoldPos.position.z);
                 _deliveryItem_R.transform.parent = RightHandHoldPos.transform;
+                if (isBellHopPlayer)
+                {
+                    BellHopGameEventManager.Instance.Call_DeliveryItemObtained(argDeliveryItem);
+                }
             }
             else
             {
