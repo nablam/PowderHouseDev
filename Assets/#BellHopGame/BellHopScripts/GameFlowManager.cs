@@ -53,7 +53,7 @@ public class GameFlowManager : MonoBehaviour
 #if DebugOn
                 print("startgame");
 #endif
-
+                _sessionMNGR.AddFloorVisitFloorsVisitedINThisSession(_floorsmngr.Get_curFloor().FloorNumber);
                 // 
                 _ElevatorDoors.OpenDoors();
                 IsAllowKeypad = true;
@@ -65,6 +65,7 @@ public class GameFlowManager : MonoBehaviour
                 print("reachedfloor");
 #endif
                 _floorsmngr.HideShowAllBarriers(false);
+
                 CheckFloorStatusUponArrival();
 
                 BellHopGameEventManager.Instance.Call_SimpleTaskEnded(); //this will kick in the first task
@@ -137,7 +138,7 @@ public class GameFlowManager : MonoBehaviour
         {
 
             FirstTime = false;// handeled by gamestate startgame ... this shit is bad 
-
+            _sessionMNGR.AddFloorVisitFloorsVisitedINThisSession(_floorsmngr.Get_curFloor().FloorNumber);
 
             _curDweller = _floorsmngr.GetCurFloorDweller();
             _curDeliveryItem = _curDweller.GetMyItemManager().GetItem_LR(GameEnums.AnimalCharacterHands.Right);
@@ -162,6 +163,7 @@ public class GameFlowManager : MonoBehaviour
             }
             else
             {
+                _sessionMNGR.AddFloorVisitFloorsVisitedINThisSession(_floorsmngr.Get_curFloor().FloorNumber);
                 _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.Badfloor_short);
                 _cam.m_Text_Game.text = "NO " + _StoryTextGen.SimpleRiddle_takethisto(_ContextItem, _floorsmngr.Get_curFloor().FloorNumber, _sessionMNGR.GetFloorsVisitedINThisSession());
             }
@@ -199,6 +201,7 @@ public class GameFlowManager : MonoBehaviour
 
     {
         _sessionMNGR = argSessionMNGR;
+        _sessionMNGR.Init();
         _BellhopPos = argBellhopCocation;
         _bellHop = argbh;
         _floorsmngr = argfloors;

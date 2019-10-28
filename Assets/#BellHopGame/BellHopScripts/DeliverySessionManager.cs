@@ -5,20 +5,18 @@ public class DeliverySessionManager : MonoBehaviour
 {
 
 
-    List<DeliverySession> gameSessions;
+    List<DeliverySession> gameSessions = null;
 
 
     DeliverySession curSession;
     int GameSessionID = 0;
     public void CreateSessionWhenBellHopObtainsANewItem(DeliveryItem argItem)
     {
-        if (gameSessions == null)
-        {
-            gameSessions = new List<DeliverySession>();
-        }
+
         print("making new Session itenm dest is floor " + argItem.GetDestFloorDweller().MyFinalResidenceFloorNumber);
-        curSession = new DeliverySession(argItem, GameSessionID);
-        gameSessions.Add(curSession);
+        DeliverySession temp = new DeliverySession(argItem, GameSessionID);
+        curSession = temp;
+        gameSessions.Add(temp);
         GameSessionID++;
     }
 
@@ -30,15 +28,20 @@ public class DeliverySessionManager : MonoBehaviour
         return curSession.FloorsVisited.Count;
     }
 
-    // Start is called before the first frame update
-    void Awake()
+    public void AddFloorVisitFloorsVisitedINThisSession(int curfloornum)
     {
+        if (curSession != null)
 
+            curSession.AddFloorVisited(curfloornum);
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void Init()
     {
+        if (gameSessions == null)
+        {
+            gameSessions = new List<DeliverySession>();
+        }
 
     }
 }

@@ -41,6 +41,8 @@ public class DeliverySession
 
     public void AddFloorVisited(int argFloorVisited)
     {
-        _floorsVisited.Add(argFloorVisited);
+
+        if (!_floorsVisited.Contains(argFloorVisited))
+            _floorsVisited.Add(argFloorVisited);
     }
 }

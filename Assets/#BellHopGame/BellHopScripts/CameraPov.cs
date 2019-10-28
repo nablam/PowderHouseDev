@@ -67,7 +67,7 @@ public class CameraPov : MonoBehaviour
     bool startedMoving = false;
     public void StartMovingCameraDown() { startedMoving = true; }
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if (!startedMoving) { return; }
         if (ReachedInitialPos)
