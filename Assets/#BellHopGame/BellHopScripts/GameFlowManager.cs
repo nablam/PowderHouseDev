@@ -40,17 +40,12 @@ public class GameFlowManager : MonoBehaviour
         switch (argGST)
         {
             case GameEnums.GameSequenceType.GameStart:
-                _floorsmngr.HideShowAllBarriers(false);
+
                 _seqMNGR.gamestarted = true;
 #if DebugOn
                 print("startgame");
 #endif
 
-                _curDweller = _floorsmngr.GetCurFloorDweller();
-                _curDeliveryItem = _curDweller.GetMyItemManager().GetItem_LR(GameEnums.AnimalCharacterHands.Right);
-                _ContextItem = _curDeliveryItem;
-
-                print("GOES TO " + _ContextItem.GetDestFloorDweller().AnimalName);
                 // 
                 _ElevatorDoors.OpenDoors();
                 IsAllowKeypad = true;
@@ -61,8 +56,10 @@ public class GameFlowManager : MonoBehaviour
 #if DebugOn
                 print("reachedfloor");
 #endif
-                _curDweller = _floorsmngr.GetCurFloorDweller();
+                _floorsmngr.HideShowAllBarriers(false);
+                CheckFloorStatusUponArrival();
 
+                BellHopGameEventManager.Instance.Call_SimpleTaskEnded(); //this will kick in the first task
 
                 _ElevatorDoors.OpenDoors();
                 break;
@@ -72,7 +69,7 @@ public class GameFlowManager : MonoBehaviour
                 print("doorsOpened");
 #endif
 
-                CheckFloorStatusUponArrival();
+
 
                 break;
 
@@ -123,35 +120,39 @@ public class GameFlowManager : MonoBehaviour
     void CheckFloorStatusUponArrival()
     {
 
-        _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor());
+
 
 
         if (FirstTime)
         {
 
-            FirstTime = false;
+            FirstTime = false;// handeled by gamestate startgame ... this shit is bad 
+
+
+            _curDweller = _floorsmngr.GetCurFloorDweller();
+            _curDeliveryItem = _curDweller.GetMyItemManager().GetItem_LR(GameEnums.AnimalCharacterHands.Right);
+            _ContextItem = _curDeliveryItem;
+            _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), GameEnums.SequenceType.DwellerToss_short);
+            print("GOES TO " + _ContextItem.GetDestFloorDweller().AnimalName);
 
         }
         else
         {
+            _curDweller = _floorsmngr.GetCurFloorDweller();
+            _curDeliveryItem = _bellHop.GetMyItemManager().GetItem_LR(GameEnums.AnimalCharacterHands.Right);
+            _ContextItem = _curDeliveryItem;
+
             _ContextItem = _curDeliveryItem;
 
             if (_ContextItem.IsMyOwner(_curDweller.GetComponent<DwellerMeshComposer>()))
             {
-#if DebugOn
-                Debug.Log("YAYA");
-#endif
-                _GOODFLOOR = true;
-
+                _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), GameEnums.SequenceType.GoodFloor_short);
             }
             else
             {
-#if DebugOn
-                Debug.Log("nay");
-#endif
-                _GOODFLOOR = false;
+                _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), GameEnums.SequenceType.Badfloor_short);
             }
-
+            print("GOES TO " + _ContextItem.GetDestFloorDweller().AnimalName);
         }
     }
     void ThrowRoutine()

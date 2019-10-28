@@ -330,4 +330,12 @@
         Right,
         Left,
     }
+
+    public enum SequenceType
+    {
+        DwellerToss_short,
+        GoodFloor_short,
+        Badfloor_short,
+
+    }
 }

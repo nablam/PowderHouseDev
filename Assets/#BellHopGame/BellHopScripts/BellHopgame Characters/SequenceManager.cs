@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using static GameEnums;
 
 public class SequenceManager : MonoBehaviour
 {
@@ -28,17 +29,18 @@ public class SequenceManager : MonoBehaviour
     TA_DwellerMoveTo M_D_RoomPos;
     TA_DwellerMoveTo M_D_DancePos;
 
-    TA_DwellerFace F_D_Camera;
+    TA_DwellerFace F_D_Cam;
     TA_DwellerFace F_D_Bell;
     TA_DwellerFace F_D_RoomLookat;
     TA_DwellerFace F_B_Dweller;
-    TA_DwellerFace F_B_cam;
+    TA_DwellerFace F_B_Cam;
 
     TA_DwellerAnimate A_D_Wave1;
     TA_DwellerAnimate A_D_Wave2;
     TA_DwellerAnimate A_D_Hello;
     TA_DwellerAnimate A_D_No;
     TA_DwellerAnimate A_D_Good;
+    TA_DwellerAnimate A_B_Good;
     TA_DwellerAnimate A_D_RoomAction;
     TA_DwellerAnimate A_D_Toss;
     //TA_DwellerAnimate A_D_Catch1;//NOT NEEDED , the coordinator runs it
@@ -46,14 +48,16 @@ public class SequenceManager : MonoBehaviour
     TA_DwellerPullCoord_2L P_D_2L;
     TA_DwellerPullCoord_2R P_B_2R;
 
+    TA_InstantTaskHandShowHide I_D_showRight;
+    TA_InstantTaskHandShowHide I_D_HideLeft;
 
 
     List<ITaskAction> Sequence_SimpleGreet;
 
 
+    List<ITaskAction> Sequence_ShortDwellerToss;
 
-
-    List<ITaskAction> Sequence_Greet_fromRomm;
+    List<ITaskAction> Sequence_Short_goodfloor;
 
 
     List<ITaskAction> Sequence_WrongFloor;
@@ -83,26 +87,37 @@ public class SequenceManager : MonoBehaviour
         ITaskAction task = TaskSys.RequestNextTask();
         if (task != null)
             task.RunME();
+        else
+        {
+            //no more tasks 
+            BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameSequenceType.PlayerInputs);
+        }
     }
 
-    public void InitAllPointsAccordingToCurFloor(HotelFloor argHF)
+    public void InitAllPointsAccordingToCurFloor(HotelFloor argHF, SequenceType argSequenceType)
     {
         _Dweller = argHF.FloorDweller;
         _exhangeI = argHF.Greetings;
         _danceI = argHF.Dance;
         _couchI = argHF.Mainaction;
-        Make_newSystem();
+
+
+        _Bellhop.ActivateAgent();
+        //_Dweller.ActivateAgent();
+
+        Make_newSystem(argSequenceType);
     }
 
-    void Make_newSystem()
+
+    int cntx = 0;
+    void Make_newSystem(SequenceType argSequenceType)
     {
-        _Bellhop.ActivateAgent();
-        _Dweller.ActivateAgent();
+
 
 
         TaskSys = new BHG_TaskSystem();
         _gs = GameSettings.Instance;
-        Sequence_SimpleGreet = new List<ITaskAction>();
+
         W_D_ExchandePos = new TA_DwellerWarp(_Dweller, _exhangeI.GetActionPos());
         W_D_RoomPos = new TA_DwellerWarp(_Dweller, _couchI.GetActionPos());
         W_D_DancePos = new TA_DwellerWarp(_Dweller, _danceI.GetActionPos());
@@ -113,7 +128,8 @@ public class SequenceManager : MonoBehaviour
         M_D_DancePos = new TA_DwellerMoveTo(_Dweller, _danceI.GetActionPos());
 
 
-        F_D_Camera = new TA_DwellerFace(_Dweller, Camera.main.transform);
+        F_D_Cam = new TA_DwellerFace(_Dweller, Camera.main.transform);
+        F_B_Cam = new TA_DwellerFace(_Bellhop, Camera.main.transform);
         F_D_Bell = new TA_DwellerFace(_Dweller, _Bellhop.transform);
         F_D_RoomLookat = new TA_DwellerFace(_Dweller, _couchI.GetLookTarg());
         F_B_Dweller = new TA_DwellerFace(_Bellhop, _Dweller.transform);
@@ -128,25 +144,92 @@ public class SequenceManager : MonoBehaviour
         A_D_Hello = new TA_DwellerAnimate(_Dweller, _gs.Hello);
         A_D_No = new TA_DwellerAnimate(_Dweller, _gs.No);
         A_D_Good = new TA_DwellerAnimate(_Dweller, _gs.Good);
+        A_B_Good = new TA_DwellerAnimate(_Bellhop, _gs.Good);
         A_D_RoomAction = new TA_DwellerAnimate(_Dweller, _couchI.argActionString);
         A_D_Toss = new TA_DwellerAnimate(_Dweller, _gs.Toss);
         A_B_Toss = new TA_DwellerAnimate(_Bellhop, _gs.Toss);
+        I_D_showRight = new TA_InstantTaskHandShowHide(_Dweller, GameEnums.AnimalCharacterHands.Right, true);
+        I_D_HideLeft = new TA_InstantTaskHandShowHide(_Dweller, GameEnums.AnimalCharacterHands.Left, false);
 
-        Sequence_SimpleGreet.Add(W_D_RoomPos);
-        Sequence_SimpleGreet.Add(F_D_Bell);
-        Sequence_SimpleGreet.Add(F_B_Dweller);
-        Sequence_SimpleGreet.Add(A_D_Toss);
-        Sequence_SimpleGreet.Add(P_B_2R);
-        Sequence_SimpleGreet.Add(M_D_DancePos);
-        Sequence_SimpleGreet.Add(F_D_Camera);
+        F_B_Cam = new TA_DwellerFace(_Bellhop, Camera.main.transform);
 
-        Sequence_SimpleGreet.Add(F_D_Bell);
-        Sequence_SimpleGreet.Add(F_B_Dweller);
-        Sequence_SimpleGreet.Add(A_B_Toss);
-        Sequence_SimpleGreet.Add(P_D_2L);
+        Sequence_SimpleGreet = new List<ITaskAction>
+        {
+            W_D_ExchandePos,
+            M_D_ExchandePos,
+            I_D_showRight,
+            F_D_Bell,
+            F_B_Dweller,
+            A_D_Toss,
+            P_B_2R,
+            M_D_DancePos,
+            F_D_Cam,
+            F_D_Bell,
+            F_B_Dweller,
+            A_B_Toss,
+            P_D_2L,
+            F_B_Cam
+        };
+
+        Sequence_ShortDwellerToss = new List<ITaskAction>   {
+            W_D_ExchandePos,
+                M_D_ExchandePos,
+            F_B_Dweller,
+            I_D_showRight,
+            F_D_Bell,
+            A_D_Toss, //needed for pull mirorred character
+            P_B_2R,
+            F_D_Cam,
+            F_B_Cam,
+        };
+
+        Sequence_Short_goodfloor = new List<ITaskAction>   {
+            W_D_DancePos,
+            M_D_ExchandePos,
+            F_B_Dweller,
+            F_D_Bell,
+            A_D_Hello,
+            A_B_Toss, //needed for pull mirorred character
+            P_D_2L,
+            A_D_Good,
+            I_D_HideLeft,
+            I_D_showRight,
+            A_D_Toss,
+            P_B_2R,
+            F_B_Cam,
+
+        };
+
+        Sequence_WrongFloor = new List<ITaskAction>   {
+            W_D_ExchandePos,
+
+            F_B_Dweller,
+            F_D_Bell,
+            A_D_No,
+
+            F_B_Cam,
+
+        };
 
 
-        Setup_Tasksystem(Sequence_SimpleGreet);
+        if (argSequenceType == SequenceType.DwellerToss_short)
+        {
+            Setup_Tasksystem(Sequence_ShortDwellerToss);
+
+        }
+        else
+             if (argSequenceType == SequenceType.GoodFloor_short)
+        {
+            Setup_Tasksystem(Sequence_Short_goodfloor);
+        }
+        else
+        {
+            Setup_Tasksystem(Sequence_WrongFloor);
+        }
+
+
+
+
         CharacterItemManager cim = _Dweller.GetComponent<CharacterItemManager>();
         if (cim != null)
         {
@@ -176,11 +259,11 @@ public class SequenceManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            HeardTaskEnded();
-        }
-    }
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Alpha1))
+    //    {
+    //        HeardTaskEnded();
+    //    }
+    //}
 }

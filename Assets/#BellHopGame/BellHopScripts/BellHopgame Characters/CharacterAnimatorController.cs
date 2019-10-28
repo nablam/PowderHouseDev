@@ -271,7 +271,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 
             m_TurnAmount = Mathf.Atan2(argDirection.x, argDirection.z);
-            m_ForwardAmount = argDirection.z * -m_TurnAmount / 10f;
+            m_ForwardAmount = argDirection.z * -m_TurnAmount / 8f;
 
 
 
@@ -286,12 +286,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             float tothis = m_TurnAmount * turnSpeed * Time.deltaTime;
             transform.Rotate(0, tothis, 0);
 
-            if (Mathf.Abs(tothis) < 0.55f) //it's the abs value! otherwise no turning smoothly if turning left
+            if (Mathf.Abs(tothis) < 0.4f) //it's the abs value! otherwise no turning smoothly if turning left
             {
                 if (!reachedRot)
                 {
                     reachedRot = true;
                     //print("fin trn");
+                    UpdateAnimator(Vector3.zero);
+                    m_Animator.SetFloat("Turn", 0.0f);
                     argOnRotCompledCallBAck();
 
                 }
@@ -313,6 +315,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         #region Agent
         public void ActivateAgent()
         {
+
             agent.enabled = true;
             if (agent.isActiveAndEnabled)
             {
@@ -391,14 +394,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         void NoAI()
         {
-            // Vector3 Direction = transform.LookAt(CahsedDESTINATION);// (this.transform.position + (CahsedDESTINATION.position - this.transform.position)).normalized;
             Vector3 heading = CahsedDESTINATION.position - this.transform.position;
-            float distance = heading.magnitude;
-            Vector3 direction = heading / distance;
+            //float distance = heading.magnitude;
+            //Vector3 direction = heading / distance;
 
 
-            Debug.DrawRay(new Vector3(transform.position.x, 1f, transform.position.z), new Vector3(heading.x, 0f, heading.z), Color.red, 0.1f);
-            Debug.DrawRay(new Vector3(transform.position.x, 1f, transform.position.z), new Vector3(direction.x, 0f, direction.z), Color.blue, 0.1f);
+            //Debug.DrawRay(new Vector3(transform.position.x, 1f, transform.position.z), new Vector3(heading.x, 0f, heading.z), Color.red, 0.1f);
+            //Debug.DrawRay(new Vector3(transform.position.x, 1f, transform.position.z), new Vector3(direction.x, 0f, direction.z), Color.blue, 0.1f);
 
             TurnToSimple(heading, SignalEndTask);
         }
