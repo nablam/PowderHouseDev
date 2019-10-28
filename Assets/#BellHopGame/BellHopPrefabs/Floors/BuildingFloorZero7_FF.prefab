@@ -716,7 +716,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6020543217066226731
 Transform:
   m_ObjectHideFlags: 0
@@ -1346,11 +1346,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 778586735274227812}
     m_Modifications:
-    - target: {fileID: 6918487535586797219, guid: 0023a982f443cf74daddc103119f1949,
-        type: 3}
-      propertyPath: m_Name
-      value: BakedNavFloorCedntered
-      objectReference: {fileID: 0}
     - target: {fileID: 6918487535586797216, guid: 0023a982f443cf74daddc103119f1949,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1405,6 +1400,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6918487535586797219, guid: 0023a982f443cf74daddc103119f1949,
+        type: 3}
+      propertyPath: m_Name
+      value: BakedNavFloorCedntered
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0023a982f443cf74daddc103119f1949, type: 3}

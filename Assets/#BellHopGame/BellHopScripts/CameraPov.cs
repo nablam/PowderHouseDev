@@ -104,7 +104,7 @@ public class CameraPov : MonoBehaviour
 #endif
                 _eventManager.Call_CurSequenceChanged(GameEnums.GameSequenceType.GameStart);
                 ElevatorWall.transform.parent = this.transform;
-                BunnyHop.transform.parent = this.transform;
+                // BunnyHop.transform.parent = this.transform;
                 ButtonsCanvas.SetActive(true);
                 ReachedInitialPos = true;
                 _eventManager.Call_CurSequenceChanged(GameEnums.GameSequenceType.ReachedFloor);

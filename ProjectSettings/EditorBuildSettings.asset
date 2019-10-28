@@ -8,16 +8,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DeliveryGame.unity
     guid: 17eb268a1516cf44da9a93a38d741a46
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Lobby.unity
     guid: 1d5023e8c0246f04fb51a379a8f5fb8c
   - enabled: 0
     path: Assets/Scenes/CollectGame.unity
     guid: 9fd0b05e23ef9f246aaac7529e36bb7d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PrimGame.unity
     guid: 055af27f94bb0fa4cb9a2729cda227f2
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/FurnitureLivingRoom.unity
     guid: 9ecb880a4d768d44f80abd8c46d1bcd9
   m_configObjects: {}
