@@ -132,12 +132,13 @@ public class GameFlowManager : MonoBehaviour
             _curDweller = _floorsmngr.GetCurFloorDweller();
             _curDeliveryItem = _curDweller.GetMyItemManager().GetItem_LR(GameEnums.AnimalCharacterHands.Right);
             _ContextItem = _curDeliveryItem;
-            _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), GameEnums.SequenceType.DwellerToss_short);
+            _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.DwellerToss_short);
             print("GOES TO " + _ContextItem.GetDestFloorDweller().AnimalName);
 
         }
         else
         {
+            _bellHop.Warp(_BellhopPos.GetActionPos());
             _curDweller = _floorsmngr.GetCurFloorDweller();
             _curDeliveryItem = _bellHop.GetMyItemManager().GetItem_LR(GameEnums.AnimalCharacterHands.Right);
             _ContextItem = _curDeliveryItem;
@@ -146,11 +147,11 @@ public class GameFlowManager : MonoBehaviour
 
             if (_ContextItem.IsMyOwner(_curDweller.GetComponent<DwellerMeshComposer>()))
             {
-                _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), GameEnums.SequenceType.GoodFloor_short);
+                _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.GoodFloor_short);
             }
             else
             {
-                _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), GameEnums.SequenceType.Badfloor_short);
+                _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.Badfloor_short);
             }
             print("GOES TO " + _ContextItem.GetDestFloorDweller().AnimalName);
         }
@@ -176,10 +177,11 @@ public class GameFlowManager : MonoBehaviour
     ElevatorDoorsMasterControl _ElevatorDoors;
     CameraPov _cam;
 
+    InteractionCentral _BellhopPos;
 
-    public void InitializeMyThings(AnimalCentralCommand argbh, HotelFloorsManager argfloors, CameraPov argCam, NamedActionsController argNameActionCTRL)
+    public void InitializeMyThings(AnimalCentralCommand argbh, HotelFloorsManager argfloors, CameraPov argCam, NamedActionsController argNameActionCTRL, InteractionCentral argBellhopCocation)
     {
-
+        _BellhopPos = argBellhopCocation;
         _bellHop = argbh;
         _floorsmngr = argfloors;
         _cam = argCam;
@@ -243,6 +245,8 @@ public class GameFlowManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         _floorsmngr.INNNINNTNPOOOW();
+        _bellHop.Warp(_BellhopPos.GetActionPos());
+        _bellHop.transform.parent = _BellhopPos.transform;
         _floorsmngr.StartMovingCam();
 
     }

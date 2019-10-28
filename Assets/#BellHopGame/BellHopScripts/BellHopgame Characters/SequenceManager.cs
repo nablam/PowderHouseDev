@@ -15,6 +15,7 @@ public class SequenceManager : MonoBehaviour
     public Transform _curCamPlace;
     public InteractionCentral _bedI;
     public InteractionCentral _couchI;
+    public InteractionCentral _BunnyPos;
 
 
 
@@ -94,8 +95,9 @@ public class SequenceManager : MonoBehaviour
         }
     }
 
-    public void InitAllPointsAccordingToCurFloor(HotelFloor argHF, SequenceType argSequenceType)
+    public void InitAllPointsAccordingToCurFloor(HotelFloor argHF, AnimalCentralCommand argBEllHop, SequenceType argSequenceType)
     {
+        _Bellhop = argBEllHop;
         _Dweller = argHF.FloorDweller;
         _exhangeI = argHF.Greetings;
         _danceI = argHF.Dance;

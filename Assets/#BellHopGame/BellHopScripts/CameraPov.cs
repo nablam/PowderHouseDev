@@ -27,6 +27,8 @@ public class CameraPov : MonoBehaviour
     public GameObject ButtonsCanvas;
     public Transform InitialPos;
 
+    public Transform BellHopLobbyPosTan;
+
     GameSettings _gs;
     ElevatorDoorsMasterControl _ElevatorDoorsCTRL;
     BellHopGameEventManager _eventManager;

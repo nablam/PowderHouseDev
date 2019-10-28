@@ -45,7 +45,7 @@ public class SceneBuilder : MonoBehaviour
     HotelFloor tempHotelFloor;
     public List<HotelFloor> HotelAsListOfFloors = new List<HotelFloor>();
     GameObject Hotel;
-
+    public InteractionCentral BellhopCocation;
     int[] path;
 
     /// <summary>
@@ -350,9 +350,12 @@ public class SceneBuilder : MonoBehaviour
         }
 
 
+        GameObject tempBEllHop = Instantiate(Hop, camlobby.BellHopLobbyPosTan.position, Quaternion.identity);
+
+
 
         HotelFloorsMNG.InitializeFLoors(HotelAsListOfFloors);
-        GameFlow.InitializeMyThings(Hop.GetComponent<AnimalCentralCommand>(), HotelFloorsMNG, camlobby, ActionsControllerObj);
+        GameFlow.InitializeMyThings(tempBEllHop.GetComponent<AnimalCentralCommand>(), HotelFloorsMNG, camlobby, ActionsControllerObj, BellhopCocation);
         camlobby.assignBunny(Hop);
 
         camlobby.SetInitialPos(HotelAsListOfFloors[_gs.Master_Number_of_Floors - 1].BaseCamPos.transform);
