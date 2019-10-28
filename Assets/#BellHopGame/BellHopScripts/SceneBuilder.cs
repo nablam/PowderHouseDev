@@ -16,10 +16,10 @@ public class SceneBuilder : MonoBehaviour
     public GameObject BaseAnimalRef;
     public HotelFloorsManager HotelFloorsMNG;
     public GameFlowManager GameFlow;
+    public DeliverySessionManager SessionMNGR;
     public GameObject Hop;
     public CameraPov camlobby;
 
-    public NamedActionsController ActionsControllerObj;
 
     Dictionary<char, List<string>> Dict_BoyNames;
     Dictionary<char, List<string>> Dict_GirlNames;
@@ -355,7 +355,7 @@ public class SceneBuilder : MonoBehaviour
 
 
         HotelFloorsMNG.InitializeFLoors(HotelAsListOfFloors);
-        GameFlow.InitializeMyThings(tempBEllHop.GetComponent<AnimalCentralCommand>(), HotelFloorsMNG, camlobby, ActionsControllerObj, BellhopCocation);
+        GameFlow.InitializeMyThings(tempBEllHop.GetComponent<AnimalCentralCommand>(), HotelFloorsMNG, camlobby, BellhopCocation, SessionMNGR);
         camlobby.assignBunny(Hop);
 
         camlobby.SetInitialPos(HotelAsListOfFloors[_gs.Master_Number_of_Floors - 1].BaseCamPos.transform);

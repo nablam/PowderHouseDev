@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -112,60 +112,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &16092032
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 16092034}
-  - component: {fileID: 16092033}
-  m_Layer: 0
-  m_Name: _5_NamedActionCTRL
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &16092033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 16092032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 746f237d23f72e1418e298841e2e0639, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _tempBunnyObj: {fileID: 0}
-  _tempdwellertemp: {fileID: 0}
-  MyContextItem: {fileID: 0}
-  tempSTART: {fileID: 0}
-  tempEND: {fileID: 0}
-  m_Curve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!4 &16092034
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 16092032}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &37944866
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,9 +216,9 @@ MonoBehaviour:
     type: 3}
   HotelFloorsMNG: {fileID: 1185464936}
   GameFlow: {fileID: 1882000201}
+  SessionMNGR: {fileID: 50743434}
   Hop: {fileID: 1446855866856646526, guid: 29927ac375546e44dbdde617add860c8, type: 3}
   camlobby: {fileID: 349089609}
-  ActionsControllerObj: {fileID: 16092033}
   LoadedDeliveryItemObjs: []
   FloorItem_REFS: []
   DeliveryItem_Instances: []
@@ -339,7 +285,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &73803588
 GameObject:
@@ -603,7 +549,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &349089605
 GameObject:
@@ -808,7 +754,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &411978356
 GameObject:
@@ -2163,7 +2109,7 @@ Transform:
   - {fileID: 1107079556}
   - {fileID: 349089608}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1000565796
 GameObject:
@@ -2766,7 +2712,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1411918399
 GameObject:
@@ -3021,7 +2967,7 @@ PrefabInstance:
     - target: {fileID: 5171166441784013835, guid: 19a177500809f8443a548d5fc09a7121,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5171166441784013835, guid: 19a177500809f8443a548d5fc09a7121,
         type: 3}
@@ -3348,7 +3294,7 @@ GameObject:
   - component: {fileID: 1882000201}
   - component: {fileID: 1882000203}
   m_Layer: 0
-  m_Name: _4_FlowManager
+  m_Name: _4_FlowManager_SequenceMnager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3593,6 +3539,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6918487535586797219, guid: 0023a982f443cf74daddc103119f1949,
+        type: 3}
+      propertyPath: m_Name
+      value: BakedNavFloorCedntered
+      objectReference: {fileID: 0}
+    - target: {fileID: 6918487535586797219, guid: 0023a982f443cf74daddc103119f1949,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6918487535586797216, guid: 0023a982f443cf74daddc103119f1949,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3631,7 +3587,7 @@ PrefabInstance:
     - target: {fileID: 6918487535586797216, guid: 0023a982f443cf74daddc103119f1949,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6918487535586797216, guid: 0023a982f443cf74daddc103119f1949,
         type: 3}
@@ -3646,16 +3602,6 @@ PrefabInstance:
     - target: {fileID: 6918487535586797216, guid: 0023a982f443cf74daddc103119f1949,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6918487535586797219, guid: 0023a982f443cf74daddc103119f1949,
-        type: 3}
-      propertyPath: m_Name
-      value: BakedNavFloorCedntered
-      objectReference: {fileID: 0}
-    - target: {fileID: 6918487535586797219, guid: 0023a982f443cf74daddc103119f1949,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -3715,7 +3661,7 @@ PrefabInstance:
     - target: {fileID: 1463362373653592565, guid: 6bc66b3f724be5543b32432833ab9dd5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1463362373653592565, guid: 6bc66b3f724be5543b32432833ab9dd5,
         type: 3}
@@ -3794,7 +3740,7 @@ PrefabInstance:
     - target: {fileID: 1913010178438860950, guid: 56d3fc1c4e749da439f47d0f4379f4e7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1913010178438860950, guid: 56d3fc1c4e749da439f47d0f4379f4e7,
         type: 3}

@@ -179,8 +179,11 @@ public class GameFlowManager : MonoBehaviour
 
     InteractionCentral _BellhopPos;
 
-    public void InitializeMyThings(AnimalCentralCommand argbh, HotelFloorsManager argfloors, CameraPov argCam, NamedActionsController argNameActionCTRL, InteractionCentral argBellhopCocation)
+    DeliverySessionManager _sessionMNGR;
+
+    public void InitializeMyThings(AnimalCentralCommand argbh, HotelFloorsManager argfloors, CameraPov argCam, InteractionCentral argBellhopCocation, DeliverySessionManager argSessionMNGR)
     {
+        _sessionMNGR = argSessionMNGR;
         _BellhopPos = argBellhopCocation;
         _bellHop = argbh;
         _floorsmngr = argfloors;
