@@ -72,6 +72,7 @@ public class SequenceManager : MonoBehaviour
 
     BHG_TaskSystem TaskSys;
 
+    bool sequencStarted = false;
     private void OnEnable()
     {
         BellHopGameEventManager.OnSimpleTaskEnded += HeardTaskEnded;
@@ -90,9 +91,18 @@ public class SequenceManager : MonoBehaviour
             task.RunME();
         else
         {
-            //no more tasks 
-            BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameSequenceType.PlayerInputs);
+            if (sequencStarted)
+                //no more tasks 
+                BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameSequenceType.PlayerInputs);
+            sequencStarted = false;
         }
+    }
+
+    public void StartSequence()
+    {
+        sequencStarted = true;
+
+        HeardTaskEnded();
     }
 
     public void InitAllPointsAccordingToCurFloor(HotelFloor argHF, AnimalCentralCommand argBEllHop, SequenceType argSequenceType)

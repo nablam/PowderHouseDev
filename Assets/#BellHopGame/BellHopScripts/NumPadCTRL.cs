@@ -6,6 +6,8 @@ public class NumPadCTRL : MonoBehaviour
     GameSettings _gs;
     GameFlowManager _flowMngr;
 
+
+
     public GameObject UpArrow;
 
     public GameObject DownArrowArrow;
@@ -15,6 +17,8 @@ public class NumPadCTRL : MonoBehaviour
     public List<GameObject> AllButtonsObjs = new List<GameObject>();
 
     public List<GameObject> AvailableButtonsObjs = new List<GameObject>();
+
+
 
     private void Start()
     {
@@ -50,6 +54,8 @@ public class NumPadCTRL : MonoBehaviour
             }
         }
     }
+
+
     public void ReadButtonTouch(int argnum)
     {
         if (!_flowMngr.IsAllowKeypad)
@@ -74,6 +80,7 @@ public class NumPadCTRL : MonoBehaviour
         Debug.Log("pressed " + argnum);
         BellHopGameEventManager.Instance.Call_ButtonPressed(argnum);
 
+
     }
     public void UnTouch(int argnum)
     {
@@ -84,5 +91,19 @@ public class NumPadCTRL : MonoBehaviour
     {
         UpArrow.SetActive(false);
         DownArrowArrow.SetActive(false);
+    }
+
+
+    public void SetButtonColor(Color argColor)
+    {
+
+        foreach (GameObject Go in AvailableButtonsObjs)
+        {
+
+            //  Transform TranChild = Go.transform.GetChild(0);
+            TMPro.TextMeshProUGUI ButtonTExt = Go.gameObject.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+            ButtonTExt.color = argColor;
+        }
+
     }
 }

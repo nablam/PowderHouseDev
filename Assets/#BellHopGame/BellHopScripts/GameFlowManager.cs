@@ -53,10 +53,21 @@ public class GameFlowManager : MonoBehaviour
 #if DebugOn
                 print("startgame");
 #endif
+                FirstTime = false; //just kill the first time in chack floorupon arrival
+
+
                 _sessionMNGR.AddFloorVisitFloorsVisitedINThisSession(_floorsmngr.Get_curFloor().FloorNumber);
-                // 
+
+                _curDweller = _floorsmngr.GetCurFloorDweller();
+                _curDeliveryItem = _curDweller.GetMyItemManager().GetItem_LR(GameEnums.AnimalCharacterHands.Right);
+                _ContextItem = _curDeliveryItem;
+                _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.DwellerToss_short);
+                _cam.m_Text_Game.text = "welcom \n" + _StoryTextGen.SimpleRiddle_takethisto(_ContextItem, _floorsmngr.Get_curFloor().FloorNumber, _sessionMNGR.GetFloorsVisitedINThisSession());
+
+                _floorsmngr.HideShowAllBarriers(false);
+
                 _ElevatorDoors.OpenDoors();
-                IsAllowKeypad = true;
+
 
                 break;
 
@@ -68,9 +79,9 @@ public class GameFlowManager : MonoBehaviour
 
                 CheckFloorStatusUponArrival();
 
-                BellHopGameEventManager.Instance.Call_SimpleTaskEnded(); //this will kick in the first task
 
-                _ElevatorDoors.OpenDoors();
+
+
                 break;
 
             case GameEnums.GameSequenceType.DoorsOppned:
@@ -78,8 +89,9 @@ public class GameFlowManager : MonoBehaviour
                 if (GameSettings.Instance.ShowDebugs)
                     print("doorsOpened");
 #endif
+                // BellHopGameEventManager.Instance.Call_SimpleTaskEnded(); //this will kick in the first task
 
-
+                _seqMNGR.StartSequence();
 
                 break;
 
@@ -95,7 +107,7 @@ public class GameFlowManager : MonoBehaviour
             case GameEnums.GameSequenceType.PlayerInputs:
                 //    _ContextItem = _bellHop.Get_CurHeldObj();
                 IsAllowKeypad = true;
-
+                _cam.numkeypad.SetButtonColor(Color.green);
 
                 break;
 
@@ -120,6 +132,8 @@ public class GameFlowManager : MonoBehaviour
         IsAllowKeypad = false;
         _ElevatorDoors.CloseDoors();
         _requestedFloor = x;
+        _cam.numkeypad.SetButtonColor(Color.red);
+
 
     }
 
@@ -136,7 +150,7 @@ public class GameFlowManager : MonoBehaviour
 
         if (FirstTime)
         {
-
+            Debug.Log("FIRST");
             FirstTime = false;// handeled by gamestate startgame ... this shit is bad 
             _sessionMNGR.AddFloorVisitFloorsVisitedINThisSession(_floorsmngr.Get_curFloor().FloorNumber);
 
@@ -154,7 +168,7 @@ public class GameFlowManager : MonoBehaviour
             _curDeliveryItem = _bellHop.GetMyItemManager().GetItem_LR(GameEnums.AnimalCharacterHands.Right);
             _ContextItem = _curDeliveryItem;
 
-            _ContextItem = _curDeliveryItem;
+
 
             if (_ContextItem.IsMyOwner(_curDweller.GetComponent<DwellerMeshComposer>()))
             {
@@ -167,7 +181,8 @@ public class GameFlowManager : MonoBehaviour
                 _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.Badfloor_short);
                 _cam.m_Text_Game.text = "NO " + _StoryTextGen.SimpleRiddle_takethisto(_ContextItem, _floorsmngr.Get_curFloor().FloorNumber, _sessionMNGR.GetFloorsVisitedINThisSession());
             }
-
+            //  BellHopGameEventManager.Instance.Call_SimpleTaskEnded(); //this will kick in the first task
+            _ElevatorDoors.OpenDoors();
         }
 
         // print("GOES TO " + _ContextItem.GetDestFloorDweller().AnimalName + " floor" + _ContextItem.GetDestFloorDweller().MyFinalResidenceFloorNumber);
@@ -225,7 +240,7 @@ public class GameFlowManager : MonoBehaviour
         else
             Destroy(this.gameObject);
 
-        IsAllowKeypad = true;
+        // IsAllowKeypad = true;
 
     }
 

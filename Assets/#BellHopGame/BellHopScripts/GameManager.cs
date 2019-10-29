@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        print("I shall never see thi");
         _numPad = NumpadObj.GetComponent<NumPadCTRL>();
         StartCoroutine(WaitOpenDoors(1));
 

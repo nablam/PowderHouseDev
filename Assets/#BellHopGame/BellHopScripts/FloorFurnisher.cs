@@ -79,8 +79,8 @@ public class FloorFurnisher : MonoBehaviour
     public void Build_rand_RoomType()
     {
         //SetTransDoorStepAsInteraction = GreetingsActionObj.transform;
-        //BuildRoomType((GameEnums.RoomType)Random.Range(0, 4));
-        BuildRoomType(GameEnums.RoomType.Bedroom);
+        BuildRoomType((GameEnums.RoomType)Random.Range(0, 4));
+        // BuildRoomType(GameEnums.RoomType.Bedroom);
     }
 
     public void BuildRoomType(GameEnums.RoomType argTypr)

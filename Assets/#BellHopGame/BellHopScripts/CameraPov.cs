@@ -6,17 +6,17 @@ public class CameraPov : MonoBehaviour
 {
 
     #region EventSubscription
-    //private void OnEnable()
-    //{
-    //    BellHopGameEventManager.OnCurSequenceChanged += HeardSequenceChanged;
-    //}
+    private void OnEnable()
+    {
+        BellHopGameEventManager.OnCurSequenceChanged += HeardSequenceChanged;
+    }
 
-    //private void OnDisable()
-    //{
-    //    BellHopGameEventManager.OnCurSequenceChanged -= HeardSequenceChanged;
-    //}
+    private void OnDisable()
+    {
+        BellHopGameEventManager.OnCurSequenceChanged -= HeardSequenceChanged;
+    }
 
-    //void HeardSequenceChanged(GameEnums.GameSequenceType argGST) { }
+    void HeardSequenceChanged(GameEnums.GameSequenceType argGST) { m_Text_GameFlowState.text = argGST.ToString(); }
     #endregion
 
 
@@ -33,6 +33,9 @@ public class CameraPov : MonoBehaviour
     ElevatorDoorsMasterControl _ElevatorDoorsCTRL;
     BellHopGameEventManager _eventManager;
     public TMPro.TextMeshProUGUI m_Text_Game;
+    public TMPro.TextMeshProUGUI m_Text_GameFlowState;
+
+    public NumPadCTRL numkeypad;
     private void Start()
     {
         _gs = GameSettings.Instance;
@@ -107,7 +110,7 @@ public class CameraPov : MonoBehaviour
                 // BunnyHop.transform.parent = this.transform;
                 ButtonsCanvas.SetActive(true);
                 ReachedInitialPos = true;
-                _eventManager.Call_CurSequenceChanged(GameEnums.GameSequenceType.ReachedFloor);
+                // _eventManager.Call_CurSequenceChanged(GameEnums.GameSequenceType.ReachedFloor);
 
             }
         }
