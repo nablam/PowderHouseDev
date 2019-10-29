@@ -384,7 +384,18 @@ public class FloorFurnisher : MonoBehaviour
 
     }
 
-
+    public void PlaceCeilingLightHere(Transform argHere)
+    {
+        GameObject RandLight = Instantiate(_ff.RandCEilingLight());
+        RandLight.transform.position = argHere.position;
+        RandLight.transform.parent = argHere.transform;
+    }
+    public void PlaceRug(Transform argHere)
+    {
+        GameObject RandRug = Instantiate(_ff.RandRug());
+        RandRug.transform.position = argHere.position;
+        RandRug.transform.parent = argHere.transform;
+    }
 
 }
 

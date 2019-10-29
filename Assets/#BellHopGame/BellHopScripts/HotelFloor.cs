@@ -59,6 +59,9 @@ public class HotelFloor : MonoBehaviour
         Greetings = floorFurnisherChild.GetGreetingsAction();
         Dance = floorFurnisherChild.GetDanceAction();
         Mainaction = floorFurnisherChild.GetMainAction();
+        floorFurnisherChild.PlaceCeilingLightHere(TRAN_CeilingLightPos);
+        floorFurnisherChild.PlaceRug(Dance.transform);
+
     }
 
     public void SetDweller(GameObject argDwellerObj)

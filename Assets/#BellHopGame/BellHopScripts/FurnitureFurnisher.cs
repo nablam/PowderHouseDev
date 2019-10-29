@@ -7,7 +7,9 @@ public class FurnitureFurnisher : MonoBehaviour
     public List<GameObject> Surfs = new List<GameObject>();
     public List<GameObject> Toys = new List<GameObject>();
     public List<GameObject> Rest = new List<GameObject>();
-
+    public List<GameObject> CeilingLights = new List<GameObject>();
+    public List<GameObject> Rugs = new List<GameObject>();
+    public List<GameObject> Windows = new List<GameObject>();
     List<GameObject> All = new List<GameObject>();
 
     public GameObject Get_Rand()
@@ -59,5 +61,18 @@ public class FurnitureFurnisher : MonoBehaviour
 
             }
         }
+    }
+
+
+    public GameObject RandCEilingLight()
+    {
+
+        return CeilingLights[Random.Range(0, CeilingLights.Count)];
+    }
+
+    public GameObject RandRug()
+    {
+
+        return Rugs[Random.Range(0, Rugs.Count)];
     }
 }

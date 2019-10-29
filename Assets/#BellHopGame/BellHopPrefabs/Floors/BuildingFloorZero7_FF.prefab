@@ -86,7 +86,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1264851569420529447}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 3.376, z: 0.131}
+  m_LocalPosition: {x: -0.5, y: 2.683, z: 0.131}
   m_LocalScale: {x: 4, y: 0.6, z: 0.2}
   m_Children: []
   m_Father: {fileID: 1463362373653592565}
@@ -207,7 +207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4791159766501718373}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WindowPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1011,7 +1011,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1025
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
@@ -1031,7 +1031,7 @@ GameObject:
   - component: {fileID: 7701241403115932616}
   - component: {fileID: 7701241403115932614}
   - component: {fileID: 7701241403115932615}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BackWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1134,7 +1134,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.53, y: 3.133}
+  m_AnchoredPosition: {x: -0.53, y: 2.44}
   m_SizeDelta: {x: 3, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &2058329071414131152
@@ -1556,6 +1556,88 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5270986458269639610, guid: 18cecbe3a7d45104fbb9a629b6d80be4,
+        type: 3}
+      propertyPath: CeilingLights.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5270986458269639610, guid: 18cecbe3a7d45104fbb9a629b6d80be4,
+        type: 3}
+      propertyPath: Rugs.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5270986458269639610, guid: 18cecbe3a7d45104fbb9a629b6d80be4,
+        type: 3}
+      propertyPath: CeilingLights.Array.data[0]
+      value: 
+      objectReference: {fileID: 1198026103541116470, guid: 38f7bc3eaa781074b9425f524072aa9f,
+        type: 3}
+    - target: {fileID: 5270986458269639610, guid: 18cecbe3a7d45104fbb9a629b6d80be4,
+        type: 3}
+      propertyPath: CeilingLights.Array.data[1]
+      value: 
+      objectReference: {fileID: 2508561627893553402, guid: 7325280010839f84990ca781db799ba5,
+        type: 3}
+    - target: {fileID: 5270986458269639610, guid: 18cecbe3a7d45104fbb9a629b6d80be4,
+        type: 3}
+      propertyPath: CeilingLights.Array.data[2]
+      value: 
+      objectReference: {fileID: 8572716409464128388, guid: 03133f3a0f0e6bf4fb3e11c3936958aa,
+        type: 3}
+    - target: {fileID: 5270986458269639610, guid: 18cecbe3a7d45104fbb9a629b6d80be4,
+        type: 3}
+      propertyPath: CeilingLights.Array.data[3]
+      value: 
+      objectReference: {fileID: 2599618160288307629, guid: b3f8e3b31ae910648832e48a7e285b04,
+        type: 3}
+    - target: {fileID: 5270986458269639610, guid: 18cecbe3a7d45104fbb9a629b6d80be4,
+        type: 3}
+      propertyPath: CeilingLights.Array.data[4]
+      value: 
+      objectReference: {fileID: 8137629188251982361, guid: 6a675fbe26810a1469ad3da598eb870f,
+        type: 3}
+    - target: {fileID: 5270986458269639610, guid: 18cecbe3a7d45104fbb9a629b6d80be4,
+        type: 3}
+      propertyPath: CeilingLights.Array.data[5]
+      value: 
+      objectReference: {fileID: 3512153104979025288, guid: 9471969118d14974484a3e0cb5bcfdb2,
+        type: 3}
+    - target: {fileID: 5270986458269639610, guid: 18cecbe3a7d45104fbb9a629b6d80be4,
+        type: 3}
+      propertyPath: Rugs.Array.data[0]
+      value: 
+      objectReference: {fileID: 8930968193941058710, guid: bda688e0468288b4ea1244fdc84b1497,
+        type: 3}
+    - target: {fileID: 5270986458269639610, guid: 18cecbe3a7d45104fbb9a629b6d80be4,
+        type: 3}
+      propertyPath: Rugs.Array.data[1]
+      value: 
+      objectReference: {fileID: 1695940722774524544, guid: 83ce976977288314db8992e95666a887,
+        type: 3}
+    - target: {fileID: 5270986458269639610, guid: 18cecbe3a7d45104fbb9a629b6d80be4,
+        type: 3}
+      propertyPath: Rugs.Array.data[2]
+      value: 
+      objectReference: {fileID: 3482187503743231541, guid: 418153b5b41478b44af4d5904a8a30a1,
+        type: 3}
+    - target: {fileID: 5270986458269639610, guid: 18cecbe3a7d45104fbb9a629b6d80be4,
+        type: 3}
+      propertyPath: Rugs.Array.data[3]
+      value: 
+      objectReference: {fileID: 3940628417288063307, guid: b3637e098e79de6469891be638931fb7,
+        type: 3}
+    - target: {fileID: 5270986458269639610, guid: 18cecbe3a7d45104fbb9a629b6d80be4,
+        type: 3}
+      propertyPath: Rugs.Array.data[4]
+      value: 
+      objectReference: {fileID: 4953670509416954877, guid: 8c5abe8716a73c1448168dfb523e00f6,
+        type: 3}
+    - target: {fileID: 5270986458269639610, guid: 18cecbe3a7d45104fbb9a629b6d80be4,
+        type: 3}
+      propertyPath: Rugs.Array.data[5]
+      value: 
+      objectReference: {fileID: 7352952478992292671, guid: 4f1cf698d2d26fb4591d1cccb46a044f,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18cecbe3a7d45104fbb9a629b6d80be4, type: 3}
 --- !u!4 &3925817523586008723 stripped
