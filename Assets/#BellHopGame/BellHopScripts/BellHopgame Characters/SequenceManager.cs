@@ -51,7 +51,7 @@ public class SequenceManager : MonoBehaviour
 
     TA_InstantTaskHandShowHide I_D_showRight;
     TA_InstantTaskHandShowHide I_D_HideLeft;
-
+    TA_TimedOpenDoor O_DoorsNow;
 
     List<ITaskAction> Sequence_SimpleGreet;
 
@@ -169,6 +169,9 @@ public class SequenceManager : MonoBehaviour
 
         F_B_Cam = new TA_DwellerFace(_Bellhop, Camera.main.transform);
 
+        O_DoorsNow = new TA_TimedOpenDoor();
+
+
         Sequence_SimpleGreet = new List<ITaskAction>
         {
             W_D_ExchandePos,
@@ -189,7 +192,9 @@ public class SequenceManager : MonoBehaviour
 
         Sequence_ShortDwellerToss = new List<ITaskAction>   {
             W_D_ExchandePos,
+              O_DoorsNow,
                 M_D_ExchandePos,
+
             F_B_Dweller,
             I_D_showRight,
             F_D_Bell,
@@ -201,6 +206,7 @@ public class SequenceManager : MonoBehaviour
 
         Sequence_Short_goodfloor = new List<ITaskAction>   {
             W_D_DancePos,
+            O_DoorsNow,
             M_D_ExchandePos,
             F_B_Dweller,
             F_D_Bell,
@@ -219,6 +225,7 @@ public class SequenceManager : MonoBehaviour
         Sequence_WrongFloor = new List<ITaskAction>   {
             W_D_ExchandePos,
 
+            O_DoorsNow,
             F_B_Dweller,
             F_D_Bell,
             A_D_No,

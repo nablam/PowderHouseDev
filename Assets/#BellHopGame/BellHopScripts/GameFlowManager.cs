@@ -65,8 +65,9 @@ public class GameFlowManager : MonoBehaviour
                 _cam.m_Text_Game.text = "welcom \n" + _StoryTextGen.SimpleRiddle_takethisto(_ContextItem, _floorsmngr.Get_curFloor().FloorNumber, _sessionMNGR.GetFloorsVisitedINThisSession());
 
                 _floorsmngr.HideShowAllBarriers(false);
-
-                _ElevatorDoors.OpenDoors();
+                _curDweller.IsCurentFloorAnimal = true;
+                _seqMNGR.StartSequence();
+                //_ElevatorDoors.OpenDoors();
 
 
                 break;
@@ -90,8 +91,8 @@ public class GameFlowManager : MonoBehaviour
                     print("doorsOpened");
 #endif
                 // BellHopGameEventManager.Instance.Call_SimpleTaskEnded(); //this will kick in the first task
-                _curDweller.IsCurentFloorAnimal = true;
-                _seqMNGR.StartSequence();
+
+
 
                 break;
 
@@ -183,8 +184,11 @@ public class GameFlowManager : MonoBehaviour
                 _cam.m_Text_Game.text = "NO " + _StoryTextGen.SimpleRiddle_takethisto(_ContextItem, _floorsmngr.Get_curFloor().FloorNumber, _sessionMNGR.GetFloorsVisitedINThisSession());
             }
             //  BellHopGameEventManager.Instance.Call_SimpleTaskEnded(); //this will kick in the first task
-            _ElevatorDoors.OpenDoors();
+            // _ElevatorDoors.OpenDoors();
         }
+        _curDweller.IsCurentFloorAnimal = true;
+
+        _seqMNGR.StartSequence();
 
         // print("GOES TO " + _ContextItem.GetDestFloorDweller().AnimalName + " floor" + _ContextItem.GetDestFloorDweller().MyFinalResidenceFloorNumber);
     }
