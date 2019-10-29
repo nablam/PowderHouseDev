@@ -229,7 +229,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8330331579487908499}
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0, z: -0.27000007}
+  m_LocalPosition: {x: -0, y: 0, z: -0.548}
   m_LocalScale: {x: 0.8764065, y: 0.8875019, z: 1}
   m_Children:
   - {fileID: 8330331581612229897}
@@ -325,6 +325,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eaef02edbf75cd45832a5c919b6b927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LookitHere: {fileID: 0}
+  ActionPos: {fileID: 0}
   argActionString: SitChair
 --- !u!1 &8330331581519266214
 GameObject:
@@ -381,7 +383,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8330331581612229896}
   m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: -0.01, y: 0, z: 0}
+  m_LocalPosition: {x: 0.41, y: -0, z: 0}
   m_LocalScale: {x: 1.1267588, y: 1, z: 1.1410233}
   m_Children: []
   m_Father: {fileID: 8330331579487908496}

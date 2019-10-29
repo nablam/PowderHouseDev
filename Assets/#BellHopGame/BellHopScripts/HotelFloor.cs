@@ -76,7 +76,7 @@ public class HotelFloor : MonoBehaviour
         //GameObject nf = Instantiate(NavFloor);
         //nf.transform.position = new Vector3(TRAN_516Pos.position.x, TRAN_516Pos.position.y, TRAN_516Pos.position.z);
         InitialFLoor.SetActive(true);
-        BuildingMesh.SetActive(false);
+        BuildingMesh.SetActive(true);
 
 
 
@@ -97,14 +97,18 @@ public class HotelFloor : MonoBehaviour
         FloorDweller.Warp(Greetings.GetActionPos());
     }
 
-    public void SetInitDest()
+    public void SetReceived()
     {
-        //  FloorDweller.Plz_GOTO(TRAN_DoorStep, false);//<false just sets dest , no walking
+        ReceivedItem = true;
+        if (FloorNumber == 0)
+        {
+            Debug.LogError("endGame");
+        }
     }
 
-    public void WarpInit()
+    public bool IsComplete()
     {
-        // FloorDweller.WarpAgent(TRAN_DoorStep);
+        return ReceivedItem;
     }
 
     int cnt = 0;

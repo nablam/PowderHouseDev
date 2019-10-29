@@ -53,6 +53,7 @@ public class SequenceManager : MonoBehaviour
     TA_InstantTaskHandShowHide I_D_HideLeft;
     TA_TimedOpenDoor O_DoorsNow;
     TA_MoveOnTrig T_moveOn;
+    TA_GameOver T_GG;
 
     List<ITaskAction> Sequence_SimpleGreet;
 
@@ -67,7 +68,7 @@ public class SequenceManager : MonoBehaviour
 
     List<ITaskAction> Sequence_LONG_DwellerToss;
 
-    List<ITaskAction> Sequence_BellPulls;
+    List<ITaskAction> Sequence_LONG_goodfloor; //also is the endcallller
 
     List<ITaskAction> Sequence_DwellerPulls;
 
@@ -171,8 +172,8 @@ public class SequenceManager : MonoBehaviour
         F_B_Cam = new TA_DwellerFace(_Bellhop, Camera.main.transform);
 
         O_DoorsNow = new TA_TimedOpenDoor();
-        T_moveOn = new TA_MoveOnTrig(_Dweller, 5f);
-
+        T_moveOn = new TA_MoveOnTrig(_Dweller, 4f);
+        T_GG = new TA_GameOver();
         Sequence_SimpleGreet = new List<ITaskAction>
         {
             W_D_ExchandePos,
@@ -196,9 +197,9 @@ public class SequenceManager : MonoBehaviour
               O_DoorsNow,
                 M_D_ExchandePos,
 
+            F_D_Bell,
             F_B_Dweller,
             I_D_showRight,
-            F_D_Bell,
             A_D_Toss, //needed for pull mirorred character
             P_B_2R,
             F_D_Cam,
@@ -213,9 +214,9 @@ public class SequenceManager : MonoBehaviour
             F_D_Bell,
             M_D_ExchandePos,
 
-            F_B_Dweller,
             I_D_showRight,
             F_D_Bell,
+            F_B_Dweller,
             A_D_Toss, //needed for pull mirorred character
             P_B_2R,
             F_D_Cam,
@@ -239,6 +240,27 @@ public class SequenceManager : MonoBehaviour
 
         };
 
+        Sequence_LONG_goodfloor = new List<ITaskAction>   {
+            W_D_RoomPos,
+            T_moveOn,
+            F_D_RoomLookat,
+              O_DoorsNow,
+            A_D_RoomAction, //is running right after roomlookat , and hopes to get exited on time by O_DOOrnow
+            F_D_Bell,
+            A_D_Hello,
+            A_B_Toss, //needed for pull mirorred character
+            
+            A_D_Good,
+            A_B_Good,
+            I_D_HideLeft,
+
+
+
+            F_B_Cam,
+            T_GG,
+
+        };
+
         Sequence_WrongFloor = new List<ITaskAction>   {
             W_D_ExchandePos,
 
@@ -252,15 +274,26 @@ public class SequenceManager : MonoBehaviour
         };
 
 
-        if (argSequenceType == SequenceType.DwellerToss_short)
+        if (argSequenceType == SequenceType.DwellerToss_Long)
         {
             Setup_Tasksystem(Sequence_LONG_DwellerToss);
+
+        }
+        else
+            if (argSequenceType == SequenceType.DwellerToss_short)
+        {
+            Setup_Tasksystem(Sequence_ShortDwellerToss);
 
         }
         else
              if (argSequenceType == SequenceType.GoodFloor_short)
         {
             Setup_Tasksystem(Sequence_Short_goodfloor);
+        }
+        else
+             if (argSequenceType == SequenceType.GoodFloor_Long)
+        {
+            Setup_Tasksystem(Sequence_LONG_goodfloor);
         }
         else
         {

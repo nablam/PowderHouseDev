@@ -61,7 +61,7 @@ public class GameFlowManager : MonoBehaviour
                 _curDweller = _floorsmngr.GetCurFloorDweller();
                 _curDeliveryItem = _curDweller.GetMyItemManager().GetItem_LR(GameEnums.AnimalCharacterHands.Right);
                 _ContextItem = _curDeliveryItem;
-                _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.DwellerToss_short);
+                _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.DwellerToss_Long);
                 _cam.m_Text_Game.text = "welcom \n" + _StoryTextGen.SimpleRiddle_takethisto(_ContextItem, _floorsmngr.Get_curFloor().FloorNumber, _sessionMNGR.GetFloorsVisitedINThisSession());
 
                 _floorsmngr.HideShowAllBarriers(false);
@@ -122,6 +122,8 @@ public class GameFlowManager : MonoBehaviour
                 break;
 
             case GameEnums.GameSequenceType.GameEnd:
+
+                SceneManager.LoadScene("DeliveryGame");
                 break;
 
 
@@ -153,14 +155,14 @@ public class GameFlowManager : MonoBehaviour
         if (FirstTime)
         {
             Debug.Log("FIRST");
-            FirstTime = false;// handeled by gamestate startgame ... this shit is bad 
-            _sessionMNGR.AddFloorVisitFloorsVisitedINThisSession(_floorsmngr.Get_curFloor().FloorNumber);
+            //FirstTime = false;// handeled by gamestate startgame ... this shit is bad 
+            //_sessionMNGR.AddFloorVisitFloorsVisitedINThisSession(_floorsmngr.Get_curFloor().FloorNumber);
 
-            _curDweller = _floorsmngr.GetCurFloorDweller();
-            _curDeliveryItem = _curDweller.GetMyItemManager().GetItem_LR(GameEnums.AnimalCharacterHands.Right);
-            _ContextItem = _curDeliveryItem;
-            _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.DwellerToss_short);
-            _cam.m_Text_Game.text = _StoryTextGen.SimpleRiddle_takethisto(_ContextItem, _floorsmngr.Get_curFloor().FloorNumber, _sessionMNGR.GetFloorsVisitedINThisSession());
+            //_curDweller = _floorsmngr.GetCurFloorDweller();
+            //_curDeliveryItem = _curDweller.GetMyItemManager().GetItem_LR(GameEnums.AnimalCharacterHands.Right);
+            //_ContextItem = _curDeliveryItem;
+            //_seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.DwellerToss_short);
+            //_cam.m_Text_Game.text = _StoryTextGen.SimpleRiddle_takethisto(_ContextItem, _floorsmngr.Get_curFloor().FloorNumber, _sessionMNGR.GetFloorsVisitedINThisSession());
 
         }
         else
@@ -174,8 +176,14 @@ public class GameFlowManager : MonoBehaviour
 
             if (_ContextItem.IsMyOwner(_curDweller.GetComponent<DwellerMeshComposer>()))
             {
-                _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.GoodFloor_short);
-
+                if (_floorsmngr.Get_curFloor().FloorNumber == 0)
+                {
+                    _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.GoodFloor_Long);
+                }
+                else
+                {
+                    _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.GoodFloor_short);
+                }
             }
             else
             {

@@ -51,7 +51,7 @@ public class FloorFurnisher : MonoBehaviour
     public InteractionCentral GetGreetingsAction() { return this.GreetingsAoIC; }
 
     const int Width = 6;
-    const int Height = 6;
+    const int Height = 4;
 
     FurnitureFurnisher _ff;
     // Start is called before the first frame update
@@ -102,27 +102,27 @@ public class FloorFurnisher : MonoBehaviour
     void BuildKichen()
     {
         _roomtypeToBuild = GameEnums.RoomType.Kitchen;
-        PlaceActionObj_andFillRow(Random.Range(0, Width), 5, Kitchen2x1Action, Kitchen1x1, Kitchen2x1);
+        PlaceActionObj_andFillRow(Random.Range(0, Width), Height - 1, Kitchen2x1Action, Kitchen1x1, Kitchen2x1);
     }
 
 
     void Build_BEdroom()
     {
         _roomtypeToBuild = GameEnums.RoomType.Bedroom;
-        PlaceActionObj_andFillRow(Random.Range(0, Width), 5, Bedroom2x1Action, Bedroom1x1, Bedroom2x1);
+        PlaceActionObj_andFillRow(Random.Range(0, Width), Height - 1, Bedroom2x1Action, Bedroom1x1, Bedroom2x1);
     }
 
     void Build_Livingroom()
     {
         _roomtypeToBuild = GameEnums.RoomType.Livingroom;
         //allow couchspace
-        PlaceActionObj_andFillRow(Random.Range(2, Width), 5, Livingroom2x1Action, Livingroom1x1, Livingroom2x1);
+        PlaceActionObj_andFillRow(Random.Range(2, Width), Height - 1, Livingroom2x1Action, Livingroom1x1, Livingroom2x1);
     }
 
     void Build_Lab()
     {
         _roomtypeToBuild = GameEnums.RoomType.Lab;
-        PlaceActionObj_andFillRow(Random.Range(0, Width), 5, Lab2x1Action, Lab1x1, Lab2x1);
+        PlaceActionObj_andFillRow(Random.Range(0, Width), Height - 1, Lab2x1Action, Lab1x1, Lab2x1);
     }
 
 
