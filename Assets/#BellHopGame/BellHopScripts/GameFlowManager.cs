@@ -123,7 +123,7 @@ public class GameFlowManager : MonoBehaviour
 
             case GameEnums.GameSequenceType.GameEnd:
 
-                SceneManager.LoadScene("DeliveryGame");
+                SceneManager.LoadScene("DeliveryStart");
                 break;
 
 
