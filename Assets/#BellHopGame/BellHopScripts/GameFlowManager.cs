@@ -62,7 +62,7 @@ public class GameFlowManager : MonoBehaviour
                 _curDeliveryItem = _curDweller.GetMyItemManager().GetItem_LR(GameEnums.AnimalCharacterHands.Right);
                 _ContextItem = _curDeliveryItem;
                 _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.DwellerToss_Long);
-                _cam.m_Text_Game.text = "welcom \n" + _StoryTextGen.SimpleRiddle_takethisto(_ContextItem, _floorsmngr.Get_curFloor().FloorNumber, _sessionMNGR.GetFloorsVisitedINThisSession());
+                _cam.m_Text_Game.text = _StoryTextGen.SimpleRiddle_takethisto(_ContextItem, _floorsmngr.Get_curFloor().FloorNumber, _sessionMNGR.GetFloorsVisitedINThisSession());
 
                 _floorsmngr.HideShowAllBarriers(false);
                 _curDweller.IsCurentFloorAnimal = true;
