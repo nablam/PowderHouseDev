@@ -178,4 +178,17 @@ public class AnimalCentralCommand : MonoBehaviour, ITaskable
     {
         _myAnimatorCtrl.Get_myAnimator().SetTrigger("TrigMoveOn");
     }
+
+    public void MoveOnTrigger(float sec)
+    {
+        print("rnning Moveon");
+        StartCoroutine(DelayMoveOnTrigger(sec));
+    }
+    IEnumerator DelayMoveOnTrigger(float argsec)
+    {
+        yield return new WaitForSeconds(argsec);
+        _myAnimatorCtrl.Get_myAnimator().SetTrigger("TrigMoveOn");
+        print("ended Moveon");
+
+    }
 }

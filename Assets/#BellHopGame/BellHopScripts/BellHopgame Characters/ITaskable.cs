@@ -12,7 +12,7 @@ public interface ITaskable
 
 
     CharacterItemManager GetMyItemManager();
-    void MoveOnTrigger();
+    void MoveOnTrigger(float sec);
     void TaskEnded();
     void ActivateAgent();
 }

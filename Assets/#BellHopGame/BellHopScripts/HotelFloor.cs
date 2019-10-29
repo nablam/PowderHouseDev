@@ -76,7 +76,7 @@ public class HotelFloor : MonoBehaviour
         //GameObject nf = Instantiate(NavFloor);
         //nf.transform.position = new Vector3(TRAN_516Pos.position.x, TRAN_516Pos.position.y, TRAN_516Pos.position.z);
         InitialFLoor.SetActive(true);
-        BuildingMesh.SetActive(true);
+        BuildingMesh.SetActive(false);
 
 
 
