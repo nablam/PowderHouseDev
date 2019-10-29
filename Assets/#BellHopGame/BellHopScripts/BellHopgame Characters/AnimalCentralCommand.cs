@@ -11,6 +11,9 @@ public class AnimalCentralCommand : MonoBehaviour, ITaskable
     CharacterItemManager _myItemManager;
 
     string Myname = "bellhopDefault";
+    bool _isCurentFloorAnimal;
+
+    public bool IsCurentFloorAnimal { get => _isCurentFloorAnimal; set => _isCurentFloorAnimal = value; }
 
     public string GEtMyName(bool Compound)
     {
@@ -30,6 +33,7 @@ public class AnimalCentralCommand : MonoBehaviour, ITaskable
     {
         _myAnimatorCtrl = GetComponent<CharacterAnimatorController>();
         _myItemManager = GetComponent<CharacterItemManager>();
+        _isCurentFloorAnimal = false;
 
 
     }
@@ -126,8 +130,14 @@ public class AnimalCentralCommand : MonoBehaviour, ITaskable
 
     public void TaskEnded()
     {
+        if (IsCurentFloorAnimal || gameObject.CompareTag("Player"))
 
-        BellHopGameEventManager.Instance.Call_SimpleTaskEnded();
+            BellHopGameEventManager.Instance.Call_SimpleTaskEnded();
+
+        else
+        {
+            Debug.Log("not main nor player yet finished a task");
+        }
     }
     public void ActivateAgent()
     {

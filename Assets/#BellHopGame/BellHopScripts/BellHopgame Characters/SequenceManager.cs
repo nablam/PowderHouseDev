@@ -90,10 +90,14 @@ public class SequenceManager : MonoBehaviour
         if (task != null)
             task.RunME();
         else
-        {
+        {//no more tasks 
             if (sequencStarted)
-                //no more tasks 
+            {
+
                 BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameSequenceType.PlayerInputs);
+            }
+
+
             sequencStarted = false;
         }
     }

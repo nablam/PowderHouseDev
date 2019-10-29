@@ -90,7 +90,7 @@ public class GameFlowManager : MonoBehaviour
                     print("doorsOpened");
 #endif
                 // BellHopGameEventManager.Instance.Call_SimpleTaskEnded(); //this will kick in the first task
-
+                _curDweller.IsCurentFloorAnimal = true;
                 _seqMNGR.StartSequence();
 
                 break;
@@ -115,6 +115,7 @@ public class GameFlowManager : MonoBehaviour
 #if DebugOn
                 //  print("here");
 #endif
+                _curDweller.IsCurentFloorAnimal = false;
                 _floorsmngr.UpdateCurFloorDest(_requestedFloor);
                 _cam.m_Text_Game.text = "";
                 break;
