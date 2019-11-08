@@ -49,7 +49,7 @@ public class HotelFloor : MonoBehaviour
     private void Awake()
     {
 
-        // DidthisFire = true;
+
     }
 
     public void EarlyBuildFurniture()
@@ -72,7 +72,7 @@ public class HotelFloor : MonoBehaviour
         argDwellerObj.transform.parent = this.transform;
         FloorDweller = argDwellerObj.GetComponent<AnimalCentralCommand>();
 
-        m_Text_Billboard.text = argDwellerObj.GetComponent<DwellerMeshComposer>().Gender + ". " + argDwellerObj.GetComponent<DwellerMeshComposer>().AnimalName + " the " + argDwellerObj.GetComponent<DwellerMeshComposer>().AnimalType;
+        m_Text_Billboard.text = argDwellerObj.GetComponent<DwellerMeshComposer>().Gender + ". " + CapitalizeMe(argDwellerObj.GetComponent<DwellerMeshComposer>().AnimalName) + " the " + CapitalizeMe(argDwellerObj.GetComponent<DwellerMeshComposer>().AnimalType);
 
 
         ReceivedItem = false;
@@ -80,14 +80,6 @@ public class HotelFloor : MonoBehaviour
         //nf.transform.position = new Vector3(TRAN_516Pos.position.x, TRAN_516Pos.position.y, TRAN_516Pos.position.z);
         InitialFLoor.SetActive(true);
         BuildingMesh.SetActive(true);
-
-
-
-
-
-
-
-
     }
     public void InitDwellerAgentNowIGuess()
     {
@@ -144,4 +136,23 @@ public class HotelFloor : MonoBehaviour
     void visitingCorrectFloor() { }
 
     void visitingWrongFloor() { }
+
+
+    string CapitalizeMe(string argstr)
+    {
+        string FirstLetter;
+        string output = "";
+        if (argstr.Length > 1)
+        {
+
+            FirstLetter = argstr[0].ToString();
+            FirstLetter = FirstLetter.ToUpper();
+
+            output = FirstLetter + argstr.Remove(0, 1); ;
+        }
+        return output;
+
+
+
+    }
 }
