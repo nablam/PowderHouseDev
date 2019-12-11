@@ -29,6 +29,7 @@ public class DwellerMeshComposer : MonoBehaviour
 
     public GameObject HeadCat;
     public GameObject HeadDuck;
+    public GameObject HeadFurret;
     public GameObject HeadMole;
     public GameObject HeadMonkey;
     public GameObject HeadMouse;
@@ -37,8 +38,10 @@ public class DwellerMeshComposer : MonoBehaviour
     public GameObject HeadRabbit;
     public GameObject HeadSheep;
 
+
     public Material MatCat;
     public Material MatDuck;
+    public Material MatFurret;
     public Material MatMole;
     public Material MatMonkey;
     public Material MatMouse;
@@ -129,6 +132,7 @@ public class DwellerMeshComposer : MonoBehaviour
     void HideHeads()
     {
         HeadCat.SetActive(false);
+        HeadFurret.SetActive(false);
         HeadDuck.SetActive(false);
         HeadMole.SetActive(false);
         HeadMonkey.SetActive(false);
@@ -150,6 +154,9 @@ public class DwellerMeshComposer : MonoBehaviour
                 break;
             case "duck":
                 HeadDuck.SetActive(true);
+                break;
+            case "furret":
+                HeadFurret.SetActive(true);
                 break;
             case "mole":
                 HeadMole.SetActive(true);
@@ -294,6 +301,9 @@ public class DwellerMeshComposer : MonoBehaviour
                 break;
             case "duck":
                 BodyRenderer.material = MatDuck;
+                break;
+            case "furret":
+                BodyRenderer.material = MatFurret;
                 break;
             case "mole":
                 BodyRenderer.material = MatMole;

@@ -116,6 +116,7 @@
     {
         cat,
         duck,
+        furret,
         mole,
         mouse,
         monkey,
