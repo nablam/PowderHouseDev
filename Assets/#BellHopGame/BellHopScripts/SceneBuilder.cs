@@ -125,6 +125,7 @@ public class SceneBuilder : MonoBehaviour
     {
 
         _gs = GameSettings.Instance;
+
         if (_gs == null) { Debug.LogError("SceneBuilder: No GameSettings in scene!"); }
 
 

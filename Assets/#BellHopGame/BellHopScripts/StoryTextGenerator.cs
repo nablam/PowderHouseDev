@@ -3,7 +3,7 @@
 public class StoryTextGenerator : MonoBehaviour
 {
 
-
+    GameSettings _gs;
     HotelFloorsManager _hotelManager;
 
     int IncreaseDiffafter3 = 3;
@@ -14,6 +14,8 @@ public class StoryTextGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _gs = GameSettings.Instance;
+
 
     }
 
@@ -57,6 +59,67 @@ public class StoryTextGenerator : MonoBehaviour
             strToSay = "d_" + Take_thisThing_to_FloorNumber(ItemNAme, argDeliveryItem.GetDestFloorDweller().MyFinalResidenceFloorNumber);
 
         }
+
+        return strToSay;
+    }
+
+
+
+    public string SimpleRiddle_takethisto_WithAlgebra(DeliveryItem argDeliveryItem, int argCurfloor, int numberofWronsForThisSession)
+    {
+        string strToSay = "";
+        string nameofGiver = _hotelManager.GetCurFloorDweller().GEtMyName(true);
+        string nameOfDestinationDude = argDeliveryItem.GetDestFloorDweller().AnimalName;
+        string ItemNAme = argDeliveryItem.RefName;
+        int DestinationFloorNumberZeroBased = argDeliveryItem.GetDestFloorDweller().MyFinalResidenceFloorNumber;
+        DestinationFloorNumberZeroBased++;
+        int RandomFloorDiscovered = _hotelManager.Get_Random_FloorDiscovered();
+
+        int X = Random.Range(0, (_gs.Master_Number_of_Floors * 2));
+        int Y = Mathf.Abs(X - DestinationFloorNumberZeroBased);
+        if (X >= DestinationFloorNumberZeroBased)
+        {
+
+            //do substractiom
+            strToSay = X.ToString() + " - " + Y.ToString() + " = ";
+        }
+        else
+        {
+            //do addition
+            strToSay = X.ToString() + " + " + Y.ToString() + " = ";
+
+        }
+
+
+
+
+
+
+
+        //if (numberofWronsForThisSession == 0)
+        //{
+        //    if (_hotelManager.DiscoveredFloors.Count <= 1)
+        //    {
+        //        //we jsut started 
+        //        strToSay = "a_" + Take_thisThing_to_FloorNumberRelativeToHere(ItemNAme, DestinationFloorNumberZeroBased, argCurfloor);
+
+        //    }
+        //    else
+        //    {
+        //        strToSay = "b_" + Take_thisThing_to_FloorNumberRelativeToHere(ItemNAme, DestinationFloorNumberZeroBased, argCurfloor);
+
+        //    }
+        //}
+        //else
+        //if (numberofWronsForThisSession > 0 && numberofWronsForThisSession < 2)
+        //{
+        //    strToSay = "c_" + Take_this_to_FloorNumberRelativeTo_Memorized(ItemNAme, DestinationFloorNumberZeroBased, RandomFloorDiscovered);
+        //}
+        //else if (numberofWronsForThisSession >= 2)
+        //{
+        //    strToSay = "d_" + Take_thisThing_to_FloorNumber(ItemNAme, argDeliveryItem.GetDestFloorDweller().MyFinalResidenceFloorNumber);
+
+        //}
 
         return strToSay;
     }

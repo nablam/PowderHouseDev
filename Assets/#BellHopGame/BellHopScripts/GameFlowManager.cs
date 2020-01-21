@@ -35,7 +35,7 @@ public class GameFlowManager : MonoBehaviour
     void HeardDeliveryItemObtainedByBellhop(DeliveryItem argItem)
     {
         _sessionMNGR.CreateSessionWhenBellHopObtainsANewItem(argItem);
-        _cam.m_Text_Game.text = _StoryTextGen.SimpleRiddle_takethisto(argItem, _floorsmngr.Get_curFloor().FloorNumber, _sessionMNGR.GetFloorsVisitedINThisSession());
+        _cam.m_Text_Game.text = _StoryTextGen.SimpleRiddle_takethisto_WithAlgebra(argItem, _floorsmngr.Get_curFloor().FloorNumber, _sessionMNGR.GetFloorsVisitedINThisSession());
     }
 
     SequenceManager _seqMNGR;
@@ -189,7 +189,7 @@ public class GameFlowManager : MonoBehaviour
             {
                 _sessionMNGR.AddFloorVisitFloorsVisitedINThisSession(_floorsmngr.Get_curFloor().FloorNumber);
                 _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.Badfloor_short);
-                _cam.m_Text_Game.text = "NO " + _StoryTextGen.SimpleRiddle_takethisto(_ContextItem, _floorsmngr.Get_curFloor().FloorNumber, _sessionMNGR.GetFloorsVisitedINThisSession());
+                _cam.m_Text_Game.text = "NO " + _StoryTextGen.SimpleRiddle_takethisto_WithAlgebra(_ContextItem, _floorsmngr.Get_curFloor().FloorNumber, _sessionMNGR.GetFloorsVisitedINThisSession());
             }
             //  BellHopGameEventManager.Instance.Call_SimpleTaskEnded(); //this will kick in the first task
             // _ElevatorDoors.OpenDoors();

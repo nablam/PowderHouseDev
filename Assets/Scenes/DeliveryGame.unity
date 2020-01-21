@@ -711,11 +711,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 118183725377491429, guid: 19f74bac3df920e48958b281d1f0e189,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.452
-      objectReference: {fileID: 0}
     - target: {fileID: 748405804442180814, guid: 19f74bac3df920e48958b281d1f0e189,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -1075,6 +1070,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748405804641164713, guid: 19f74bac3df920e48958b281d1f0e189,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19f74bac3df920e48958b281d1f0e189, type: 3}
