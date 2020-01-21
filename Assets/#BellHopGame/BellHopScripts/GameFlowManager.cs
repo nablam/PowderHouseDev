@@ -141,6 +141,11 @@ public class GameFlowManager : MonoBehaviour
         x++;
         _cam.m_Text_Game.text += x.ToString();
 
+
+        if (x > _floorsmngr.Get_curFloor().FloorNumber) { _cam.numkeypad.Set_GoingUP(); }
+        else if (x < _floorsmngr.Get_curFloor().FloorNumber) { _cam.numkeypad.Set_GoingDown(); }
+        else { _cam.numkeypad.Set_cleararrows(); }
+
     }
 
     #endregion
@@ -152,7 +157,7 @@ public class GameFlowManager : MonoBehaviour
     {
 
         _cam.numkeypad.SetFloorNumberOnDisplay(_floorsmngr.Get_curFloor().FloorNumber);
-
+        _cam.numkeypad.Set_cleararrows();
 
         if (FirstTime)
         {

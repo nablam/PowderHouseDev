@@ -70,10 +70,6 @@ public class NumPadCTRL : MonoBehaviour
         }
         if (argnum >= _gs.Master_Number_of_Floors) return;
 
-        //if (_gs.Master_CurentFloorNumber < argnum) { UpArrow.SetActive(true); DownArrowArrow.SetActive(false); }
-        //else
-
-        //if (_gs.Master_CurentFloorNumber > argnum) { UpArrow.SetActive(false); DownArrowArrow.SetActive(true); }
 
         // _gs.StartGoingToFloorOnButtonClicked(argnum);
 
@@ -115,4 +111,20 @@ public class NumPadCTRL : MonoBehaviour
         argArrivedOnFloorZeroBased++;
         m_Text_FloorNumber.text = argArrivedOnFloorZeroBased.ToString();
     }
+
+    public void Set_GoingUP()
+    {
+        UpArrow.SetActive(true); DownArrowArrow.SetActive(false);
+    }
+
+    public void Set_GoingDown()
+    {
+        UpArrow.SetActive(false); DownArrowArrow.SetActive(true);
+    }
+
+    public void Set_cleararrows()
+    {
+        UpArrow.SetActive(false); DownArrowArrow.SetActive(false);
+    }
+
 }
