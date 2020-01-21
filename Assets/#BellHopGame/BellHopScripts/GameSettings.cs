@@ -161,6 +161,12 @@ public class GameSettings : MonoBehaviour
 
     float _elevatorSpeed;
 
+    const float _floorHeight = 6f;
+
+
+    public float Master_Floor_Height { get => _floorHeight; }
+
+
 }
 
 

@@ -276,7 +276,7 @@ public class SceneBuilder : MonoBehaviour
 
             GameObject FloorObjectInstance = Instantiate(FloorObjRef);
             FloorObjectInstance.name = "floor_" + i;
-            FloorObjectInstance.transform.position = new Vector3(FloorObjectInstance.transform.position.x, i * 6f, FloorObjectInstance.transform.position.z);
+            FloorObjectInstance.transform.position = new Vector3(FloorObjectInstance.transform.position.x, i * _gs.Master_Floor_Height, FloorObjectInstance.transform.position.z);
 
 
 

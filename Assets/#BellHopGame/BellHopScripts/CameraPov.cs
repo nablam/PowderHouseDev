@@ -81,14 +81,30 @@ public class CameraPov : MonoBehaviour
 
     void MoveToTargetFloor()
     {
+
+
         if (_target != null && !Reached)
         {
             transform.position = Vector3.MoveTowards(transform.position, _target.position, _gs.ElevatorSpeed);
+
+
+            int VerticalIntPos = (int)(transform.position.y - 1.3f);
+
+            if ((VerticalIntPos) % _gs.Master_Floor_Height == 0)
+            {
+                int numtodisplay = (VerticalIntPos / (int)_gs.Master_Floor_Height);
+                numkeypad.SetFloorNumberOnDisplay(numtodisplay);
+            }
+
+
+
             if (transform.position == _target.position)
             {
 #if DebugOn
                 Debug.Log("Cam pov reacehd");
 #endif
+
+
                 _eventManager.Call_CurSequenceChanged(GameEnums.GameSequenceType.ReachedFloor);
                 Reached = true;
             }
