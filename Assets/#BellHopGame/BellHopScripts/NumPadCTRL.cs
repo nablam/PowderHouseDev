@@ -76,10 +76,13 @@ public class NumPadCTRL : MonoBehaviour
         //if (_gs.Master_CurentFloorNumber > argnum) { UpArrow.SetActive(false); DownArrowArrow.SetActive(true); }
 
         // _gs.StartGoingToFloorOnButtonClicked(argnum);
-        m_Text_FloorNumber.text = argnum.ToString();
-        Debug.Log("pressed " + argnum);
+
+
         BellHopGameEventManager.Instance.Call_ButtonPressed(argnum);
 
+
+
+        Debug.Log("pressed " + argnum);
 
     }
     public void UnTouch(int argnum)
@@ -105,5 +108,11 @@ public class NumPadCTRL : MonoBehaviour
             ButtonTExt.color = argColor;
         }
 
+    }
+
+    public void SetFloorNumberOnDisplay(int argArrivedOnFloorZeroBased)
+    {
+        argArrivedOnFloorZeroBased++;
+        m_Text_FloorNumber.text = argArrivedOnFloorZeroBased.ToString();
     }
 }

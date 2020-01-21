@@ -138,6 +138,8 @@ public class GameFlowManager : MonoBehaviour
         _requestedFloor = x;
         _cam.numkeypad.SetButtonColor(Color.red);
 
+        x++;
+        _cam.m_Text_Game.text += x.ToString();
 
     }
 
@@ -149,7 +151,7 @@ public class GameFlowManager : MonoBehaviour
     void CheckFloorStatusUponArrival()
     {
 
-
+        _cam.numkeypad.SetFloorNumberOnDisplay(_floorsmngr.Get_curFloor().FloorNumber);
 
 
         if (FirstTime)
