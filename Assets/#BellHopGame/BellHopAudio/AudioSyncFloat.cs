@@ -13,7 +13,8 @@ public class AudioSyncFloat : AudioSyncer
 
         while (_curr != _target)
         {
-            _curr = Mathf.Lerp(_initial, _target, _timer / timeToBeat);
+            // _curr = Mathf.Lerp(_initial, _target, _timer / timeToBeat);
+            _curr = Mathf.Lerp(_initial, _target, 1.5f);
             _timer += Time.deltaTime;
 
             BlendShapeCurPos = _curr;
@@ -24,7 +25,7 @@ public class AudioSyncFloat : AudioSyncer
         m_isBeat = false;
 
     }
-    int index = 0;
+    int index = 3;
     public override void OnUpdate()
     {
         base.OnUpdate();
@@ -34,7 +35,8 @@ public class AudioSyncFloat : AudioSyncer
 
         BlendShapeCurPos = Mathf.Lerp(BlendShapeCurPos, restScale, restSmoothTime * Time.deltaTime);
 
-        skinnedMeshRenderer.SetBlendShapeWeight(index, BlendShapeCurPos);
+        skinnedMeshRenderer.SetBlendShapeWeight(0, BlendShapeCurPos);
+        skinnedMeshRenderer.SetBlendShapeWeight(1, BlendShapeCurPos);
     }
 
     public override void OnBeat()

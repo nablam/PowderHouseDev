@@ -9,7 +9,7 @@ public class AudioSpectrum : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_audioSpectrum = new float[128];
+        m_audioSpectrum = new float[256];
     }
 
     // Update is called once per frame
