@@ -223,9 +223,16 @@ public class SequenceManager : MonoBehaviour
             F_B_Cam,
         };
         Sequence_Short_goodfloor = new List<ITaskAction>   {
-            W_D_DancePos,
-            O_DoorsNow,
+          W_D_RoomPos,
+            T_moveOn,
+            F_D_RoomLookat,
+              O_DoorsNow,
+            A_D_RoomAction,
+            F_D_Bell,
             M_D_ExchandePos,
+
+            I_D_showRight,
+
             F_B_Dweller,
             F_D_Bell,
             A_D_Hello,
@@ -237,6 +244,25 @@ public class SequenceManager : MonoBehaviour
             A_D_Toss,
             P_B_2R,
             F_B_Cam,
+
+
+
+            //W_D_DancePos,
+            //O_DoorsNow,
+            //M_D_ExchandePos,
+            //F_B_Dweller,
+            //F_D_Bell,
+            //A_D_Hello,
+            //A_B_Toss, //needed for pull mirorred character
+            //P_D_2L,
+            //A_D_Good,
+            //I_D_HideLeft,
+            //I_D_showRight,
+            //A_D_Toss,
+            //P_B_2R,
+            //F_B_Cam,
+
+
 
         };
 
