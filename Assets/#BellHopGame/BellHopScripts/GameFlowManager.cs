@@ -186,7 +186,7 @@ public class GameFlowManager : MonoBehaviour
             {
                 _sessionMNGR.AddFloorVisitFloorsVisitedINThisSession(_floorsmngr.Get_curFloor().FloorNumber);
                 _sessionMNGR.IncrementWrongAnswersForCurSession();
-                _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.Badfloor_short);
+                _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.Badfloor_Long);
                 _cam.m_Text_Game.text = " " + _StoryTextGen.RiddleMaker(_ContextItem, _sessionMNGR.GetNumberOfWrongAnswersInThisSession());
             }
             //  BellHopGameEventManager.Instance.Call_SimpleTaskEnded(); //this will kick in the first task

@@ -1181,6 +1181,7 @@ MonoBehaviour:
   _theItem: {fileID: 0}
   _exhangeI: {fileID: 0}
   _danceI: {fileID: 0}
+  _spawnI: {fileID: 0}
   _curCamPlace: {fileID: 0}
   _bedI: {fileID: 0}
   _couchI: {fileID: 0}
@@ -1209,6 +1210,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BuildingFloorZero7_FF
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027963608595529744, guid: 6bc66b3f724be5543b32432833ab9dd5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1463362373653592565, guid: 6bc66b3f724be5543b32432833ab9dd5,
         type: 3}

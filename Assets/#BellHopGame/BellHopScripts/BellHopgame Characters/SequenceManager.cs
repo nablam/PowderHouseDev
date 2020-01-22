@@ -27,6 +27,8 @@ public class SequenceManager : MonoBehaviour
     TA_DwellerWarp W_D_RoomPos;
     TA_DwellerWarp W_D_DancePos;
 
+    TA_DwellerWarp W_D_SpawnPos;
+
     TA_DwellerMoveTo M_D_ExchandePos;
     TA_DwellerMoveTo M_D_RoomPos;
     TA_DwellerMoveTo M_D_DancePos;
@@ -36,6 +38,9 @@ public class SequenceManager : MonoBehaviour
     TA_DwellerFace F_D_RoomLookat;
     TA_DwellerFace F_B_Dweller;
     TA_DwellerFace F_B_Cam;
+
+    TA_DwellerFace F_D_SpawnLookat;
+
 
     TA_DwellerAnimate A_D_Wave1;
     TA_DwellerAnimate A_D_Wave2;
@@ -65,6 +70,8 @@ public class SequenceManager : MonoBehaviour
 
 
     List<ITaskAction> Sequence_WrongFloor;
+
+    List<ITaskAction> Sequence_WrongFloorLONG;
     ITaskAction _DwellerAnimate_NO;
 
     List<ITaskAction> Sequence_LONG_DwellerToss;
@@ -141,7 +148,7 @@ public class SequenceManager : MonoBehaviour
         W_D_ExchandePos = new TA_DwellerWarp(_Dweller, _exhangeI.GetActionPos());
         W_D_RoomPos = new TA_DwellerWarp(_Dweller, _couchI.GetActionPos());
         W_D_DancePos = new TA_DwellerWarp(_Dweller, _danceI.GetActionPos());
-
+        W_D_SpawnPos = new TA_DwellerWarp(_Dweller, _spawnI.GetActionPos());
 
         M_D_ExchandePos = new TA_DwellerMoveTo(_Dweller, _exhangeI.GetActionPos());
         M_D_RoomPos = new TA_DwellerMoveTo(_Dweller, _couchI.GetActionPos());
@@ -153,7 +160,7 @@ public class SequenceManager : MonoBehaviour
         F_D_Bell = new TA_DwellerFace(_Dweller, _Bellhop.transform);
         F_D_RoomLookat = new TA_DwellerFace(_Dweller, _couchI.GetLookTarg());
         F_B_Dweller = new TA_DwellerFace(_Bellhop, _Dweller.transform);
-
+        F_D_SpawnLookat = new TA_DwellerFace(_Dweller, _spawnI.GetLookTarg());
         //dweller pulls to his left AKA good delivery 
         P_B_2R = new TA_DwellerPullCoord_2R(_Bellhop, _Dweller);
         P_D_2L = new TA_DwellerPullCoord_2L(_Dweller, _Bellhop);
@@ -300,6 +307,19 @@ public class SequenceManager : MonoBehaviour
             F_B_Cam,
 
         };
+        Sequence_WrongFloorLONG = new List<ITaskAction>   {
+            W_D_SpawnPos,
+            F_D_SpawnLookat,
+
+            O_DoorsNow,
+            M_D_ExchandePos,
+            F_B_Dweller,
+            F_D_Bell,
+            A_D_No,
+
+            F_B_Cam,
+
+        };
 
 
         if (argSequenceType == SequenceType.DwellerToss_Long)
@@ -322,6 +342,10 @@ public class SequenceManager : MonoBehaviour
              if (argSequenceType == SequenceType.GoodFloor_Long)
         {
             Setup_Tasksystem(Sequence_LONG_goodfloor);
+        }
+        if (argSequenceType == SequenceType.Badfloor_Long)
+        {
+            Setup_Tasksystem(Sequence_WrongFloorLONG);
         }
         else
         {

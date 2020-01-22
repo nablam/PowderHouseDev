@@ -339,6 +339,7 @@
         Badfloor_short,
         DwellerToss_Long,
         GoodFloor_Long,
+        Badfloor_Long,
 
     }
 }
