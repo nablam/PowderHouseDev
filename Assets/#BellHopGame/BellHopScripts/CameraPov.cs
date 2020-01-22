@@ -10,21 +10,29 @@ public class CameraPov : MonoBehaviour
     private void OnEnable()
     {
         BellHopGameEventManager.OnCurSequenceChanged += HeardSequenceChanged;
+        BellHopGameEventManager.OnDebugLineHeard += DebugOnCanvas;
     }
 
     private void OnDisable()
     {
         BellHopGameEventManager.OnCurSequenceChanged -= HeardSequenceChanged;
+        BellHopGameEventManager.OnDebugLineHeard -= DebugOnCanvas;
     }
 
     void HeardSequenceChanged(GameEnums.GameSequenceType argGST)
     {
         //m_Text_GameFlowState.text = argGST.ToString();
-        m_Text_GameFlowState.text = "";
+        // m_Text_GameFlowState.text = "";
     }
     #endregion
+    int linecount = 0;
+    void DebugOnCanvas(string argDebugStr)
+    {
 
-
+        string line = linecount.ToString() + ".  " + argDebugStr;
+        m_Text_GameFlowState.text = line;
+        linecount++;
+    }
 
     Transform _target = null;
     public GameObject ElevatorWall;

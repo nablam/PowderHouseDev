@@ -69,4 +69,12 @@ public class BellHopGameEventManager : MonoBehaviour
         //  Debug.Log("task or animationeneded BROADCAST");
         OnDeliveryItemObtained?.Invoke(argDi);
     }
+
+
+    public delegate void EventDebugStr(string argStr);
+    public static EventDebugStr OnDebugLineHeard;
+    public void Call_DebugThis(string argStr)
+    {
+        OnDebugLineHeard?.Invoke(argStr);
+    }
 }

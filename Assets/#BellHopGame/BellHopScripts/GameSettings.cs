@@ -46,7 +46,7 @@ public class GameSettings : MonoBehaviour
         //    Master_Number_of_Floors = _Master_max_Available_Dwellers_sofar;
 
         // ElevatorSpeed = 0.12f;
-        ElevatorSpeed = 0.21f;
+        ElevatorSpeed = 0.41f;
 
         Debug.Log(nameof(_Master_max_Available_Dwellers_sofar));
     }

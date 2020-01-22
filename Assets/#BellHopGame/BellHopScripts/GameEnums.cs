@@ -334,12 +334,12 @@
 
     public enum SequenceType
     {
-        DwellerToss_short,
-        GoodFloor_short,
-        Badfloor_short,
-        DwellerToss_Long,
-        GoodFloor_Long,
-        Badfloor_Long,
+
+
+        sq_FIRST,
+        sq_correct,
+        sq_wrong,
+        sq_GameOver,
 
     }
 }

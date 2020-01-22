@@ -14,6 +14,7 @@ public class HotelFloor : MonoBehaviour
     public Transform TRAN_CeilingLightPos;
     public GameObject BuildingMesh;
     public GameObject BaseCamPos;
+    public GameObject OutDoorsPoint;
     public TMPro.TextMeshPro m_Text_Billboard;
 
 

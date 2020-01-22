@@ -61,7 +61,7 @@ public class GameFlowManager : MonoBehaviour
                 _curDweller = _floorsmngr.GetCurFloorDweller();
                 _curDeliveryItem = _curDweller.GetMyItemManager().GetItem_LR(GameEnums.AnimalCharacterHands.Right);
                 _ContextItem = _curDeliveryItem;
-                _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.DwellerToss_Long);
+                _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.sq_FIRST, 0);
 
                 _cam.m_Text_Game.text = "Hello !";
                 //_cam.m_Text_Game.text = _StoryTextGen.SimpleRiddle_takethisto(_ContextItem, _floorsmngr.Get_curFloor().FloorNumber, _sessionMNGR.GetFloorsVisitedINThisSession());
@@ -108,7 +108,7 @@ public class GameFlowManager : MonoBehaviour
 #endif
                 _curDweller.IsCurentFloorAnimal = false;
                 _floorsmngr.UpdateCurFloorDest(_requestedFloor);
-                _cam.m_Text_Game.text = "";
+                //_cam.m_Text_Game.text = "";
                 break;
 
             case GameEnums.GameSequenceType.GameEnd:
@@ -129,7 +129,7 @@ public class GameFlowManager : MonoBehaviour
         _cam.numkeypad.SetButtonColor(Color.red);
 
         x++;
-        _cam.m_Text_Game.text += x.ToString();
+        // _cam.m_Text_Game.text += x.ToString();
 
 
         if (x > _floorsmngr.Get_curFloor().FloorNumber) { _cam.numkeypad.Set_GoingUP(); }
@@ -143,23 +143,17 @@ public class GameFlowManager : MonoBehaviour
 
     bool _GOODFLOOR = false;
     bool FirstTime = true;
+    int cashedWrongAnswers = 0;
     void CheckFloorStatusUponArrival()
     {
 
         _cam.numkeypad.SetFloorNumberOnDisplay(_floorsmngr.Get_curFloor().FloorNumber);
         _cam.numkeypad.Set_cleararrows();
-
+        cashedWrongAnswers = _sessionMNGR.GetNumberOfWrongAnswersInThisSession();
         if (FirstTime)
         {
             Debug.Log("FIRST");
-            //FirstTime = false;// handeled by gamestate startgame ... this shit is bad 
-            //_sessionMNGR.AddFloorVisitFloorsVisitedINThisSession(_floorsmngr.Get_curFloor().FloorNumber);
 
-            //_curDweller = _floorsmngr.GetCurFloorDweller();
-            //_curDeliveryItem = _curDweller.GetMyItemManager().GetItem_LR(GameEnums.AnimalCharacterHands.Right);
-            //_ContextItem = _curDeliveryItem;
-            //_seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.DwellerToss_short);
-            //_cam.m_Text_Game.text = _StoryTextGen.SimpleRiddle_takethisto(_ContextItem, _floorsmngr.Get_curFloor().FloorNumber, _sessionMNGR.GetFloorsVisitedINThisSession());
 
         }
         else
@@ -175,19 +169,22 @@ public class GameFlowManager : MonoBehaviour
             {
                 if (_floorsmngr.Get_curFloor().FloorNumber == 0)
                 {
-                    _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.GoodFloor_Long);
+                    _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.sq_GameOver, 0);
                 }
                 else
                 {
-                    _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.GoodFloor_short);
+                    _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.sq_correct, cashedWrongAnswers);
                 }
             }
             else
             {
                 _sessionMNGR.AddFloorVisitFloorsVisitedINThisSession(_floorsmngr.Get_curFloor().FloorNumber);
                 _sessionMNGR.IncrementWrongAnswersForCurSession();
-                _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.Badfloor_Long);
-                _cam.m_Text_Game.text = " " + _StoryTextGen.RiddleMaker(_ContextItem, _sessionMNGR.GetNumberOfWrongAnswersInThisSession());
+                _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.sq_wrong, cashedWrongAnswers);
+                if (cashedWrongAnswers >= 1)
+                {
+                    _cam.m_Text_Game.text = _StoryTextGen.RiddleMaker(_ContextItem, cashedWrongAnswers);
+                }
             }
             //  BellHopGameEventManager.Instance.Call_SimpleTaskEnded(); //this will kick in the first task
             // _ElevatorDoors.OpenDoors();

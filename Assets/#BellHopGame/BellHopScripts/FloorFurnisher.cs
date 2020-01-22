@@ -6,7 +6,6 @@ public class FloorFurnisher : MonoBehaviour
     public GameObject Greatings;
     public GameObject StarDance;
     public GameObject SpawnStar;
-    public Transform SpawnTransTobeManuallyMoved;
     public GameObject cornershelf_L;
     public GameObject cornershelf_R;
     public List<GameObject> StandaloneActions2x1 = new List<GameObject>();
@@ -89,9 +88,10 @@ public class FloorFurnisher : MonoBehaviour
     {
         //SetTransDoorStepAsInteraction = GreetingsActionObj.transform;
         //BuildRoomType((GameEnums.RoomType)Random.Range(0, 4));
-        //  BuildRoomType(GameEnums.RoomType.Bedroom);
-        BuildRoomType(GameEnums.RoomType.Livingroom);
+        //BuildRoomType(GameEnums.RoomType.Bedroom);
+        // BuildRoomType(GameEnums.RoomType.Livingroom);
 
+        BuildRoomType(GameEnums.RoomType.Kitchen);
     }
 
     public void BuildRoomType(GameEnums.RoomType argTypr)
