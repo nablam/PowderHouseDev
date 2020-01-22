@@ -72,7 +72,8 @@ public class HotelFloor : MonoBehaviour
         argDwellerObj.transform.parent = this.transform;
         FloorDweller = argDwellerObj.GetComponent<AnimalCentralCommand>();
 
-        m_Text_Billboard.text = argDwellerObj.GetComponent<DwellerMeshComposer>().Gender + ". " + CapitalizeMe(argDwellerObj.GetComponent<DwellerMeshComposer>().AnimalName) + " the " + CapitalizeMe(argDwellerObj.GetComponent<DwellerMeshComposer>().AnimalType);
+        //m_Text_Billboard.text = argDwellerObj.GetComponent<DwellerMeshComposer>().Gender + ". " + CapitalizeMe(argDwellerObj.GetComponent<DwellerMeshComposer>().AnimalName) + " the " + CapitalizeMe(argDwellerObj.GetComponent<DwellerMeshComposer>().AnimalType);
+        m_Text_Billboard.text = CapitalizeMe(argDwellerObj.GetComponent<DwellerMeshComposer>().AnimalName) + " the " + CapitalizeMe(argDwellerObj.GetComponent<DwellerMeshComposer>().AnimalType);
 
 
         ReceivedItem = false;

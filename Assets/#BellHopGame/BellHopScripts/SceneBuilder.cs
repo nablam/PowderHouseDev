@@ -144,6 +144,8 @@ public class SceneBuilder : MonoBehaviour
         {
             BOYS_AvailableDynamicAnimalNames[x] = "Mr." + BOYS_AvailableDynamicAnimalNames[x];
             GIRLS_AvailableDynamicAnimalNames[x] = "Mrs." + GIRLS_AvailableDynamicAnimalNames[x];
+            //BOYS_AvailableDynamicAnimalNames[x] = BOYS_AvailableDynamicAnimalNames[x];
+            //GIRLS_AvailableDynamicAnimalNames[x] = GIRLS_AvailableDynamicAnimalNames[x];
         }
 
         SelectedAnimalNames.AddRange(BOYS_AvailableDynamicAnimalNames);
