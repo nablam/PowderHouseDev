@@ -28,6 +28,8 @@ public class DeliverySession
 
     int _correctDestinationFloorNumver;
 
+    int _wrongAnswers;
+    public int WrongAnswers { get => _wrongAnswers; private set => _wrongAnswers = value; }
     public DeliverySession(DeliveryItem argdeliveryItem, int argID)
     {
         _id = argID;
@@ -35,14 +37,21 @@ public class DeliverySession
         _floorsVisited = new List<int>();
         _dwellerOwner = argdeliveryItem.GetDestFloorDweller();
         _correctDestinationFloorNumver = _dwellerOwner.MyFinalResidenceFloorNumber;
+        _wrongAnswers = 0;
     }
 
     public int CorrectDestinationFloorNumver { get => _correctDestinationFloorNumver; private set => _correctDestinationFloorNumver = value; }
+
 
     public void AddFloorVisited(int argFloorVisited)
     {
 
         if (!_floorsVisited.Contains(argFloorVisited))
             _floorsVisited.Add(argFloorVisited);
+    }
+
+    public void IncrementWrongAnswers()
+    {
+        _wrongAnswers++;
     }
 }

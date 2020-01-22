@@ -27,12 +27,26 @@ public class DeliverySessionManager : MonoBehaviour
         if (curSession.FloorsVisited == null) return 0;
         return curSession.FloorsVisited.Count;
     }
+    public int GetNumberOfWrongAnswersInThisSession()
+    {
+
+        if (curSession == null) return 0;
+
+        return curSession.WrongAnswers;
+    }
 
     public void AddFloorVisitFloorsVisitedINThisSession(int curfloornum)
     {
         if (curSession != null)
 
             curSession.AddFloorVisited(curfloornum);
+    }
+
+    public void IncrementWrongAnswersForCurSession()
+    {
+        if (curSession == null) return;
+
+        curSession.IncrementWrongAnswers();
     }
 
 

@@ -78,7 +78,7 @@ public class NumPadCTRL : MonoBehaviour
 
 
 
-        Debug.Log("pressed " + argnum);
+        ;// Debug.Log("pressed " + argnum);
 
     }
     public void UnTouch(int argnum)

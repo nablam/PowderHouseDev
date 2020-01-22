@@ -27,6 +27,85 @@ public class StoryTextGenerator : MonoBehaviour
 
     }
 
+    string Take_thisThing_to_FloorNumber(string argThisthing, int argDestFloorNum)
+    {
+
+        return "direct " + argThisthing + " to floor " + argDestFloorNum;
+    }
+
+
+    string Take_thisThing_to_FloorNumberRelativeToHere(string argThisthing, int argDestFloorNum, int argCurFloor)
+    {
+        string FloorsUpDown = "";
+        string Floor_S = "Floor ";
+        int Diff = 0;
+
+
+        if (argDestFloorNum > argCurFloor)
+        {
+            FloorsUpDown = " Up ";
+            Diff = argDestFloorNum - argCurFloor;
+        }
+        else
+        {
+            FloorsUpDown = " Down ";
+            Diff = argCurFloor - argDestFloorNum;
+        }
+
+
+
+        if (Diff > 1)
+        {
+            Floor_S = "Floors ";
+        }
+
+
+        return " " + argThisthing + "   " + Diff.ToString() + " " + Floor_S + FloorsUpDown + "from here";
+    }
+
+
+
+    string Take_this_to_FloorNumberRelativeTo_Memorized(string argThisthing, int argDestFloorNum, int argRandMemorizedFloor)
+    {
+        string FloorsUpDown = "";
+        string Floor_S = "Floor ";
+        int Diff = 0;
+
+
+        if (argDestFloorNum > argRandMemorizedFloor)
+        {
+            FloorsUpDown = " Up ";
+            Diff = argDestFloorNum - argRandMemorizedFloor;
+        }
+        else
+        {
+            FloorsUpDown = " Down ";
+            Diff = argRandMemorizedFloor - argDestFloorNum;
+        }
+        Diff--;
+
+        if (Diff > 1)
+        {
+            Floor_S = "Floors ";
+        }
+
+
+
+        return "the dweller " + Diff.ToString() + " " + Floor_S + FloorsUpDown + "from " + _hotelManager.Get_FloorDwellerNAmeOnFloor(argRandMemorizedFloor) + " need this" + argThisthing;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     public string SimpleRiddle_takethisto(DeliveryItem argDeliveryItem, int argCurfloor, int numberofWronsForThisSession)
     {
         string nameofGiver = _hotelManager.GetCurFloorDweller().GEtMyName(true);
@@ -67,7 +146,7 @@ public class StoryTextGenerator : MonoBehaviour
 
 
 
-    public string SimpleRiddle_takethisto_WithAlgebra(DeliveryItem argDeliveryItem, int argCurfloor, int numberofWronsForThisSession)
+    public string RiddleMaker(DeliveryItem argDeliveryItem, int numberofWronsForThisSession)
     {
         string strToSay = "";
         string nameofGiver = _hotelManager.GetCurFloorDweller().GEtMyName(true);
@@ -75,13 +154,60 @@ public class StoryTextGenerator : MonoBehaviour
         string ItemNAme = argDeliveryItem.RefName;
         int DestinationFloorNumberZeroBased = argDeliveryItem.GetDestFloorDweller().MyFinalResidenceFloorNumber;
         DestinationFloorNumberZeroBased++;
+        int Curfloor = _hotelManager.Get_curFloor().FloorNumber;
+        Curfloor++;
         int RandomFloorDiscovered = _hotelManager.Get_Random_FloorDiscovered();
 
-        Debug.Log("randFloor " + RandomFloorDiscovered);
+        Debug.Log("wrongs: " + numberofWronsForThisSession);
+        if (numberofWronsForThisSession > 1)
+        {
+
+            strToSay = Algebra_SimpleAdditionSubstraction(DestinationFloorNumberZeroBased);
+        }
+        else
+        {
+            strToSay = Algebra_BigSubstraction(DestinationFloorNumberZeroBased, 3);
+        }
+
+        return strToSay;
+    }
+
+
+    string Algebra_BigSubstraction(int argFixedDestinationFloor, int argDifficultyConst)
+    {
+        string strToSay = "";
+        //                                                                             * 3 2 1 
+        int X = Random.Range(argFixedDestinationFloor + 1, (_gs.Master_Number_of_Floors * argDifficultyConst));
+        int Y = Mathf.Abs(X - argFixedDestinationFloor);
+
+        int Offset = Random.Range(10, 30);
+
+
+
+        X += Offset;
+        Y += Offset;
+        //do substractiom
+        strToSay = X.ToString() + " - " + Y.ToString() + " = ";
+
+
+
+
+
+        return strToSay;
+    }
+
+
+    string Algebra_SimpleAdditionSubstraction(int argFixedDestinationFloor)
+    {
+        string strToSay = "";
 
         int X = Random.Range(0, (_gs.Master_Number_of_Floors * 2));
-        int Y = Mathf.Abs(X - DestinationFloorNumberZeroBased);
-        if (X >= DestinationFloorNumberZeroBased)
+        int Y = Mathf.Abs(X - argFixedDestinationFloor);
+
+
+
+
+        if (X >= argFixedDestinationFloor)
         {
 
             //do substractiom
@@ -97,80 +223,5 @@ public class StoryTextGenerator : MonoBehaviour
 
 
         return strToSay;
-    }
-
-    string Take_thisThing_to_FloorNumber(string argThisthing, int argDestFloorNum)
-    {
-
-        return "direct " + argThisthing + " to floor " + argDestFloorNum;
-    }
-
-
-    string Take_thisThing_to_FloorNumberRelativeToHere(string argThisthing, int argDestFloorNum, int argCurFloor)
-    {
-        string FloorsUpDown = "";
-        string Floor_S = "Floor ";
-        int Diff = 0;
-
-
-        if (argDestFloorNum > argCurFloor)
-        {
-            FloorsUpDown = " Up ";
-            Diff = argDestFloorNum - argCurFloor;
-        }
-        else
-        {
-            FloorsUpDown = " Down ";
-            Diff = argCurFloor - argDestFloorNum;
-        }
-
-
-
-        if (Diff > 1)
-        {
-            Floor_S = "Floors ";
-        }
-
-
-        return " " + argThisthing + "   " + Diff.ToString() + " " + Floor_S + FloorsUpDown + "from here";
-    }
-
-
-    string Take_this_to_MemorizesDiscoveredGuy(string argThisthing, string argDiscoveredDwellerName)
-    {
-
-        return "  " + argThisthing + " to  " + argDiscoveredDwellerName;
-
-    }
-
-
-    string Take_this_to_FloorNumberRelativeTo_Memorized(string argThisthing, int argDestFloorNum, int argRandMemorizedFloor)
-    {
-        string FloorsUpDown = "";
-        string Floor_S = "Floor ";
-        int Diff = 0;
-
-
-        if (argDestFloorNum > argRandMemorizedFloor)
-        {
-            FloorsUpDown = " Up ";
-            Diff = argDestFloorNum - argRandMemorizedFloor;
-        }
-        else
-        {
-            FloorsUpDown = " Down ";
-            Diff = argRandMemorizedFloor - argDestFloorNum;
-        }
-        Diff--;
-
-        if (Diff > 1)
-        {
-            Floor_S = "Floors ";
-        }
-
-
-
-        return "the dweller " + Diff.ToString() + " " + Floor_S + FloorsUpDown + "from " + _hotelManager.Get_FloorDwellerNAmeOnFloor(argRandMemorizedFloor) + " need this" + argThisthing;
-
     }
 }
