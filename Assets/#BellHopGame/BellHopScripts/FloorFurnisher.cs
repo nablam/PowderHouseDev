@@ -80,7 +80,9 @@ public class FloorFurnisher : MonoBehaviour
     {
         //SetTransDoorStepAsInteraction = GreetingsActionObj.transform;
         BuildRoomType((GameEnums.RoomType)Random.Range(0, 4));
-        // BuildRoomType(GameEnums.RoomType.Bedroom);
+        //  BuildRoomType(GameEnums.RoomType.Bedroom);
+        //  BuildRoomType(GameEnums.RoomType.Livingroom);
+
     }
 
     public void BuildRoomType(GameEnums.RoomType argTypr)
@@ -185,7 +187,7 @@ public class FloorFurnisher : MonoBehaviour
         GreetingsActionObj = Instantiate(Greatings);
         GreetingsAoIC = GreetingsActionObj.GetComponentInParent<InteractionCentral>();
         GreetingsActionObj.transform.parent = Base00.transform;
-        GreetingsActionObj.transform.localPosition = new Vector3(x, 0, y - 1);
+        GreetingsActionObj.transform.localPosition = new Vector3(x + 0.4f, 0, y - 0.85f);
     }
 
     void PlaceDance_All()
@@ -198,7 +200,7 @@ public class FloorFurnisher : MonoBehaviour
         DanceActionObj = Instantiate(StarDance);
         DanceAoIC = DanceActionObj.GetComponentInParent<InteractionCentral>();
         DanceActionObj.transform.parent = Base00.transform;
-        DanceActionObj.transform.localPosition = new Vector3(x, 0, y);
+        DanceActionObj.transform.localPosition = new Vector3(x - 0.25f, 0, y + 0.1f);
     }
 
     void FillLeftRight(int XposOf2x1Action, List<GameObject> OtherObjsOfSameType_size1, List<GameObject> OtherObjsOfSameType_size2)

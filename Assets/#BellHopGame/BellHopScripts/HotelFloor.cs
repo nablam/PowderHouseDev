@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class HotelFloor : MonoBehaviour
 {
@@ -23,6 +24,16 @@ public class HotelFloor : MonoBehaviour
     public Transform TRAN_516Pos;
     //---------------
 
+
+    //--------------------
+    public MeshRenderer REN_WallLeft;
+    public MeshRenderer REN_WallRight;
+    public MeshRenderer REN_Floor;
+    public MeshRenderer REN_Ceiling;
+    public MeshRenderer REN_WallBack;
+    //---------------
+
+
     public GameObject trmpObstcle;
 
     int _floorNumber;
@@ -46,8 +57,32 @@ public class HotelFloor : MonoBehaviour
     InteractionCentral _mainaction;
 
     //bool DidthisFire = false;
-    private void Awake()
+
+
+    public List<Material> FloorMats;
+    public List<Material> Wallmats;
+
+    private void Start()
     {
+        ColorMyWalls();
+
+    }
+
+    void ColorMyWalls()
+    {
+        int Index_1_Rand = Random.Range(0, FloorMats.Count);
+        int Index_2_Rand = Random.Range(0, Wallmats.Count);
+
+        Material Temp_Mat_PTR_FloorAndCeiling = FloorMats[Index_1_Rand];
+        Material Temp_Mat_PTR_Walls = Wallmats[Index_2_Rand];
+
+
+        REN_Ceiling.material = Temp_Mat_PTR_FloorAndCeiling;
+        REN_Floor.material = Temp_Mat_PTR_FloorAndCeiling;
+
+        REN_WallBack.material = Temp_Mat_PTR_Walls;
+        REN_WallLeft.material = Temp_Mat_PTR_Walls;
+        REN_WallRight.material = Temp_Mat_PTR_Walls;
 
 
     }

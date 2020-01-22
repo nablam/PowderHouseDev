@@ -192,7 +192,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2144257308939233077}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.3, z: -4}
+  m_LocalPosition: {x: 0, y: 1.3, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1463362373653592565}
@@ -321,7 +321,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3570459453803183760}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.75, y: 1.75, z: 3.56}
+  m_LocalPosition: {x: -3.75, y: 1.75, z: 2.808}
   m_LocalScale: {x: 0.1, y: 3.5, z: 5}
   m_Children: []
   m_Father: {fileID: 4142859989317787279}
@@ -804,7 +804,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6020543217187607635}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.5, y: 1.75, z: 3.56}
+  m_LocalPosition: {x: 2.5, y: 1.75, z: 2.808}
   m_LocalScale: {x: 0.1, y: 3.5, z: 5}
   m_Children: []
   m_Father: {fileID: 4142859989317787279}
@@ -879,7 +879,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6659044550859907868}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 1.92, y: 0, z: 5.57}
+  m_LocalPosition: {x: 2.164, y: 0, z: 1.139}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5421695700921891113}
@@ -947,10 +947,29 @@ MonoBehaviour:
     type: 3}
   InitialFLoor: {fileID: 5963489865929602478}
   TRAN_516Pos: {fileID: 387458229492510048}
+  REN_WallLeft: {fileID: 4848511441584417515}
+  REN_WallRight: {fileID: 6020543217187607633}
+  REN_Floor: {fileID: 7450883596427799190}
+  REN_Ceiling: {fileID: 6020543217066226728}
+  REN_WallBack: {fileID: 7701241403115932615}
   trmpObstcle: {fileID: 8174622403403484305, guid: 2f46a7e7ecac397469873543b4ed592a,
     type: 3}
   FloorDweller: {fileID: 0}
   floorFurnisherChild: {fileID: 3925817523586008722}
+  FloorMats:
+  - {fileID: 2100000, guid: 13c067ec46ecfbf4b918466bf9d6286b, type: 2}
+  - {fileID: 2100000, guid: e3e49a5f1f5f824488f2fbe91c93fec8, type: 2}
+  - {fileID: 2100000, guid: 6773b885a3d525d4395fb0112c6b453e, type: 2}
+  - {fileID: 2100000, guid: ef3c3a1b4323a0c4fafa004d1efeb45d, type: 2}
+  - {fileID: 2100000, guid: b4b0d51b96b0dbe459f031abe6eecf37, type: 2}
+  - {fileID: 2100000, guid: c4160b0e4e22a874da70fddf14376ff1, type: 2}
+  Wallmats:
+  - {fileID: 2100000, guid: 6ea80e1f313ab2c46b611278db17916c, type: 2}
+  - {fileID: 2100000, guid: 8db5effaecee0b448b34392fce40150f, type: 2}
+  - {fileID: 2100000, guid: 2aac3f596e0c2c64bb650acceac781e3, type: 2}
+  - {fileID: 2100000, guid: 24aa72fc403968e448d429aace170fae, type: 2}
+  - {fileID: 2100000, guid: 5411eec863428d8489cebaac573937a0, type: 2}
+  - {fileID: 2100000, guid: 5ea668a01ce7f0049a5455b91280f230, type: 2}
 --- !u!1 &7236974103388886910
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 ﻿//#define DebugOn
 
+using System.Collections;
 using UnityEngine;
 
 public class CameraPov : MonoBehaviour
@@ -125,14 +126,50 @@ public class CameraPov : MonoBehaviour
 #if DebugOn
                 Debug.Log("Cam pov Startpos");
 #endif
-                _eventManager.Call_CurSequenceChanged(GameEnums.GameSequenceType.GameStart);
-                ElevatorWall.transform.parent = this.transform;
-                // BunnyHop.transform.parent = this.transform;
-                ButtonsCanvas.SetActive(true);
                 ReachedInitialPos = true;
-                // _eventManager.Call_CurSequenceChanged(GameEnums.GameSequenceType.ReachedFloor);
+                StartCoroutine(Rotate2(1.5f, 10f));
+
 
             }
         }
+    }
+    IEnumerator Rotate2(float duration, float argAngle)
+    {
+        Quaternion startRot = transform.rotation;
+        float t = 0.0f;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            transform.rotation = startRot * Quaternion.AngleAxis(t / duration * argAngle, Vector3.up); //or transform.right if you want it to be locally based
+            yield return null;
+        }
+        print("DONE2");
+        ElevatorWall.transform.parent = this.transform;
+        ButtonsCanvas.SetActive(true);
+
+        _eventManager.Call_CurSequenceChanged(GameEnums.GameSequenceType.GameStart);
+        // transform.rotation = startRot;
+    }
+
+
+    IEnumerator RotateForSeconds(float duration, float argAngle)
+    {
+        float startRotation = transform.eulerAngles.y;
+        float endRotation = startRotation + argAngle;
+        float t = 0.0f;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            float yRotation = Mathf.Lerp(startRotation, endRotation, t / duration) % argAngle;
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, yRotation, transform.eulerAngles.z);
+            yield return null;
+
+
+        }
+        print("DONE2");
+        ElevatorWall.transform.parent = this.transform;
+        ButtonsCanvas.SetActive(true);
+
+        _eventManager.Call_CurSequenceChanged(GameEnums.GameSequenceType.GameStart);
     }
 }
