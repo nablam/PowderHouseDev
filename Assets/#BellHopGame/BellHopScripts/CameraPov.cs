@@ -16,7 +16,11 @@ public class CameraPov : MonoBehaviour
         BellHopGameEventManager.OnCurSequenceChanged -= HeardSequenceChanged;
     }
 
-    void HeardSequenceChanged(GameEnums.GameSequenceType argGST) { m_Text_GameFlowState.text = argGST.ToString(); }
+    void HeardSequenceChanged(GameEnums.GameSequenceType argGST)
+    {
+        //m_Text_GameFlowState.text = argGST.ToString();
+        m_Text_GameFlowState.text = "";
+    }
     #endregion
 
 

@@ -62,12 +62,13 @@ public class GameFlowManager : MonoBehaviour
                 _curDeliveryItem = _curDweller.GetMyItemManager().GetItem_LR(GameEnums.AnimalCharacterHands.Right);
                 _ContextItem = _curDeliveryItem;
                 _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.DwellerToss_Long);
-                _cam.m_Text_Game.text = _StoryTextGen.SimpleRiddle_takethisto(_ContextItem, _floorsmngr.Get_curFloor().FloorNumber, _sessionMNGR.GetFloorsVisitedINThisSession());
+
+                _cam.m_Text_Game.text = "Hello !";
+                //_cam.m_Text_Game.text = _StoryTextGen.SimpleRiddle_takethisto(_ContextItem, _floorsmngr.Get_curFloor().FloorNumber, _sessionMNGR.GetFloorsVisitedINThisSession());
 
                 _floorsmngr.HideShowAllBarriers(false);
                 _curDweller.IsCurentFloorAnimal = true;
                 _seqMNGR.StartSequence();
-                //_ElevatorDoors.OpenDoors();
 
 
                 break;
@@ -77,12 +78,7 @@ public class GameFlowManager : MonoBehaviour
                 print("reachedfloor");
 #endif
                 _floorsmngr.HideShowAllBarriers(false);
-
                 CheckFloorStatusUponArrival();
-
-
-
-
                 break;
 
             case GameEnums.GameSequenceType.DoorsOppned:
@@ -90,10 +86,6 @@ public class GameFlowManager : MonoBehaviour
                 if (GameSettings.Instance.ShowDebugs)
                     print("doorsOpened");
 #endif
-                // BellHopGameEventManager.Instance.Call_SimpleTaskEnded(); //this will kick in the first task
-
-
-
                 break;
 
 
@@ -102,8 +94,6 @@ public class GameFlowManager : MonoBehaviour
                 print("action floor finished");
 #endif
                 break;
-
-
 
             case GameEnums.GameSequenceType.PlayerInputs:
                 //    _ContextItem = _bellHop.Get_CurHeldObj();
@@ -196,7 +186,7 @@ public class GameFlowManager : MonoBehaviour
             {
                 _sessionMNGR.AddFloorVisitFloorsVisitedINThisSession(_floorsmngr.Get_curFloor().FloorNumber);
                 _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.Badfloor_short);
-                _cam.m_Text_Game.text = "NO " + _StoryTextGen.SimpleRiddle_takethisto_WithAlgebra(_ContextItem, _floorsmngr.Get_curFloor().FloorNumber, _sessionMNGR.GetFloorsVisitedINThisSession());
+                _cam.m_Text_Game.text = " " + _StoryTextGen.SimpleRiddle_takethisto_WithAlgebra(_ContextItem, _floorsmngr.Get_curFloor().FloorNumber, _sessionMNGR.GetFloorsVisitedINThisSession());
             }
             //  BellHopGameEventManager.Instance.Call_SimpleTaskEnded(); //this will kick in the first task
             // _ElevatorDoors.OpenDoors();

@@ -17,13 +17,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/FurnitureLivingRoom.unity
     guid: 9ecb880a4d768d44f80abd8c46d1bcd9
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/DeliveryStart.unity
     guid: a33aa7504156724489bc93eef31ec29c
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/DeliveryGame.unity
     guid: 17eb268a1516cf44da9a93a38d741a46
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/LinkScene.unity
     guid: 3fe707c40c10e3d42ab561de18a91d3b
   m_configObjects: {}

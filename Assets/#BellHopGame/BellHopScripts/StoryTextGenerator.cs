@@ -8,6 +8,8 @@ public class StoryTextGenerator : MonoBehaviour
 
     int IncreaseDiffafter3 = 3;
 
+
+
     public void InitMyRefs(HotelFloorsManager arghotemanager) { _hotelManager = arghotemanager; }
 
 
@@ -75,6 +77,8 @@ public class StoryTextGenerator : MonoBehaviour
         DestinationFloorNumberZeroBased++;
         int RandomFloorDiscovered = _hotelManager.Get_Random_FloorDiscovered();
 
+        Debug.Log("randFloor " + RandomFloorDiscovered);
+
         int X = Random.Range(0, (_gs.Master_Number_of_Floors * 2));
         int Y = Mathf.Abs(X - DestinationFloorNumberZeroBased);
         if (X >= DestinationFloorNumberZeroBased)
@@ -91,35 +95,6 @@ public class StoryTextGenerator : MonoBehaviour
         }
 
 
-
-
-
-
-
-        //if (numberofWronsForThisSession == 0)
-        //{
-        //    if (_hotelManager.DiscoveredFloors.Count <= 1)
-        //    {
-        //        //we jsut started 
-        //        strToSay = "a_" + Take_thisThing_to_FloorNumberRelativeToHere(ItemNAme, DestinationFloorNumberZeroBased, argCurfloor);
-
-        //    }
-        //    else
-        //    {
-        //        strToSay = "b_" + Take_thisThing_to_FloorNumberRelativeToHere(ItemNAme, DestinationFloorNumberZeroBased, argCurfloor);
-
-        //    }
-        //}
-        //else
-        //if (numberofWronsForThisSession > 0 && numberofWronsForThisSession < 2)
-        //{
-        //    strToSay = "c_" + Take_this_to_FloorNumberRelativeTo_Memorized(ItemNAme, DestinationFloorNumberZeroBased, RandomFloorDiscovered);
-        //}
-        //else if (numberofWronsForThisSession >= 2)
-        //{
-        //    strToSay = "d_" + Take_thisThing_to_FloorNumber(ItemNAme, argDeliveryItem.GetDestFloorDweller().MyFinalResidenceFloorNumber);
-
-        //}
 
         return strToSay;
     }

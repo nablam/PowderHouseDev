@@ -27,7 +27,16 @@ public class HotelFloorsManager : MonoBehaviour
             DiscoveredFloors.Add(x);
         camPov.SetNextPos(_curfloor.BaseCamPos.transform);
 
+        Debug.Log("session ");
+        foreach (int d in DiscoveredFloors)
+        {
+            Debug.Log("df_ " + d);
+        }
+        Debug.Log("xxxxxxxxxx");
     }
+
+
+
     #endregion
     public void StartMovingCam() { camPov.StartMovingCameraDown(); }
     public CameraPov camPov;
