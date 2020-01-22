@@ -70,21 +70,12 @@ public class NumPadCTRL : MonoBehaviour
         }
         if (argnum >= _gs.Master_Number_of_Floors) return;
 
-
-        // _gs.StartGoingToFloorOnButtonClicked(argnum);
-
-
         BellHopGameEventManager.Instance.Call_ButtonPressed(argnum);
-
-
-
-        ;// Debug.Log("pressed " + argnum);
 
     }
     public void UnTouch(int argnum)
     {
         Debug.Log("UNpressed " + argnum);
-
     }
     public void ClearArrows()
     {

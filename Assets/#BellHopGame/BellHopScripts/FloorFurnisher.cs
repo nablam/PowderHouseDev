@@ -116,7 +116,7 @@ public class FloorFurnisher : MonoBehaviour
     {
         _roomtypeToBuild = GameEnums.RoomType.Livingroom;
         //allow couchspace
-        PlaceActionObj_andFillRow(Random.Range(2, Width), Height - 1, Livingroom2x1Action, Livingroom1x1, Livingroom2x1);
+        PlaceActionObj_andFillRow(Random.Range(3, Width), Height - 1, Livingroom2x1Action, Livingroom1x1, Livingroom2x1);
     }
 
     void Build_Lab()

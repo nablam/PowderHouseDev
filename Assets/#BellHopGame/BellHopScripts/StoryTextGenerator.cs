@@ -8,7 +8,9 @@ public class StoryTextGenerator : MonoBehaviour
 
     int IncreaseDiffafter3 = 3;
 
-
+    int Low_wrongs = 1;
+    int Med_wrongs = 3;
+    int HIGH_wrongs = 5;
 
     public void InitMyRefs(HotelFloorsManager arghotemanager) { _hotelManager = arghotemanager; }
 
@@ -159,25 +161,40 @@ public class StoryTextGenerator : MonoBehaviour
         int RandomFloorDiscovered = _hotelManager.Get_Random_FloorDiscovered();
 
         Debug.Log("wrongs: " + numberofWronsForThisSession);
-        if (numberofWronsForThisSession > 1)
+        if (numberofWronsForThisSession > HIGH_wrongs)
         {
 
-            strToSay = Algebra_SimpleAdditionSubstraction(DestinationFloorNumberZeroBased);
+            strToSay = "just " + DestinationFloorNumberZeroBased;
+        }
+        else
+        if (numberofWronsForThisSession > Med_wrongs)
+        {
+
+            strToSay = "Go to " + DestinationFloorNumberZeroBased;
+        }
+        else
+        if (numberofWronsForThisSession > Low_wrongs)
+        {
+
+            strToSay = Algebra_SimpleAdditionSubstraction(DestinationFloorNumberZeroBased, numberofWronsForThisSession);
         }
         else
         {
-            strToSay = Algebra_BigSubstraction(DestinationFloorNumberZeroBased, 3);
+            strToSay = Algebra_BigSubstraction(DestinationFloorNumberZeroBased, numberofWronsForThisSession);
         }
 
         return strToSay;
     }
 
 
-    string Algebra_BigSubstraction(int argFixedDestinationFloor, int argDifficultyConst)
+    string Algebra_BigSubstraction(int argFixedDestinationFloor, int argDifficultyConst) // 0 or 1 or 2
     {
         string strToSay = "";
+
+        int difficultyAdjusted = 2 - argDifficultyConst;
+        if (difficultyAdjusted <= 0) difficultyAdjusted = 1;
         //                                                                             * 3 2 1 
-        int X = Random.Range(argFixedDestinationFloor + 1, (_gs.Master_Number_of_Floors * argDifficultyConst));
+        int X = Random.Range(argFixedDestinationFloor + 1, (_gs.Master_Number_of_Floors * difficultyAdjusted));
         int Y = Mathf.Abs(X - argFixedDestinationFloor);
 
         int Offset = Random.Range(10, 30);
@@ -197,11 +214,15 @@ public class StoryTextGenerator : MonoBehaviour
     }
 
 
-    string Algebra_SimpleAdditionSubstraction(int argFixedDestinationFloor)
+    string Algebra_SimpleAdditionSubstraction(int argFixedDestinationFloor, int argDifficultyConst) // 0 or 1 or 2
     {
         string strToSay = "";
 
-        int X = Random.Range(0, (_gs.Master_Number_of_Floors * 2));
+        int difficultyAdjusted = Med_wrongs - argDifficultyConst;
+        if (difficultyAdjusted <= 0) difficultyAdjusted = 1;
+
+
+        int X = Random.Range(0, (_gs.Master_Number_of_Floors * difficultyAdjusted));
         int Y = Mathf.Abs(X - argFixedDestinationFloor);
 
 
