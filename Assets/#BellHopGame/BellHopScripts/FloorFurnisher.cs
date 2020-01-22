@@ -5,6 +5,8 @@ public class FloorFurnisher : MonoBehaviour
 {
     public GameObject Greatings;
     public GameObject StarDance;
+    public GameObject SpawnStar;
+    public Transform SpawnTransTobeManuallyMoved;
     public GameObject cornershelf_L;
     public GameObject cornershelf_R;
     public List<GameObject> StandaloneActions2x1 = new List<GameObject>();
@@ -47,8 +49,15 @@ public class FloorFurnisher : MonoBehaviour
     public InteractionCentral GetDanceAction() { return this.DanceAoIC; }
     GameObject GreetingsActionObj;
     InteractionCentral GreetingsAoIC;
-
     public InteractionCentral GetGreetingsAction() { return this.GreetingsAoIC; }
+
+    GameObject SpawnActionObj;
+    InteractionCentral SpawnAoIC;
+    public InteractionCentral SpawnAction() { return this.SpawnAoIC; }
+
+
+
+
 
     const int Width = 6;
     const int Height = 4;
@@ -79,9 +88,9 @@ public class FloorFurnisher : MonoBehaviour
     public void Build_rand_RoomType()
     {
         //SetTransDoorStepAsInteraction = GreetingsActionObj.transform;
-        BuildRoomType((GameEnums.RoomType)Random.Range(0, 4));
+        //BuildRoomType((GameEnums.RoomType)Random.Range(0, 4));
         //  BuildRoomType(GameEnums.RoomType.Bedroom);
-        //  BuildRoomType(GameEnums.RoomType.Livingroom);
+        BuildRoomType(GameEnums.RoomType.Livingroom);
 
     }
 
@@ -89,6 +98,7 @@ public class FloorFurnisher : MonoBehaviour
     {
 
         PlaceDance_All();
+        PlaceSpawns_All();
         PlaceGreetings_All(2);
 
         if (argTypr == GameEnums.RoomType.Kitchen) { BuildKichen(); }
@@ -202,6 +212,21 @@ public class FloorFurnisher : MonoBehaviour
         DanceActionObj.transform.parent = Base00.transform;
         DanceActionObj.transform.localPosition = new Vector3(x - 0.25f, 0, y + 0.1f);
     }
+
+    void PlaceSpawns_All()
+    {
+        int x = Width - 1;
+        int y = 1;
+
+        blueprint[x, y] = true; //reserves a path quad to access the dang spot
+
+        SpawnActionObj = Instantiate(SpawnStar);
+        SpawnAoIC = SpawnActionObj.GetComponentInParent<InteractionCentral>();
+        SpawnActionObj.transform.parent = Base00.transform;
+        SpawnActionObj.transform.localPosition = new Vector3(x + 0.21f, 0, y + 0.01f);
+    }
+
+
 
     void FillLeftRight(int XposOf2x1Action, List<GameObject> OtherObjsOfSameType_size1, List<GameObject> OtherObjsOfSameType_size2)
     {

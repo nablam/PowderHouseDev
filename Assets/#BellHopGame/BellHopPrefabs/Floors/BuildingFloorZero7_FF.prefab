@@ -1517,6 +1517,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5270986458269639608, guid: 18cecbe3a7d45104fbb9a629b6d80be4,
         type: 3}
+      propertyPath: SpawnStar
+      value: 
+      objectReference: {fileID: 882789036057973492, guid: 7349342c875ec824db1d4498d3bb0cde,
+        type: 3}
+    - target: {fileID: 5270986458269639608, guid: 18cecbe3a7d45104fbb9a629b6d80be4,
+        type: 3}
+      propertyPath: SpawnTransTobeManuallyMoved
+      value: 
+      objectReference: {fileID: 4239599377618091753}
+    - target: {fileID: 5270986458269639608, guid: 18cecbe3a7d45104fbb9a629b6d80be4,
+        type: 3}
       propertyPath: Base00
       value: 
       objectReference: {fileID: 4063939924701198199}
