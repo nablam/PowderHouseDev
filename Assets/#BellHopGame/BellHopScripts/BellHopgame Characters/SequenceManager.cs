@@ -278,10 +278,12 @@ public class SequenceManager : MonoBehaviour
 
 
         Sequence_U_goodfloor_fromSpaw = new List<ITaskAction>   {
-          I_D_showRight,
                     W_D_SpawnPos,
             F_D_SpawnLookat,
+           I_D_showRight,
             O_DoorsNow,
+             M_D_ExchandePos,
+
             F_B_Dweller,
             F_D_Bell,
             A_D_Hello,
