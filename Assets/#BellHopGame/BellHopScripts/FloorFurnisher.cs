@@ -53,7 +53,7 @@ public class FloorFurnisher : MonoBehaviour
 
     GameObject SpawnActionObj;
     InteractionCentral SpawnAoIC;
-    public InteractionCentral SpawnAction() { return this.SpawnAoIC; }
+    public InteractionCentral GetSpawnAction() { return this.SpawnAoIC; }
 
 
 

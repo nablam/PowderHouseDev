@@ -48,14 +48,15 @@ public class HotelFloor : MonoBehaviour
     // public bool DeliveryItemStillOnFloor { get => _deliveryItemStillOnFloor; set => _deliveryItemStillOnFloor = value; }
     public bool ReceivedItem { get => _receivedItem; set => _receivedItem = value; }
 
-    public InteractionCentral Greetings { get => _greetings; set => _greetings = value; }
-    public InteractionCentral Dance { get => _dance; set => _dance = value; }
-    public InteractionCentral Mainaction { get => _mainaction; set => _mainaction = value; }
+    public InteractionCentral Greetings_HF { get => _greetings; set => _greetings = value; }
+    public InteractionCentral Dance_HF { get => _dance; set => _dance = value; }
+    public InteractionCentral Mainaction_HF { get => _mainaction; set => _mainaction = value; }
+    public InteractionCentral SpawnPoint_HF { get => _spawnp; set => _spawnp = value; }
 
     InteractionCentral _greetings;
     InteractionCentral _dance;
     InteractionCentral _mainaction;
-
+    InteractionCentral _spawnp;
     //bool DidthisFire = false;
 
 
@@ -91,11 +92,12 @@ public class HotelFloor : MonoBehaviour
     {
         floorFurnisherChild.Build_rand_RoomType();
 
-        Greetings = floorFurnisherChild.GetGreetingsAction();
-        Dance = floorFurnisherChild.GetDanceAction();
-        Mainaction = floorFurnisherChild.GetMainAction();
+        Greetings_HF = floorFurnisherChild.GetGreetingsAction();
+        Dance_HF = floorFurnisherChild.GetDanceAction();
+        Mainaction_HF = floorFurnisherChild.GetMainAction();
+        SpawnPoint_HF = floorFurnisherChild.GetSpawnAction();
         floorFurnisherChild.PlaceCeilingLightHere(TRAN_CeilingLightPos);
-        floorFurnisherChild.PlaceRug(Dance.transform);
+        floorFurnisherChild.PlaceRug(Dance_HF.transform);
 
     }
 
@@ -125,7 +127,7 @@ public class HotelFloor : MonoBehaviour
 
         FloorDweller.ActivateAgent();
 
-        FloorDweller.Warp(Greetings.GetActionPos());
+        FloorDweller.Warp(Greetings_HF.GetActionPos());
     }
 
     public void SetReceived()

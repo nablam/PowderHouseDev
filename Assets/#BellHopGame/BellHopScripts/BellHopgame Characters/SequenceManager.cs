@@ -12,6 +12,7 @@ public class SequenceManager : MonoBehaviour
 
     public InteractionCentral _exhangeI;
     public InteractionCentral _danceI;
+    public InteractionCentral _spawnI;
     public Transform _curCamPlace;
     public InteractionCentral _bedI;
     public InteractionCentral _couchI;
@@ -115,9 +116,10 @@ public class SequenceManager : MonoBehaviour
     {
         _Bellhop = argBEllHop;
         _Dweller = argHF.FloorDweller;
-        _exhangeI = argHF.Greetings;
-        _danceI = argHF.Dance;
-        _couchI = argHF.Mainaction;
+        _exhangeI = argHF.Greetings_HF;
+        _danceI = argHF.Dance_HF;
+        _spawnI = argHF.SpawnPoint_HF;
+        _couchI = argHF.Mainaction_HF;
 
 
         _Bellhop.ActivateAgent();
