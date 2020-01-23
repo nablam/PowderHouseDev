@@ -10,12 +10,14 @@ public class SequenceManager : MonoBehaviour
     public AnimalCentralCommand _Dweller;
     public DeliveryItem _theItem;
 
-    public InteractionCentral _exhangeI;
-    public InteractionCentral _danceI;
-    public Transform _curCamPlace;
-    public InteractionCentral _bedI;
-    public InteractionCentral _couchI;
-    public InteractionCentral _BunnyPos;
+    InteractionCentral _exhangeI;
+    InteractionCentral _danceI;
+    InteractionCentral _spawnI;
+    Transform _outDoorsPlace;
+    InteractionCentral _bedI;
+    InteractionCentral _mainRoomActionI;
+    InteractionCentral _BunnyPos;
+
 
 
 
@@ -23,18 +25,25 @@ public class SequenceManager : MonoBehaviour
 
 
     TA_DwellerWarp W_D_ExchandePos;
-    TA_DwellerWarp W_D_RoomPos;
+    TA_DwellerWarp W_D_MAinRoomActionPos;
     TA_DwellerWarp W_D_DancePos;
 
+    TA_DwellerWarp W_D_SpawnPos;
+
     TA_DwellerMoveTo M_D_ExchandePos;
-    TA_DwellerMoveTo M_D_RoomPos;
+    TA_DwellerMoveTo M_D_MainRoomActionPos;
     TA_DwellerMoveTo M_D_DancePos;
+
+    TA_DwellerMoveTo M_D_Outdoors;
 
     TA_DwellerFace F_D_Cam;
     TA_DwellerFace F_D_Bell;
-    TA_DwellerFace F_D_RoomLookat;
+    TA_DwellerFace F_D_MainRoomActionLookat;
     TA_DwellerFace F_B_Dweller;
     TA_DwellerFace F_B_Cam;
+
+    TA_DwellerFace F_D_SpawnLookat;
+
 
     TA_DwellerAnimate A_D_Wave1;
     TA_DwellerAnimate A_D_Wave2;
@@ -42,7 +51,7 @@ public class SequenceManager : MonoBehaviour
     TA_DwellerAnimate A_D_No;
     TA_DwellerAnimate A_D_Good;
     TA_DwellerAnimate A_B_Good;
-    TA_DwellerAnimate A_D_RoomAction;
+    TA_DwellerAnimate A_D_MainRoomAction;
     TA_DwellerAnimate A_D_Toss;
     //TA_DwellerAnimate A_D_Catch1;//NOT NEEDED , the coordinator runs it
     TA_DwellerAnimate A_B_Toss;
@@ -51,27 +60,42 @@ public class SequenceManager : MonoBehaviour
 
     TA_InstantTaskHandShowHide I_D_showRight;
     TA_InstantTaskHandShowHide I_D_HideLeft;
-
+    TA_TimedOpenDoor O_DoorsNow;
+    TA_MoveOnTrig T_moveOn;
+    TA_GameOver T_GG;
 
     List<ITaskAction> Sequence_SimpleGreet;
 
 
-    List<ITaskAction> Sequence_ShortDwellerToss;
+    List<ITaskAction> Sequence_Exc_DwellerToss1way_end;
 
-    List<ITaskAction> Sequence_Short_goodfloor;
+    List<ITaskAction> Sequence_U_Long_goodfloor;
+    List<ITaskAction> Sequence_U_short_goodfloor;
+    List<ITaskAction> Sequence_U_goodfloor_fromSpaw;
 
+    List<ITaskAction> Sequence_WrongFloor_Short;
 
-    List<ITaskAction> Sequence_WrongFloor;
+    List<ITaskAction> Sequence_WrongFloorLONG;
+    List<ITaskAction> Sequence_U_WrongFloorLONG_walk;
     ITaskAction _DwellerAnimate_NO;
 
-    List<ITaskAction> Sequence_MovesAndAnims;
+    List<ITaskAction> Sequence_U_FIRST;
 
-    List<ITaskAction> Sequence_BellPulls;
+
+
+
+
+    List<ITaskAction> Sequence_U_GameOver; //also is the endcallller
 
     List<ITaskAction> Sequence_DwellerPulls;
 
     BHG_TaskSystem TaskSys;
 
+    //these 2 will point to different task lists depending on on wrong answers
+    List<ITaskAction> REF_correct;
+    List<ITaskAction> REF_Wrong;
+
+    bool sequencStarted = false;
     private void OnEnable()
     {
         BellHopGameEventManager.OnSimpleTaskEnded += HeardTaskEnded;
@@ -89,53 +113,66 @@ public class SequenceManager : MonoBehaviour
         if (task != null)
             task.RunME();
         else
-        {
-            //no more tasks 
-            BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameSequenceType.PlayerInputs);
+        {//no more tasks 
+            if (sequencStarted)
+            {
+
+                BellHopGameEventManager.Instance.Call_CurSequenceChanged(GameSequenceType.PlayerInputs);
+            }
+
+
+            sequencStarted = false;
         }
     }
 
-    public void InitAllPointsAccordingToCurFloor(HotelFloor argHF, AnimalCentralCommand argBEllHop, SequenceType argSequenceType)
+    public void StartSequence()
+    {
+        sequencStarted = true;
+
+        HeardTaskEnded();
+    }
+
+    public void InitAllPointsAccordingToCurFloor(HotelFloor argHF, AnimalCentralCommand argBEllHop, SequenceType argSequenceType, int argWrongAnswers)
     {
         _Bellhop = argBEllHop;
         _Dweller = argHF.FloorDweller;
-        _exhangeI = argHF.Greetings;
-        _danceI = argHF.Dance;
-        _couchI = argHF.Mainaction;
-
+        _exhangeI = argHF.Greetings_HF;
+        _danceI = argHF.Dance_HF;
+        _spawnI = argHF.SpawnPoint_HF;
+        _mainRoomActionI = argHF.Mainaction_HF;
+        _outDoorsPlace = argHF.OutDoorsPoint.transform;
 
         _Bellhop.ActivateAgent();
         //_Dweller.ActivateAgent();
 
-        Make_newSystem(argSequenceType);
+        Make_newSystem(argSequenceType, argWrongAnswers);
     }
 
 
     int cntx = 0;
-    void Make_newSystem(SequenceType argSequenceType)
+    void Make_newSystem(SequenceType argSequenceType, int argwrons)
     {
-
+        BellHopGameEventManager.Instance.Call_DebugThis("w=" + argwrons.ToString() + " " + argSequenceType.ToString());
 
 
         TaskSys = new BHG_TaskSystem();
         _gs = GameSettings.Instance;
 
         W_D_ExchandePos = new TA_DwellerWarp(_Dweller, _exhangeI.GetActionPos());
-        W_D_RoomPos = new TA_DwellerWarp(_Dweller, _couchI.GetActionPos());
+        W_D_MAinRoomActionPos = new TA_DwellerWarp(_Dweller, _mainRoomActionI.GetActionPos());
         W_D_DancePos = new TA_DwellerWarp(_Dweller, _danceI.GetActionPos());
-
+        W_D_SpawnPos = new TA_DwellerWarp(_Dweller, _spawnI.GetActionPos());
 
         M_D_ExchandePos = new TA_DwellerMoveTo(_Dweller, _exhangeI.GetActionPos());
-        M_D_RoomPos = new TA_DwellerMoveTo(_Dweller, _couchI.GetActionPos());
+        M_D_MainRoomActionPos = new TA_DwellerMoveTo(_Dweller, _mainRoomActionI.GetActionPos());
         M_D_DancePos = new TA_DwellerMoveTo(_Dweller, _danceI.GetActionPos());
-
-
+        M_D_Outdoors = new TA_DwellerMoveTo(_Dweller, _outDoorsPlace);
         F_D_Cam = new TA_DwellerFace(_Dweller, Camera.main.transform);
         F_B_Cam = new TA_DwellerFace(_Bellhop, Camera.main.transform);
         F_D_Bell = new TA_DwellerFace(_Dweller, _Bellhop.transform);
-        F_D_RoomLookat = new TA_DwellerFace(_Dweller, _couchI.GetLookTarg());
+        F_D_MainRoomActionLookat = new TA_DwellerFace(_Dweller, _mainRoomActionI.GetLookTarg());
         F_B_Dweller = new TA_DwellerFace(_Bellhop, _Dweller.transform);
-
+        F_D_SpawnLookat = new TA_DwellerFace(_Dweller, _spawnI.GetLookTarg());
         //dweller pulls to his left AKA good delivery 
         P_B_2R = new TA_DwellerPullCoord_2R(_Bellhop, _Dweller);
         P_D_2L = new TA_DwellerPullCoord_2L(_Dweller, _Bellhop);
@@ -147,7 +184,7 @@ public class SequenceManager : MonoBehaviour
         A_D_No = new TA_DwellerAnimate(_Dweller, _gs.No);
         A_D_Good = new TA_DwellerAnimate(_Dweller, _gs.Good);
         A_B_Good = new TA_DwellerAnimate(_Bellhop, _gs.Good);
-        A_D_RoomAction = new TA_DwellerAnimate(_Dweller, _couchI.argActionString);
+        A_D_MainRoomAction = new TA_DwellerAnimate(_Dweller, _mainRoomActionI.argActionString);
         A_D_Toss = new TA_DwellerAnimate(_Dweller, _gs.Toss);
         A_B_Toss = new TA_DwellerAnimate(_Bellhop, _gs.Toss);
         I_D_showRight = new TA_InstantTaskHandShowHide(_Dweller, GameEnums.AnimalCharacterHands.Right, true);
@@ -155,6 +192,9 @@ public class SequenceManager : MonoBehaviour
 
         F_B_Cam = new TA_DwellerFace(_Bellhop, Camera.main.transform);
 
+        O_DoorsNow = new TA_TimedOpenDoor();
+        T_moveOn = new TA_MoveOnTrig(_Dweller, 4f);
+        T_GG = new TA_GameOver();
         Sequence_SimpleGreet = new List<ITaskAction>
         {
             W_D_ExchandePos,
@@ -173,21 +213,33 @@ public class SequenceManager : MonoBehaviour
             F_B_Cam
         };
 
-        Sequence_ShortDwellerToss = new List<ITaskAction>   {
-            W_D_ExchandePos,
-                M_D_ExchandePos,
-            F_B_Dweller,
+
+        Sequence_U_FIRST = new List<ITaskAction>   {
+            W_D_MAinRoomActionPos,
+            T_moveOn,
+            F_D_MainRoomActionLookat,
+            O_DoorsNow,
+            A_D_MainRoomAction,
+            F_D_Bell,
+            M_D_ExchandePos,
+
             I_D_showRight,
             F_D_Bell,
+            F_B_Dweller,
             A_D_Toss, //needed for pull mirorred character
             P_B_2R,
             F_D_Cam,
             F_B_Cam,
         };
-
-        Sequence_Short_goodfloor = new List<ITaskAction>   {
-            W_D_DancePos,
-            M_D_ExchandePos,
+        Sequence_U_Long_goodfloor = new List<ITaskAction>   {
+          W_D_MAinRoomActionPos,
+          T_moveOn,
+          F_D_MainRoomActionLookat,
+          O_DoorsNow,
+          A_D_MainRoomAction,
+          F_D_Bell,
+          M_D_ExchandePos,
+          I_D_showRight,
             F_B_Dweller,
             F_D_Bell,
             A_D_Hello,
@@ -200,11 +252,106 @@ public class SequenceManager : MonoBehaviour
             P_B_2R,
             F_B_Cam,
 
+
         };
 
-        Sequence_WrongFloor = new List<ITaskAction>   {
+        Sequence_U_short_goodfloor = new List<ITaskAction>   {
+            W_D_ExchandePos,
+            I_D_showRight,
+            O_DoorsNow,
+            F_B_Dweller,
+            F_D_Bell,
+            M_D_ExchandePos,
+            F_B_Dweller,
+            F_D_Bell,
+            A_B_Toss, //needed for pull mirorred character
+            P_D_2L,
+            A_D_Good,
+            I_D_HideLeft,
+            I_D_showRight,
+            A_D_Toss,
+            P_B_2R,
+            F_B_Cam,
+
+
+        };
+
+
+        Sequence_U_goodfloor_fromSpaw = new List<ITaskAction>   {
+                    W_D_SpawnPos,
+            F_D_SpawnLookat,
+           I_D_showRight,
+            O_DoorsNow,
+             M_D_ExchandePos,
+
+            F_B_Dweller,
+            F_D_Bell,
+            A_D_Hello,
+            A_B_Toss, //needed for pull mirorred character
+            P_D_2L,
+            A_D_Good,
+            I_D_HideLeft,
+            I_D_showRight,
+            A_D_Toss,
+            P_B_2R,
+            F_B_Cam,
+
+
+        };
+
+        Sequence_U_GameOver = new List<ITaskAction>   {
+            W_D_MAinRoomActionPos,
+            T_moveOn,
+            F_D_MainRoomActionLookat,
+              O_DoorsNow,
+            A_D_MainRoomAction, //is running right after roomlookat , and hopes to get exited on time by O_DOOrnow
+            F_D_Bell,
+            A_D_Hello,
+            A_B_Toss, //needed for pull mirorred character
+            
+            A_D_Good,
+            A_B_Good,
+            I_D_HideLeft,
+
+
+
+            F_B_Cam,
+            T_GG,
+
+        };
+
+        Sequence_U_WrongFloorLONG_walk = new List<ITaskAction>   {
+            W_D_SpawnPos,
+            F_D_SpawnLookat,
+            O_DoorsNow,
+            M_D_Outdoors,
+        //    M_D_ExchandePos,
+            F_B_Dweller,
+            F_D_Bell,
+            A_D_No,
+
+            F_B_Cam,
+             M_D_ExchandePos,
+             F_D_Cam,
+        };
+
+
+        Sequence_Exc_DwellerToss1way_end = new List<ITaskAction>   {
+            W_D_ExchandePos,
+            O_DoorsNow,
+            M_D_ExchandePos,
+            F_D_Bell,
+            F_B_Dweller,
+            I_D_showRight,
+            A_D_Toss, //needed for pull mirorred character
+            P_B_2R,
+            F_D_Cam,
+            F_B_Cam,
+        };
+        Sequence_WrongFloor_Short = new List<ITaskAction>   {
             W_D_ExchandePos,
 
+            O_DoorsNow,
             F_B_Dweller,
             F_D_Bell,
             A_D_No,
@@ -212,21 +359,76 @@ public class SequenceManager : MonoBehaviour
             F_B_Cam,
 
         };
+        Sequence_WrongFloorLONG = new List<ITaskAction>   {
+            //W_D_SpawnPos,
+            //F_D_SpawnLookat,
+
+            //O_DoorsNow,
+            //M_D_ExchandePos,
+            //F_B_Dweller,
+            //F_D_Bell,
+            //A_D_No,
+
+            F_B_Cam,
+
+        };
 
 
-        if (argSequenceType == SequenceType.DwellerToss_short)
+
+
+        if (argwrons == 0)
         {
-            Setup_Tasksystem(Sequence_ShortDwellerToss);
+            REF_correct = Sequence_U_short_goodfloor;
+            REF_Wrong = Sequence_WrongFloor_Short;
+        }
+        else
+
+        if (argwrons == 1)
+        {
+            REF_correct = Sequence_U_Long_goodfloor;
+            REF_Wrong = Sequence_U_WrongFloorLONG_walk;
+        }
+        else
+        {
+            REF_correct = Sequence_U_goodfloor_fromSpaw;
+            REF_Wrong = Sequence_U_WrongFloorLONG_walk;
+        }
+
+
+
+
+
+
+
+
+
+
+
+        if (argSequenceType == SequenceType.sq_FIRST)
+        {
+            Setup_Tasksystem(Sequence_U_FIRST);
 
         }
         else
-             if (argSequenceType == SequenceType.GoodFloor_short)
+
+             if (argSequenceType == SequenceType.sq_correct)
         {
-            Setup_Tasksystem(Sequence_Short_goodfloor);
+            Setup_Tasksystem(REF_correct);
+        }
+        else
+             if (argSequenceType == SequenceType.sq_GameOver)
+        {
+            Setup_Tasksystem(Sequence_U_GameOver);
+        }
+        else
+
+        if (argSequenceType == SequenceType.sq_wrong)
+        {
+            Setup_Tasksystem(REF_Wrong);
         }
         else
         {
-            Setup_Tasksystem(Sequence_WrongFloor);
+            Setup_Tasksystem(Sequence_WrongFloor_Short);
         }
 
 

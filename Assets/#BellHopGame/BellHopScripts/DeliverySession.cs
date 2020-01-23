@@ -4,12 +4,18 @@
 /// 
 /// new delivery session starts when bunny owns a delivery item 
 /// 
-/// we must record the floor on which delivery started. these lists should look like this 0 1 2     2 4     4 0 1 3       3 0  
+/// we must record the floor on which delivery started. these lists should look like this 0 1 2     2 4     4 0 1 3       3 0
+/// 
+/// THE LAST FLOOR VISITED IS OBVIOUSLY THE CORRECT FLOOR , so counting session.floorvisited should tell us how many wrong floors
 /// 
 /// </summary>
 
 public class DeliverySession
 {
+
+    int _id;
+    public int Id { get => _id; set => _id = value; }
+
 
     DeliveryItem _deliveryItem;
     public DeliveryItem DeliveryItem { get => _deliveryItem; set => _deliveryItem = value; }
@@ -22,12 +28,16 @@ public class DeliverySession
 
     int _correctDestinationFloorNumver;
 
-    public DeliverySession(DeliveryItem argdeliveryItem)
+    int _wrongAnswers;
+    public int WrongAnswers { get => _wrongAnswers; private set => _wrongAnswers = value; }
+    public DeliverySession(DeliveryItem argdeliveryItem, int argID)
     {
+        _id = argID;
         _deliveryItem = argdeliveryItem;
         _floorsVisited = new List<int>();
         _dwellerOwner = argdeliveryItem.GetDestFloorDweller();
         _correctDestinationFloorNumver = _dwellerOwner.MyFinalResidenceFloorNumber;
+        _wrongAnswers = 0;
     }
 
     public int CorrectDestinationFloorNumver { get => _correctDestinationFloorNumver; private set => _correctDestinationFloorNumver = value; }
@@ -35,6 +45,13 @@ public class DeliverySession
 
     public void AddFloorVisited(int argFloorVisited)
     {
-        _floorsVisited.Add(argFloorVisited);
+
+        if (!_floorsVisited.Contains(argFloorVisited))
+            _floorsVisited.Add(argFloorVisited);
+    }
+
+    public void IncrementWrongAnswers()
+    {
+        _wrongAnswers++;
     }
 }

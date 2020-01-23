@@ -10,12 +10,11 @@ public class TA_DwellerAnimate : ITaskAction
         _theCharacter = taskableAnimal;
     }
 
-    //public ITaskable TheCharacter { get => _theCharacter; set => _theCharacter = value; }
-    //public string TargetNavTrans { get => _animaStateName; private set => _animaStateName = value; }
 
     public void RunME()
     {
-        Debug.Log("run dwel anim" + _animaStateName);
+        if (GameSettings.Instance.ShowDebugs)
+            Debug.Log("run dwel anim" + _animaStateName);
         _theCharacter.Animate(_animaStateName);
     }
 }

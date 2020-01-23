@@ -25,7 +25,8 @@ public class TA_Coordination : ITaskAction
 
     public void RunME()
     {
-        Debug.Log("run Bell pull");
+        if (GameSettings.Instance.ShowDebugs)
+            Debug.Log("run Bell pull");
         _theCharacter.Pull_Coordinate(_theOTHERCharacter, FromHand, ToMyHand);//Bellhop always pulls to his RIght hand making it the context item the first time he gets it
     }
 }

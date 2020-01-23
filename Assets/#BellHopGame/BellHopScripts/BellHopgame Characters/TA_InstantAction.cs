@@ -22,7 +22,8 @@ public class TA_InstantTaskHandShowHide : ITaskAction
 
     public void RunME()
     {
-        Debug.Log("run showhide pull");
+        if (GameSettings.Instance.ShowDebugs)
+            Debug.Log("run showhide pull");
         _theCharacter.GetMyItemManager().Show_LR(_isShow, _handSide);
         _theCharacter.TaskEnded(); //<-------------------------------------------task kils itself
     }

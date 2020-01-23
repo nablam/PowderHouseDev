@@ -1,25 +1,38 @@
 ﻿//#define DebugOn
 
+using System.Collections;
 using UnityEngine;
 
 public class CameraPov : MonoBehaviour
 {
 
     #region EventSubscription
-    //private void OnEnable()
-    //{
-    //    BellHopGameEventManager.OnCurSequenceChanged += HeardSequenceChanged;
-    //}
+    private void OnEnable()
+    {
+        BellHopGameEventManager.OnCurSequenceChanged += HeardSequenceChanged;
+        BellHopGameEventManager.OnDebugLineHeard += DebugOnCanvas;
+    }
 
-    //private void OnDisable()
-    //{
-    //    BellHopGameEventManager.OnCurSequenceChanged -= HeardSequenceChanged;
-    //}
+    private void OnDisable()
+    {
+        BellHopGameEventManager.OnCurSequenceChanged -= HeardSequenceChanged;
+        BellHopGameEventManager.OnDebugLineHeard -= DebugOnCanvas;
+    }
 
-    //void HeardSequenceChanged(GameEnums.GameSequenceType argGST) { }
+    void HeardSequenceChanged(GameEnums.GameSequenceType argGST)
+    {
+        //m_Text_GameFlowState.text = argGST.ToString();
+        // m_Text_GameFlowState.text = "";
+    }
     #endregion
+    int linecount = 0;
+    void DebugOnCanvas(string argDebugStr)
+    {
 
-
+        string line = linecount.ToString() + ".  " + argDebugStr;
+        m_Text_GameFlowState.text = line;
+        linecount++;
+    }
 
     Transform _target = null;
     public GameObject ElevatorWall;
@@ -32,7 +45,10 @@ public class CameraPov : MonoBehaviour
     GameSettings _gs;
     ElevatorDoorsMasterControl _ElevatorDoorsCTRL;
     BellHopGameEventManager _eventManager;
+    public TMPro.TextMeshProUGUI m_Text_Game;
+    public TMPro.TextMeshProUGUI m_Text_GameFlowState;
 
+    public NumPadCTRL numkeypad;
     private void Start()
     {
         _gs = GameSettings.Instance;
@@ -67,7 +83,7 @@ public class CameraPov : MonoBehaviour
     bool startedMoving = false;
     public void StartMovingCameraDown() { startedMoving = true; }
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if (!startedMoving) { return; }
         if (ReachedInitialPos)
@@ -78,14 +94,30 @@ public class CameraPov : MonoBehaviour
 
     void MoveToTargetFloor()
     {
+
+
         if (_target != null && !Reached)
         {
             transform.position = Vector3.MoveTowards(transform.position, _target.position, _gs.ElevatorSpeed);
+
+
+            int VerticalIntPos = (int)(transform.position.y - 1.3f);
+
+            if ((VerticalIntPos) % _gs.Master_Floor_Height == 0)
+            {
+                int numtodisplay = (VerticalIntPos / (int)_gs.Master_Floor_Height);
+                numkeypad.SetFloorNumberOnDisplay(numtodisplay);
+            }
+
+
+
             if (transform.position == _target.position)
             {
 #if DebugOn
                 Debug.Log("Cam pov reacehd");
 #endif
+
+
                 _eventManager.Call_CurSequenceChanged(GameEnums.GameSequenceType.ReachedFloor);
                 Reached = true;
             }
@@ -102,14 +134,50 @@ public class CameraPov : MonoBehaviour
 #if DebugOn
                 Debug.Log("Cam pov Startpos");
 #endif
-                _eventManager.Call_CurSequenceChanged(GameEnums.GameSequenceType.GameStart);
-                ElevatorWall.transform.parent = this.transform;
-                // BunnyHop.transform.parent = this.transform;
-                ButtonsCanvas.SetActive(true);
                 ReachedInitialPos = true;
-                _eventManager.Call_CurSequenceChanged(GameEnums.GameSequenceType.ReachedFloor);
+                StartCoroutine(Rotate2(1.5f, 10f));
+
 
             }
         }
+    }
+    IEnumerator Rotate2(float duration, float argAngle)
+    {
+        Quaternion startRot = transform.rotation;
+        float t = 0.0f;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            transform.rotation = startRot * Quaternion.AngleAxis(t / duration * argAngle, Vector3.up); //or transform.right if you want it to be locally based
+            yield return null;
+        }
+        print("DONE2");
+        ElevatorWall.transform.parent = this.transform;
+        ButtonsCanvas.SetActive(true);
+
+        _eventManager.Call_CurSequenceChanged(GameEnums.GameSequenceType.GameStart);
+        // transform.rotation = startRot;
+    }
+
+
+    IEnumerator RotateForSeconds(float duration, float argAngle)
+    {
+        float startRotation = transform.eulerAngles.y;
+        float endRotation = startRotation + argAngle;
+        float t = 0.0f;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            float yRotation = Mathf.Lerp(startRotation, endRotation, t / duration) % argAngle;
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, yRotation, transform.eulerAngles.z);
+            yield return null;
+
+
+        }
+        print("DONE2");
+        ElevatorWall.transform.parent = this.transform;
+        ButtonsCanvas.SetActive(true);
+
+        _eventManager.Call_CurSequenceChanged(GameEnums.GameSequenceType.GameStart);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -48,7 +49,7 @@ public class ElevatorDoorsMasterControl : MonoBehaviour
     {
         if (!_doorsAreOpen)
         {
-            DoorAnimator.SetTrigger("TriggerActivate");
+            StartCoroutine(OpenDoorDelay(1.3f));
         }
         else
         {
@@ -96,6 +97,11 @@ public class ElevatorDoorsMasterControl : MonoBehaviour
             Debug.LogError("Wrong string, check typos");
     }
 
+    IEnumerator OpenDoorDelay(float argDelay)
+    {
+        yield return new WaitForSeconds(argDelay);
+        DoorAnimator.SetTrigger("TriggerActivate");
 
+    }
 
 }

@@ -6,6 +6,8 @@ public class NumPadCTRL : MonoBehaviour
     GameSettings _gs;
     GameFlowManager _flowMngr;
 
+
+
     public GameObject UpArrow;
 
     public GameObject DownArrowArrow;
@@ -15,6 +17,8 @@ public class NumPadCTRL : MonoBehaviour
     public List<GameObject> AllButtonsObjs = new List<GameObject>();
 
     public List<GameObject> AvailableButtonsObjs = new List<GameObject>();
+
+
 
     private void Start()
     {
@@ -50,6 +54,8 @@ public class NumPadCTRL : MonoBehaviour
             }
         }
     }
+
+
     public void ReadButtonTouch(int argnum)
     {
         if (!_flowMngr.IsAllowKeypad)
@@ -64,25 +70,52 @@ public class NumPadCTRL : MonoBehaviour
         }
         if (argnum >= _gs.Master_Number_of_Floors) return;
 
-        //if (_gs.Master_CurentFloorNumber < argnum) { UpArrow.SetActive(true); DownArrowArrow.SetActive(false); }
-        //else
-
-        //if (_gs.Master_CurentFloorNumber > argnum) { UpArrow.SetActive(false); DownArrowArrow.SetActive(true); }
-
-        // _gs.StartGoingToFloorOnButtonClicked(argnum);
-        m_Text_FloorNumber.text = argnum.ToString();
-        Debug.Log("pressed " + argnum);
         BellHopGameEventManager.Instance.Call_ButtonPressed(argnum);
 
     }
     public void UnTouch(int argnum)
     {
         Debug.Log("UNpressed " + argnum);
-
     }
     public void ClearArrows()
     {
         UpArrow.SetActive(false);
         DownArrowArrow.SetActive(false);
     }
+
+
+    public void SetButtonColor(Color argColor)
+    {
+
+        foreach (GameObject Go in AvailableButtonsObjs)
+        {
+
+            //  Transform TranChild = Go.transform.GetChild(0);
+            TMPro.TextMeshProUGUI ButtonTExt = Go.gameObject.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+            ButtonTExt.color = argColor;
+        }
+
+    }
+
+    public void SetFloorNumberOnDisplay(int argArrivedOnFloorZeroBased)
+    {
+        argArrivedOnFloorZeroBased++;
+        m_Text_FloorNumber.text = argArrivedOnFloorZeroBased.ToString();
+    }
+
+    public void Set_GoingUP()
+    {
+        UpArrow.SetActive(true); DownArrowArrow.SetActive(false);
+    }
+
+    public void Set_GoingDown()
+    {
+        UpArrow.SetActive(false); DownArrowArrow.SetActive(true);
+    }
+
+    public void Set_cleararrows()
+    {
+        UpArrow.SetActive(false); DownArrowArrow.SetActive(false);
+    }
+
 }

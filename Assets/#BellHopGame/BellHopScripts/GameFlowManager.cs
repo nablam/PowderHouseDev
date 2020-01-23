@@ -22,12 +22,20 @@ public class GameFlowManager : MonoBehaviour
         _seqMNGR = GetComponent<SequenceManager>();
         BellHopGameEventManager.OnCurSequenceChanged += HeardSequenceChanged;
         BellHopGameEventManager.OnButtonPressed += FloorDestRequested;
+        BellHopGameEventManager.OnDeliveryItemObtained += HeardDeliveryItemObtainedByBellhop;
     }
 
     private void OnDisable()
     {
         BellHopGameEventManager.OnCurSequenceChanged -= HeardSequenceChanged;
-        BellHopGameEventManager.OnButtonPressed += FloorDestRequested;
+        BellHopGameEventManager.OnButtonPressed -= FloorDestRequested;
+        BellHopGameEventManager.OnDeliveryItemObtained -= HeardDeliveryItemObtainedByBellhop;
+    }
+
+    void HeardDeliveryItemObtainedByBellhop(DeliveryItem argItem)
+    {
+        _sessionMNGR.CreateSessionWhenBellHopObtainsANewItem(argItem);
+        _cam.m_Text_Game.text = _StoryTextGen.RiddleMaker(argItem, _sessionMNGR.GetNumberOfWrongAnswersInThisSession());
     }
 
     SequenceManager _seqMNGR;
@@ -45,10 +53,23 @@ public class GameFlowManager : MonoBehaviour
 #if DebugOn
                 print("startgame");
 #endif
+                FirstTime = false; //just kill the first time in chack floorupon arrival
 
-                // 
-                _ElevatorDoors.OpenDoors();
-                IsAllowKeypad = true;
+
+                _sessionMNGR.AddFloorVisitFloorsVisitedINThisSession(_floorsmngr.Get_curFloor().FloorNumber);
+
+                _curDweller = _floorsmngr.GetCurFloorDweller();
+                _curDeliveryItem = _curDweller.GetMyItemManager().GetItem_LR(GameEnums.AnimalCharacterHands.Right);
+                _ContextItem = _curDeliveryItem;
+                _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.sq_FIRST, 0);
+
+                _cam.m_Text_Game.text = "Hello !";
+                //_cam.m_Text_Game.text = _StoryTextGen.SimpleRiddle_takethisto(_ContextItem, _floorsmngr.Get_curFloor().FloorNumber, _sessionMNGR.GetFloorsVisitedINThisSession());
+
+                _floorsmngr.HideShowAllBarriers(false);
+                _curDweller.IsCurentFloorAnimal = true;
+                _seqMNGR.StartSequence();
+
 
                 break;
 
@@ -58,19 +79,13 @@ public class GameFlowManager : MonoBehaviour
 #endif
                 _floorsmngr.HideShowAllBarriers(false);
                 CheckFloorStatusUponArrival();
-
-                BellHopGameEventManager.Instance.Call_SimpleTaskEnded(); //this will kick in the first task
-
-                _ElevatorDoors.OpenDoors();
                 break;
 
             case GameEnums.GameSequenceType.DoorsOppned:
 #if DebugOn
-                print("doorsOpened");
+                if (GameSettings.Instance.ShowDebugs)
+                    print("doorsOpened");
 #endif
-
-
-
                 break;
 
 
@@ -80,12 +95,10 @@ public class GameFlowManager : MonoBehaviour
 #endif
                 break;
 
-
-
             case GameEnums.GameSequenceType.PlayerInputs:
                 //    _ContextItem = _bellHop.Get_CurHeldObj();
                 IsAllowKeypad = true;
-
+                _cam.numkeypad.SetButtonColor(Color.green);
 
                 break;
 
@@ -93,10 +106,14 @@ public class GameFlowManager : MonoBehaviour
 #if DebugOn
                 //  print("here");
 #endif
+                _curDweller.IsCurentFloorAnimal = false;
                 _floorsmngr.UpdateCurFloorDest(_requestedFloor);
+                //_cam.m_Text_Game.text = "";
                 break;
 
             case GameEnums.GameSequenceType.GameEnd:
+
+                SceneManager.LoadScene("DeliveryStart");
                 break;
 
 
@@ -109,6 +126,15 @@ public class GameFlowManager : MonoBehaviour
         IsAllowKeypad = false;
         _ElevatorDoors.CloseDoors();
         _requestedFloor = x;
+        _cam.numkeypad.SetButtonColor(Color.red);
+
+        x++;
+        // _cam.m_Text_Game.text += x.ToString();
+
+
+        if (x > _floorsmngr.Get_curFloor().FloorNumber) { _cam.numkeypad.Set_GoingUP(); }
+        else if (x < _floorsmngr.Get_curFloor().FloorNumber) { _cam.numkeypad.Set_GoingDown(); }
+        else { _cam.numkeypad.Set_cleararrows(); }
 
     }
 
@@ -117,23 +143,17 @@ public class GameFlowManager : MonoBehaviour
 
     bool _GOODFLOOR = false;
     bool FirstTime = true;
+    int cashedWrongAnswers = 0;
     void CheckFloorStatusUponArrival()
     {
 
-
-
-
+        _cam.numkeypad.SetFloorNumberOnDisplay(_floorsmngr.Get_curFloor().FloorNumber);
+        _cam.numkeypad.Set_cleararrows();
+        cashedWrongAnswers = _sessionMNGR.GetNumberOfWrongAnswersInThisSession();
         if (FirstTime)
         {
+            Debug.Log("FIRST");
 
-            FirstTime = false;// handeled by gamestate startgame ... this shit is bad 
-
-
-            _curDweller = _floorsmngr.GetCurFloorDweller();
-            _curDeliveryItem = _curDweller.GetMyItemManager().GetItem_LR(GameEnums.AnimalCharacterHands.Right);
-            _ContextItem = _curDeliveryItem;
-            _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.DwellerToss_short);
-            print("GOES TO " + _ContextItem.GetDestFloorDweller().AnimalName);
 
         }
         else
@@ -143,18 +163,37 @@ public class GameFlowManager : MonoBehaviour
             _curDeliveryItem = _bellHop.GetMyItemManager().GetItem_LR(GameEnums.AnimalCharacterHands.Right);
             _ContextItem = _curDeliveryItem;
 
-            _ContextItem = _curDeliveryItem;
+
 
             if (_ContextItem.IsMyOwner(_curDweller.GetComponent<DwellerMeshComposer>()))
             {
-                _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.GoodFloor_short);
+                if (_floorsmngr.Get_curFloor().FloorNumber == 0)
+                {
+                    _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.sq_GameOver, 0);
+                }
+                else
+                {
+                    _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.sq_correct, cashedWrongAnswers);
+                }
             }
             else
             {
-                _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.Badfloor_short);
+                _sessionMNGR.AddFloorVisitFloorsVisitedINThisSession(_floorsmngr.Get_curFloor().FloorNumber);
+                _sessionMNGR.IncrementWrongAnswersForCurSession();
+                _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.sq_wrong, cashedWrongAnswers);
+                if (cashedWrongAnswers >= 1)
+                {
+                    _cam.m_Text_Game.text = _StoryTextGen.RiddleMaker(_ContextItem, cashedWrongAnswers);
+                }
             }
-            print("GOES TO " + _ContextItem.GetDestFloorDweller().AnimalName);
+            //  BellHopGameEventManager.Instance.Call_SimpleTaskEnded(); //this will kick in the first task
+            // _ElevatorDoors.OpenDoors();
         }
+        _curDweller.IsCurentFloorAnimal = true;
+
+        _seqMNGR.StartSequence();
+
+        // print("GOES TO " + _ContextItem.GetDestFloorDweller().AnimalName + " floor" + _ContextItem.GetDestFloorDweller().MyFinalResidenceFloorNumber);
     }
     void ThrowRoutine()
     {
@@ -179,13 +218,21 @@ public class GameFlowManager : MonoBehaviour
 
     InteractionCentral _BellhopPos;
 
-    public void InitializeMyThings(AnimalCentralCommand argbh, HotelFloorsManager argfloors, CameraPov argCam, NamedActionsController argNameActionCTRL, InteractionCentral argBellhopCocation)
+    DeliverySessionManager _sessionMNGR;
+    StoryTextGenerator _StoryTextGen;
+    public void InitializeMyThings(AnimalCentralCommand argbh, HotelFloorsManager argfloors, CameraPov argCam, InteractionCentral argBellhopCocation, DeliverySessionManager argSessionMNGR, StoryTextGenerator argStoryTExtGen)
+
     {
+        _sessionMNGR = argSessionMNGR;
+        _sessionMNGR.Init();
         _BellhopPos = argBellhopCocation;
         _bellHop = argbh;
         _floorsmngr = argfloors;
         _cam = argCam;
         _ElevatorDoors = ElevatorDoorsMasterControl.Instance;
+
+        _StoryTextGen = argStoryTExtGen;
+        _StoryTextGen.InitMyRefs(_floorsmngr);
     }
 
 
@@ -201,7 +248,7 @@ public class GameFlowManager : MonoBehaviour
         else
             Destroy(this.gameObject);
 
-        IsAllowKeypad = true;
+        // IsAllowKeypad = true;
 
     }
 

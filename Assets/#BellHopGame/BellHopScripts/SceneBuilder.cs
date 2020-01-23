@@ -16,10 +16,10 @@ public class SceneBuilder : MonoBehaviour
     public GameObject BaseAnimalRef;
     public HotelFloorsManager HotelFloorsMNG;
     public GameFlowManager GameFlow;
+    public DeliverySessionManager SessionMNGR;
     public GameObject Hop;
     public CameraPov camlobby;
-
-    public NamedActionsController ActionsControllerObj;
+    public StoryTextGenerator StoryTextGen;
 
     Dictionary<char, List<string>> Dict_BoyNames;
     Dictionary<char, List<string>> Dict_GirlNames;
@@ -125,6 +125,7 @@ public class SceneBuilder : MonoBehaviour
     {
 
         _gs = GameSettings.Instance;
+
         if (_gs == null) { Debug.LogError("SceneBuilder: No GameSettings in scene!"); }
 
 
@@ -143,6 +144,8 @@ public class SceneBuilder : MonoBehaviour
         {
             BOYS_AvailableDynamicAnimalNames[x] = "Mr." + BOYS_AvailableDynamicAnimalNames[x];
             GIRLS_AvailableDynamicAnimalNames[x] = "Mrs." + GIRLS_AvailableDynamicAnimalNames[x];
+            //BOYS_AvailableDynamicAnimalNames[x] = BOYS_AvailableDynamicAnimalNames[x];
+            //GIRLS_AvailableDynamicAnimalNames[x] = GIRLS_AvailableDynamicAnimalNames[x];
         }
 
         SelectedAnimalNames.AddRange(BOYS_AvailableDynamicAnimalNames);
@@ -275,7 +278,7 @@ public class SceneBuilder : MonoBehaviour
 
             GameObject FloorObjectInstance = Instantiate(FloorObjRef);
             FloorObjectInstance.name = "floor_" + i;
-            FloorObjectInstance.transform.position = new Vector3(FloorObjectInstance.transform.position.x, i * 6f, FloorObjectInstance.transform.position.z);
+            FloorObjectInstance.transform.position = new Vector3(FloorObjectInstance.transform.position.x, i * _gs.Master_Floor_Height, FloorObjectInstance.transform.position.z);
 
 
 
@@ -355,7 +358,7 @@ public class SceneBuilder : MonoBehaviour
 
 
         HotelFloorsMNG.InitializeFLoors(HotelAsListOfFloors);
-        GameFlow.InitializeMyThings(tempBEllHop.GetComponent<AnimalCentralCommand>(), HotelFloorsMNG, camlobby, ActionsControllerObj, BellhopCocation);
+        GameFlow.InitializeMyThings(tempBEllHop.GetComponent<AnimalCentralCommand>(), HotelFloorsMNG, camlobby, BellhopCocation, SessionMNGR, StoryTextGen);
         camlobby.assignBunny(Hop);
 
         camlobby.SetInitialPos(HotelAsListOfFloors[_gs.Master_Number_of_Floors - 1].BaseCamPos.transform);

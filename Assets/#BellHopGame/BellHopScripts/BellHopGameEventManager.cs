@@ -28,43 +28,7 @@ public class BellHopGameEventManager : MonoBehaviour
         OnCurSequenceChanged?.Invoke(gs);
     }
 
-    /*
-       void HeardSequenceChanged(GameEnums.GameSequenceType argGST)
-    {
-        switch (argGST)
-        {
-            case GameEnums.GameSequenceType.GameStart:
-                break;
 
-            case GameEnums.GameSequenceType.ReachedFloor:
-                break;
-
-            case GameEnums.GameSequenceType.DoorsOppned:
-                break;
-            case GameEnums.GameSequenceType.DwellerReactionFinished:
-                break;
-            case GameEnums.GameSequenceType.BunnyReleasedObject:
-                break;
-            case GameEnums.GameSequenceType.BunnyCaughtObject:
-                break;
-            case GameEnums.GameSequenceType.DwellerReleasedObject:
-                break;
-            case GameEnums.GameSequenceType.DwellerCaughtObject:
-                break;
-            case GameEnums.GameSequenceType.BunnyReaction:
-                break;
-            case GameEnums.GameSequenceType.DoorsClosed:
-                break;
-
-            case GameEnums.GameSequenceType.GameEnd:
-                break;
-
-
-        }
-
-        IsAllowKeypad = true;
-    }
-    */
     public delegate void EventButtonPressed(int argNum);
     public static EventButtonPressed OnButtonPressed;
     public void Call_ButtonPressed(int argNum)
@@ -94,8 +58,23 @@ public class BellHopGameEventManager : MonoBehaviour
     public static EventSimpleTaskEnded OnSimpleTaskEnded;
     public void Call_SimpleTaskEnded()
     {
-        Debug.Log("task or animationeneded BROADCAST");
-        //  Debug.Break();
+        //   Debug.Log("task or animationeneded BROADCAST");
         OnSimpleTaskEnded?.Invoke();
+    }
+
+    public delegate void EventDeliveryItemObtained(DeliveryItem argDi);
+    public static EventDeliveryItemObtained OnDeliveryItemObtained;
+    public void Call_DeliveryItemObtained(DeliveryItem argDi)
+    {
+        //  Debug.Log("task or animationeneded BROADCAST");
+        OnDeliveryItemObtained?.Invoke(argDi);
+    }
+
+
+    public delegate void EventDebugStr(string argStr);
+    public static EventDebugStr OnDebugLineHeard;
+    public void Call_DebugThis(string argStr)
+    {
+        OnDebugLineHeard?.Invoke(argStr);
     }
 }

@@ -116,6 +116,7 @@
     {
         cat,
         duck,
+        furret,
         mole,
         mouse,
         monkey,
@@ -333,9 +334,12 @@
 
     public enum SequenceType
     {
-        DwellerToss_short,
-        GoodFloor_short,
-        Badfloor_short,
+
+
+        sq_FIRST,
+        sq_correct,
+        sq_wrong,
+        sq_GameOver,
 
     }
 }

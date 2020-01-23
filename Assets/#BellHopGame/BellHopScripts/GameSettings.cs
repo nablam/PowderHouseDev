@@ -14,6 +14,7 @@ public class GameSettings : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(this.gameObject);
             ActionNames = new List<string>(); //TODO: should be a dictionary if dataset gets longer 
 
             ActionNames.Add(_toss);
@@ -41,14 +42,16 @@ public class GameSettings : MonoBehaviour
             Destroy(this.gameObject);
 
         Master_Number_of_Floors = 9;
-        if (Master_Number_of_Floors > _Master_max_Available_Dwellers_sofar)
-            Master_Number_of_Floors = _Master_max_Available_Dwellers_sofar;
+        //if (Master_Number_of_Floors > _Master_max_Available_Dwellers_sofar)
+        //    Master_Number_of_Floors = _Master_max_Available_Dwellers_sofar;
 
-        ElevatorSpeed = 0.1f;
-        // ElevatorSpeed = 2f;
+        // ElevatorSpeed = 0.12f;
+        ElevatorSpeed = 0.41f;
 
         Debug.Log(nameof(_Master_max_Available_Dwellers_sofar));
     }
+
+    public bool ShowDebugs = false;
 
     public List<string> ActionNames;
     #region ActionString
@@ -144,7 +147,12 @@ public class GameSettings : MonoBehaviour
     public int Master_Number_of_Floors { get => _master_Number_of_Floors; set => _master_Number_of_Floors = value; }
 
 
-
+    public void Set_safely_MAsterFloorNumber(int argNewNumber)
+    {
+        if (argNewNumber > _Master_max_Available_Dwellers_sofar)
+            argNewNumber = _Master_max_Available_Dwellers_sofar;
+        Master_Number_of_Floors = argNewNumber;
+    }
 
 
     //we only have 9 animals right now , we can create 18 animals male/female. lets keep the max at a power of 2 for now 
@@ -152,6 +160,12 @@ public class GameSettings : MonoBehaviour
     const int _Master_max_Available_Dwellers_sofar = 12;
 
     float _elevatorSpeed;
+
+    const float _floorHeight = 6f;
+
+
+    public float Master_Floor_Height { get => _floorHeight; }
+
 
 }
 

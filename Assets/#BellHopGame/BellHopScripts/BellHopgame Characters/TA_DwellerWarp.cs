@@ -15,7 +15,8 @@ public class TA_DwellerWarp : ITaskAction
 
     public void RunME()
     {
-        Debug.Log("run warp");
+        if (GameSettings.Instance.ShowDebugs)
+            Debug.Log("run warp");
         _theCharacter.Warp(TargetNavTrans);
     }
 }

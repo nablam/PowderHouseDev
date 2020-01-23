@@ -5,6 +5,7 @@ public class FloorFurnisher : MonoBehaviour
 {
     public GameObject Greatings;
     public GameObject StarDance;
+    public GameObject SpawnStar;
     public GameObject cornershelf_L;
     public GameObject cornershelf_R;
     public List<GameObject> StandaloneActions2x1 = new List<GameObject>();
@@ -47,11 +48,18 @@ public class FloorFurnisher : MonoBehaviour
     public InteractionCentral GetDanceAction() { return this.DanceAoIC; }
     GameObject GreetingsActionObj;
     InteractionCentral GreetingsAoIC;
-
     public InteractionCentral GetGreetingsAction() { return this.GreetingsAoIC; }
 
+    GameObject SpawnActionObj;
+    InteractionCentral SpawnAoIC;
+    public InteractionCentral GetSpawnAction() { return this.SpawnAoIC; }
+
+
+
+
+
     const int Width = 6;
-    const int Height = 6;
+    const int Height = 4;
 
     FurnitureFurnisher _ff;
     // Start is called before the first frame update
@@ -79,14 +87,18 @@ public class FloorFurnisher : MonoBehaviour
     public void Build_rand_RoomType()
     {
         //SetTransDoorStepAsInteraction = GreetingsActionObj.transform;
-        //BuildRoomType((GameEnums.RoomType)Random.Range(0, 4));
-        BuildRoomType(GameEnums.RoomType.Bedroom);
+        BuildRoomType((GameEnums.RoomType)Random.Range(0, 4));
+        //BuildRoomType(GameEnums.RoomType.Bedroom);
+        // BuildRoomType(GameEnums.RoomType.Livingroom);
+
+        //        BuildRoomType(GameEnums.RoomType.Kitchen);
     }
 
     public void BuildRoomType(GameEnums.RoomType argTypr)
     {
 
         PlaceDance_All();
+        PlaceSpawns_All();
         PlaceGreetings_All(2);
 
         if (argTypr == GameEnums.RoomType.Kitchen) { BuildKichen(); }
@@ -102,27 +114,27 @@ public class FloorFurnisher : MonoBehaviour
     void BuildKichen()
     {
         _roomtypeToBuild = GameEnums.RoomType.Kitchen;
-        PlaceActionObj_andFillRow(Random.Range(0, Width), 5, Kitchen2x1Action, Kitchen1x1, Kitchen2x1);
+        PlaceActionObj_andFillRow(Random.Range(0, Width), Height - 1, Kitchen2x1Action, Kitchen1x1, Kitchen2x1);
     }
 
 
     void Build_BEdroom()
     {
         _roomtypeToBuild = GameEnums.RoomType.Bedroom;
-        PlaceActionObj_andFillRow(Random.Range(0, Width), 5, Bedroom2x1Action, Bedroom1x1, Bedroom2x1);
+        PlaceActionObj_andFillRow(Random.Range(0, Width), Height - 1, Bedroom2x1Action, Bedroom1x1, Bedroom2x1);
     }
 
     void Build_Livingroom()
     {
         _roomtypeToBuild = GameEnums.RoomType.Livingroom;
         //allow couchspace
-        PlaceActionObj_andFillRow(Random.Range(2, Width), 5, Livingroom2x1Action, Livingroom1x1, Livingroom2x1);
+        PlaceActionObj_andFillRow(Random.Range(3, Width), Height - 1, Livingroom2x1Action, Livingroom1x1, Livingroom2x1);
     }
 
     void Build_Lab()
     {
         _roomtypeToBuild = GameEnums.RoomType.Lab;
-        PlaceActionObj_andFillRow(Random.Range(0, Width), 5, Lab2x1Action, Lab1x1, Lab2x1);
+        PlaceActionObj_andFillRow(Random.Range(0, Width), Height - 1, Lab2x1Action, Lab1x1, Lab2x1);
     }
 
 
@@ -185,7 +197,7 @@ public class FloorFurnisher : MonoBehaviour
         GreetingsActionObj = Instantiate(Greatings);
         GreetingsAoIC = GreetingsActionObj.GetComponentInParent<InteractionCentral>();
         GreetingsActionObj.transform.parent = Base00.transform;
-        GreetingsActionObj.transform.localPosition = new Vector3(x, 0, y - 1);
+        GreetingsActionObj.transform.localPosition = new Vector3(x + 0.4f, 0, y - 0.85f);
     }
 
     void PlaceDance_All()
@@ -198,8 +210,23 @@ public class FloorFurnisher : MonoBehaviour
         DanceActionObj = Instantiate(StarDance);
         DanceAoIC = DanceActionObj.GetComponentInParent<InteractionCentral>();
         DanceActionObj.transform.parent = Base00.transform;
-        DanceActionObj.transform.localPosition = new Vector3(x, 0, y);
+        DanceActionObj.transform.localPosition = new Vector3(x - 0.25f, 0, y + 0.1f);
     }
+
+    void PlaceSpawns_All()
+    {
+        int x = Width - 1;
+        int y = 1;
+
+        blueprint[x, y] = true; //reserves a path quad to access the dang spot
+
+        SpawnActionObj = Instantiate(SpawnStar);
+        SpawnAoIC = SpawnActionObj.GetComponentInParent<InteractionCentral>();
+        SpawnActionObj.transform.parent = Base00.transform;
+        SpawnActionObj.transform.localPosition = new Vector3(x + 0.21f, 0, y + 0.01f);
+    }
+
+
 
     void FillLeftRight(int XposOf2x1Action, List<GameObject> OtherObjsOfSameType_size1, List<GameObject> OtherObjsOfSameType_size2)
     {
@@ -384,7 +411,18 @@ public class FloorFurnisher : MonoBehaviour
 
     }
 
-
+    public void PlaceCeilingLightHere(Transform argHere)
+    {
+        GameObject RandLight = Instantiate(_ff.RandCEilingLight());
+        RandLight.transform.position = argHere.position;
+        RandLight.transform.parent = argHere.transform;
+    }
+    public void PlaceRug(Transform argHere)
+    {
+        GameObject RandRug = Instantiate(_ff.RandRug());
+        RandRug.transform.position = argHere.position;
+        RandRug.transform.parent = argHere.transform;
+    }
 
 }
 
