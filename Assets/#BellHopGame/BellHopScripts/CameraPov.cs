@@ -11,12 +11,14 @@ public class CameraPov : MonoBehaviour
     {
         BellHopGameEventManager.OnCurSequenceChanged += HeardSequenceChanged;
         BellHopGameEventManager.OnDebugLineHeard += DebugOnCanvas;
+        BellHopGameEventManager.OnNewTextLineHeard += UpdateCalulationText;
     }
 
     private void OnDisable()
     {
         BellHopGameEventManager.OnCurSequenceChanged -= HeardSequenceChanged;
         BellHopGameEventManager.OnDebugLineHeard -= DebugOnCanvas;
+        BellHopGameEventManager.OnNewTextLineHeard -= UpdateCalulationText;
     }
 
     void HeardSequenceChanged(GameEnums.GameSequenceType argGST)
@@ -46,6 +48,13 @@ public class CameraPov : MonoBehaviour
     ElevatorDoorsMasterControl _ElevatorDoorsCTRL;
     BellHopGameEventManager _eventManager;
     public TMPro.TextMeshProUGUI m_Text_Game;
+
+    void UpdateCalulationText(string argDebugStr)
+    {
+        m_Text_Game.text = argDebugStr;
+    }
+
+
     public TMPro.TextMeshProUGUI m_Text_GameFlowState;
 
     public NumPadCTRL numkeypad;

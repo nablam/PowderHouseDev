@@ -77,4 +77,11 @@ public class BellHopGameEventManager : MonoBehaviour
     {
         OnDebugLineHeard?.Invoke(argStr);
     }
+
+    public delegate void EventNewTextStr(string argStr);
+    public static EventNewTextStr OnNewTextLineHeard;
+    public void Call_NewTextThis(string argStr)
+    {
+        OnNewTextLineHeard?.Invoke(argStr);
+    }
 }

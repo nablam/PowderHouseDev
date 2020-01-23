@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
+    [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(CapsuleCollider))]
-    [RequireComponent(typeof(Animator))]
     public class ThirdPersonCharacter : MonoBehaviour
     {
         [SerializeField] float m_MovingTurnSpeed = 360;
@@ -36,9 +36,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
 
 
-            DwellerMeshComposer dm = GetComponent<DwellerMeshComposer>();
-            int i = dm.Id;
-            string n = dm.name;
+            //DwellerMeshComposer dm = GetComponent<DwellerMeshComposer>();
+            //int i = dm.Id;
+            //string n = dm.name;
             // print("base3rd.Start" + i + " " + n);
             m_Animator = GetComponent<Animator>();
             m_Rigidbody = GetComponent<Rigidbody>();
@@ -260,6 +260,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             // this allows us to modify the positional speed before it's applied.
             if (m_IsGrounded && Time.deltaTime > 0)
             {
+                if (m_Animator == null) m_Animator = GetComponent<Animator>();
                 Vector3 v = (m_Animator.deltaPosition * m_MoveSpeedMultiplier) / Time.deltaTime;
 
                 // we preserve the existing y part of the current velocity.

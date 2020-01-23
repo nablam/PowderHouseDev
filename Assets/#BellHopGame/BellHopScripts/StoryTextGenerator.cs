@@ -146,8 +146,8 @@ public class StoryTextGenerator : MonoBehaviour
         return strToSay;
     }
 
-
-
+    string CashedEquation = "";
+    public string GetCashedEquation() { return this.CashedEquation; }
     public string RiddleMaker(DeliveryItem argDeliveryItem, int numberofWronsForThisSession)
     {
         string strToSay = "";
@@ -177,11 +177,15 @@ public class StoryTextGenerator : MonoBehaviour
         {
 
             strToSay = Algebra_SimpleAdditionSubstraction(DestinationFloorNumberZeroBased, numberofWronsForThisSession);
+            CashedEquation = strToSay;
         }
         else
         {
             strToSay = Algebra_BigSubstraction(DestinationFloorNumberZeroBased, numberofWronsForThisSession);
+            CashedEquation = strToSay;
         }
+
+
 
         return strToSay;
     }

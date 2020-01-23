@@ -35,7 +35,12 @@ public class GameFlowManager : MonoBehaviour
     void HeardDeliveryItemObtainedByBellhop(DeliveryItem argItem)
     {
         _sessionMNGR.CreateSessionWhenBellHopObtainsANewItem(argItem);
-        _cam.m_Text_Game.text = _StoryTextGen.RiddleMaker(argItem, _sessionMNGR.GetNumberOfWrongAnswersInThisSession());
+
+        //Request New Equation. it will be cashed in storytextgenerator
+        BellHopGameEventManager.Instance.Call_NewTextThis(
+             //  _StoryTextGen.RiddleMaker(argItem, _sessionMNGR.GetNumberOfWrongAnswersInThisSession())
+             _StoryTextGen.RiddleMaker(argItem, 0) //zero wrong answers . this is the first time we request 
+            );
     }
 
     SequenceManager _seqMNGR;
@@ -62,8 +67,8 @@ public class GameFlowManager : MonoBehaviour
                 _curDeliveryItem = _curDweller.GetMyItemManager().GetItem_LR(GameEnums.AnimalCharacterHands.Right);
                 _ContextItem = _curDeliveryItem;
                 _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.sq_FIRST, 0);
-
-                _cam.m_Text_Game.text = "Hello !";
+                BellHopGameEventManager.Instance.Call_NewTextThis("");
+                //_cam.m_Text_Game.text = "Hello !";
                 //_cam.m_Text_Game.text = _StoryTextGen.SimpleRiddle_takethisto(_ContextItem, _floorsmngr.Get_curFloor().FloorNumber, _sessionMNGR.GetFloorsVisitedINThisSession());
 
                 _floorsmngr.HideShowAllBarriers(false);
@@ -86,6 +91,7 @@ public class GameFlowManager : MonoBehaviour
                 if (GameSettings.Instance.ShowDebugs)
                     print("doorsOpened");
 #endif
+                TextColor(cashedWrongAnswers);
                 break;
 
 
@@ -129,7 +135,7 @@ public class GameFlowManager : MonoBehaviour
         _cam.numkeypad.SetButtonColor(Color.red);
 
         x++;
-        // _cam.m_Text_Game.text += x.ToString();
+        _cam.m_Text_Game.text += x.ToString();
 
 
         if (x > _floorsmngr.Get_curFloor().FloorNumber) { _cam.numkeypad.Set_GoingUP(); }
@@ -181,10 +187,14 @@ public class GameFlowManager : MonoBehaviour
                 _sessionMNGR.AddFloorVisitFloorsVisitedINThisSession(_floorsmngr.Get_curFloor().FloorNumber);
                 _sessionMNGR.IncrementWrongAnswersForCurSession();
                 _seqMNGR.InitAllPointsAccordingToCurFloor(_floorsmngr.Get_curFloor(), _bellHop, GameEnums.SequenceType.sq_wrong, cashedWrongAnswers);
-                if (cashedWrongAnswers >= 1)
-                {
-                    _cam.m_Text_Game.text = _StoryTextGen.RiddleMaker(_ContextItem, cashedWrongAnswers);
-                }
+
+                //reset the text to only the equation
+                BellHopGameEventManager.Instance.Call_NewTextThis(_StoryTextGen.GetCashedEquation());
+
+                //if (cashedWrongAnswers >= 1)
+                //{
+                // _StoryTextGen.RiddleMaker(_ContextItem, cashedWrongAnswers);
+                //}
             }
             //  BellHopGameEventManager.Instance.Call_SimpleTaskEnded(); //this will kick in the first task
             // _ElevatorDoors.OpenDoors();
@@ -304,6 +314,28 @@ public class GameFlowManager : MonoBehaviour
         {
             SceneManager.LoadScene("DeliveryGame");
         }
+    }
+
+
+    void TextColor(int argWrongs)
+    {
+        //(0.678f, 0.082f, 0.039f)
+        //red set1 AD150A 
+
+        //(0.851f, 0.8f, 0.216f)
+        // yellow D9CC37
+
+        // 7AFA92
+        // green (0.478f, 0.98f, 0.573f)
+        if (argWrongs == 0) { _cam.m_Text_Game.color = new Color(1.0f, 1.0f, 1.0f); }
+        else
+            if (argWrongs == 1) { _cam.m_Text_Game.color = new Color(0.478f, 0.98f, 0.573f); }
+        else
+            if (argWrongs == 2) { _cam.m_Text_Game.color = new Color(0.851f, 0.8f, 0.216f); }
+        else
+        { _cam.m_Text_Game.color = new Color(0.678f, 0.082f, 0.039f); }
+
+
     }
 
 }
