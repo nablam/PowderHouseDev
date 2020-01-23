@@ -136,7 +136,7 @@ public class CameraPov : MonoBehaviour
 #endif
                 ReachedInitialPos = true;
                 StartCoroutine(Rotate2(1.5f, 10f));
-
+                _gs.ElevatorSpeed = 0.12f;
 
             }
         }
